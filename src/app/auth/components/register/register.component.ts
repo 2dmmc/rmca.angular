@@ -23,7 +23,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <div class="alert alert-success" role="alert"
-             *ngIf="hasMessage() && isSubmitted()">
+             *ngIf="hasMessage()">
           <div><strong>{{message.title}}</strong></div>
           <div>{{message.message}}</div>
         </div>
@@ -125,7 +125,8 @@ export class NbRegisterComponent {
   submitted = false;
 
   register(): void {
-    this.error = this.message = {title: '', message: ''};
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
     this.submitted = true;
 
     this.service.register(this.user.username, this.user.password, this.user.email)
@@ -133,7 +134,12 @@ export class NbRegisterComponent {
         result => {
           this.submitted = false;
 
-          console.info(result);
+          this.message.title = '注册成功';
+          this.message.message = '欢迎加入炉心, 即将跳转到登录页';
+
+          setTimeout(() => {
+            this.router.navigate(['/auth/login']);
+          }, 2e3);
         },
         error => {
           console.error(error);
