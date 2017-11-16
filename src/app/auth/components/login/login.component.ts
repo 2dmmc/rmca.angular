@@ -106,12 +106,9 @@ export class NbLoginComponent {
         result => {
           this.submitted = false;
 
-          alert(result);
           console.info(result);
         },
         error => {
-          console.error(error);
-
           this.submitted = false;
 
           switch (error.status) {
