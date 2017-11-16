@@ -47,7 +47,7 @@ import {AuthService} from '../../services/auth.service';
         <button class="btn btn-block btn-hero-success"
                 [disabled]="isSubmitted() || !form.form.valid"
                 [class.btn-pulse]="isSubmitted()">
-          登陆
+          发送邮件
         </button>
       </form>
 
