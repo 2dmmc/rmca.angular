@@ -117,12 +117,12 @@ export class NbLoginComponent {
           switch (error.status) {
             case 401 : {
               this.error.title = '用户名或密码错误';
-              this.error.message = `message: ${error.error.message} | code: ${error.error.code}`;
+              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
               break;
             }
             default: {
               this.error.title = '未知错误, 请联系鹳狸猿';
-              this.error.message = `message: ${error.error.message} | code: ${error.error.code}`;
+              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
             }
           }
         },
