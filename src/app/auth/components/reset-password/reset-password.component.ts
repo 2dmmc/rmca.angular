@@ -103,7 +103,7 @@ export class NbResetPasswordComponent {
 
           switch (error.status) {
             case 403: {
-              this.error.title = '令牌无效, 请重新找回密码';
+              this.error.title = '令牌无效或已被使用, 请重新找回密码';
               break;
             }
             default: {
@@ -139,7 +139,7 @@ export class NbResetPasswordComponent {
 
           switch (error.status) {
             case 403: {
-              this.error.title = '';
+              this.error.title = '令牌无效或已被使用, 请重新找回密码';
               break;
             }
             default: {
