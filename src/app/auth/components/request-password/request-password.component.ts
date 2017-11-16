@@ -23,7 +23,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <div class="alert alert-success" role="alert"
-             *ngIf="hasMessage() && isSubmitted()">
+             *ngIf="hasMessage()">
           <div><strong>{{message.title}}</strong></div>
           <div>{{message.message}}</div>
         </div>
@@ -72,15 +72,20 @@ export class NbRequestPasswordComponent {
   submitted = false;
 
   requestPass(): void {
-    this.error = this.message = {title: '', message: ''};
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
     this.submitted = true;
 
     this.service.requestPass(this.user.email)
       .subscribe(
         result => {
-          this.submitted = false;
+          this.message.title = '发送成功';
+          this.message.message = `我们已经发送了一封邮件到你的邮箱里 (${this.user.email}), 请根据邮件内容找回你的密码. 如没有收到,请尝试重新发送邮件或稍后重试`;
 
-          console.info(result);
+          // FIXME 非常简单的倒计时
+          setTimeout(() => {
+            this.submitted = false;
+          }, 60e3);
         },
         error => {
           this.submitted = false;
