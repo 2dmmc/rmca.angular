@@ -22,7 +22,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <div class="alert alert-success" role="alert"
-             *ngIf="hasMessage() && isSubmitted()">
+             *ngIf="hasMessage()">
           <div><strong>{{message.title}}</strong></div>
           <div>{{message.message}}</div>
         </div>
@@ -97,15 +97,21 @@ export class NbLoginComponent {
   submitted = false;
 
   login(): void {
-    this.error = this.message = {title: '', message: ''};
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
     this.submitted = true;
 
     this.service.login(this.user.username, this.user.password)
       .subscribe(
-        result => {
+        user => {
           this.submitted = false;
 
-          console.info(result);
+          this.message.title = '登陆成功';
+          this.message.message = `欢迎回来 ${user['username'] || '用户名获取失败'} (${user['email'] || '邮箱获取失败'}), 即将跳转到控制台`;
+
+          setTimeout(() => {
+            this.router.navigate(['/pages/dashboard']);
+          }, 3e3);
         },
         error => {
           this.submitted = false;
@@ -118,8 +124,7 @@ export class NbLoginComponent {
             default: {
               this.error.title = '未知错误, 请联系鹳狸猿';
             }
-
-            this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
           }
         },
       );
