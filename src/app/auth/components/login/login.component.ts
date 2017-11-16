@@ -24,8 +24,8 @@ import {AuthService} from '../../services/auth.service';
 
         <div class="alert alert-success" role="alert"
              *ngIf="hasMessage() && isSubmitted()">
-          <div><strong>message title</strong></div>
-          <div>{{message}}</div>
+          <div><strong>{{message.title}}</strong></div>
+          <div>{{message.message}}</div>
         </div>
 
         <div class="form-group">
