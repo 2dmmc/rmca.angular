@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   register(username, password, email) {
-    return this.http.post('', {
+    return this.http.post('/api/user/register', {
       username,
       password,
       email,
