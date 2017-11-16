@@ -25,8 +25,8 @@ export class AuthService {
     });
   }
 
-  resetPassword(email) {
-    return this.http.post('', {
+  requestPass(email) {
+    return this.http.post('/api/user/reset', {
       email,
     });
   }
