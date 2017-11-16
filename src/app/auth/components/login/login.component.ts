@@ -65,7 +65,8 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <button class="btn btn-block btn-hero-success"
-                [disabled]="isSubmitted() || !form.valid">
+                [disabled]="isSubmitted() || !form.form.valid"
+                [class.btn-pulse]="isSubmitted()">
           登陆
         </button>
       </form>
@@ -80,7 +81,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <small class="form-text">
-          还没有账户? 去 <a routerLink="../register"><strong>注册</strong></a>
+          还没有账户? <a routerLink="../register"><strong>注册</strong></a>
         </small>
       </div>
     </ngx-auth-block>
@@ -104,8 +105,6 @@ export class NbLoginComponent {
     this.service.login(this.user.username, this.user.password)
       .subscribe(
         user => {
-          this.submitted = false;
-
           this.message.title = '登陆成功';
           this.message.message = `欢迎回来 ${user['username'] || '用户名获取失败'} (${user['email'] || '邮箱获取失败'}), 即将跳转到控制台`;
 

@@ -45,8 +45,9 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <button class="btn btn-block btn-hero-success"
-                [disabled]="isSubmitted() || !form.valid">
-          找回密码
+                [disabled]="isSubmitted() || !form.form.valid"
+                [class.btn-pulse]="isSubmitted()">
+          登陆
         </button>
       </form>
 
@@ -55,7 +56,7 @@ import {AuthService} from '../../services/auth.service';
           已经有账户了? <a routerLink="../login"><strong>登陆</strong></a>
         </small>
         <small class="form-text">
-          还没有账户? 去 <a routerLink="../register"><strong>注册</strong></a>
+          还没有账户? <a routerLink="../register"><strong>注册</strong></a>
         </small>
       </div>
     </ngx-auth-block>

@@ -101,7 +101,8 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <button class="btn btn-block btn-hero-success"
-                [disabled]="isSubmitted() || !form.valid">
+                [disabled]="isSubmitted() || !form.form.valid || password.value != rePass.value"
+                [class.btn-pulse]="isSubmitted()">>
           注册
         </button>
       </form>
@@ -132,8 +133,6 @@ export class NbRegisterComponent {
     this.service.register(this.user.username, this.user.password, this.user.email)
       .subscribe(
         result => {
-          this.submitted = false;
-
           this.message.title = '注册成功';
           this.message.message = '欢迎加入炉心, 即将跳转到登录页';
 
