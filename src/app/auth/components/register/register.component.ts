@@ -139,7 +139,7 @@ export class NbRegisterComponent {
 
           setTimeout(() => {
             this.router.navigate(['/auth/login']);
-          }, 2e3);
+          }, 3e3);
         },
         error => {
           console.error(error);
