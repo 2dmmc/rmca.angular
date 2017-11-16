@@ -29,7 +29,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <div class="form-group">
-          <label for="input-email" class="sr-only">Username</label>
+          <label for="input-username" class="sr-only">Username</label>
           <input name="username" id="input-username" class="form-control" placeholder="用户名" autofocus
                  [(ngModel)]="user.username" #username="ngModel"
                  [class.form-control-danger]="username.invalid && username.touched"
