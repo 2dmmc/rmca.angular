@@ -30,4 +30,14 @@ export class AuthService {
       email,
     });
   }
+
+  resetPassword(hash, password) {
+    return this.http.post(`/api/user/reset/${hash}`, {
+      password,
+    });
+  }
+
+  checkHash(hash) {
+    return this.http.get(`/api/user/reset/${hash}`);
+  }
 }
