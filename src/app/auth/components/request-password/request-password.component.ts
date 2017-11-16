@@ -30,7 +30,7 @@ import {AuthService} from '../../services/auth.service';
 
         <div class="form-group">
           <label for="input-email" class="sr-only">邮箱</label>
-          <input name="email" id="input-email" class="form-control" placeholder="邮箱"
+          <input name="email" id="input-email" class="form-control" placeholder="邮箱" autofocus
                  [(ngModel)]="user.email" #email="ngModel"
                  [class.form-control-danger]="email.invalid && email.touched"
                  [required]="true" pattern=".+@.+..+">

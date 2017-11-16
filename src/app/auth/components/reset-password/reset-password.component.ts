@@ -30,7 +30,7 @@ import {AuthService} from '../../services/auth.service';
 
         <div class="form-group">
           <label for="input-password" class="sr-only">密码</label>
-          <input name="password" type="password" id="input-password" class="form-control" placeholder="密码"
+          <input name="password" type="password" id="input-password" class="form-control" placeholder="密码" autofocus
                  [(ngModel)]="user.password" #password="ngModel"
                  [class.form-control-danger]="password.invalid && password.touched"
                  [required]="true" [minlength]='6' [maxlength]='32'>
