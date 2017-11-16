@@ -102,7 +102,7 @@ import {AuthService} from '../../services/auth.service';
 
         <button class="btn btn-block btn-hero-success"
                 [disabled]="isSubmitted() || !form.form.valid || password.value != rePass.value"
-                [class.btn-pulse]="isSubmitted()">>
+                [class.btn-pulse]="isSubmitted()">
           注册
         </button>
       </form>
