@@ -41,4 +41,8 @@ export class AuthService {
   checkHash(hash) {
     return this.http.get(`/api/user/reset/${hash}`);
   }
+
+  checkLoginState() {
+    return this.http.get('/api/user/login');
+  }
 }

@@ -1,6 +1,6 @@
 import {NbMenuItem} from '@nebular/theme';
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: '控制台',
     icon: 'nb-home',
@@ -35,8 +35,12 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+];
+
+
+export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
   {
-    title: '高级设置',
+    title: '高级设置(Admin)',
     group: true,
   },
   {
@@ -71,8 +75,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+];
+
+export const DEVELOPER_MENU_ITEMS: NbMenuItem[] = [
   {
-    title: '功能性入口',
+    title: '功能性入口(Debug)',
     group: true,
   },
   {
