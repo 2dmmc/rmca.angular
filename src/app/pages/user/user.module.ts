@@ -1,17 +1,30 @@
 import {NgModule} from '@angular/core';
-import {AngularEchartsModule} from 'ngx-echarts';
 
 import {ThemeModule} from '../../@theme/theme.module';
-import {UserComponent} from './user.component';
+import {UserRoutingModule} from './user-routing.module';
 
+import {UserComponent} from './user.component';
+import {ProfileComponent} from './profile/profile.component';
+import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
+
+import {UserService} from './user.service';
+
+const components = [
+  UserComponent,
+  ProfileComponent,
+  YggdrasilComponent,
+];
 
 @NgModule({
   imports: [
     ThemeModule,
-    AngularEchartsModule,
+    UserRoutingModule,
   ],
   declarations: [
-    UserComponent,
+    ...components,
+  ],
+  providers: [
+    UserService,
   ],
 })
 export class UserModule {
