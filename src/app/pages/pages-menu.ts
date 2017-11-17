@@ -17,7 +17,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '正版验证',
-        link: '/user/kannakamui',
+        link: '/user/yggdrasil',
       },
       {
         title: 'profile',
