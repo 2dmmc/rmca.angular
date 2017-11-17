@@ -6,7 +6,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {UserService} from '../../../pages/user/user.service';
 
 @Component({
   selector: 'ngx-login',
@@ -61,7 +60,7 @@ import {UserService} from '../../../pages/user/user.service';
         </div>
 
         <div class="form-group accept-group col-sm-12">
-          <nb-checkbox name="rememberMe" [(ngModel)]="user.isKeepLogin">保持登陆状态(不是自己的电脑上不要勾选此项)</nb-checkbox>
+          <nb-checkbox name="rememberMe" [(ngModel)]="user.isKeepLogin">保持登陆状态(公共电脑不要勾选)</nb-checkbox>
           <a class="forgot-password" routerLink="../request-password">忘记密码</a>
         </div>
 
