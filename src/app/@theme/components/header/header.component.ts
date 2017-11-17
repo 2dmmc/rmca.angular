@@ -32,9 +32,12 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserProfile()
       .subscribe(userProfile => {
-        this.user = userProfile;
-        this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=64`;
-      });
+          this.user = userProfile;
+          this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=64`;
+        },
+        error => {
+          // TODO 增加toast
+        });
   }
 
   toggleSidebar(): boolean {
