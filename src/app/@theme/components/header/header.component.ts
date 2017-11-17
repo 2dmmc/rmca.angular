@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Md5} from 'ts-md5/dist/md5';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {UserService} from '../../../pages/user/user.service';
+
+import {Md5} from 'ts-md5/dist/md5';
 
 @Component({
   selector: 'ngx-header',
