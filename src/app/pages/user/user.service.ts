@@ -10,13 +10,13 @@ export class UserService {
     return this.http.get('/api/user/profile');
   }
 
-  setUserProfile(email) {
+  updateUserProfile(email) {
     return this.http.post('/api/user/profile', {
       email,
     });
   }
 
-  changeUserPassword(password, newPassword) {
+  updateUserPassword(password, newPassword) {
     return this.http.post('/api/user/password', {
       password,
       newPassword,
