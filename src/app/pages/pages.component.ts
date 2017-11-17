@@ -46,7 +46,7 @@ export class PagesComponent implements OnInit {
               break;
             }
             default: {
-              alert('RMCA 出现了一些问题');
+              document.write('RMCA出了一些问题, 请稍后重试');
             }
           }
         });
