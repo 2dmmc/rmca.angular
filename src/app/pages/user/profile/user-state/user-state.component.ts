@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Md5} from 'ts-md5/dist/md5';
 
-import {UserService} from '../user.service';
+import {UserService} from '../../user.service';
 
 @Component({
-  selector: 'ngx-profile',
+  selector: 'ngx-user-state',
   styleUrls: ['./profile.component.scss'],
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent implements OnInit {
+export class UserStateComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
