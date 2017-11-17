@@ -15,7 +15,7 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.get('');
+    return this.http.get('/api/user/logout');
   }
 
   register(username, password, email) {

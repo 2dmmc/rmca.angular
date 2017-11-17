@@ -95,6 +95,10 @@ export const MENU_ITEMS: NbMenuItem[] = [
         title: '重置密码',
         link: '/auth/reset-password',
       },
+      {
+        title: '登出',
+        link: '/auth/logout',
+      },
     ],
   },
 ];
