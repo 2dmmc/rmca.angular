@@ -1,16 +1,16 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Md5} from 'ts-md5/dist/md5';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {UserService} from '../../../@core/data/users.service';
-import {AnalyticsService} from '../../../@core/utils/analytics.service';
+import {UserService} from '../../../pages/user/user.service';
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
+  providers: [UserService],
 })
 export class HeaderComponent implements OnInit {
-
 
   @Input() position = 'normal';
 
@@ -20,13 +20,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
-              private analyticsService: AnalyticsService) {
+              private userService: UserService) {
   }
 
   ngOnInit() {
-    this.userService.getUser()
-      .subscribe((users: any) => this.user = users.nick);
+    this.userService.getUserProfile()
+      .subscribe(userProfile => {
+        this.user = userProfile;
+        this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=64`;
+      });
   }
 
   toggleSidebar(): boolean {
@@ -41,9 +43,5 @@ export class HeaderComponent implements OnInit {
 
   goToHome() {
     this.menuService.navigateHome();
-  }
-
-  startSearch() {
-    this.analyticsService.trackEvent('startSearch');
   }
 }
