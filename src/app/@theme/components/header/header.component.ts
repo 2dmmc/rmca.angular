@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
 
   userMenu = [{
     title: '个人资料',
-    link: '/user/profile',
+    link: '/pages/user/profile',
   }, {
     title: '登出',
     link: '/auth/logout',
