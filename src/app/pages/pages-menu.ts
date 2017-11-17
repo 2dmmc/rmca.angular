@@ -71,4 +71,30 @@ export const MENU_ITEMS: NbMenuItem[] = [
       },
     ],
   },
+  {
+    title: '功能性入口',
+    group: true,
+  },
+  {
+    title: 'Auth',
+    icon: 'nb-locked',
+    children: [
+      {
+        title: '登陆',
+        link: '/auth/login',
+      },
+      {
+        title: '注册',
+        link: '/auth/register',
+      },
+      {
+        title: '找回密码',
+        link: '/auth/request-password',
+      },
+      {
+        title: '重置密码',
+        link: '/auth/reset-password',
+      },
+    ],
+  },
 ];
