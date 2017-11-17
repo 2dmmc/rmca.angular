@@ -6,7 +6,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
 
 const routes: Routes = [{
-  path: 'user',
+  path: '',
   component: UserComponent,
   children: [{
     path: 'profile',
