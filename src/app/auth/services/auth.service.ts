@@ -6,10 +6,11 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  login(username, password) {
+  login(username, password, isKeepLogin) {
     return this.http.post('/api/user/login', {
       username,
       password,
+      isKeepLogin,
     });
   }
 

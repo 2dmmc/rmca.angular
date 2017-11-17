@@ -60,7 +60,7 @@ import {AuthService} from '../../services/auth.service';
         </div>
 
         <div class="form-group accept-group col-sm-12">
-          <nb-checkbox name="rememberMe">保持登陆状态(没实现)</nb-checkbox>
+          <nb-checkbox name="rememberMe" [(ngModel)]="user.isKeepLogin">保持登陆状态(不是自己的电脑上不要勾选此项)</nb-checkbox>
           <a class="forgot-password" routerLink="../request-password">忘记密码</a>
         </div>
 
@@ -102,7 +102,7 @@ export class NbLoginComponent {
     this.message = {title: '', message: ''};
     this.submitted = true;
 
-    this.service.login(this.user.username, this.user.password)
+    this.service.login(this.user.username, this.user.password, this.user.isKeepLogin)
       .subscribe(
         user => {
           this.message.title = '登陆成功';
