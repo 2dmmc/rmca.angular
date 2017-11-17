@@ -17,11 +17,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '正版验证',
-        link: '/user/yggdrasil',
+        link: '/pages/user/yggdrasil',
       },
       {
         title: 'profile',
-        link: '/user/profile',
+        link: '/pages/user/profile',
       },
     ],
   },
@@ -31,7 +31,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '角色列表',
-        link: '/player/list',
+        link: '/pages/player/list',
       },
     ],
   },
@@ -49,15 +49,15 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '服务器列表',
-        link: '/manager/server/list',
+        link: '/pages/manager/server/list',
       },
       {
         title: '服务器历史管理',
-        link: '/manager/server/history/detail',
+        link: '/pages/manager/server/history/detail',
       },
       {
         title: '财务历史管理',
-        link: '/manager/server/money/detail',
+        link: '/pages/manager/server/money/detail',
       },
     ],
   },
@@ -67,11 +67,11 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '管理员列表',
-        link: '/manager/rmca/admin/list',
+        link: '/pages/manager/rmca/admin/list',
       },
       {
         title: '玩家管理',
-        link: '/manager/rmca/player/list',
+        link: '/pages/manager/rmca/player/list',
       },
     ],
   },
