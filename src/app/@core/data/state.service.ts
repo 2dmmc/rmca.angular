@@ -9,18 +9,18 @@ export class StateService {
 
   protected layouts: any = [
     {
-      name: 'One Column',
+      name: '单列',
       icon: 'nb-layout-default',
       id: 'one-column',
       selected: true,
     },
     {
-      name: 'Two Column',
+      name: '双列',
       icon: 'nb-layout-two-column',
       id: 'two-column',
     },
     {
-      name: 'Center Column',
+      name: '居中',
       icon: 'nb-layout-centre',
       id: 'center-column',
     },
@@ -28,13 +28,13 @@ export class StateService {
   protected layoutState$ = new BehaviorSubject(this.layouts[0]);
   protected sidebars: any = [
     {
-      name: 'Left Sidebar',
+      name: '左侧侧边栏',
       icon: 'nb-layout-sidebar-left',
       id: 'left',
       selected: true,
     },
     {
-      name: 'Right Sidebar',
+      name: '右侧侧边栏',
       icon: 'nb-layout-sidebar-right',
       id: 'right',
     },
