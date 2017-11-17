@@ -117,7 +117,7 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NbRegisterComponent {
   constructor(protected router: Router,
-              protected service: AuthService) {
+              protected authService: AuthService) {
   }
 
   user: any = {};
@@ -130,7 +130,7 @@ export class NbRegisterComponent {
     this.message = {title: '', message: ''};
     this.submitted = true;
 
-    this.service.register(this.user.username, this.user.password, this.user.email)
+    this.authService.register(this.user.username, this.user.password, this.user.email)
       .subscribe(
         result => {
           this.message.title = '注册成功';

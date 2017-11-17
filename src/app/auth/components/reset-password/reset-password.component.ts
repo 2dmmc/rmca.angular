@@ -89,12 +89,12 @@ export class NbResetPasswordComponent {
 
   constructor(protected router: Router,
               protected activatedRoute: ActivatedRoute,
-              protected service: AuthService) {
+              protected authService: AuthService) {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.hash = queryParams.hash;
     });
 
-    this.service.checkHash(this.hash)
+    this.authService.checkHash(this.hash)
       .subscribe(
         result => {
         },
@@ -122,7 +122,7 @@ export class NbResetPasswordComponent {
     this.submitted = true;
 
 
-    this.service.resetPassword(this.hash, this.user.password)
+    this.authService.resetPassword(this.hash, this.user.password)
       .subscribe(
         result => {
           this.message.title = '重置成功';

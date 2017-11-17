@@ -6,6 +6,7 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../../pages/user/user.service';
 
 @Component({
   selector: 'ngx-login',
@@ -89,7 +90,7 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NbLoginComponent {
   constructor(protected router: Router,
-              protected service: AuthService) {
+              protected authService: AuthService) {
   }
 
   user: any = {};
@@ -102,7 +103,7 @@ export class NbLoginComponent {
     this.message = {title: '', message: ''};
     this.submitted = true;
 
-    this.service.login(this.user.username, this.user.password, this.user.isKeepLogin)
+    this.authService.login(this.user.username, this.user.password, this.user.isKeepLogin)
       .subscribe(
         user => {
           this.message.title = '登陆成功';

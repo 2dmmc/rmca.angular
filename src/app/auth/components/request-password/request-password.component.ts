@@ -64,7 +64,7 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NbRequestPasswordComponent {
   constructor(protected router: Router,
-              protected service: AuthService) {
+              protected authService: AuthService) {
   }
 
   user: any = {};
@@ -77,7 +77,7 @@ export class NbRequestPasswordComponent {
     this.message = {title: '', message: ''};
     this.submitted = true;
 
-    this.service.requestPass(this.user.email)
+    this.authService.requestPass(this.user.email)
       .subscribe(
         result => {
           this.message.title = '发送成功';

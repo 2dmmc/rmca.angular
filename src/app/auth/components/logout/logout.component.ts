@@ -6,6 +6,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../../pages/user/user.service';
 
 @Component({
   selector: 'ngx-logout',
@@ -30,14 +31,14 @@ import {AuthService} from '../../services/auth.service';
 export class NbLogoutComponent implements OnInit {
 
   constructor(protected router: Router,
-              protected service: AuthService) {
+              protected authService: AuthService) {
   }
 
   error = {title: '', message: ''};
   message = {title: '', message: ''};
 
   ngOnInit(): void {
-    this.service.logout()
+    this.authService.logout()
       .subscribe(
         logoutResult => {
           this.message.title = '登出成功';
