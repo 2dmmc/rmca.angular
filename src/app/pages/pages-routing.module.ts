@@ -11,6 +11,9 @@ const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
   }, {
+    path: 'user',
+    loadChildren: './user/user.module#UserModule',
+  }, {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

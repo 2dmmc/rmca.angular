@@ -17,7 +17,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '正版验证',
-        link: '/auth/login',
+        link: '/user/kannakamui',
+      },
+      {
+        title: 'profile',
+        link: '/user/profile',
       },
     ],
   },
@@ -27,7 +31,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '角色列表',
-        link: '/auth/login',
+        link: '/player/list',
       },
     ],
   },
@@ -41,11 +45,15 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '服务器列表',
-        link: '/auth/login',
+        link: '/manager/server/list',
       },
       {
-        title: '玩家管理',
-        link: '/ergergerg',
+        title: '服务器历史管理',
+        link: '/manager/server/history/detail',
+      },
+      {
+        title: '财务历史管理',
+        link: '/manager/server/money/detail',
       },
     ],
   },
@@ -55,15 +63,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '管理员列表',
-        link: '/auth/login',
+        link: '/manager/rmca/admin/list',
       },
       {
-        title: '服务器历史管理',
-        link: '/auth/login',
-      },
-      {
-        title: '财务历史管理',
-        link: '/asdasdasr',
+        title: '玩家管理',
+        link: '/manager/rmca/player/list',
       },
     ],
   },
