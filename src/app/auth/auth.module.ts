@@ -10,6 +10,7 @@ import {NbLogoutComponent} from './components/logout/logout.component';
 import {NbRegisterComponent} from './components/register/register.component';
 import {NbRequestPasswordComponent} from './components/request-password/request-password.component';
 import {NbResetPasswordComponent} from './components/reset-password/reset-password.component';
+import {AuthService} from './services/auth.service';
 
 const AUTH_COMPONENTS = [
   NbAuthComponent,
@@ -29,7 +30,9 @@ const AUTH_COMPONENTS = [
   declarations: [
     ...AUTH_COMPONENTS,
   ],
-  providers: [],
+  providers: [
+    AuthService,
+  ],
 })
 export class AuthModule {
 }
