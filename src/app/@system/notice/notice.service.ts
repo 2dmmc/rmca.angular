@@ -4,7 +4,7 @@ import {BodyOutputType, Toast, ToasterService} from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
 
 @Injectable()
-export class ToastService {
+export class NoticeService {
   constructor(private toasterService: ToasterService) {
   }
 

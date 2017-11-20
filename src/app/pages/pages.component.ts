@@ -5,12 +5,10 @@ import {ADMIN_MENU_ITEMS, DEVELOPER_MENU_ITEMS, USER_MENU_ITEMS} from './pages-m
 import {Router} from '@angular/router';
 import {AuthService} from '../auth/services/auth.service';
 import {NbMenuService} from '@nebular/theme';
-import {ToasterConfig, ToasterService} from 'angular2-toaster';
 
 @Component({
   selector: 'ngx-rmca-pages',
   template: `
-    <toaster-container [toasterconfig]="toasterconfig"></toaster-container>
     <ngx-sample-layout>
       <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
@@ -52,15 +50,4 @@ export class PagesComponent implements OnInit {
         }
       });
   }
-
-  public toasterconfig: ToasterConfig =
-    new ToasterConfig({
-      positionClass: 'toast-bottom-right',
-      timeout: 3e3,
-      newestOnTop: true,
-      tapToDismiss: true,
-      preventDuplicates: false,
-      animation: 'flyRight',
-      limit: 0,
-    });
 }

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {ThemeModule} from '../../../@theme/theme.module';
 import {UserStateComponent} from './user-state/user-state.component';
 
-import {ToastService} from '../../../@system/toast/toast.service';
+import {NoticeService} from '../../../@system/notice/notice.service';
 import {UserService} from '../user.service';
 
 const components = [
@@ -21,7 +21,7 @@ const components = [
     ...components,
   ],
   providers: [
-    ToastService,
+    NoticeService,
     UserService,
   ],
 })

@@ -2,7 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Md5} from 'ts-md5/dist/md5';
 
 import {UserService} from '../user.service';
-import {ToastService} from '../../../@system/toast/toast.service';
+import {NoticeService} from '../../../@system/notice/notice.service';
 
 @Component({
   selector: 'ngx-profile',
@@ -12,7 +12,7 @@ import {ToastService} from '../../../@system/toast/toast.service';
 
 export class ProfileComponent implements AfterViewInit, OnInit {
   constructor(private userService: UserService,
-              private toastService: ToastService) {
+              private noticeService: NoticeService) {
   }
 
   user: any;
@@ -33,7 +33,7 @@ export class ProfileComponent implements AfterViewInit, OnInit {
         this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=128`;
       })
       .catch(error => {
-        this.toastService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
+        this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
       });
   }
 
@@ -45,11 +45,11 @@ export class ProfileComponent implements AfterViewInit, OnInit {
 
     this.userService.updateUserProfile(this.user.email)
       .then(updateState => {
-        this.toastService.success('更新成功', '更新个人资料成功');
+        this.noticeService.success('更新成功', '更新个人资料成功');
         this.profileSubmitted = false;
       })
       .catch(error => {
-        this.toastService.error('更新个人资料失败', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
+        this.noticeService.error('更新个人资料失败', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
         this.profileSubmitted = false;
       });
   }
@@ -65,7 +65,7 @@ export class ProfileComponent implements AfterViewInit, OnInit {
     this.userService.updateUserPassword(this.user.password, this.user.newPassword)
       .then(updateState => {
         this.passwordSubmitted = false;
-        this.toastService.success('更新成功', '更新密码成功');
+        this.noticeService.success('更新成功', '更新密码成功');
       })
       .catch(error => {
         this.passwordSubmitted = false;
@@ -80,7 +80,7 @@ export class ProfileComponent implements AfterViewInit, OnInit {
           }
         }
 
-        this.toastService.error('更新密码失败', errorMessage);
+        this.noticeService.error('更新密码失败', errorMessage);
       });
   }
 

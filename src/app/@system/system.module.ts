@@ -1,12 +1,12 @@
 import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../@theme/theme.module';
-import {ToastModule} from './toast/toast.module';
+import {NoticeModule} from './notice/notice.module';
 
 @NgModule({
   imports: [
     ThemeModule,
-    ToastModule,
+    NoticeModule,
   ],
   declarations: [],
 })

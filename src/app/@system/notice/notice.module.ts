@@ -12,5 +12,5 @@ import {ToasterService} from 'angular2-toaster';
     ToasterService,
   ],
 })
-export class ToastModule {
+export class NoticeModule {
 }
