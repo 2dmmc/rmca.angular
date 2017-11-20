@@ -9,6 +9,7 @@ import {Component, OnInit} from '@angular/core';
   selector: 'ngx-rmca-app',
   template: '<router-outlet></router-outlet>',
 })
+
 export class AppComponent implements OnInit {
   constructor() {
   }

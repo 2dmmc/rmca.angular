@@ -9,7 +9,9 @@ import {Md5} from 'ts-md5/dist/md5';
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
-  providers: [UserService],
+  providers: [
+    UserService,
+  ],
 })
 export class HeaderComponent implements OnInit {
 
