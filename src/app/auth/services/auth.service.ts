@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
@@ -11,11 +12,13 @@ export class AuthService {
       username,
       password,
       isKeepLogin,
-    });
+    })
+      .toPromise();
   }
 
   logout() {
-    return this.http.get('/api/user/logout');
+    return this.http.get('/api/user/logout')
+      .toPromise();
   }
 
   register(username, password, email) {
@@ -23,26 +26,31 @@ export class AuthService {
       username,
       password,
       email,
-    });
+    })
+      .toPromise();
   }
 
   requestPass(email) {
     return this.http.post('/api/user/reset', {
       email,
-    });
+    })
+      .toPromise();
   }
 
   resetPassword(hash, password) {
     return this.http.post(`/api/user/reset/${hash}`, {
       password,
-    });
+    })
+      .toPromise();
   }
 
   checkHash(hash) {
-    return this.http.get(`/api/user/reset/${hash}`);
+    return this.http.get(`/api/user/reset/${hash}`)
+      .toPromise();
   }
 
   checkLoginState() {
-    return this.http.get('/api/user/login');
+    return this.http.get('/api/user/login')
+      .toPromise();
   }
 }

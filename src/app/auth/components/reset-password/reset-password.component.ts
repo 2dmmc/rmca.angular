@@ -27,25 +27,21 @@ export class NbResetPasswordComponent {
     });
 
     this.authService.checkHash(this.hash)
-      .subscribe(
-        result => {
-        },
-        error => {
-          this.submitted = false;
+      .catch(error => {
+        this.submitted = false;
 
-          switch (error.status) {
-            case 403: {
-              this.error.title = '令牌无效或已被使用, 请重新找回密码';
-              break;
-            }
-            default: {
-              this.error.title = '未知错误, 请联系鹳狸猿';
-            }
+        switch (error.status) {
+          case 403: {
+            this.error.title = '令牌无效或已被使用, 请重新找回密码';
+            break;
           }
+          default: {
+            this.error.title = '未知错误, 请联系鹳狸猿';
+          }
+        }
 
-          this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
-        },
-      );
+        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+      });
   }
 
   resetPassword(): void {
@@ -55,8 +51,8 @@ export class NbResetPasswordComponent {
 
 
     this.authService.resetPassword(this.hash, this.user.password)
-      .subscribe(
-        result => {
+      .then(
+        resetResult => {
           this.message.title = '重置成功';
           this.message.message = '请使用你的新密码登陆, 即将跳转到登陆页';
 
@@ -64,24 +60,22 @@ export class NbResetPasswordComponent {
             this.router.navigate(['/auth/login']);
           }, 3e3);
         },
-        error => {
-          console.error(error);
+      )
+      .catch(error => {
+        this.submitted = false;
 
-          this.submitted = false;
-
-          switch (error.status) {
-            case 403: {
-              this.error.title = '令牌无效或已被使用, 请重新找回密码';
-              break;
-            }
-            default: {
-              this.error.title = '未知错误, 请联系鹳狸猿';
-            }
+        switch (error.status) {
+          case 403: {
+            this.error.title = '令牌无效或已被使用, 请重新找回密码';
+            break;
           }
+          default: {
+            this.error.title = '未知错误, 请联系鹳狸猿';
+          }
+        }
 
-          this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
-        },
-      );
+        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+      });
   }
 
   isSubmitted(): boolean {

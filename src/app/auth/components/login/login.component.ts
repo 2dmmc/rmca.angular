@@ -27,7 +27,7 @@ export class NbLoginComponent {
     this.submitted = true;
 
     this.authService.login(this.user.username, this.user.password, this.user.isKeepLogin)
-      .subscribe(
+      .then(
         user => {
           this.message.title = '登陆成功';
           this.message.message = `欢迎回来 ${user['username'] || '用户名获取失败'} (${user['email'] || '邮箱获取失败'}), 即将跳转到控制台`;
@@ -36,21 +36,21 @@ export class NbLoginComponent {
             this.router.navigate(['/pages/dashboard']);
           }, 3e3);
         },
-        error => {
-          this.submitted = false;
+      )
+      .catch(error => {
+        this.submitted = false;
 
-          switch (error.status) {
-            case 401 : {
-              this.error.title = '用户名或密码错误';
-              break;
-            }
-            default: {
-              this.error.title = '未知错误, 请联系鹳狸猿';
-            }
-              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+        switch (error.status) {
+          case 401 : {
+            this.error.title = '用户名或密码错误';
+            break;
           }
-        },
-      );
+          default: {
+            this.error.title = '未知错误, 请联系鹳狸猿';
+          }
+            this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+        }
+      });
   }
 
   isSubmitted(): boolean {

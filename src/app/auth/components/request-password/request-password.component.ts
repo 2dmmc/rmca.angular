@@ -28,8 +28,8 @@ export class NbRequestPasswordComponent {
     this.submitted = true;
 
     this.authService.requestPass(this.user.email)
-      .subscribe(
-        result => {
+      .then(
+        requestResult => {
           this.message.title = '发送成功';
           this.message.message = `我们已经发送了一封邮件到你的邮箱里 (${this.user.email}), 请根据邮件内容找回你的密码. 如没有收到,请尝试重新发送邮件或稍后重试`;
 
@@ -38,22 +38,22 @@ export class NbRequestPasswordComponent {
             this.submitted = false;
           }, 60e3);
         },
-        error => {
-          this.submitted = false;
+      )
+      .catch(error => {
+        this.submitted = false;
 
-          switch (error.status) {
-            case 404 : {
-              this.error.title = '邮箱不存在';
-              break;
-            }
-            default: {
-              this.error.title = '未知错误, 请联系鹳狸猿';
-            }
-
-              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+        switch (error.status) {
+          case 404 : {
+            this.error.title = '邮箱不存在';
+            break;
           }
-        },
-      );
+          default: {
+            this.error.title = '未知错误, 请联系鹳狸猿';
+          }
+        }
+
+        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+      });
   }
 
   isSubmitted(): boolean {

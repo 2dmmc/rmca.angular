@@ -22,7 +22,7 @@ export class NbLogoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.logout()
-      .subscribe(
+      .then(
         logoutResult => {
           this.message.title = '登出成功';
           this.message.message = '即将跳转到登陆页';
@@ -31,24 +31,25 @@ export class NbLogoutComponent implements OnInit {
             this.router.navigate(['/auth/login']);
           }, 3e3);
         },
-        error => {
-          switch (error.status) {
-            case 401 : {
-              this.error.title = '大兄弟你得先登陆';
-              this.error.message = '即将跳转到登陆页';
+      )
+      .catch(error => {
+        switch (error.status) {
+          case 401 : {
+            this.error.title = '大兄弟你得先登陆';
+            this.error.message = '即将跳转到登陆页';
 
-              setTimeout(() => {
-                this.router.navigate(['/auth/login']);
-              }, 3e3);
-              break;
-            }
-            default: {
-              this.error.title = '未知错误, 请联系鹳狸猿';
-            }
-              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+            setTimeout(() => {
+              this.router.navigate(['/auth/login']);
+            }, 3e3);
+            break;
           }
-        },
-      );
+          default: {
+            this.error.title = '未知错误, 请联系鹳狸猿';
+          }
+        }
+
+        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+      });
   }
 
   hasError(): boolean {
