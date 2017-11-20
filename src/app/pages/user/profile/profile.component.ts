@@ -8,11 +8,13 @@ import {UserService} from '../user.service';
   styleUrls: ['./profile.component.scss'],
   templateUrl: './profile.component.html',
 })
+
 export class ProfileComponent implements OnInit {
   constructor(private userService: UserService) {
   }
 
   user: any;
+  profileSubmitted: boolean;
 
   ngOnInit() {
     this.userService.getUserProfile()
@@ -22,14 +24,24 @@ export class ProfileComponent implements OnInit {
       });
   }
 
-  updateProfile(email): void {
-    this.userService.updateUserProfile(email)
+  updateProfile(): void {
+    this.profileSubmitted = true;
+
+    this.userService.updateUserProfile(this.user.email)
       .subscribe(updateState => {
           // TODO toast
+
+          this.profileSubmitted = false;
         },
         error => {
           // TODO toast
+
+          this.profileSubmitted = false;
         });
+  }
+
+  isProfileSubmitted(): boolean {
+    return this.profileSubmitted;
   }
 
   updatePassword(password, newPassword): void {

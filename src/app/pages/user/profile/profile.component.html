@@ -3,18 +3,33 @@
     <nb-card>
       <nb-card-header><i class="fa fa-id-card"></i> 个人资料</nb-card-header>
       <nb-card-body>
-        <form>
+        <form (ngSubmit)="updateProfile()" #profileForm="ngForm">
           <div class="form-group row">
-            <label for="email" class="col-sm-2 col-form-label">电子邮箱</label>
+            <label for="input-email" class="col-sm-2 col-form-label">电子邮箱</label>
             <div class="col-sm-10">
-              <input type="email" class="form-control" id="email" placeholder="Email">
+              <input name="email" id="input-email" class="form-control" placeholder="邮箱"
+                     [(ngModel)]="user.email" #email="ngModel"
+                     [class.form-control-danger]="email.invalid && email.touched"
+                     [required]="true" pattern=".+@.+..+">
+              <small class="form-text error"
+                     *ngIf="email.invalid && email.touched && email.errors?.required">
+                请填写邮箱
+              </small>
+              <small class="form-text error"
+                     *ngIf="email.invalid && email.touched && email.errors?.pattern">
+                邮箱格式不正确
+              </small>
               <small class="form-text">我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a>
               </small>
             </div>
           </div>
           <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-              <button type="submit" class="btn btn-primary">更新个人资料</button>
+              <button class="btn btn-primary"
+                      [disabled]="isProfileSubmitted() || !profileForm.form.valid "
+                      [class.btn-pulse]="isProfileSubmitted()">
+                更新个人资料
+              </button>
             </div>
           </div>
         </form>
@@ -44,11 +59,11 @@
           </div>
           <div class="form-group">
             <label for="newPassword">新密码</label>
-            <input type="password" class="form-control" id="newPassword" placeholder="请输入新密码(不修改请留空)">
+            <input type="password" class="form-control" id="newPassword" placeholder="请输入新密码">
           </div>
           <div class="form-group">
             <label for="newPasswordRep">重复新密码</label>
-            <input type="password" class="form-control" id="newPasswordRep" placeholder="请再输入新密码(不修改请留空)">
+            <input type="password" class="form-control" id="newPasswordRep" placeholder="请再输入新密码">
           </div>
           <button type="submit" class="btn btn-danger">更新密码</button>
         </form>
