@@ -18,9 +18,12 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userService.getUserProfile()
-      .subscribe(userProfile => {
+      .then(userProfile => {
         this.user = userProfile;
         this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=128`;
+      })
+      .catch(error => {
+        //
       });
   }
 
@@ -28,16 +31,14 @@ export class ProfileComponent implements OnInit {
     this.profileSubmitted = true;
 
     this.userService.updateUserProfile(this.user.email)
-      .subscribe(updateState => {
-          // TODO toast
-
-          this.profileSubmitted = false;
-        },
-        error => {
-          // TODO toast
-
-          this.profileSubmitted = false;
-        });
+      .then(updateState => {
+        // TODO toast
+        this.profileSubmitted = false;
+      })
+      .catch(error => {
+        // TODO toast
+        this.profileSubmitted = false;
+      });
   }
 
   isProfileSubmitted(): boolean {
@@ -46,11 +47,11 @@ export class ProfileComponent implements OnInit {
 
   updatePassword(password, newPassword): void {
     this.userService.updateUserPassword(password, newPassword)
-      .subscribe(updateState => {
-          // TODO toast
-        },
-        error => {
-          // TODO toast
-        });
+      .then(updateState => {
+        // TODO toast
+      })
+      .catch(error => {
+        // TODO toast
+      });
   }
 }
