@@ -4,6 +4,7 @@ import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {UserService} from '../../../pages/user/user.service';
 
 import {Md5} from 'ts-md5/dist/md5';
+import {ToastService} from '../../../@system/toast/toast.service';
 
 @Component({
   selector: 'ngx-header',
@@ -11,6 +12,7 @@ import {Md5} from 'ts-md5/dist/md5';
   templateUrl: './header.component.html',
   providers: [
     UserService,
+    ToastService,
   ],
 })
 export class HeaderComponent implements OnInit {
@@ -29,7 +31,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService) {
+              private userService: UserService,
+              private toastService: ToastService) {
   }
 
   ngOnInit() {
@@ -39,7 +42,7 @@ export class HeaderComponent implements OnInit {
         this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=64`;
       })
       .catch(error => {
-        // TODO 增加toast
+        this.toastService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
       });
   }
 
