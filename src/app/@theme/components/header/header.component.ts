@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   user: any;
 
   userMenu = [{
-    title: '个人资料',
+    title: '个人中心',
     link: '/pages/user/profile',
   }, {
     title: '登出',

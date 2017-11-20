@@ -19,10 +19,6 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         title: '正版验证',
         link: '/pages/user/yggdrasil',
       },
-      {
-        title: 'profile',
-        link: '/pages/user/profile',
-      },
     ],
   },
   {
