@@ -10,7 +10,7 @@ export class ToastService {
 
   public success(title, body) {
     const toast: Toast = {
-      type: 'info',
+      type: 'success',
       title: title,
       body: body,
       bodyOutputType: BodyOutputType.TrustedHtml,
