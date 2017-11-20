@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserProfile()
       .subscribe(userProfile => {
         this.user = userProfile;
-        this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=64`;
+        this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=256`;
       });
   }
 

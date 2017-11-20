@@ -1,0 +1,21 @@
+<div class="user-container">
+  <div class="user-picture">
+    <div class="background image" style.background-image="url({{user.picture}})"></div>
+  </div>
+  <div class="user-name">
+    <p>
+      {{user.username}}
+    </p>
+  </div>
+</div>
+<div class="info-container">
+  <span class="tag tag-success" *ngIf="!user.ban">
+      未封禁
+  </span>
+  <span class="tag tag-danger" *ngIf="user.ban">
+      已封禁: {{user.ban}}
+    </span>
+  <span class="tag tag-danger" *ngIf="user.admin">
+      管理员
+  </span>
+</div>

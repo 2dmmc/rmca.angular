@@ -1,14 +1,15 @@
 <div class="row">
   <div class="col-lg-8">
     <nb-card>
-      <nb-card-header><i class="fa fa-id-card"></i>  个人资料</nb-card-header>
+      <nb-card-header><i class="fa fa-id-card"></i> 个人资料</nb-card-header>
       <nb-card-body>
         <form>
           <div class="form-group row">
             <label for="email" class="col-sm-2 col-form-label">电子邮箱</label>
             <div class="col-sm-10">
               <input type="email" class="form-control" id="email" placeholder="Email">
-              <small class="form-text">我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a></small>
+              <small class="form-text">我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a>
+              </small>
             </div>
           </div>
           <div class="form-group row">
@@ -22,10 +23,10 @@
   </div>
   <div class="col-lg-4">
     <nb-card>
-      <nb-card-header><i class="fa fa-info"></i>  我的账户</nb-card-header>
+      <nb-card-header><i class="fa fa-info"></i> 我的账户</nb-card-header>
       <nb-card-body>
         <div class="user-state">
-          <!--<ngx-user-state [name="user?.username"] [picture="user?.picture"] [state="user?.state"]></ngx-user-state>-->
+          <ngx-user-state [user]="user"></ngx-user-state>
         </div>
       </nb-card-body>
     </nb-card>
@@ -34,7 +35,7 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header><i class="fa fa-lock"></i>  密码管理</nb-card-header>
+      <nb-card-header><i class="fa fa-lock"></i> 密码管理</nb-card-header>
       <nb-card-body>
         <form>
           <div class="form-group">
