@@ -6,27 +6,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
-import {UserService} from '../../../pages/user/user.service';
 
 @Component({
   selector: 'ngx-logout',
-  template: `
-    <ngx-auth-block>
-      <h2 class="title">RMCA - 登出</h2>
-      <div class="alert alert-danger" role="alert"
-           *ngIf="hasError()">
-        <div><strong>{{error.title}}</strong></div>
-        <div>{{error.message}}</div>
-      </div>
-
-      <div class="alert alert-success" role="alert"
-           *ngIf="hasMessage()">
-        <div><strong>{{message.title}}</strong></div>
-        <div>{{message.message}}</div>
-      </div>
-
-    </ngx-auth-block>
-  `,
+  templateUrl: './logout.component.html',
 })
 export class NbLogoutComponent implements OnInit {
 
