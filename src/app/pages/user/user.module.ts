@@ -8,8 +8,6 @@ import {UserComponent} from './user.component';
 import {ProfileComponent} from './profile/profile.component';
 import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
 
-import {UserService} from './user.service';
-
 const components = [
   UserComponent,
   ProfileComponent,
@@ -25,9 +23,7 @@ const components = [
   declarations: [
     ...components,
   ],
-  providers: [
-    UserService,
-  ],
+  providers: [],
 })
 export class UserModule {
 }

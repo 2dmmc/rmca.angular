@@ -7,6 +7,8 @@ import {ThemeModule} from '../@theme/theme.module';
 
 import {AuthService} from '../auth/services/auth.service';
 
+import {ToastComponent, ToasterContainerComponent, ToasterService} from 'angular2-toaster/angular2-toaster';
+
 const PAGES_COMPONENTS = [
   PagesComponent,
 ];
@@ -19,9 +21,12 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    ToasterContainerComponent,
+    ToastComponent,
   ],
   providers: [
     AuthService,
+    ToasterService,
   ],
 })
 export class PagesModule {
