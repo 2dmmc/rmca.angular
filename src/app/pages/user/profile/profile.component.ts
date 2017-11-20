@@ -15,24 +15,25 @@ export class ProfileComponent implements AfterViewInit, OnInit {
               private toastService: ToastService) {
   }
 
-  // user: any;
-  user = {
-    username: 'sdjnmxd',
-    email: 'i@mxd.moe',
-    admin: true,
-    picture: '',
-  };
-
+  user: any;
   profileSubmitted: boolean;
+  passwordSubmitted: boolean;
 
   ngOnInit() {
+    this.user = {
+      email: '',
+      password: '',
+      newPassword: '',
+      newPasswordRep: '',
+    };
+
     this.userService.getUserProfile()
       .then(userProfile => {
-        // this.user = userProfile;
+        this.user = userProfile;
         this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=128`;
       })
       .catch(error => {
-        this.toastService.error('获取用户信息失败', error.error.message);
+        this.toastService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
       });
   }
 
@@ -45,14 +46,10 @@ export class ProfileComponent implements AfterViewInit, OnInit {
     this.userService.updateUserProfile(this.user.email)
       .then(updateState => {
         this.toastService.success('更新成功', '更新个人资料成功');
-
-        // TODO toast
         this.profileSubmitted = false;
       })
       .catch(error => {
-        this.toastService.error('更新个人资料失败', error.error.message);
-
-        // TODO toast
+        this.toastService.error('更新个人资料失败', `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`);
         this.profileSubmitted = false;
       });
   }
@@ -61,13 +58,33 @@ export class ProfileComponent implements AfterViewInit, OnInit {
     return this.profileSubmitted;
   }
 
-  updatePassword(password, newPassword): void {
-    this.userService.updateUserPassword(password, newPassword)
+  updatePassword(): void {
+    this.passwordSubmitted = true;
+    let errorMessage = '';
+
+    this.userService.updateUserPassword(this.user.password, this.user.newPassword)
       .then(updateState => {
-        // TODO toast
+        this.passwordSubmitted = false;
+        this.toastService.success('更新成功', '更新密码成功');
       })
       .catch(error => {
-        // TODO toast
+        this.passwordSubmitted = false;
+
+        switch (error.status) {
+          case 403: {
+            errorMessage = '当前密码错误';
+            break;
+          }
+          default: {
+            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+          }
+        }
+
+        this.toastService.error('更新密码失败', errorMessage);
       });
+  }
+
+  isPasswordSubmitted(): boolean {
+    return this.passwordSubmitted;
   }
 }
