@@ -74,9 +74,8 @@
              *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
         请输入重复密码
       </small>
-      <small
-        class="form-text error"
-        *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
+      <small class="form-text error"
+             *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
         两次密码不匹配
       </small>
     </div>
