@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -13,16 +13,19 @@ export class UserService {
   }
 
   updateUserProfile(email) {
-    return this.http.post('/api/user/profile', {
-      email,
-    })
+    const params = new HttpParams()
+      .set(email, email);
+
+    return this.http.post('/api/user/profile', params)
       .toPromise();
   }
 
   updateUserPassword(password, newPassword) {
-    return this.http.post('/api/user/password', {
-      password,
-      newPassword,
-    }).toPromise();
+    const params = new HttpParams()
+      .set(password, password)
+      .set(newPassword, newPassword);
+
+    return this.http.post('/api/user/password', params)
+      .toPromise();
   }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -8,11 +8,12 @@ export class AuthService {
   }
 
   login(username, password, isKeepLogin) {
-    return this.http.post('/api/user/login', {
-      username,
-      password,
-      isKeepLogin,
-    })
+    const params = new HttpParams()
+      .set(username, username)
+      .set(password, password)
+      .set(isKeepLogin, isKeepLogin);
+
+    return this.http.post('/api/user/login', params)
       .toPromise();
   }
 
@@ -22,25 +23,28 @@ export class AuthService {
   }
 
   register(username, password, email) {
-    return this.http.post('/api/user/register', {
-      username,
-      password,
-      email,
-    })
+    const params = new HttpParams()
+      .set(username, username)
+      .set(password, password)
+      .set(email, email);
+
+    return this.http.post('/api/user/register', params)
       .toPromise();
   }
 
   requestPass(email) {
-    return this.http.post('/api/user/reset', {
-      email,
-    })
+    const params = new HttpParams()
+      .set(email, email);
+
+    return this.http.post('/api/user/reset', params)
       .toPromise();
   }
 
   resetPassword(hash, password) {
-    return this.http.post(`/api/user/reset/${hash}`, {
-      password,
-    })
+    const params = new HttpParams()
+      .set(password, password);
+
+    return this.http.post(`/api/user/reset/${hash}`, params)
       .toPromise();
   }
 
