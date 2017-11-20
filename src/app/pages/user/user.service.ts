@@ -14,7 +14,7 @@ export class UserService {
 
   updateUserProfile(email) {
     const params = new HttpParams()
-      .set(email, email);
+      .set('email', email);
 
     return this.http.post('/api/user/profile', params)
       .toPromise();
@@ -22,8 +22,8 @@ export class UserService {
 
   updateUserPassword(password, newPassword) {
     const params = new HttpParams()
-      .set(password, password)
-      .set(newPassword, newPassword);
+      .set('password', password)
+      .set('newPassword', newPassword);
 
     return this.http.post('/api/user/password', params)
       .toPromise();

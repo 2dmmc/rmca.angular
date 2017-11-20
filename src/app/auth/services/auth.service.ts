@@ -9,9 +9,9 @@ export class AuthService {
 
   login(username, password, isKeepLogin) {
     const params = new HttpParams()
-      .set(username, username)
-      .set(password, password)
-      .set(isKeepLogin, isKeepLogin);
+      .set('username', username)
+      .set('password', password)
+      .set('isKeepLogin', isKeepLogin);
 
     return this.http.post('/api/user/login', params)
       .toPromise();
@@ -24,9 +24,9 @@ export class AuthService {
 
   register(username, password, email) {
     const params = new HttpParams()
-      .set(username, username)
-      .set(password, password)
-      .set(email, email);
+      .set('username', username)
+      .set('password', password)
+      .set('email', email);
 
     return this.http.post('/api/user/register', params)
       .toPromise();
@@ -34,7 +34,7 @@ export class AuthService {
 
   requestPass(email) {
     const params = new HttpParams()
-      .set(email, email);
+      .set('email', email);
 
     return this.http.post('/api/user/reset', params)
       .toPromise();
@@ -42,7 +42,7 @@ export class AuthService {
 
   resetPassword(hash, password) {
     const params = new HttpParams()
-      .set(password, password);
+      .set('password', password);
 
     return this.http.post(`/api/user/reset/${hash}`, params)
       .toPromise();
