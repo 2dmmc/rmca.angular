@@ -5,12 +5,12 @@
 ## how to use
 
 ### Develop
-`npm install`
-`npm run dev`
+- `npm install`
+- `npm run dev`
 
 ### Production
-`npm insall`
-`npm run deploy`
+- `npm insall`
+- `npm run deploy`
 
 ## 备注
 
