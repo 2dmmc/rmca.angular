@@ -20,10 +20,6 @@ const components = [
   declarations: [
     ...components,
   ],
-  providers: [
-    NoticeService,
-    UserService,
-  ],
 })
 export class ProfileModule {
 }

@@ -9,6 +9,9 @@ import {UserComponent} from './user.component';
 import {ProfileComponent} from './profile/profile.component';
 import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
 
+import {UserService} from './user.service';
+import {NoticeService} from '../../@system/notice/notice.service';
+
 const components = [
   UserComponent,
   ProfileComponent,
@@ -25,7 +28,10 @@ const components = [
   declarations: [
     ...components,
   ],
-  providers: [],
+  providers: [
+    UserService,
+    NoticeService,
+  ],
 })
 export class UserModule {
 }
