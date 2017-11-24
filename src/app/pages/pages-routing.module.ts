@@ -14,6 +14,9 @@ const routes: Routes = [{
     path: 'user',
     loadChildren: './user/user.module#UserModule',
   }, {
+    path: 'player',
+    loadChildren: './player/player.module#PlayerModule',
+  }, {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
