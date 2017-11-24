@@ -22,9 +22,22 @@ export class YggdrasilComponent implements OnInit {
       password: '',
     };
 
+    this.updateYggdrasilState();
+  }
+
+  updateYggdrasilState(): void {
     this.userService.getUserProfile()
       .then(profile => {
-        this.yggdrasilProfile = profile['yggdrasil'];
+        if (profile['yggdrasil']) {
+          this.yggdrasilProfile = profile['yggdrasil'];
+          this.yggdrasilProfile.isAuth = true;
+        } else {
+          this.yggdrasilProfile = {
+            username: '未验证',
+            uuid: '未验证',
+            isAuth: false,
+          };
+        }
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
@@ -41,6 +54,7 @@ export class YggdrasilComponent implements OnInit {
     this.userService.updateUserYggdrasil(this.yggdrasil.username, this.yggdrasil.password)
       .then(updateState => {
         this.submitted = false;
+        this.updateYggdrasilState();
         this.noticeService.success('更新成功', '更新正版验证状态成功');
       })
       .catch(error => {

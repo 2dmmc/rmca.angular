@@ -16,10 +16,10 @@
   <small class="form-text">* 该内容从Mojang获取, 不可修改</small>
 </div>
 <div class="info-container">
-  <span class="tag tag-success" *ngIf="yggdrasilProfile.username || yggdrasilProfile.uuid">
+  <span class="tag tag-success" *ngIf="yggdrasilProfile.isAuth">
       已验证
   </span>
-  <span class="tag tag-warning" *ngIf="!yggdrasilProfile.username || !yggdrasilProfile.uuid">
+  <span class="tag tag-warning" *ngIf="!yggdrasilProfile.isAuth">
       未验证
   </span>
 </div>

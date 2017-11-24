@@ -3,13 +3,13 @@
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
 .info-container {
-  padding: 1rem;
+  padding-top: 1rem;
   display: flex;
   justify-content: center;
 
   .tag {
     display: block;
-    padding: 1rem 1.5rem;
+    padding: 0.8rem 1.2rem;
     border-radius: 0.3rem;
     margin: 0 0.5rem;
   }
