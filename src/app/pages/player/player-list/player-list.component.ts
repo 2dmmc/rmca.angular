@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 import {PlayerService} from '../player.service';
 import {NoticeService} from '../../../@system/notice/notice.service';
@@ -11,10 +12,56 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 
 export class PlayerListComponent implements OnInit {
   constructor(private playerService: PlayerService,
-              private noticeService: NoticeService) {
+              private noticeService: NoticeService,
+              private router: Router) {
   }
 
-  ngOnInit() {
+  roles: any = [];
 
+  ngOnInit() {
+    this.getRoles();
+  }
+
+  getRoles(): void {
+    this.roles = [];
+
+    this.playerService.getRoles()
+      .then((roles: any) => {
+        this.roles = roles.sort((a, b) => !a.isDefault);
+      })
+      .catch(error => {
+        this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
+  }
+
+  updateDefaultRole(roleId): void {
+    this.playerService.updateDefaultRole(roleId)
+      .then(updateState => {
+        this.noticeService.success('更新成功', '更新默认角色成功');
+        this.getRoles();
+      })
+      .catch(error => {
+        let errorMessage = '';
+
+        switch (error.status) {
+          case 403: {
+            errorMessage = '角色属组不存在?';
+            break;
+          }
+          case 404: {
+            errorMessage = '角色不存在';
+            break;
+          }
+          default: {
+            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+          }
+        }
+
+        this.noticeService.error('更新默认角色失败', errorMessage);
+      });
+  }
+
+  jumpAddRole(): void {
+    this.router.navigate(['/pages/player/add']);
   }
 }
