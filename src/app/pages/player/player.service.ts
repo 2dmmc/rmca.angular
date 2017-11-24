@@ -34,7 +34,7 @@ export class PlayerService {
       .toPromise();
   }
 
-  setDefaultRole(roleId) {
+  updateDefaultRole(roleId) {
     const params = new HttpParams()
       .set('roleId', roleId);
 
