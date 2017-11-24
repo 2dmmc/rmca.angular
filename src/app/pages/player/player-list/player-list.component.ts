@@ -34,10 +34,10 @@ export class PlayerListComponent implements OnInit {
       });
   }
 
-  updateDefaultRole(roleId): void {
-    this.playerService.updateDefaultRole(roleId)
+  updateDefaultRole(role): void {
+    this.playerService.updateDefaultRole(role._id)
       .then(updateState => {
-        this.noticeService.success('更新成功', '更新默认角色成功');
+        this.noticeService.success('更新成功', `更新默认角色成功, 默认角色已更换为 ${role.rolename}`);
         this.getRoles();
       })
       .catch(error => {
