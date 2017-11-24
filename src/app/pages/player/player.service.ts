@@ -25,8 +25,9 @@ export class PlayerService {
       .toPromise();
   }
 
-  setPlayerSkin(playerId, file) {
+  setPlayerSkin(playerId, skinModel, file) {
     const params = new HttpParams()
+      .set('skinModel', skinModel)
       .set('file', file);
 
     return this.http.post(`/api/role/skin/${playerId}`, params)
