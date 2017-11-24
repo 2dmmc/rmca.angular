@@ -23,8 +23,6 @@ export class PlayerListComponent implements OnInit {
   }
 
   getRoles(): void {
-    this.roles = [];
-
     this.playerService.getRoles()
       .then((roles: any) => {
         this.roles = roles;
