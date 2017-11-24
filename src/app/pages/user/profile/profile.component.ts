@@ -60,7 +60,6 @@ export class ProfileComponent implements AfterViewInit, OnInit {
 
   updatePassword(): void {
     this.passwordSubmitted = true;
-    let errorMessage = '';
 
     this.userService.updateUserPassword(this.user.password, this.user.newPassword)
       .then(updateState => {
@@ -69,6 +68,8 @@ export class ProfileComponent implements AfterViewInit, OnInit {
       })
       .catch(error => {
         this.passwordSubmitted = false;
+
+        let errorMessage = '';
 
         switch (error.status) {
           case 403: {
