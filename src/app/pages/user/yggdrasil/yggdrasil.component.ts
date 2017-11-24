@@ -13,6 +13,7 @@ export class YggdrasilComponent implements OnInit {
   }
 
   yggdrasil: any = {};
+  yggdrasilProfile: any = {};
   submitted: boolean;
 
   ngOnInit() {
@@ -20,6 +21,14 @@ export class YggdrasilComponent implements OnInit {
       username: '',
       password: '',
     };
+
+    this.userService.getUserProfile()
+      .then(profile => {
+        this.yggdrasilProfile = profile['yggdrasil'];
+      })
+      .catch(error => {
+        this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
   }
 
   isSubmitted(): boolean {

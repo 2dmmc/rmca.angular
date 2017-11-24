@@ -1,13 +1,13 @@
 import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../../@theme/theme.module';
-// import {UserStateComponent} from './user-state/user-state.component';
+import {YggdrasilStateComponent} from './yggdrasil-state/yggdrasil-state.component';
 
 import {NoticeService} from '../../../@system/notice/notice.service';
 import {UserService} from '../user.service';
 
 const components = [
-  // UserStateComponent,
+  YggdrasilStateComponent,
 ];
 
 @NgModule({
