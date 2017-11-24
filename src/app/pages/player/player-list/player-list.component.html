@@ -1,58 +1,72 @@
-<div class="row">
+<!--<div class="row">-->
+<!--<div class="col-lg-12">-->
+<!--<nb-card>-->
+<!--<nb-card-header><i class="fa fa-id-card"></i> 角色列表</nb-card-header>-->
+<!--<nb-card-body>-->
+<!--<table class="table table-bordered table-hover">-->
+<!--<caption>-->
+<!--<button class="btn btn-success" (click)="jumpAddRole()">新增角色</button>-->
+<!--</caption>-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th>角色名称</th>-->
+<!--<th>UUID</th>-->
+<!--<th>角色类型</th>-->
+<!--<th>角色状态</th>-->
+<!--<th>角色管理</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr *ngIf="roles.length == 0">-->
+<!--<td colspan="6">-->
+<!--你还没有任何角色-->
+<!--</td>-->
+<!--</tr>-->
+<!--<tr *ngFor="let role of roles">-->
+<!--<td>{{role.rolename}}</td>-->
+<!--<td>{{role.uuid}}</td>-->
+<!--<td>{{role.userModel}}</td>-->
+<!--<td>-->
+<!--<span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>-->
+<!--<span class="tag tag-primary" *ngIf="!role.isDefault">未设定</span>-->
+<!--</td>-->
+<!--<td>-->
+<!--<a href=""> </a>-->
+<!--<button class="btn btn-success" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">-->
+<!--<i class="fa fa-edit"></i>设为默认角色-->
+<!--</button>-->
+<!--<button class="btn btn-primary"><i class="fa fa-edit"></i>编辑</button>-->
+<!--</td>-->
+<!--</tr>-->
+<!--&lt;!&ndash;<tr>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>sdjnmxd</td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td></td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td><span class="tag tag-success">默认角色</span><span class="tag tag-primary">未设定</span></td>&ndash;&gt;-->
+<!--&lt;!&ndash;<td>&ndash;&gt;-->
+<!--&lt;!&ndash;<a href=""><i class="fa fa-edit"></i> 编辑</a>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;<a href=""> <i class="fa fa-edit"></i> 设为默认角色</a>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;</td>&ndash;&gt;-->
+<!--&lt;!&ndash;</tr>&ndash;&gt;-->
+<!--</tbody>-->
+<!--</table>-->
+<!--</nb-card-body>-->
+<!--</nb-card>-->
+<!--</div>-->
+<!--</div>-->
+
+<div class="row" *ngFor="let role of roles">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header><i class="fa fa-id-card"></i> 角色列表</nb-card-header>
+      <nb-card-header>{{role.rolename}} - {{role.uuid}} <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span></nb-card-header>
       <nb-card-body>
-        <table class="table table-bordered table-hover">
-          <caption>
-            <button class="btn btn-success" (click)="jumpAddRole()">新增角色</button>
-          </caption>
-          <thead>
-          <tr>
-            <th>角色名称</th>
-            <th>UUID</th>
-            <th>角色类型</th>
-            <th>角色状态</th>
-            <th>角色管理</th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngIf="roles.length == 0">
-            <td colspan="6">
-              你还没有任何角色
-            </td>
-          </tr>
-          <tr *ngFor="let role of roles">
-            <td>{{role.rolename}}</td>
-            <td>{{role.uuid}}</td>
-            <td>{{role.userModel}}</td>
-            <td>
-              <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
-              <span class="tag tag-primary" *ngIf="!role.isDefault">未设定</span>
-            </td>
-            <td>
-              <a href=""> </a>
-              <button class="btn btn-success" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">
-                <i class="fa fa-edit"></i>设为默认角色
-              </button>
-              <button class="btn btn-primary"><i class="fa fa-edit"></i>编辑</button>
-            </td>
-          </tr>
-          <!--<tr>-->
-          <!--<td>sdjnmxd</td>-->
-          <!--<td></td>-->
-          <!--<td></td>-->
-          <!--<td></td>-->
-          <!--<td><span class="tag tag-success">默认角色</span><span class="tag tag-primary">未设定</span></td>-->
-          <!--<td>-->
-          <!--<a href=""><i class="fa fa-edit"></i> 编辑</a>-->
-          <!--&lt;!&ndash;<a href=""> <i class="fa fa-edit"></i> 设为默认角色</a>&ndash;&gt;-->
-          <!--</td>-->
-          <!--</tr>-->
-          </tbody>
-        </table>
+        <button class="btn btn-success" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">
+          <i class="fa fa-edit"></i>设为默认角色
+        </button>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 
+<button class="btn btn-success" (click)="jumpAddRole()">新增角色</button>
