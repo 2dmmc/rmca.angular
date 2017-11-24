@@ -27,7 +27,7 @@ export class PlayerListComponent implements OnInit {
 
     this.playerService.getRoles()
       .then((roles: any) => {
-        this.roles = roles.sort((a, b) => !a.isDefault);
+        this.roles = roles;
       })
       .catch(error => {
         this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
