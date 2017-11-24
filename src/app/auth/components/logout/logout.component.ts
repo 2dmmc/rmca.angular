@@ -48,7 +48,7 @@ export class NbLogoutComponent implements OnInit {
           }
         }
 
-        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
       });
   }
 

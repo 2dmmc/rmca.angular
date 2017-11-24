@@ -48,7 +48,7 @@ export class NbLoginComponent {
           default: {
             this.error.title = '未知错误, 请联系鹳狸猿';
           }
-            this.error.message = `message: ${error.error.message || '未知'} | code: ${error.error.code || '未知'}`;
+            this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
         }
       });
   }
