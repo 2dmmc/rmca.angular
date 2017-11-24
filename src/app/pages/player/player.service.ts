@@ -7,36 +7,36 @@ export class PlayerService {
   constructor(private http: HttpClient) {
   }
 
-  getPlayers() {
+  getRoles() {
     return this.http.get('/api/role')
       .toPromise();
   }
 
-  createPlayer(playerName) {
+  addRole(rolename) {
     const params = new HttpParams()
-      .set('rolename', playerName);
+      .set('rolename', rolename);
 
     return this.http.post('/api/role', params)
       .toPromise();
   }
 
-  getPlayerSkin(playerId) {
-    return this.http.get(`/api/role/skin/${playerId}`)
+  getRoleSkin(roleId) {
+    return this.http.get(`/api/role/skin/${roleId}`)
       .toPromise();
   }
 
-  setPlayerSkin(playerId, skinModel, file) {
+  setRoleSkin(roleId, skinModel, file) {
     const params = new HttpParams()
       .set('skinModel', skinModel)
       .set('file', file);
 
-    return this.http.post(`/api/role/skin/${playerId}`, params)
+    return this.http.post(`/api/role/skin/${roleId}`, params)
       .toPromise();
   }
 
-  setPlayerDefault(playerId) {
+  setDefaultRole(roleId) {
     const params = new HttpParams()
-      .set('roleId', playerId);
+      .set('roleId', roleId);
 
     return this.http.patch('/api/role/default', params)
       .toPromise();
