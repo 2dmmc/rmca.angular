@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../@theme/theme.module';
 import {ProfileModule} from './profile/profile.module';
+import {YggdrasilModule} from './yggdrasil/yggdrasil.module';
 import {UserRoutingModule} from './user-routing.module';
 
 import {UserComponent} from './user.component';
@@ -19,6 +20,7 @@ const components = [
     ThemeModule,
     UserRoutingModule,
     ProfileModule,
+    YggdrasilModule,
   ],
   declarations: [
     ...components,

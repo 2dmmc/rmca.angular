@@ -28,4 +28,13 @@ export class UserService {
     return this.http.post('/api/user/password', params)
       .toPromise();
   }
+
+  updateUserYggdrasil(username, password) {
+    const params = new HttpParams()
+      .set('username', username)
+      .set('password', password);
+
+    return this.http.post('/api/user/yggdrasil', params)
+      .toPromise();
+  }
 }
