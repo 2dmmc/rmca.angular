@@ -16,6 +16,10 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     icon: 'ion-person',
     children: [
       {
+        title: '个人中心',
+        link: '/pages/user/profile',
+      },
+      {
         title: '正版验证',
         link: '/pages/user/yggdrasil',
       },
