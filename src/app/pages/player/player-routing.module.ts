@@ -13,7 +13,7 @@ const routes: Routes = [{
     path: 'list',
     component: PlayerListComponent,
   }, {
-    path: 'detail',
+    path: 'detail/:id',
     component: PlayerDetailComponent,
   }, {
     path: 'add',
