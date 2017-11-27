@@ -25,10 +25,10 @@ export class PlayerService {
       .toPromise();
   }
 
-  setRoleSkin(roleId, skinModel, file) {
+  updateRole(roleId, skinModel, skin) {
     const params = new HttpParams()
       .set('skinModel', skinModel)
-      .set('file', file);
+      .set('file', skin);
 
     return this.http.post(`/api/role/skin/${roleId}`, params)
       .toPromise();
