@@ -64,10 +64,11 @@
         <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
       </nb-card-header>
       <nb-card-body>
-        <button class="btn btn-primary" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
+        <button class="btn btn-hero-info">编辑</button>
+        <button class="btn btn-hero-primary" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 
-<button class="btn btn-success" (click)="jumpAddRole()">新增角色</button>
+<button class="btn btn-hero-success" (click)="jumpAddRole()">新增角色</button>
