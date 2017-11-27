@@ -68,12 +68,4 @@ export class PlayerListComponent implements OnInit {
         this.noticeService.error('更新默认角色失败', errorMessage);
       });
   }
-
-  jumpRoleDeatil(roleId): void {
-    this.router.navigate([`/pages/player/detail`, roleId]);
-  }
-
-  jumpRoleAdd(): void {
-    this.router.navigate(['/pages/player/add']);
-  }
 }

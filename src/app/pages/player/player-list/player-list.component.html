@@ -6,12 +6,14 @@
         <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
       </nb-card-header>
       <nb-card-body>
-        <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
-        <button class="btn btn-info" (click)="jumpRoleDeatil(role._id)">编辑</button>
+        <div class="skin-viewer">
+          <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
+        </div>
+        <button class="btn btn-info" [routerLink]="['../detail', role._id]">编辑</button>
         <button class="btn btn-primary" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-body>
     </nb-card>
   </div>
 </div>
 
-<button class="btn btn-hero-success" (click)="jumpRoleAdd()">新增角色</button>
+<button class="btn btn-hero-success" routerLink="../add">新增角色</button>

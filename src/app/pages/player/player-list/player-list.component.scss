@@ -11,6 +11,17 @@ nb-card-header {
   }
 }
 
+nb-card-body {
+  .skin-viewer {
+    img {
+      height: 5rem;
+      width: 10rem;
+    }
+
+    padding-bottom: 1rem;
+  }
+}
+
 .tag {
   font-size: 1rem;
   line-height: 1rem;
