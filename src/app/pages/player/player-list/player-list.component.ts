@@ -69,7 +69,11 @@ export class PlayerListComponent implements OnInit {
       });
   }
 
-  jumpAddRole(): void {
+  jumpRoleDeatil(roleId): void {
+    this.router.navigate([`/pages/player/detail`, roleId]);
+  }
+
+  jumpRoleAdd(): void {
     this.router.navigate(['/pages/player/add']);
   }
 }
