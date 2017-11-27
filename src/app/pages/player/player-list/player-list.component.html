@@ -9,9 +9,11 @@
         <div class="skin-viewer">
           <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
         </div>
+      </nb-card-body>
+      <nb-card-footer>
         <button class="btn btn-info" [routerLink]="['../detail', role._id]">编辑</button>
         <button class="btn btn-primary" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
-      </nb-card-body>
+      </nb-card-footer>
     </nb-card>
   </div>
 </div>
