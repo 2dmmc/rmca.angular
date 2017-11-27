@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
-import {RequestOptions} from '@angular/http';
 
 @Injectable()
 export class PlayerService {
@@ -32,11 +31,16 @@ export class PlayerService {
   }
 
   updateRole(roleId, skinModel, skin) {
-    const params = new HttpParams()
-      .set('model', skinModel)
-      .set('skin', skin);
+    // FIXME https://github.com/angular/angular/issues/18261
+    // FUCK u Angular
+    // const params = new HttpParams()
+    //   .set('model', skinModel)
+    //   .set('skin', skin);
 
-    return this.http.post(`/api/role/skin/${roleId}`, params)
+    return this.http.post(`/api/role/skin/${roleId}`, {
+      model: skinModel,
+      skin: skin,
+    })
       .toPromise();
   }
 
