@@ -25,9 +25,14 @@ export class PlayerService {
       .toPromise();
   }
 
+  getRole(roleId) {
+    return this.http.get(`/api/role/${roleId}`)
+      .toPromise();
+  }
+
   updateRole(roleId, skinModel, skin) {
     const params = new HttpParams()
-      .set('skinModel', skinModel)
+      .set('model', skinModel)
       .set('file', skin);
 
     return this.http.post(`/api/role/skin/${roleId}`, params)
