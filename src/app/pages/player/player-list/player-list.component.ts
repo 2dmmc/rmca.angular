@@ -32,6 +32,16 @@ export class PlayerListComponent implements OnInit {
       });
   }
 
+  initSkinView(roleId): void {
+    this.playerService.getRoleSkin(roleId)
+      .then(skinSrc => {
+        return skinSrc;
+      })
+      .catch(error => {
+        this.noticeService.error('获取角色皮肤失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
+  }
+
   updateDefaultRole(role): void {
     this.playerService.updateDefaultRole(role._id)
       .then(updateState => {

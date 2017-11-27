@@ -43,7 +43,8 @@
         "../node_modules/tinymce/plugins/table/plugin.min.js",
         "./assets/vendors/echarts.min.js",
         "./assets/vendors/echarts.world.min.js",
-        "../node_modules/chart.js/dist/Chart.min.js"
+        "../node_modules/chart.js/dist/Chart.min.js",
+        "../node_modules/skinview3d/build/skinview3d.module.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

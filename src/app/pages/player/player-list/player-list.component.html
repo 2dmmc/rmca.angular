@@ -64,6 +64,7 @@
         <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
       </nb-card-header>
       <nb-card-body>
+        <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
         <button class="btn btn-info">编辑</button>
         <button class="btn btn-primary" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-body>
