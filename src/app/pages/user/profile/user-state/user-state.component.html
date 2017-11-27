@@ -1,24 +1,31 @@
-<div class="user-container">
-  <div class="user-picture">
-    <div class="background image" style.background-image="url({{user.picture}})"></div>
-  </div>
-  <div class="user-name">
-    <p>
-      {{user.username}}
-    </p>
-  </div>
-</div>
-<div class="info-container">
-  <span class="tag tag-success" *ngIf="!user.ban">
-      账户状态: 正常
-  </span>
-  <span class="tag tag-danger" *ngIf="user.ban">
-      已封禁: {{user.ban}}
-    </span>
-  <span class="tag tag-danger" *ngIf="user.admin">
-      管理员
-  </span>
-  <span class="tag tag-info" *ngIf="user.username == 'sdjnmxd' || user.username == 'bangbang93'">
-      Developer
-  </span>
-</div>
+<nb-card>
+  <nb-card-header><i class="fa fa-info"></i> 我的账户</nb-card-header>
+  <nb-card-body>
+    <div class="user-state">
+      <div class="user-container">
+        <div class="user-picture">
+          <div class="background image" style.background-image="url({{user.picture}})"></div>
+        </div>
+        <div class="user-name">
+          <p>
+            {{user.username}}
+          </p>
+        </div>
+      </div>
+      <div class="info-container">
+        <span class="tag tag-success" *ngIf="!user.ban">
+          账户状态: 正常
+        </span>
+              <span class="tag tag-danger" *ngIf="user.ban">
+          已封禁: {{user.ban}}
+        </span>
+              <span class="tag tag-danger" *ngIf="user.admin">
+          管理员
+        </span>
+              <span class="tag tag-info" *ngIf="user.username == 'sdjnmxd' || user.username == 'bangbang93'">
+          Developer
+        </span>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

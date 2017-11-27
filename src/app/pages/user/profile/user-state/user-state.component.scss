@@ -2,6 +2,12 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 
+nb-card-header {
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
 .user-container {
   display: flex;
   align-items: center;
@@ -40,26 +46,28 @@
 .info-container {
   display: flex;
   justify-content: center;
+}
 
-  .tag {
-    display: block;
-    padding: 0.3rem 0.5rem;
-    border-radius: 0.3rem;
-    margin: 0 0.5rem;
-  }
+.tag {
+  display: block;
+  font-size: 1rem;
+  line-height: 1rem;
+  padding: 0.4rem 0.5rem;
+  border-radius: 0.3rem;
+  margin: 0 0.5rem;
+}
 
-  .tag-info {
-    color: nb-theme(color-white);
-    background-color: nb-theme(color-info);
-  }
+.tag-info {
+  color: nb-theme(color-white);
+  background-color: nb-theme(color-info);
+}
 
-  .tag-success {
-    color: nb-theme(color-white);
-    background-color: nb-theme(color-success);
-  }
+.tag-success {
+  color: nb-theme(color-white);
+  background-color: nb-theme(color-success);
+}
 
-  .tag-danger {
-    color: nb-theme(color-white);
-    background-color: nb-theme(color-danger);
-  }
+.tag-danger {
+  color: nb-theme(color-white);
+  background-color: nb-theme(color-danger);
 }

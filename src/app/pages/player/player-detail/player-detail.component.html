@@ -35,10 +35,9 @@
           <div class="form-group row">
             <label for="input-skin" class="col-sm-1 col-form-label">皮肤上传</label>
             <div class="col-sm-11">
-              <div class="file btn btn-primary">
+              <div class="file btn btn-hero-info">
                 <span *ngIf="!role.file">选择文件</span>
                 <span *ngIf="role.file">文件已选择</span>
-
                 <input type="file" name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
                        ngModel (change)="getFiles($event)">
               </div>
@@ -62,7 +61,7 @@
           </div>
           <div class="form-group row">
             <div class="offset-sm-1 col-sm-11">
-              <button class="btn btn-success"
+              <button class="btn btn-hero-success"
                       [disabled]="isSubmitted() || !roleForm.form.valid"
                       [class.btn-pulse]="isSubmitted()">
                 更新角色信息
