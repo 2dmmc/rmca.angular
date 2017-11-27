@@ -61,11 +61,20 @@ export class PlayerDetailComponent implements OnInit {
         this.router.navigate(['/pages/player/list']);
       })
       .catch(error => {
-        this.submitted = true;
+        this.submitted = false;
 
-        let errorMessage: string;
+        let errorMessage = '';
 
-        errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        switch (error.status) {
+          case 415: {
+            errorMessage = '图片格式不符, 请上传png';
+            break;
+          }
+          default: {
+            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+          }
+        }
+
         this.noticeService.error('更新角色详情失败', errorMessage);
       });
   }
