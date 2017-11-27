@@ -44,6 +44,11 @@ export class PlayerService {
       .toPromise();
   }
 
+  updateYggdrasilSkin(roldId) {
+    return this.http.patch(`/api/role/skin/${roldId}/yggdrasil`, {})
+      .toPromise();
+  }
+
   updateDefaultRole(roleId) {
     const params = new HttpParams()
       .set('roleId', roleId);

@@ -13,6 +13,9 @@
       </nb-card-body>
       <nb-card-footer>
         <button class="btn btn-hero-success" [routerLink]="['../detail', role._id]">编辑</button>
+        <button class="btn btn-hero-info"
+                (click)="updateYggdrasilSkin(role._id)" [disabled]="isUpdate()" [class.btn-pulse]="isUpdate()">同步正版皮肤
+        </button>
       </nb-card-footer>
     </nb-card>
   </div>
