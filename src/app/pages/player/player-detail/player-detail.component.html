@@ -1,4 +1,51 @@
 <div class="row">
-  detail
+  <div class="col-lg-12">
+    <nb-card>
+      <nb-card-header><i class="fa fa-pencil-square-o"></i> 角色管理 - 角色详情</nb-card-header>
+      <nb-card-body>
+        <form #roleForm="ngForm" name="roleForm">
+          <div class="form-group row">
+            <label class="col-sm-1 col-form-label">模型类型</label>
+            <div class="col-sm-11">
+              <label class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="customRadio" checked>
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Steve</span>
+              </label>
+              <label class="custom-control custom-radio">
+                <input type="radio" class="custom-control-input" name="customRadio">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Alex</span>
+              </label>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input-skin" class="col-sm-1 col-form-label">皮肤上传</label>
+            <div class="col-sm-11">
+              <div class="file btn btn-primary">
+                选择文件
+                <input type="file" name="username" id="input-skin" class="form-control" placeholder="皮肤上传"
+                       ng2FileSelect [uploader]="uploader">
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input-skin" class="col-sm-1 col-form-label">皮肤预览</label>
+            <div class="col-sm-11">
+              <img src="//cdn.v2ex.com/gravatar/72d8fc62ddaeca55fd7187953e37f8cc?s=64" alt="">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="offset-sm-1 col-sm-11">
+              <button class="btn btn-success"
+                      [disabled]="isSubmitted() || !roleForm.form.valid"
+                      [class.btn-pulse]="isSubmitted()">
+                更改角色信息
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </div>
 </div>
-

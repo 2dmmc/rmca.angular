@@ -17,4 +17,14 @@ export class PlayerDetailComponent implements OnInit {
   ngOnInit() {
 
   }
+
+  submitted: boolean;
+
+  isSubmitted(): boolean {
+    return this.submitted;
+  }
+
+  updateRole(): void {
+    this.playerService.updateRole()
+  }
 }
