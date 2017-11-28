@@ -1,7 +1,17 @@
 <div class="row">
   <div class="col-lg-8">
     <nb-card>
-      <nb-card-header><i class="fa fa-id-card"></i> 个人资料</nb-card-header>
+      <nb-card-header>
+        <span>
+          <i class="fa fa-id-card"></i> 个人资料
+        </span>
+        <span class="tag tag-success" *ngIf="user.isEmailVerify">
+          已验证
+        </span>
+        <span class="tag tag-warning" *ngIf="!user.isEmailVerify">
+          未验证
+        </span>
+      </nb-card-header>
       <nb-card-body>
         <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
           <div class="form-group row">
@@ -19,7 +29,11 @@
                      *ngIf="email.invalid && email.touched && email.errors?.pattern">
                 邮箱格式不正确
               </small>
-              <small class="form-text">我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a>
+              <small class="form-text" *ngIf="user.isEmailVerify">
+                我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a>
+              </small>
+              <small class="form-text text-warning" *ngIf="!user.isEmailVerify">
+                你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到,请尝试 <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>或稍后重试
               </small>
             </div>
           </div>
@@ -43,7 +57,11 @@
 <div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header><i class="fa fa-lock"></i> 密码管理</nb-card-header>
+      <nb-card-header>
+        <span>
+          <i class="fa fa-lock"></i> 密码管理
+        </span>
+      </nb-card-header>
       <nb-card-body>
         <form (ngSubmit)="updatePassword()" #passwordForm="ngForm" name="passwordForm">
           <div class="form-group">

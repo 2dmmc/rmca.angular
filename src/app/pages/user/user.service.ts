@@ -37,4 +37,14 @@ export class UserService {
     return this.http.post('/api/user/yggdrasil', params)
       .toPromise();
   }
+
+  verifyEmail(hash) {
+    return this.http.patch(`/api/user/email-verify/${hash}`, {})
+      .toPromise();
+  }
+
+  resendVerifyEmail() {
+    return this.http.get('/api/user/resend-verify-email')
+      .toPromise();
+  }
 }
