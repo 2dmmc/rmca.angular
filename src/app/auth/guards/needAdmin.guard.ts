@@ -18,7 +18,7 @@ export class NeedAdminGuard implements CanActivate {
           resolve(isAdmin);
         })
         .catch(notAdmin => {
-          this.noticeService.error('authentication failed', '你又不是鹳狸猿');
+          this.noticeService.warning('Auth Router Guard (needAdmin)', '你又不是鹳狸猿');
           this.router.navigate(['/pages/dashboard']);
           reject(notAdmin);
         });

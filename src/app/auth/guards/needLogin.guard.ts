@@ -19,7 +19,7 @@ export class NeedLoginGuard implements CanActivate {
           resolve(isLogin);
         })
         .catch(notLogin => {
-          this.noticeService.error('authentication failed', '请先登录');
+          this.noticeService.warning('Auth Router Guard (needLogin)', '请先登录');
           this.router.navigate(['/auth/login']);
           reject(notLogin);
         });
