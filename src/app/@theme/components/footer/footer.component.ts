@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
       Created with
       <b><a href="https://akveo.github.io/nebular" target="_blank">Nebular</a></b>
       by
-      <b><a href="https://mxd.moe" target="_blank">Icefox</a></b>
+      <b><a href="https://weibo.com/sdjnmxd" target="_blank">Icefox</a></b>
       &
       <b><a href="https://blog.bangbang93.com" target="_blank">Bangbang93</a></b>.
       <b>RMCA</b>
