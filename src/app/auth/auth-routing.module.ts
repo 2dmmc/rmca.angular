@@ -8,6 +8,8 @@ import {NbRegisterComponent} from './components/register/register.component';
 import {NbRequestPasswordComponent} from './components/request-password/request-password.component';
 import {NbResetPasswordComponent} from './components/reset-password/reset-password.component';
 
+import {NeedUnLoginGuard} from './guards/needUnLogin.guard';
+
 const routes: Routes = [{
   path: '',
   component: NbAuthComponent,
@@ -19,14 +21,11 @@ const routes: Routes = [{
     {
       path: 'login',
       component: NbLoginComponent,
+      canActivate: [NeedUnLoginGuard],
     },
     {
       path: 'register',
       component: NbRegisterComponent,
-    },
-    {
-      path: 'logout',
-      component: NbLogoutComponent,
     },
     {
       path: 'request-password',
@@ -35,7 +34,11 @@ const routes: Routes = [{
     {
       path: 'reset-password',
       component: NbResetPasswordComponent,
-    }],
+    }, {
+      path: 'logout',
+      component: NbLogoutComponent,
+    },
+  ],
 }];
 
 @NgModule({

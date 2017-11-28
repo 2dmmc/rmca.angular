@@ -20,6 +20,7 @@ import {NoticeService} from './@system/notice/notice.service';
 
 import {NeedLoginGuard} from './auth/guards/needLogin.guard';
 import {NeedAdminGuard} from './auth/guards/needAdmin.guard';
+import {NeedUnLoginGuard} from './auth/guards/needUnLogin.guard';
 import {AuthService} from './auth/services/auth.service';
 import {AuthUtilService} from './auth/services/auth-util.service';
 import {UserService} from './pages/user/user.service';
@@ -43,6 +44,7 @@ import {UserService} from './pages/user/user.service';
     {provide: APP_BASE_HREF, useValue: '/'},
     NeedAdminGuard,
     NeedLoginGuard,
+    NeedUnLoginGuard,
     AuthService,
     AuthUtilService,
     UserService,
