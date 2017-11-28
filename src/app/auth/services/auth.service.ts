@@ -52,9 +52,4 @@ export class AuthService {
     return this.http.get(`/api/user/reset/${hash}`)
       .toPromise();
   }
-
-  checkLoginState() {
-    return this.http.get('/api/user/login')
-      .toPromise();
-  }
 }
