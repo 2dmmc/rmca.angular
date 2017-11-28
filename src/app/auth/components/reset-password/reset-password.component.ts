@@ -26,7 +26,7 @@ export class NbResetPasswordComponent {
       this.hash = queryParams.hash;
     });
 
-    this.authService.checkHash(this.hash)
+    this.authService.checkResetPasswordHash(this.hash)
       .catch(error => {
         this.submitted = false;
 
