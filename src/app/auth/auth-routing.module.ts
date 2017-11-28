@@ -17,21 +17,16 @@ const routes: Routes = [{
     {
       path: '',
       component: NbLoginComponent,
-    },
-    {
+    }, {
       path: 'login',
       component: NbLoginComponent,
-      canActivate: [NeedUnLoginGuard],
-    },
-    {
+    }, {
       path: 'register',
       component: NbRegisterComponent,
-    },
-    {
+    }, {
       path: 'request-password',
       component: NbRequestPasswordComponent,
-    },
-    {
+    }, {
       path: 'reset-password',
       component: NbResetPasswordComponent,
     }, {
