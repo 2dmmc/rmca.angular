@@ -15,7 +15,7 @@ export class NeedLoginGuard implements CanActivate {
     return new Promise((resolve, reject) => {
       this.authUtilService.isUserAuthenticated()
         .then(isLogin => {
-          this.noticeService.success('欢迎回来', '|･ω･｀)');
+          this.noticeService.success('不要变成发抖的小喵喵', '|･ω･｀)');
           resolve(isLogin);
         })
         .catch(notLogin => {
