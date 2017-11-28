@@ -48,7 +48,7 @@ export class AuthService {
       .toPromise();
   }
 
-  checkHash(hash) {
+  checkResetPasswordHash(hash) {
     return this.http.get(`/api/user/reset/${hash}`)
       .toPromise();
   }
