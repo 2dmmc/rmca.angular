@@ -16,6 +16,13 @@ import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {ToasterModule} from 'angular2-toaster';
+import {NoticeService} from './@system/notice/notice.service';
+
+import {NeedLoginGuard} from './auth/guards/needLogin.guard';
+import {NeedAdminGuard} from './auth/guards/needAdmin.guard';
+import {AuthService} from './auth/services/auth.service';
+import {AuthUtilService} from './auth/services/auth-util.service';
+import {UserService} from './pages/user/user.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +41,12 @@ import {ToasterModule} from 'angular2-toaster';
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy},
     {provide: APP_BASE_HREF, useValue: '/'},
+    NeedAdminGuard,
+    NeedLoginGuard,
+    AuthService,
+    AuthUtilService,
+    UserService,
+    NoticeService,
   ],
 })
 export class AppModule {

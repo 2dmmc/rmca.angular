@@ -10,7 +10,13 @@ import {NbLogoutComponent} from './components/logout/logout.component';
 import {NbRegisterComponent} from './components/register/register.component';
 import {NbRequestPasswordComponent} from './components/request-password/request-password.component';
 import {NbResetPasswordComponent} from './components/reset-password/reset-password.component';
+
 import {AuthService} from './services/auth.service';
+import {AuthUtilService} from './services/auth-util.service';
+
+import {UserService} from '../pages/user/user.service';
+import {NeedLoginGuard} from './guards/needLogin.guard';
+import {NeedAdminGuard} from './guards/needAdmin.guard';
 
 const AUTH_COMPONENTS = [
   NbAuthComponent,
@@ -31,7 +37,12 @@ const AUTH_COMPONENTS = [
     ...AUTH_COMPONENTS,
   ],
   providers: [
+    UserService,
     AuthService,
+    AuthUtilService,
+
+    NeedLoginGuard,
+    NeedAdminGuard,
   ],
 })
 export class AuthModule {
