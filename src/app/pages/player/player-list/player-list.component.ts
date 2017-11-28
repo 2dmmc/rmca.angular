@@ -68,7 +68,7 @@ export class PlayerListComponent implements OnInit {
       .then(updateState => {
         this.updated = false;
 
-        this.noticeService.success('同步成功', '同步正版皮肤成功, 皮肤显示稍有延迟, 请等待1-3分钟即可');
+        this.noticeService.success('同步成功', '同步正版皮肤成功');
         this.getRoles();
       })
       .catch(error => {
