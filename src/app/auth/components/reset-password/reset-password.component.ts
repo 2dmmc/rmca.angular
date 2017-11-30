@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
@@ -12,43 +12,33 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./reset-password.component.scss'],
   templateUrl: './reset-password.component.html',
 })
-export class NbResetPasswordComponent {
-  user: any = {};
-  error = {title: '', message: ''};
-  message = {title: '', message: ''};
-  submitted = false;
-  hash = '';
-
+export class NbResetPasswordComponent implements OnInit {
   constructor(protected router: Router,
               protected activatedRoute: ActivatedRoute,
               protected authService: AuthService) {
+  }
+
+  user: any;
+  error: any;
+  message: any;
+  submitted: boolean;
+  hash: string;
+
+  ngOnInit(): void {
+    this.user = {};
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
+    this.submitted = false;
+
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.hash = queryParams.hash;
     });
-
-    this.authService.checkResetPasswordHash(this.hash)
-      .catch(error => {
-        this.submitted = false;
-
-        switch (error.status) {
-          case 403: {
-            this.error.title = '令牌无效或已被使用, 请重新找回密码';
-            break;
-          }
-          default: {
-            this.error.title = '未知错误, 请联系鹳狸猿';
-          }
-        }
-
-        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-      });
   }
 
   resetPassword(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
     this.submitted = true;
-
 
     this.authService.resetPassword(this.hash, this.user.password)
       .then(
@@ -76,10 +66,6 @@ export class NbResetPasswordComponent {
 
         this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
       });
-  }
-
-  isSubmitted(): boolean {
-    return this.submitted;
   }
 
   hasError(): boolean {

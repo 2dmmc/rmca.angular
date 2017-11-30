@@ -13,14 +13,17 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NbLogoutComponent implements OnInit {
 
-  constructor(protected router: Router,
-              protected authService: AuthService) {
+  constructor(private router: Router,
+              private authService: AuthService) {
   }
 
-  error = {title: '', message: ''};
-  message = {title: '', message: ''};
+  error: any;
+  message: any;
 
   ngOnInit(): void {
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
+
     this.authService.logout()
       .then(
         logoutResult => {

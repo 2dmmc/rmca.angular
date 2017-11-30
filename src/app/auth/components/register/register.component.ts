@@ -3,7 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AuthService} from '../../services/auth.service';
 
@@ -12,15 +12,22 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./register.component.scss'],
   templateUrl: './register.component.html',
 })
-export class NbRegisterComponent {
+export class NbRegisterComponent implements OnInit {
   constructor(protected router: Router,
               protected authService: AuthService) {
   }
 
-  user: any = {};
-  error = {title: '', message: ''};
-  message = {title: '', message: ''};
-  submitted = false;
+  user: any;
+  error: any;
+  message: any;
+  submitted: boolean;
+
+  ngOnInit(): void {
+    this.user = {};
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
+    this.submitted = false;
+  }
 
   register(): void {
     this.error = {title: '', message: ''};
@@ -53,10 +60,6 @@ export class NbRegisterComponent {
 
         this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
       });
-  }
-
-  isSubmitted(): boolean {
-    return this.submitted;
   }
 
   hasError(): boolean {
