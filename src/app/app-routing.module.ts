@@ -14,6 +14,10 @@ const routes: Routes = [
     loadChildren: 'app/auth/auth.module#AuthModule',
   },
   {
+    path: 'callback',
+    loadChildren: 'app/callback/callback.module#CallbackModule',
+  },
+  {
     path: '',
     redirectTo: 'pages',
     pathMatch: 'full',
