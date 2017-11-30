@@ -33,6 +33,8 @@ export class UserInfoComponent implements OnInit {
         this.needGetUserProfile.emit();
       }
     });
+
+    this.submitted = false;
   }
 
   updateProfile(): void {
