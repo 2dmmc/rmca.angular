@@ -4,12 +4,12 @@ import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-password-manager',
-  styleUrls: ['./user-password-manager.component.scss'],
-  templateUrl: './user-password-manager.component.html',
+  selector: 'ngx-password',
+  styleUrls: ['./user-password.component.scss'],
+  templateUrl: './user-password.component.html',
 })
 
-export class UserPasswordManagerComponent implements OnInit {
+export class UserPasswordComponent implements OnInit {
   constructor(private userService: UserService,
               private noticeService: NoticeService) {
   }
@@ -53,5 +53,4 @@ export class UserPasswordManagerComponent implements OnInit {
         this.noticeService.error('更新密码失败', errorMessage);
       });
   }
-
 }
