@@ -12,9 +12,23 @@ export class SocialsComponent implements OnInit {
               private noticeService: NoticeService) {
   }
 
+  user: any;
+
   ngOnInit() {
+    this.user = {
+      email: '',
+    };
 
-
+    this.getUserProfile();
   }
 
+  getUserProfile(): void {
+    this.userService.getUserProfile()
+      .then(userProfile => {
+        this.user = userProfile;
+      })
+      .catch(error => {
+        this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
+  }
 }
