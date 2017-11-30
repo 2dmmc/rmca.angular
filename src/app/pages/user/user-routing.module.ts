@@ -4,6 +4,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {UserComponent} from './user.component';
 import {ProfileComponent} from './profile/profile.component';
 import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
+import {SocialsComponent} from './socials/socials.component';
 
 const routes: Routes = [{
   path: '',
@@ -14,6 +15,9 @@ const routes: Routes = [{
   }, {
     path: 'yggdrasil',
     component: YggdrasilComponent,
+  }, {
+    path: 'socials',
+    component: SocialsComponent,
   }],
 }];
 

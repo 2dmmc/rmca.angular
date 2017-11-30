@@ -23,6 +23,10 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         title: '正版验证',
         link: '/pages/user/yggdrasil',
       },
+      {
+        title: '社交账户绑定',
+        link: '/pages/user/socials',
+      },
     ],
   },
   {
