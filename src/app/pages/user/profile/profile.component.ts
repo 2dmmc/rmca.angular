@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 
 import {Md5} from 'ts-md5/dist/md5';
 
@@ -18,7 +17,6 @@ export class ProfileComponent implements OnInit {
   }
 
   user: any;
-  passwordSubmitted: boolean;
 
   ngOnInit() {
     this.user = {
@@ -41,36 +39,5 @@ export class ProfileComponent implements OnInit {
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
-  }
-
-  updatePassword(): void {
-    this.passwordSubmitted = true;
-
-    this.userService.updateUserPassword(this.user.password, this.user.newPassword)
-      .then(updateState => {
-        this.passwordSubmitted = false;
-        this.noticeService.success('更新密码成功', '更新密码成功');
-      })
-      .catch(error => {
-        this.passwordSubmitted = false;
-
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 403: {
-            errorMessage = '当前密码错误';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('更新密码失败', errorMessage);
-      });
-  }
-
-  isPasswordSubmitted(): boolean {
-    return this.passwordSubmitted;
   }
 }
