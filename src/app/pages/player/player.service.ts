@@ -9,7 +9,7 @@ export class PlayerService {
 
   /**
    * @name 获取角色列表
-   * @description 获取当前用户的角色列表, 返回Role的集合
+   * @description 获取当前用户的角色列表. 返回包含若干不完整Role模型的集合.
    * @return {Promise<Object>}
    */
   getRoles(): Promise<object> {
@@ -19,7 +19,7 @@ export class PlayerService {
 
   /**
    * @name 获取角色详情
-   * @description 获取某个角色的详情, 入参为待获取详情的角色ID, 返回不完整Role模型
+   * @description 获取某个角色的详情. 入参为待获取详情的角色ID. 返回不完整Role模型.
    * @param {string} roleId 角色ID
    * @return {Promise<Object>}
    */
@@ -30,7 +30,7 @@ export class PlayerService {
 
   /**
    * @name 新增角色
-   * @description 新增角色, 入参为角色名称, 返回新增结果
+   * @description 新增角色. 入参为角色名称. 返回新增结果.
    * @param {string} rolename 角色名称
    * @return {Promise<Object>}
    */
@@ -44,7 +44,7 @@ export class PlayerService {
 
   /**
    * @name 更新角色详情
-   * @description 更新某个角色的详情信息, 入参为要更新的字段, 返回更新结果
+   * @description 更新某个角色的详情信息. 入参为要更新的字段. 返回更新结果.
    * @param {string} roleId 角色id
    * @param {string} skinModel 皮肤模型
    * @param {string} skin 皮肤
@@ -66,7 +66,7 @@ export class PlayerService {
 
   /**
    * @name 同步正版验证皮肤
-   * @description 从Mojang服务器同步皮肤至某个角色, 入参为角色ID, 返回同步结果
+   * @description 从Mojang服务器同步皮肤至某个角色. 入参为角色ID. 返回同步结果.
    * @param {string} roldId 角色ID
    * @return {Promise<Object>}
    */
@@ -77,7 +77,7 @@ export class PlayerService {
 
   /**
    * @name 更新默认角色
-   * @description 更新某个角色为默认角色, 入参为角色ID, 返回更新结果
+   * @description 更新某个角色为默认角色. 入参为角色ID. 返回更新结果.
    * @param {string} roleId 角色ID
    * @return {Promise<Object>}
    */

@@ -9,7 +9,7 @@ export class UserService {
 
   /**
    * @name 获取用户个人资料
-   * @description 获取当前用户的个人资料, 返回不完整的User模型
+   * @description 获取当前用户的个人资料. 返回不完整的User模型.
    * @return {Promise<Object>}
    */
   getUserProfile(): Promise<object> {
@@ -19,7 +19,7 @@ export class UserService {
 
   /**
    * @name 更新用户个人资料
-   * @description 更新当前用户的个人资料, 入参为要更新的字段, 返回更新结果
+   * @description 更新当前用户的个人资料. 入参为要更新资料的字段. 返回更新结果.
    * @param {string} email 电子邮箱
    * @return {Promise<Object>}
    */
@@ -33,7 +33,7 @@ export class UserService {
 
   /**
    * @name 更新用户密码
-   * @description 更新当前用户的密码, 入参为当前用户的当前密码和新密码, 返回更新结果
+   * @description 更新当前用户的密码. 入参为当前用户的当前密码和新密码. 返回更新结果.
    * @param {string} password 当前密码
    * @param {string} newPassword 新密码
    * @return {Promise<Object>}
@@ -49,7 +49,7 @@ export class UserService {
 
   /**
    * @name 更新正版验证资料
-   * @description 更新当前用户的Minecraft正版验证资料, 入参为Mojang用户名和密码, 返回更新结果
+   * @description 更新当前用户的Minecraft正版验证资料. 入参为Mojang用户名和密码. 返回更新结果.
    * @param {string} username Mojang用户名
    * @param {string} password Mojang密码
    * @return {Promise<Object>}
@@ -65,7 +65,7 @@ export class UserService {
 
   /**
    * @name 验证电子邮箱
-   * @description 验证当前用户电子邮箱是否有效, 入参为附在URL中的Hash, 返回验证结果
+   * @description 验证当前用户电子邮箱是否有效. 入参为附在URL中的Hash. 返回验证结果.
    * @param {string} hash URL中的hash
    * @return {Promise<Object>}
    */
@@ -76,7 +76,7 @@ export class UserService {
 
   /**
    * @name 重新发送验证邮件
-   * @description 重新发送"验证用户电子邮箱是否有效"的电子邮件, 返回发送结果
+   * @description 重新发送"验证用户电子邮箱是否有效"的电子邮件. 返回发送结果.
    * @return {Promise<Object>}
    */
   resendVerifyEmail(): Promise<object> {
