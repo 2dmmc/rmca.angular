@@ -34,7 +34,7 @@ export class NbRequestPasswordComponent implements OnInit {
     this.message = {title: '', message: ''};
     this.submitted = true;
 
-    this.authService.requestPass(this.user.email)
+    this.authService.requestResetPassword(this.user.email)
       .then(
         requestResult => {
           this.message.title = '发送成功';
