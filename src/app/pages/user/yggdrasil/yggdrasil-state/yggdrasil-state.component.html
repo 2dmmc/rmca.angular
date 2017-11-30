@@ -3,10 +3,10 @@
     <span>
         <i class="fa fa-info"></i> 正版验证状态
     </span>
-    <span class="tag tag-success" *ngIf="yggdrasilProfile.isAuth">
+    <span class="tag tag-success" *ngIf="yggdrasil.isAuth">
       已验证
     </span>
-    <span class="tag tag-warning" *ngIf="!yggdrasilProfile.isAuth">
+    <span class="tag tag-warning" *ngIf="!yggdrasil.isAuth">
       未验证
     </span>
   </nb-card-header>
@@ -16,14 +16,14 @@
         <label for="input-username" class="col-sm-2 col-form-label">用户名</label>
         <div class="col-sm-10">
           <input name="password" id="input-username" class="form-control" readonly
-                 [(ngModel)]="yggdrasilProfile.username">
+                 [(ngModel)]="yggdrasil.username">
         </div>
       </div>
       <div class="form-group row">
         <label for="input-uuid" class="col-sm-2 col-form-label">UUID</label>
         <div class="col-sm-10">
           <input name="password" id="input-uuid" class="form-control" readonly
-                 [(ngModel)]="yggdrasilProfile.uuid">
+                 [(ngModel)]="yggdrasil.uuid">
         </div>
       </div>
       <small class="form-text">* 该内容从Mojang获取, 不可修改</small>

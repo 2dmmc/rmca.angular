@@ -9,5 +9,5 @@ export class YggdrasilStateComponent {
   constructor() {
   }
 
-  @Input() yggdrasilProfile: any;
+  @Input() yggdrasil: any;
 }

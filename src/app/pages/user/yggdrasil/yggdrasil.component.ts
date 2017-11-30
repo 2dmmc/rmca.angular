@@ -13,70 +13,27 @@ export class YggdrasilComponent implements OnInit {
   }
 
   yggdrasil: any = {};
-  yggdrasilProfile: any = {};
-  submitted: boolean;
 
   ngOnInit() {
     this.yggdrasil = {
-      username: '',
-      password: '',
+      username: '未验证',
+      uuid: '未验证',
+      isAuth: false,
     };
 
-    this.updateYggdrasilState();
+    this.getYggdrasilInfo();
   }
 
-  updateYggdrasilState(): void {
+  getYggdrasilInfo(): void {
     this.userService.getUserProfile()
       .then(profile => {
         if (profile['yggdrasil']) {
-          this.yggdrasilProfile = profile['yggdrasil'];
-          this.yggdrasilProfile.isAuth = true;
-        } else {
-          this.yggdrasilProfile = {
-            username: '未验证',
-            uuid: '未验证',
-            isAuth: false,
-          };
+          this.yggdrasil = profile['yggdrasil'];
+          this.yggdrasil.isAuth = true;
         }
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
-  }
-
-  isSubmitted(): boolean {
-    return this.submitted;
-  }
-
-  updateYggdrasil(): void {
-    this.submitted = true;
-
-    this.userService.updateUserYggdrasil(this.yggdrasil.username, this.yggdrasil.password)
-      .then(updateState => {
-        this.submitted = false;
-        this.updateYggdrasilState();
-        this.noticeService.success('更新成功', '更新正版验证状态成功');
-      })
-      .catch(error => {
-        this.submitted = false;
-
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 403: {
-            errorMessage = '用户名或密码错误';
-            break;
-          }
-          case 406: {
-            errorMessage = 'no selectedProfile 一般不会出现，需要去mojang页面手工选择一下profile';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('更新正版验证状态失败', errorMessage);
       });
   }
 }
