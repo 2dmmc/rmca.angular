@@ -2,12 +2,11 @@ import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../../@theme/theme.module';
 import {UserStateComponent} from './user-state/user-state.component';
-
-import {NoticeService} from '../../../@system/notice/notice.service';
-import {UserService} from '../user.service';
+import {UserInfoComponent} from './user-info/user-info.component';
 
 const components = [
   UserStateComponent,
+  UserInfoComponent,
 ];
 
 @NgModule({

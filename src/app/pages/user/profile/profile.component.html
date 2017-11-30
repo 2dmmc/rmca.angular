@@ -1,54 +1,6 @@
 <div class="row">
   <div class="col-lg-8">
-    <nb-card>
-      <nb-card-header>
-        <span>
-          <i class="fa fa-id-card"></i> 个人资料
-        </span>
-        <span class="tag tag-success" *ngIf="user.isEmailVerify">
-          已验证
-        </span>
-        <span class="tag tag-warning" *ngIf="!user.isEmailVerify">
-          未验证
-        </span>
-      </nb-card-header>
-      <nb-card-body>
-        <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
-          <div class="form-group row">
-            <label for="input-email" class="col-sm-2 col-form-label">电子邮箱</label>
-            <div class="col-sm-10">
-              <input name="email" id="input-email" class="form-control" placeholder="邮箱"
-                     [(ngModel)]="user.email" #email="ngModel"
-                     [class.form-control-danger]="email?.invalid && email?.touched"
-                     [required]="true" pattern=".+@.+..+">
-              <small class="form-text error"
-                     *ngIf="email.invalid && email.touched && email.errors?.required">
-                请填写邮箱
-              </small>
-              <small class="form-text error"
-                     *ngIf="email.invalid && email.touched && email.errors?.pattern">
-                邮箱格式不正确
-              </small>
-              <small class="form-text" *ngIf="user.isEmailVerify">
-                我们将通过电子邮箱获取Gravator头像, 详情请查看 <a target="_blank" href="https://cn.gravatar.com/">Gravator</a>
-              </small>
-              <small class="form-text text-warning" *ngIf="!user.isEmailVerify">
-                你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到,请尝试 <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>或稍后重试
-              </small>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="offset-sm-2 col-sm-10">
-              <button class="btn btn-hero-success"
-                      [disabled]="isProfileSubmitted() || !profileForm.form.valid"
-                      [class.btn-pulse]="isProfileSubmitted()">
-                更新个人资料
-              </button>
-            </div>
-          </div>
-        </form>
-      </nb-card-body>
-    </nb-card>
+    <ngx-user-info [user]="user" (needGetUserProfile)="getUserProfile()"></ngx-user-info>
   </div>
   <div class="col-lg-4">
     <ngx-user-state [user]="user"></ngx-user-state>
