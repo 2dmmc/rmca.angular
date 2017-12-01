@@ -2,7 +2,8 @@ import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
 import {CallbackComponent} from './callback.component';
-import {CallbackBlockComponent} from './components/callback-block/callback-block.component';
+import {OauthQQComponent} from './components/oauth-qq/oauth-QQ.component';
+import {OauthWeiboComponent} from './components/oauth-weibo/oauth-weibo.component';
 
 const routes: Routes = [{
   path: '',
@@ -10,14 +11,14 @@ const routes: Routes = [{
   children: [
     {
       path: '',
-      component: CallbackBlockComponent,
+      component: CallbackComponent,
     },
     {
       path: 'oauth/qq',
-      component: CallbackBlockComponent,
+      component: OauthQQComponent,
     }, {
       path: 'oauth/weibo',
-      component: CallbackBlockComponent,
+      component: OauthWeiboComponent,
     },
   ],
 }];

@@ -8,12 +8,16 @@ import {CallbackUtilService} from './services/callback-util.service';
 
 import {CallbackComponent} from './callback.component';
 import {CallbackBlockComponent} from './components/callback-block/callback-block.component';
+import {OauthQQComponent} from './components/oauth-qq/oauth-QQ.component';
+import {OauthWeiboComponent} from './components/oauth-weibo/oauth-weibo.component';
 
 import {UserService} from '../pages/user/user.service';
 
 const components = [
   CallbackComponent,
   CallbackBlockComponent,
+  OauthQQComponent,
+  OauthWeiboComponent,
 ];
 
 @NgModule({
