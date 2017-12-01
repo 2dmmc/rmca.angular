@@ -60,6 +60,14 @@ export class NbLoginComponent implements OnInit {
       });
   }
 
+  qqLogin(): void {
+    window.location.href = `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/login/qq`;
+  }
+
+  weiboLogin(): void {
+    window.location.href = `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
+  }
+
   hasError(): boolean {
     return this.error.title.length !== 0 || this.error.message.length !== 0;
   }

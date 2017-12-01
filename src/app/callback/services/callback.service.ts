@@ -7,7 +7,7 @@ export class CallbackService {
   constructor(private http: HttpClient) {
   }
 
-  oauthQQCallback(accessToken, expiresIn): Promise<object> {
+  oauthQQCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);
@@ -16,12 +16,32 @@ export class CallbackService {
       .toPromise();
   }
 
-  oauthWeiboCallback(accessToken, expiresIn): Promise<object> {
+  oauthWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);
 
     return this.http.get('/api/social/bind/weibo', {params: params})
+      .toPromise();
+  }
+
+  loginQQCallback(accessToken: string, expiresIn: string, uid: string): Promise<object> {
+    const params = new HttpParams()
+      .set('accessToken', accessToken)
+      .set('expiresIn', expiresIn)
+      .set('uid', uid);
+
+    return this.http.get('/api/user/login/callback/qq', {params: params})
+      .toPromise();
+  }
+
+  loginWeiboCallback(accessToken: string, expiresIn: string, uid: string): Promise<object> {
+    const params = new HttpParams()
+      .set('accessToken', accessToken)
+      .set('expiresIn', expiresIn)
+      .set('uid', uid);
+
+    return this.http.get('/api/user/login/callback/weibo', {params: params})
       .toPromise();
   }
 }
