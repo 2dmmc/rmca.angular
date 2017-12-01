@@ -1,12 +1,12 @@
 <nb-card>
   <nb-card-header>
-    <span><i class="fa fa-qq"></i> QQ账户</span>
+    <span><i class="fa fa-qq"></i> 腾讯QQ账户</span>
     <span class="tag tag-success" *ngIf="user?.accounts?.qq">已授权</span>
     <span class="tag tag-warning" *ngIf="!user?.accounts?.qq">未授权</span>
   </nb-card-header>
   <nb-card-body>
     <div *ngIf="!user?.accounts?.qq">
-      <small>你还未授权QQ账户</small>
+      <small>你还未授权腾讯QQ账户</small>
     </div>
     <div *ngIf="user?.accounts?.qq" class="user-container">
       <div class="user-picture">
