@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {Md5} from 'ts-md5/dist/md5';
-
 import {UserService} from '../user.service';
 import {NoticeService} from '../../../@system/notice/notice.service';
 
