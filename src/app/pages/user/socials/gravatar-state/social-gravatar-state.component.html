@@ -10,7 +10,7 @@
     </div>
     <div *ngIf="user?.email" class="user-container">
       <div class="user-picture">
-        <div class="background image" style.background-image="url({{user?.gravatar}})"></div>
+        <div class="background image" style.background-image="url({{user?.accounts?.gravatar?.avatar}})"></div>
       </div>
       <div class="user-name">
         {{user?.email}}
