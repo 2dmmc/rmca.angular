@@ -83,4 +83,9 @@ export class UserService {
     return this.http.get('/api/user/resend-verify-email')
       .toPromise();
   }
+
+  updateUserAvatar(socialType: string): Promise<object> {
+    return this.http.post(`/api/social/avatar/${socialType}`, {})
+      .toPromise();
+  }
 }
