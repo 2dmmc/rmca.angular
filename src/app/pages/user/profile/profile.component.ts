@@ -34,7 +34,6 @@ export class ProfileComponent implements OnInit {
     this.userService.getUserProfile()
       .then(userProfile => {
         this.user = userProfile;
-        this.user.picture = `//cdn.v2ex.com/gravatar/${Md5.hashStr(userProfile['email'])}?s=128`;
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
