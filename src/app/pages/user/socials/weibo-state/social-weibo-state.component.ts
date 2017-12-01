@@ -10,4 +10,8 @@ export class SocialWeiboStateComponent {
   }
 
   @Input() user: any;
+
+  oAuth(): void {
+    window.location.href = `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/oauth/weibo`;
+  }
 }

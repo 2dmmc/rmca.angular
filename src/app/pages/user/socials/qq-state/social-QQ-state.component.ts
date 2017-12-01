@@ -10,4 +10,8 @@ export class SocialQQStateComponent {
   }
 
   @Input() user: any;
+
+  oAuth(): void {
+    window.location.href = `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/oauth/qq`;
+  }
 }
