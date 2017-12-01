@@ -1,12 +1,12 @@
 <nb-card>
   <nb-card-header>
     <span><i class="fa fa-qq"></i> QQ账户</span>
-    <span class="tag tag-success" *ngIf="user?.accounts?.qq">已关联</span>
-    <span class="tag tag-warning" *ngIf="!user?.accounts?.qq">未关联</span>
+    <span class="tag tag-success" *ngIf="user?.accounts?.qq">已授权</span>
+    <span class="tag tag-warning" *ngIf="!user?.accounts?.qq">未授权</span>
   </nb-card-header>
   <nb-card-body>
     <div *ngIf="!user?.accounts?.qq">
-      <small>你还未关联QQ账户</small>
+      <small>你还未授权QQ账户</small>
     </div>
     <div *ngIf="user?.accounts?.qq" class="user-container">
       <div class="user-picture">
@@ -18,7 +18,7 @@
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user?.accounts?.qq">将QQ头像作为RMCA头像</button>
+    <button class="btn btn-hero-success" *ngIf="user?.accounts?.qq">使用该头像作为RMCA头像</button>
     <button class="btn btn-hero-info" *ngIf="!user?.accounts?.qq" (click)="oAuth()">去授权</button>
   </nb-card-footer>
 </nb-card>
