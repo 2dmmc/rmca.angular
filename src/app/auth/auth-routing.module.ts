@@ -8,8 +8,6 @@ import {NbRegisterComponent} from './components/register/register.component';
 import {NbRequestPasswordComponent} from './components/request-password/request-password.component';
 import {NbResetPasswordComponent} from './components/reset-password/reset-password.component';
 
-import {NeedUnLoginGuard} from './guards/needUnLogin.guard';
-
 const routes: Routes = [{
   path: '',
   component: NbAuthComponent,
@@ -40,5 +38,6 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
+
 export class AuthRoutingModule {
 }
