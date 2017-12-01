@@ -23,6 +23,7 @@ export class AuthUtilService {
           }
         })
         .catch(error => {
+          console.error(error);
           reject(false);
         });
     });
@@ -39,6 +40,7 @@ export class AuthUtilService {
             }
           })
           .catch(error => {
+            console.error(error);
             reject(false);
           });
       },
@@ -56,6 +58,7 @@ export class AuthUtilService {
           }
         })
         .catch(error => {
+          console.error(error);
           reject(false);
         });
     });
