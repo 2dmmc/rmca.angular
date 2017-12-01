@@ -24,7 +24,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
         link: '/pages/user/yggdrasil',
       },
       {
-        title: '社交账户绑定',
+        title: '社交账户关联',
         link: '/pages/user/socials',
       },
     ],
