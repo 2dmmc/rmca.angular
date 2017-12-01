@@ -1,4 +1,7 @@
 import {Component, Input} from '@angular/core';
+import {Router} from '@angular/router';
+
+import {UserModel} from '../../user.model';
 
 @Component({
   selector: 'ngx-social-gravatar-state',
@@ -6,8 +9,12 @@ import {Component, Input} from '@angular/core';
   templateUrl: './social-gravatar-state.component.html',
 })
 export class SocialGravatarStateComponent {
-  constructor() {
+  constructor(private router: Router) {
   }
 
-  @Input() user: any;
+  @Input() user: UserModel;
+
+  toProfile(): void {
+    this.router.navigate(['./profile']);
+  }
 }
