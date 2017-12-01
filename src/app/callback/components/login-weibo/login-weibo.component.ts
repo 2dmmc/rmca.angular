@@ -37,7 +37,7 @@ export class LoginWeiboComponent implements OnInit {
           }, 3e3);
         })
         .catch(error => {
-          this.error.title = '授权登陆成功';
+          this.error.title = '授权登陆失败';
           this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
         });
     });
