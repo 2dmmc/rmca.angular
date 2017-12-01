@@ -25,21 +25,19 @@ export class CallbackService {
       .toPromise();
   }
 
-  loginQQCallback(accessToken: string, expiresIn: string, uid: string): Promise<object> {
+  loginQQCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
-      .set('expiresIn', expiresIn)
-      .set('uid', uid);
+      .set('expiresIn', expiresIn);
 
     return this.http.get('/api/user/login/callback/qq', {params: params})
       .toPromise();
   }
 
-  loginWeiboCallback(accessToken: string, expiresIn: string, uid: string): Promise<object> {
+  loginWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
-      .set('expiresIn', expiresIn)
-      .set('uid', uid);
+      .set('expiresIn', expiresIn);
 
     return this.http.get('/api/user/login/callback/weibo', {params: params})
       .toPromise();

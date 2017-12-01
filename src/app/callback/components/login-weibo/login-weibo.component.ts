@@ -27,7 +27,7 @@ export class LoginWeiboComponent implements OnInit {
     this.message = {title: '', message: ''};
 
     this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.callbackService.loginWeiboCallback(queryParams.accessToken, queryParams.expiresIn, queryParams.uid)
+      this.callbackService.loginWeiboCallback(queryParams.accessToken, queryParams.expiresIn)
         .then(oauthState => {
           this.message.title = '授权登陆成功';
           this.message.message = '即将跳转到dashboard';

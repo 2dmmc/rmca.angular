@@ -27,7 +27,7 @@ export class LoginQQComponent implements OnInit {
     this.message = {title: '', message: ''};
 
     this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.callbackService.loginQQCallback(queryParams.accessToken, queryParams.expiresIn, queryParams.uid)
+      this.callbackService.loginQQCallback(queryParams.accessToken, queryParams.expiresIn)
         .then(success => {
           this.message.title = '授权登陆成功';
           this.message.message = '即将跳转到dashboard';
