@@ -2,7 +2,7 @@
   <i class="fa fa-pencil-square-o"></i>
   角色管理 - 角色详情
   <button class="close" aria-label="Close" (click)="closeModal()">
-    <span aria-hidden="true">&times;</span>
+    <i class="fa fa-times" aria-hidden="true"></i>
   </button>
 </div>
 <div class="modal-body">
@@ -67,4 +67,7 @@
       </div>
     </div>
   </form>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-md btn-hero-danger" (click)="closeModal()">取消</button>
 </div>
