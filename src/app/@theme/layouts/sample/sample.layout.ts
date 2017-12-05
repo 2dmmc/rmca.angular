@@ -1,3 +1,4 @@
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Component, OnDestroy} from '@angular/core';
 import {
   NbMediaBreakpoint,
@@ -8,60 +9,20 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
+import {DonationModalComponent} from './donation-modal/donation-modal.component';
+
 import {StateService} from '../../../@core/data/state.service';
 
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
 
-// TODO: move layouts into the framework
 @Component({
   selector: 'ngx-sample-layout',
   styleUrls: ['./sample.layout.scss'],
-  template: `
-    <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
-        <ngx-header [position]="sidebar.id === 'left' ? 'normal': 'inverse'"></ngx-header>
-      </nb-layout-header>
-
-      <nb-sidebar class="menu-sidebar"
-                   tag="menu-sidebar"
-                   responsive
-                   [right]="sidebar.id === 'right'">
-        <nb-sidebar-header>
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-yen"></i> <span>捐助</span>
-          </a>
-        </nb-sidebar-header>
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
-
-      <nb-layout-column class="main-content">
-        <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
-
-      <nb-layout-column left class="small" *ngIf="layout.id === 'two-column' || layout.id === 'three-column'">
-        <nb-menu [items]="subMenu"></nb-menu>
-      </nb-layout-column>
-
-      <nb-layout-column right class="small" *ngIf="layout.id === 'three-column'">
-        <nb-menu [items]="subMenu"></nb-menu>
-      </nb-layout-column>
-
-      <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
-      </nb-layout-footer>
-
-      <nb-sidebar class="settings-sidebar"
-                   tag="settings-sidebar"
-                   state="collapsed"
-                   fixed
-                   [right]="sidebar.id !== 'right'">
-        <ngx-theme-settings></ngx-theme-settings>
-      </nb-sidebar>
-    </nb-layout>
-  `,
+  templateUrl: 'sample.layout.html',
 })
+
 export class SampleLayoutComponent implements OnDestroy {
 
   subMenu: NbMenuItem[] = [
@@ -75,6 +36,7 @@ export class SampleLayoutComponent implements OnDestroy {
       link: '#',
     },
   ];
+
   layout: any = {};
   sidebar: any = {};
 
@@ -86,7 +48,8 @@ export class SampleLayoutComponent implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              private modalService: NgbModal) {
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
 
@@ -105,6 +68,12 @@ export class SampleLayoutComponent implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+  }
+
+  showLargeModal() {
+    const activeModal = this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
+
+    activeModal.componentInstance.modalHeader = 'X2D-103';
   }
 
   ngOnDestroy() {

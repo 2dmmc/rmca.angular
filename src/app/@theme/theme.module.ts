@@ -27,9 +27,12 @@ import {
 } from './components';
 
 import {CapitalizePipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
+
 import {
   SampleLayoutComponent,
+  DonationModalComponent,
 } from './layouts';
+
 import {DEFAULT_THEME} from './styles/theme.default';
 import {COSMIC_THEME} from './styles/theme.cosmic';
 
@@ -57,6 +60,7 @@ const COMPONENTS = [
   ThemeSettingsComponent,
   TinyMCEComponent,
   SampleLayoutComponent,
+  DonationModalComponent,
 ];
 
 const PIPES = [
@@ -81,6 +85,9 @@ const NB_THEME_PROVIDERS = [
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
+  entryComponents: [
+    DonationModalComponent,
+  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
