@@ -3,7 +3,7 @@ import {NbMenuItem} from '@nebular/theme';
 export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: '控制台',
-    icon: 'fa fa-tachometer',
+    icon: 'fa fa-tachometer fa-fw',
     link: '/pages/dashboard',
     home: true,
   },
@@ -13,7 +13,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '账户管理',
-    icon: 'fa fa-user',
+    icon: 'fa fa-user fa-fw',
     children: [
       {
         title: '个人中心',
@@ -31,7 +31,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '角色管理',
-    icon: 'fa fa-gamepad',
+    icon: 'fa fa-gamepad fa-fw',
     children: [
       {
         title: '角色列表',
@@ -49,7 +49,7 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '服务器管理',
-    icon: 'fa fa-sitemap',
+    icon: 'fa fa-sitemap fa-fw',
     children: [
       {
         title: '服务器列表',
@@ -67,7 +67,7 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'RMCA管理',
-    icon: 'fa fa-gears',
+    icon: 'fa fa-gears fa-fw',
     children: [
       {
         title: '管理员列表',
@@ -88,7 +88,7 @@ export const DEVELOPER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Auth',
-    icon: 'fa fa-lock',
+    icon: 'fa fa-lock fa-fw',
     children: [
       {
         title: '登陆',
