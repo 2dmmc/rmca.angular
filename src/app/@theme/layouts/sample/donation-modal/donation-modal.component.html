@@ -1,15 +1,28 @@
 <div class="modal-header">
-  <span>{{ modalHeader }}</span>
+  <span>捐助我们</span>
   <button class="close" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <p>
-    {{ modalContent }}
+    我，服务姬，打钱
   </p>
-  <img src="../../../../../assets/images/donation/alipay.jpg" alt="">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="qr-code">
+        <h5> 支付宝 | Alipay</h5>
+        <img src="../../../../../assets/images/donation/alipay.jpg" alt="">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="qr-code">
+        <h5> 微信 | WeChat</h5>
+        <img src="../../../../../assets/images/donation/wechat.jpg" alt="">
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-md btn-primary" (click)="closeModal()">妥了</button>
+  <button class="btn btn-md btn-primary" (click)="closeModal()">溜了溜了</button>
 </div>

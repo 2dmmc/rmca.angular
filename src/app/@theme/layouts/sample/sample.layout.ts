@@ -71,9 +71,7 @@ export class SampleLayoutComponent implements OnDestroy {
   }
 
   showLargeModal() {
-    const activeModal = this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
-
-    activeModal.componentInstance.modalHeader = 'X2D-103';
+    this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
   }
 
   ngOnDestroy() {
