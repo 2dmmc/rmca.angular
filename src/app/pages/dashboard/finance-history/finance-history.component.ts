@@ -38,7 +38,6 @@ export class FinanceHistoryComponent implements OnInit, AfterViewInit {
   }
 
   _pageEvent(event): void {
-    this.financeHistories = [];
     this.getFinanceHistories(event);
   }
 }

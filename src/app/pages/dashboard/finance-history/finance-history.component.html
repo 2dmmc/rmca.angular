@@ -1,27 +1,26 @@
 <nb-card>
   <nb-card-header><i class="fa fa-money"></i> 捐助记录</nb-card-header>
   <nb-card-body>
-    <section *ngIf="financeHistories.length != 0">
-      <table class="table table-bordered">
-        <thead>
-        <tr>
-          <th>日期</th>
-          <th>备注</th>
-          <th>金额</th>
-          <th>结余</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let financeHistory of financeHistories">
-          <td width="20%">
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>日期</th>
+        <th>备注</th>
+        <th>金额</th>
+        <th>结余</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let financeHistory of financeHistories">
+        <td width="20%">
           <span class="date">
             {{financeHistory.date  | date: 'yyyy-MM-dd'}}
           </span>
-          </td>
-          <td width="40%">
-            {{financeHistory.comment}}
-          </td>
-          <td width="20%">
+        </td>
+        <td width="40%">
+          {{financeHistory.comment}}
+        </td>
+        <td width="20%">
           <span class="accrual"
                 [class.success]="financeHistory.type == 'incoming'"
                 [class.danger]="financeHistory.type == 'expend'">
@@ -29,27 +28,23 @@
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
           </span>
-          </td>
-          <td width="20%" class="text-right">
+        </td>
+        <td width="20%" class="text-right">
           <span class="balance"
                 [class.success]="financeHistory.balance > 0"
                 [class.danger]="financeHistory.balance < 0">
             {{financeHistory.balance | rmb | number:'1.2-3'}} 元
           </span>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
-           [(ngModel)]="page" (ngModelChange)="_pageEvent($event)" ngbRadioGroup>
-        <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
-          <input ngbButton type="radio" [value]="page">
-          {{page}}
-        </label>
-      </div>
-    </section>
-    <section *ngIf="financeHistories.length == 0">
-      加载中...
-    </section>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
+         [(ngModel)]="page" (ngModelChange)="_pageEvent($event)" ngbRadioGroup>
+      <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
+        <input ngbButton type="radio" [value]="page">
+        {{page}}
+      </label>
+    </div>
   </nb-card-body>
 </nb-card>
