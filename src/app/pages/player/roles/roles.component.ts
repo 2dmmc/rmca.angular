@@ -107,7 +107,7 @@ export class RolesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  showRoleAddModal(id): void {
+  showRoleAddModal(): void {
     const activeModal = this.modalService.open(RoleAddModalComponent, {
       size: 'lg',
       container: 'nb-layout',
