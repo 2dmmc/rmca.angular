@@ -61,4 +61,8 @@ export class RoleAddModalComponent implements OnInit, AfterViewInit {
         this.noticeService.error('添加角色失败', errorMessage);
       });
   }
+
+  closeModal(): void {
+    this.activeModal.close();
+  }
 }
