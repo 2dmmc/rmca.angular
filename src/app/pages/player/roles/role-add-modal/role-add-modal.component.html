@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <i class="fa fa-plus"></i> 角色管理 - 添加角色
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="addRole()" #roleForm="ngForm" name="roleForm">
+    <div class="form-group row">
+      <label for="input-rolename" class="col-sm-2 col-form-label">角色名</label>
+      <div class="col-sm-10">
+        <input name="username" id="input-rolename" class="form-control" placeholder="角色名" autofocus
+               [(ngModel)]="role.rolename" #rolename="ngModel"
+               [class.form-control-danger]="rolename.invalid && rolename.touched"
+               [required]="true" pattern="^[_a-zA-Z0-9]{1,16}$">
+        <small class="form-text error"
+               *ngIf="rolename.invalid && rolename.touched && rolename.errors?.required">
+          请填写角色名
+        </small>
+        <small class="form-text error"
+               *ngIf="rolename.invalid && rolename.touched && rolename.errors?.pattern">
+          角色名格式不正确
+        </small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button class="btn btn-hero-success"
+                [disabled]="submitted || !roleForm.form.valid"
+                [class.btn-pulse]="submitted">
+          添加角色
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

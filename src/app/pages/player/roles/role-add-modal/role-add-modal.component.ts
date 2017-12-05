@@ -1,35 +1,43 @@
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
+import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {PlayerService} from '../player.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {PlayerService} from '../../player.service';
+import {NoticeService} from '../../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-player-add',
-  styleUrls: ['./player-add.component.scss'],
-  templateUrl: './player-add.component.html',
+  selector: 'ngx-role-add-modal',
+  styleUrls: ['./role-add-modal.component.scss'],
+  templateUrl: './role-add-modal.component.html',
 })
 
-export class PlayerAddComponent {
+export class RoleAddModalComponent implements OnInit, AfterViewInit {
+  @Output() event = new EventEmitter();
+
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
-              private router: Router) {
+              private activeModal: NgbActiveModal) {
   }
 
-  role: any = {
-    rolename: '',
-  };
+  role: any;
   submitted: boolean;
 
-  isSubmitted(): boolean {
-    return this.submitted;
+  ngOnInit(): void {
+    this.role = {
+      rolename: '',
+    };
+    this.submitted = false;
+  }
+
+  ngAfterViewInit(): void {
+
   }
 
   addRole(): void {
     this.playerService.addRole(this.role.rolename)
       .then(createState => {
         this.noticeService.success('创建成功', '添加角色成功');
-        this.router.navigate(['/pages/player/list']);
+        this.event.emit();
+        this.activeModal.close();
       })
       .catch(error => {
         this.submitted = false;

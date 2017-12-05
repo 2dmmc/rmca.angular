@@ -1,0 +1,70 @@
+<div class="modal-header">
+  <i class="fa fa-pencil-square-o"></i>
+  角色管理 - 角色详情
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="updateRole()" enctype="multipart/form-data" #roleForm="ngForm" name="roleForm">
+    <div class="form-group row">
+      <label for="input-rolename" class="col-sm-2 col-form-label">角色名</label>
+      <div class="col-sm-10">
+        <input name="rolename" id="input-rolename" class="form-control" placeholder="角色名" readonly
+               [ngModel]="role.rolename">
+      </div>
+    </div>
+    <div class="form-group row">
+      <!--TODO 修正扶她问题-->
+      <label class="col-sm-2 col-form-label">模型类型</label>
+      <div class="col-sm-10">
+        <label class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="Steve" checked>
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Steve</span>
+        </label>
+        <label class="custom-control custom-radio">
+          <input type="radio" class="custom-control-input" name="Alex">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Alex</span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="input-skin" class="col-sm-2 col-form-label">皮肤上传</label>
+      <div class="col-sm-10">
+        <div class="file btn btn-hero-info">
+          <span *ngIf="!role.file">选择文件</span>
+          <span *ngIf="role.file">文件已选择</span>
+          <input type="file" name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
+                 ngModel (change)="getFiles($event)">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row" *ngIf="role.file">
+      <label class="col-sm-2 col-form-label">待上传皮肤</label>
+      <div class="col-sm-10">
+        <div class="skin-viewer">
+          <img src="data:image/png;base64,{{role.file}}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-2 col-form-label">当前皮肤预览</label>
+      <div class="col-sm-10">
+        <div class="skin-viewer">
+          <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button class="btn btn-hero-success"
+                [disabled]="submitted || !roleForm.form.valid"
+                [class.btn-pulse]="submitted">
+          更新角色信息
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

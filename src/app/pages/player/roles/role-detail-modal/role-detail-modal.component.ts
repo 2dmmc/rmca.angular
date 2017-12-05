@@ -1,43 +1,42 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {PlayerService} from '../player.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {PlayerService} from '../../player.service';
+import {NoticeService} from '../../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-player-detail',
-  styleUrls: ['./player-detail.component.scss'],
-  templateUrl: './player-detail.component.html',
+  selector: 'ngx-role-detail-modal',
+  styleUrls: ['./role-detail-modal.component.scss'],
+  templateUrl: './role-detail-modal.component.html',
 })
 
-export class PlayerDetailComponent implements OnInit {
+export class RoleDetailModalComponent implements OnInit, AfterViewInit {
+  @Input() roleId;
+  @Output() event = new EventEmitter();
+
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
-              protected activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private activeModal: NgbActiveModal) {
   }
 
-  role: any = {
-    rolename: '',
-  };
-
-  ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(params => {
-        this.playerService.getRole(params['id'])
-          .then(role => {
-            this.role = role;
-          })
-          .catch(error => {
-            this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-          });
-      });
-  }
-
+  role: any;
   submitted: boolean;
 
-  isSubmitted(): boolean {
-    return this.submitted;
+  ngOnInit() {
+    this.role = {
+      rolename: '',
+    };
+    this.submitted = false;
+  }
+
+  ngAfterViewInit(): void {
+    this.playerService.getRole(this.roleId)
+      .then(role => {
+        this.role = role;
+      })
+      .catch(error => {
+        this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
   }
 
   getFiles(event): void {
@@ -58,7 +57,8 @@ export class PlayerDetailComponent implements OnInit {
     this.playerService.updateRole(this.role._id, this.role.userModel, this.role.file)
       .then(updateState => {
         this.noticeService.success('更新成功', '更新角色详情成功');
-        this.router.navigate(['/pages/player/list']);
+        this.event.emit();
+        this.activeModal.close();
       })
       .catch(error => {
         this.submitted = false;
@@ -77,5 +77,9 @@ export class PlayerDetailComponent implements OnInit {
 
         this.noticeService.error('更新角色详情失败', errorMessage);
       });
+  }
+
+  closeModal(): void {
+    this.activeModal.close();
   }
 }
