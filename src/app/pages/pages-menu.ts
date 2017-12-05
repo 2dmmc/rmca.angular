@@ -35,7 +35,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '角色列表',
-        link: '/pages/player/list',
+        link: '/pages/player/roles',
       },
     ],
   },

@@ -5,18 +5,14 @@ import {ThemeModule} from '../../@theme/theme.module';
 import {PlayerRoutingModule} from './player-routing.module';
 
 import {PlayerComponent} from './player.component';
-import {PlayerListComponent} from './player-list/player-list.component';
-import {PlayerDetailComponent} from './player-detail/player-detail.component';
-import {PlayerAddComponent} from './player-add/player-add.component';
+import {RolesComponent} from './roles/roles.component';
 
 import {PlayerService} from './player.service';
 import {NoticeService} from '../../@system/notice/notice.service';
 
 const components = [
   PlayerComponent,
-  PlayerListComponent,
-  PlayerDetailComponent,
-  PlayerAddComponent,
+  RolesComponent,
 ];
 
 @NgModule({

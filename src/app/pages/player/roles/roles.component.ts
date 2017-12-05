@@ -5,12 +5,12 @@ import {PlayerService} from '../player.service';
 import {NoticeService} from '../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-player-list',
-  styleUrls: ['./player-list.component.scss'],
-  templateUrl: './player-list.component.html',
+  selector: 'ngx-roles',
+  styleUrls: ['./roles.component.scss'],
+  templateUrl: './roles.component.html',
 })
 
-export class PlayerListComponent implements OnInit {
+export class RolesComponent implements OnInit {
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
               private router: Router) {
