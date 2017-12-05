@@ -7,6 +7,7 @@ export class CallbackService {
   constructor(private http: HttpClient) {
   }
 
+  // TODO 补充文档
   oauthQQCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)

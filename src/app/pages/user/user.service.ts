@@ -84,6 +84,7 @@ export class UserService {
       .toPromise();
   }
 
+  // TODO 补充文档
   updateUserAvatar(socialType: string): Promise<object> {
     return this.http.post(`/api/social/avatar/${socialType}`, {})
       .toPromise();

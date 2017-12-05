@@ -7,6 +7,7 @@ export class DashboardService {
   constructor(private http: HttpClient) {
   }
 
+  // TODO 补充文档
   getFinanceHistories(page): Promise<object> {
     const params = new HttpParams()
       .set('page', page);
