@@ -1,6 +1,40 @@
 <nb-card>
   <nb-card-header><i class="fa fa-money"></i> 捐助记录</nb-card-header>
   <nb-card-body>
-
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>日期</th>
+        <th>备注</th>
+        <th>金额</th>
+        <th>结余</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let financeHistory of financeHistories">
+        <td>
+          <span class="date">
+            {{financeHistory.date  | date: 'yyyy-MM-dd'}}
+          </span>
+        </td>
+        <td>{{financeHistory.comment}}</td>
+        <td>
+          <span class="accrual"
+                [class.incoming]="financeHistory.type == 'incoming'"
+                [class.expend]="financeHistory.type == 'expend'">
+            {{financeHistory.accrual}}
+          </span>
+        </td>
+        <td>{{financeHistory.balance}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
+         [(ngModel)]="page" (ngModelChange)="_pageEvent($event)" ngbRadioGroup>
+      <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
+        <input ngbButton type="radio" [value]="page">
+        {{page}}
+      </label>
+    </div>
   </nb-card-body>
 </nb-card>

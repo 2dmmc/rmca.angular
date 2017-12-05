@@ -5,6 +5,8 @@ import {DashboardComponent} from './dashboard.component';
 import {FinanceHistoryComponent} from './finance-history/finance-history.component';
 import {ExternalLinksComponent} from './external-links/external-links.component';
 
+import {DashboardService} from './dashboard.service';
+
 const components = [
   DashboardComponent,
   FinanceHistoryComponent,
@@ -20,6 +22,9 @@ const components = [
   ],
   declarations: [
     ...components,
+  ],
+  providers: [
+    DashboardService,
   ],
 })
 

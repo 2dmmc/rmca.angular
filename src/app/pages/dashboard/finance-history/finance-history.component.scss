@@ -8,26 +8,49 @@ nb-card-header {
   }
 }
 
-.tag {
-  display: block;
-  font-size: 1rem;
-  line-height: 1rem;
-  padding: 0.4rem 0.5rem;
-  border-radius: 0.3rem;
-  margin: 0 0.5rem;
-}
+table {
+  thead tr {
+    background: #494299;
 
-.tag-info {
-  color: nb-theme(color-white);
-  background-color: nb-theme(color-info);
-}
+    border: 1px solid #342e73;
+    vertical-align: middle;
 
-.tag-success {
-  color: nb-theme(color-white);
-  background-color: nb-theme(color-success);
-}
+    th {
+      border: 1px solid #342e73;
+      vertical-align: middle;
+    }
+  }
 
-.tag-danger {
-  color: nb-theme(color-white);
-  background-color: nb-theme(color-danger);
+  tr {
+    &:hover {
+      background: #494299;
+    }
+
+    td {
+      border: 1px solid #342e73;
+      vertical-align: middle;
+    }
+  }
+
+  tbody {
+    .date {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bolder);
+      color: nb-theme(color-fg-heading);
+    }
+
+    .accrual {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bolder);
+      font-size: 1.05rem;
+
+      &.incoming {
+        color: nb-theme(color-success);
+      }
+
+      &.expend {
+        color: nb-theme(color-danger);
+      }
+    }
+  }
 }
