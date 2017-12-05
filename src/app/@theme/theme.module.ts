@@ -26,7 +26,7 @@ import {
   TinyMCEComponent,
 } from './components';
 
-import {CapitalizePipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
+import {CapitalizePipe, PluralPipe, RoundPipe, TimingPipe, RmbPipe} from './pipes';
 
 import {
   SampleLayoutComponent,
@@ -68,6 +68,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  RmbPipe,
 ];
 
 const NB_THEME_PROVIDERS = [

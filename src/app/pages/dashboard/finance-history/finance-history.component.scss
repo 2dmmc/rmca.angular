@@ -34,23 +34,21 @@ table {
 
   tbody {
     .date {
-      font-family: nb-theme(font-secondary);
       font-weight: nb-theme(font-weight-bolder);
       color: nb-theme(color-fg-heading);
     }
 
-    .accrual {
-      font-family: nb-theme(font-secondary);
+    .accrual, .balance {
       font-weight: nb-theme(font-weight-bolder);
       font-size: 1.05rem;
+    }
 
-      &.incoming {
-        color: nb-theme(color-success);
-      }
+    .success {
+      color: nb-theme(color-success);
+    }
 
-      &.expend {
-        color: nb-theme(color-danger);
-      }
+    .danger {
+      color: nb-theme(color-danger);
     }
   }
 }
