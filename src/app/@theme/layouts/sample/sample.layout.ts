@@ -70,12 +70,11 @@ export class SampleLayoutComponent implements OnDestroy {
       });
   }
 
-  // TODO 修正名称
-  showLargeModal() {
+  showDonationModal(): void {
     this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.layoutState$.unsubscribe();
     this.sidebarState$.unsubscribe();
     this.menuClick$.unsubscribe();
