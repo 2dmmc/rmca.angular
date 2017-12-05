@@ -70,6 +70,7 @@ export class SampleLayoutComponent implements OnDestroy {
       });
   }
 
+  // TODO 修正名称
   showLargeModal() {
     this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
   }
