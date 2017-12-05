@@ -20,12 +20,9 @@
     </nb-card>
   </div>
 </div>
-<div class="row" *ngIf="roles.length < 1">
+<div class="row">
   <div class="col-lg-12">
     <nb-card>
-      <nb-card-header>
-        <span>你还没有角色</span>
-      </nb-card-header>
       <nb-card-body>
         <button class="btn btn-hero-success"
                 (click)="showRoleAddModal()">
