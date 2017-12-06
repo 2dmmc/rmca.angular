@@ -37,12 +37,14 @@
         <label class="col-sm-2 col-form-label">模型类型</label>
         <div class="col-sm-10">
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="skin-model" value="steve" [(ngModel)]="role.userModel">
+            <input type="radio" class="custom-control-input" name="skin-model" value="steve"
+                   [(ngModel)]="role.userModel">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Steve</span>
           </label>
           <label class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="skin-model" value="alex" [(ngModel)]="role.userModel">
+            <input type="radio" class="custom-control-input" name="skin-model" value="alex"
+                   [(ngModel)]="role.userModel">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Alex</span>
           </label>
@@ -52,8 +54,14 @@
         <label for="input-skin" class="col-sm-2 col-form-label">皮肤上传</label>
         <div class="col-sm-10">
           <div class="file btn btn-hero-info">
-            <span *ngIf="!role.file">选择文件</span>
-            <span *ngIf="role.file">文件已选择</span>
+            <span *ngIf="!role.file">
+              <i class="fa fa-file"></i>
+              选择文件
+            </span>
+            <span *ngIf="role.file">
+              <i class="fa fa-check"></i>
+              文件已选择
+            </span>
             <input type="file" name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
                    ngModel (change)="getFiles($event)">
           </div>
@@ -82,7 +90,13 @@
         <button class="btn btn-hero-success"
                 [disabled]="submitted || !roleForm.form.valid"
                 [class.btn-pulse]="submitted">
+          <i class="fa fa-pencil-square-o"></i>
           更新角色信息
+        </button>
+        <button class="btn btn-md btn-hero-danger"
+                (click)="closeModal()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          取消
         </button>
       </div>
     </div>
@@ -93,11 +107,14 @@
               [disabled]="submitted"
               [class.btn-pulse]="submitted"
               (click)="updateYggdrasilSkin(role._id)">
+        <i class="fa fa-pencil-square-o"></i>
         同步正版皮肤
+      </button>
+      <button class="btn btn-md btn-hero-danger"
+              (click)="closeModal()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+        取消
       </button>
     </div>
   </div>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-md btn-hero-danger" (click)="closeModal()">取消</button>
 </div>

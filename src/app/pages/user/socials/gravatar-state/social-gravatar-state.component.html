@@ -18,7 +18,13 @@
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user?.email" (click)="updateUserAvatar()">使用该头像作为RMCA头像</button>
-    <button class="btn btn-hero-info" *ngIf="!user?.email" (click)="goToProfile()">去个人资料</button>
+    <button class="btn btn-hero-success" *ngIf="user?.email" (click)="updateUserAvatar()">
+      <i class="fa fa-image"></i>
+      使用该头像作为RMCA头像
+    </button>
+    <button class="btn btn-hero-info" *ngIf="!user?.email" (click)="goToProfile()">
+      <i class="fa fa-link"></i>
+      去个人资料
+    </button>
   </nb-card-footer>
 </nb-card>

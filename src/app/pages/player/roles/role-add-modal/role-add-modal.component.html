@@ -28,12 +28,15 @@
         <button class="btn btn-hero-success"
                 [disabled]="submitted || !roleForm.form.valid"
                 [class.btn-pulse]="submitted">
+          <i class="fa fa-plus"></i>
           新增角色
+        </button>
+        <button class="btn btn-md btn-hero-danger"
+                (click)="closeModal()">
+          <i class="fa fa-times" aria-hidden="true"></i>
+          取消
         </button>
       </div>
     </div>
   </form>
-</div>
-<div class="modal-footer">
-  <button class="btn btn-md btn-hero-danger" (click)="closeModal()">取消</button>
 </div>

@@ -39,7 +39,7 @@ export class UserInfoComponent implements OnInit {
     this.userService.updateUserProfile(this.user.email)
       .then(updateState => {
         this.needGetUserProfile.emit();
-        this.noticeService.success('更新个人资料成功', '更新个人资料成功');
+        this.noticeService.success('更新个人资料成功', `更新个人资料成功, 你的邮箱已更换为${this.user.email}`);
         this.submitted = false;
       })
       .catch(error => {
