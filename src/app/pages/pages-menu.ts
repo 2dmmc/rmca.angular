@@ -53,7 +53,7 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '服务器列表',
-        link: '/pages/manager/server/list',
+        link: '/pages/manager/server',
       },
       {
         title: '服务器历史管理',

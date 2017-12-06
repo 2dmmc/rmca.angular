@@ -1,36 +1,36 @@
 import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../@theme/theme.module';
-// import {ProfileModule} from './profile/profile.module';
-// import {YggdrasilModule} from './yggdrasil/yggdrasil.module';
+import {ServersModule} from './servers/servers.module';
 import {ManagerRoutingModule} from './manager-routing.module';
-//
+
 import {ManagerComponent} from './manager.component';
-// import {ProfileComponent} from './profile/profile.component';
-// import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
-//
-// import {UserService} from './user.service';
-// import {NoticeService} from '../../@system/notice/notice.service';
+import {ServersComponent} from './servers/servers.component';
+import {ServerAddModalComponent} from './servers/server-add-modal/server-add-modal.component';
+import {ServerDetailModalComponent} from './servers/server-detail-modal/server-detail-modal.component';
+
+import {ManagerService} from './manager.service';
 
 const components = [
   ManagerComponent,
-  // ProfileComponent,
-  // YggdrasilComponent,
+  ServersComponent,
 ];
 
 @NgModule({
   imports: [
     ThemeModule,
     ManagerRoutingModule,
-    // ProfileModule,
-    // YggdrasilModule,
+    ServersModule,
   ],
   declarations: [
     ...components,
   ],
   providers: [
-    // UserService,
-    // NoticeService,
+    ManagerService,
+  ],
+  entryComponents: [
+    ServerAddModalComponent,
+    ServerDetailModalComponent,
   ],
 })
 export class ManagerModule {
