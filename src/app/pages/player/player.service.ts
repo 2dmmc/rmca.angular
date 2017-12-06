@@ -67,11 +67,11 @@ export class PlayerService {
   /**
    * @name 同步正版验证皮肤
    * @description 从Mojang服务器同步皮肤至某个角色. 入参为角色ID. 返回同步结果.
-   * @param {string} roldId 角色ID
+   * @param {string} roleId 角色ID
    * @return {Promise<Object>}
    */
-  public updateYggdrasilSkin(roldId: string): Promise<object> {
-    return this.http.patch(`/api/role/skin/${roldId}/yggdrasil`, {})
+  public updateYggdrasilSkin(roleId: string): Promise<object> {
+    return this.http.patch(`/api/role/skin/${roleId}/yggdrasil`, {})
       .toPromise();
   }
 
