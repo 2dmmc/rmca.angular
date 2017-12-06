@@ -14,49 +14,70 @@
                [ngModel]="role.rolename">
       </div>
     </div>
+    <hr>
     <div class="form-group row">
-      <label class="col-sm-2 col-form-label">模型类型</label>
+      <label class="col-sm-2 col-form-label">皮肤类型</label>
       <div class="col-sm-10">
         <label class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" name="model" value="Steve" checked>
+          <input type="radio" class="custom-control-input" name="skin-type" value="upload" [(ngModel)]="skinType">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">Steve</span>
+          <span class="custom-control-description">手动上传</span>
         </label>
         <label class="custom-control custom-radio">
-          <input type="radio" class="custom-control-input" name="model" value="Alex">
+          <input type="radio" class="custom-control-input" name="skin-type" value="sync"
+                 [(ngModel)]="skinType" [disabled]="!user?.yggdrasil">
           <span class="custom-control-indicator"></span>
-          <span class="custom-control-description">Alex</span>
+          <span class="custom-control-description">同步正版皮肤</span>
         </label>
+        <small *ngIf="!user?.yggdrasil">在RMCA内授权<a routerLink="./pages/user/yggdrasil">正版验证</a>后可从Mojang官方同步正版皮肤</small>
       </div>
     </div>
-    <div class="form-group row">
-      <label for="input-skin" class="col-sm-2 col-form-label">皮肤上传</label>
-      <div class="col-sm-10">
-        <div class="file btn btn-hero-info">
-          <span *ngIf="!role.file">选择文件</span>
-          <span *ngIf="role.file">文件已选择</span>
-          <input type="file" name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
-                 ngModel (change)="getFiles($event)">
+    <section *ngIf="skinType == 'upload'">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">模型类型</label>
+        <div class="col-sm-10">
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="skin-model" value="steve" [(ngModel)]="role.userModel">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Steve</span>
+          </label>
+          <label class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input" name="skin-model" value="alex" [(ngModel)]="role.userModel">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Alex</span>
+          </label>
         </div>
       </div>
-    </div>
-    <div class="form-group row" *ngIf="role.file">
-      <label class="col-sm-2 col-form-label">待上传皮肤</label>
-      <div class="col-sm-10">
-        <div class="skin-viewer">
-          <img src="data:image/png;base64,{{role.file}}" alt="">
+      <div class="form-group row">
+        <label for="input-skin" class="col-sm-2 col-form-label">皮肤上传</label>
+        <div class="col-sm-10">
+          <div class="file btn btn-hero-info">
+            <span *ngIf="!role.file">选择文件</span>
+            <span *ngIf="role.file">文件已选择</span>
+            <input type="file" name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
+                   ngModel (change)="getFiles($event)">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-2 col-form-label">当前皮肤预览</label>
-      <div class="col-sm-10">
-        <div class="skin-viewer">
-          <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
+      <div class="form-group row" *ngIf="role.file">
+        <label class="col-sm-2 col-form-label">待上传皮肤</label>
+        <div class="col-sm-10">
+          <div class="skin-viewer">
+            <img src="data:image/png;base64,{{role.file}}" alt="">
+          </div>
         </div>
       </div>
-    </div>
-    <div class="form-group row">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">当前皮肤预览</label>
+        <div class="col-sm-10">
+          <div class="skin-viewer">
+            <img src="https://rmca.bangbang93.com/api/role/skin/{{role._id}}" alt="">
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <div class="form-group row" *ngIf="skinType =='upload'">
       <div class="offset-sm-2 col-sm-10">
         <button class="btn btn-hero-success"
                 [disabled]="submitted || !roleForm.form.valid"
@@ -66,6 +87,16 @@
       </div>
     </div>
   </form>
+  <div class="form-group row" *ngIf="skinType == 'sync'">
+    <div class="offset-sm-2 col-sm-10">
+      <button class="btn btn-hero-success"
+              [disabled]="submitted"
+              [class.btn-pulse]="submitted"
+              (click)="updateYggdrasilSkin(role._id)">
+        同步正版皮肤
+      </button>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
   <button class="btn btn-md btn-hero-danger" (click)="closeModal()">取消</button>
