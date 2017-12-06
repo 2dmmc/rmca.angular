@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {ManagerService} from '../../manager.service';
-
 import {NoticeService} from '../../../../@system/notice/notice.service';
+
+import {ManagerService} from '../../manager.service';
+import {ServerModel} from '../server.model';
 
 @Component({
   selector: 'ngx-server-add-modal',
@@ -13,7 +14,7 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 
 export class ServerAddModalComponent {
   @Output() event = new EventEmitter();
-  server: any;
+  server: ServerModel;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,
@@ -21,14 +22,19 @@ export class ServerAddModalComponent {
               private managerService: ManagerService) {
     this.server = {
       name: '',
+      endpoint: '',
+      announce: '',
+      dynmap: '',
     };
     this.submitted = false;
   }
 
-  public addRole(): void {
-    this.managerService.addServer(this.server.name)
+  public addServer(): void {
+    this.submitted = true;
+
+    this.managerService.addServer(this.server)
       .then(createState => {
-        this.noticeService.success('创建成功', '添加服务器成功');
+        this.noticeService.success('新增成功', '新增服务器成功');
         this.event.emit();
         this.activeModal.close();
       })
@@ -39,11 +45,7 @@ export class ServerAddModalComponent {
 
         switch (error.status) {
           case 409: {
-            errorMessage = '角色名已存在';
-            break;
-          }
-          case 450: {
-            errorMessage = '当前角色数量超过用户账号限制';
+            errorMessage = '服务器名已存在';
             break;
           }
           default: {
@@ -51,7 +53,7 @@ export class ServerAddModalComponent {
           }
         }
 
-        this.noticeService.error('添加服务器失败', errorMessage);
+        this.noticeService.error('新增服务器失败', errorMessage);
       });
   }
 

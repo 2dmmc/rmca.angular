@@ -8,6 +8,7 @@ import {ManagerComponent} from './manager.component';
 import {ServersComponent} from './servers/servers.component';
 import {ServerAddModalComponent} from './servers/server-add-modal/server-add-modal.component';
 import {ServerDetailModalComponent} from './servers/server-detail-modal/server-detail-modal.component';
+import {ServerDeleteModalComponent} from './servers/server-delete-modal/server-delete-modal.component';
 
 import {ManagerService} from './manager.service';
 
@@ -31,6 +32,7 @@ const components = [
   entryComponents: [
     ServerAddModalComponent,
     ServerDetailModalComponent,
+    ServerDeleteModalComponent,
   ],
 })
 export class ManagerModule {
