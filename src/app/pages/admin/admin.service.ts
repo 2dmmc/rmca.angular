@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import {ServerModel} from './server/server.model';
+import {FinanceModel} from './server/finance/finance.model';
 
 @Injectable()
 export class AdminService {
@@ -43,6 +44,17 @@ export class AdminService {
 
   public deleteServer(serverId: string): Promise<object> {
     return this.http.delete(`/api/admin/server/${serverId}`)
+      .toPromise();
+  }
+
+  public addFinance(finance: FinanceModel): Promise<object> {
+    const params = new HttpParams()
+      .set('date', finance.date.toString())
+      .set('type', finance.type)
+      .set('accrual', finance.accrual.toString())
+      .set('comment', finance.comment);
+
+    return this.http.post('/api/admin/finance', params)
       .toPromise();
   }
 }

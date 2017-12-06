@@ -1,0 +1,55 @@
+@import '../../../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+nb-card-header {
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+table {
+  thead tr {
+    background: #494299;
+
+    border: 1px solid #342e73;
+    vertical-align: middle;
+
+    th {
+      border: 1px solid #342e73;
+      vertical-align: middle;
+    }
+  }
+
+  tr {
+    &:hover {
+      background: #494299;
+    }
+
+    td {
+      border: 1px solid #342e73;
+      vertical-align: middle;
+    }
+  }
+
+  tbody {
+    .date {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bolder);
+      color: nb-theme(color-fg-heading);
+    }
+
+    .accrual, .balance {
+      font-weight: nb-theme(font-weight-bolder);
+      font-size: 1.05rem;
+    }
+
+    .success {
+      color: nb-theme(color-success);
+    }
+
+    .danger {
+      color: nb-theme(color-danger);
+    }
+  }
+}
