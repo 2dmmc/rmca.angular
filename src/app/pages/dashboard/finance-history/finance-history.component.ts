@@ -38,6 +38,6 @@ export class FinanceHistoryComponent implements OnInit {
   }
 
   public pageChange(page): void {
-    this.getFinanceHistories(page);
+    this.getFinanceHistories(page, this.limit);
   }
 }
