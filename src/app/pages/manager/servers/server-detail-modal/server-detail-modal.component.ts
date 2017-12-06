@@ -5,6 +5,8 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 
 import {ManagerService} from '../../manager.service';
 
+import {ServerModel} from '../server.model';
+
 @Component({
   selector: 'ngx-server-detail-modal',
   styleUrls: ['./server-detail-modal.component.scss'],
@@ -14,14 +16,18 @@ import {ManagerService} from '../../manager.service';
 export class ServerDetailModalComponent implements OnInit {
   @Input() serverId;
   @Output() event = new EventEmitter();
-  server: any;
+  server: ServerModel;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
               private managerService: ManagerService) {
     this.server = {
-      name: '',
+      _id: '',
+      name: '获取中...',
+      endpoint: '获取中...',
+      announce: '获取中...',
+      dynmap: '获取中...',
     };
     this.submitted = false;
   }
@@ -29,7 +35,7 @@ export class ServerDetailModalComponent implements OnInit {
   public ngOnInit(): void {
     this.managerService.getServer(this.serverId)
       .then(server => {
-        this.server = server;
+        this.server = server as ServerModel;
       })
       .catch(error => {
         this.noticeService.error('获取服务器详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
@@ -39,7 +45,7 @@ export class ServerDetailModalComponent implements OnInit {
   public updateServer(): void {
     this.submitted = true;
 
-    this.managerService.updateServer(this.server.serverId, this.server.name, this.server.endpoint, this.server.announce, this.server.dynmap)
+    this.managerService.updateServer(this.server)
       .then(updateState => {
         this.noticeService.success('更新成功', '更新服务器详情成功');
         this.event.emit();

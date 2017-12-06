@@ -30,14 +30,14 @@ export class ManagerService {
       .toPromise();
   }
 
-  public updateServer(serverId: string, server: ServerModel): Promise<object> {
+  public updateServer(server: ServerModel): Promise<object> {
     const params = new HttpParams()
       .set('name', server.name)
       .set('endpoint', server.endpoint)
       .set('announce', server.announce)
       .set('dynmap', server.dynmap);
 
-    return this.http.put(`/api/role/skin${serverId}`, params)
+    return this.http.put(`/api/admin/server/${server._id}`, params)
       .toPromise();
   }
 
