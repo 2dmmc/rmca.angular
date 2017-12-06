@@ -17,7 +17,10 @@
                  [class.form-control-danger]="name.invalid && name.touched"
                  [required]="true">
           <span class="input-group-btn">
-            <button class="btn btn-danger" (click)="deleteServer()" [disabled]="name.invalid || formName != serverName">
+            <button class="btn btn-danger"
+                    (click)="deleteServer()"
+                    [class.btn-pulse]="submitted"
+                    [disabled]="submitted || name.invalid || formName != serverName">
               <i class="fa fa-trash"></i>
               删除
             </button>

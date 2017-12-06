@@ -27,7 +27,6 @@ export class ServerDeleteModalComponent {
 
   public deleteServer(): void {
     this.submitted = true;
-
     this.managerService.deleteServer(this.serverId)
       .then(updateState => {
         this.noticeService.success('删除成功', `删除${this.serverName}服务器成功`);
