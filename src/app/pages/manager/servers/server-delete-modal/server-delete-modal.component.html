@@ -1,0 +1,28 @@
+<div class="modal-header">
+  <i class="fa fa-pencil-square-o"></i>
+  服务器管理 - 删除服务器
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <form #roleForm="ngForm" name="serverForm">
+    <p class="col-sm-12">请输入服务器名称: <code>{{serverName}}</code> 来删除该服务器</p>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <div class="input-group">
+          <input name='name' id="input-name" class="form-control" placeholder="请输入服务器名称"
+                 autofocus autocomplete=off
+                 [(ngModel)]="formName" #name="ngModel"
+                 [class.form-control-danger]="name.invalid && name.touched"
+                 [required]="true">
+          <span class="input-group-btn">
+            <button class="btn btn-danger" (click)="deleteServer()" [disabled]="name.invalid || formName != serverName">
+              删除
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -6,6 +6,9 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 
 import {ServerAddModalComponent} from './server-add-modal/server-add-modal.component';
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
+import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
+
+import {ServerModel} from './server.model';
 
 @Component({
   selector: 'ngx-services',
@@ -14,7 +17,7 @@ import {ServerDetailModalComponent} from './server-detail-modal/server-detail-mo
 })
 
 export class ServersComponent implements OnInit {
-  servers: any;
+  servers: ServerModel[];
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
@@ -28,7 +31,7 @@ export class ServersComponent implements OnInit {
 
   public getServers(): void {
     this.managerService.getServers()
-      .then((servers: any) => {
+      .then((servers: ServerModel[]) => {
         this.servers = servers;
       })
       .catch(error => {
@@ -56,6 +59,21 @@ export class ServersComponent implements OnInit {
     });
 
     activeModal.componentInstance.serverId = serverId;
+
+    activeModal.componentInstance.event.subscribe(() => {
+      this.getServers();
+    });
+  }
+
+  public openServerDeleteModal(serverId: string, serverName: string): void {
+    const activeModal = this.modalService.open(ServerDeleteModalComponent, {
+      size: 'lg',
+      container: 'nb-layout',
+      backdrop: 'static',
+    });
+
+    activeModal.componentInstance.serverId = serverId;
+    activeModal.componentInstance.serverName = serverName;
 
     activeModal.componentInstance.event.subscribe(() => {
       this.getServers();
