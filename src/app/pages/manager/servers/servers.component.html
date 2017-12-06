@@ -4,6 +4,7 @@
       <nb-card-body>
         <button class="btn btn-hero-success"
                 (click)="openServerAddModal()">
+          <i class="fa fa-plus"></i>
           新增服务器
         </button>
       </nb-card-body>
@@ -39,10 +40,12 @@
       <nb-card-footer>
         <button class="btn btn-hero-success"
                 (click)="openServerDetailModal(server._id)">
+          <i class="fa fa-pencil-square-o"></i>
           编辑
         </button>
         <button class="btn btn-hero-danger"
                 (click)="openServerDeleteModal(server._id, server.name)">
+          <i class="fa fa-trash"></i>
           删除
         </button>
       </nb-card-footer>
