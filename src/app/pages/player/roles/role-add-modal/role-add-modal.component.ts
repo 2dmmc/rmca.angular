@@ -25,6 +25,8 @@ export class RoleAddModalComponent {
   }
 
   public addRole(): void {
+    this.submitted = true;
+
     this.playerService.addRole(this.role.rolename)
       .then(createState => {
         this.noticeService.success('新增成功', '新增角色成功');
