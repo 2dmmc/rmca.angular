@@ -13,20 +13,22 @@ export class FinanceHistoryComponent implements OnInit {
   financeHistories: any;
   page: number;
   pageArray: number[];
+  limit: number;
 
   constructor(private noticeService: NoticeService,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.page = 1;
     this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    this.limit = 13;
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(this.page);
+    this.getFinanceHistories(this.page, this.limit);
   }
 
-  public getFinanceHistories(page): void {
-    this.dashboardService.getFinanceHistories(page)
+  public getFinanceHistories(page, limit): void {
+    this.dashboardService.getFinanceHistories(page, limit)
       .then(financeHistory => {
         this.financeHistories = financeHistory;
       })

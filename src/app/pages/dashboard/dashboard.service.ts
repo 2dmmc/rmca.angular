@@ -8,9 +8,10 @@ export class DashboardService {
   }
 
   // TODO 补充文档
-  public getFinanceHistories(page): Promise<object> {
+  public getFinanceHistories(page, limit): Promise<object> {
     const params = new HttpParams()
-      .set('page', page);
+      .set('page', page)
+      .set('limit', limit);
 
     return this.http.get('/api/finance', {params: params})
       .toPromise();
