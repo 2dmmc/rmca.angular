@@ -14,7 +14,7 @@ const routes: Routes = [{
     path: 'rmca',
     // component: ProfileComponent,
   }, {
-    path: 'server',
+    path: 'servers',
     component: ServersComponent,
   }],
 }];
