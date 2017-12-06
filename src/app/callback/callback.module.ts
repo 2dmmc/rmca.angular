@@ -4,7 +4,6 @@ import {CallbackRoutingModule} from './callback-routing.module';
 import {ThemeModule} from '../@theme/theme.module';
 
 import {CallbackService} from './services/callback.service';
-import {CallbackUtilService} from './services/callback-util.service';
 
 import {CallbackComponent} from './callback.component';
 import {CallbackBlockComponent} from './components/callback-block/callback-block.component';
@@ -35,7 +34,6 @@ const components = [
   providers: [
     UserService,
     CallbackService,
-    CallbackUtilService,
   ],
 })
 export class CallbackModule {

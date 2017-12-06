@@ -1,10 +1,6 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
+
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -12,30 +8,31 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./reset-password.component.scss'],
   templateUrl: './reset-password.component.html',
 })
-export class NbResetPasswordComponent implements OnInit {
-  constructor(protected router: Router,
-              protected activatedRoute: ActivatedRoute,
-              protected authService: AuthService) {
-  }
 
+export class NbResetPasswordComponent implements OnInit {
   user: any;
   error: any;
   message: any;
   submitted: boolean;
   hash: string;
 
-  ngOnInit(): void {
+  constructor(private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private authService: AuthService) {
     this.user = {};
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
     this.submitted = false;
+    this.hash = '';
+  }
 
+  public ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.hash = queryParams.hash;
     });
   }
 
-  resetPassword(): void {
+  public resetPassword(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
     this.submitted = true;
@@ -68,11 +65,11 @@ export class NbResetPasswordComponent implements OnInit {
       });
   }
 
-  hasError(): boolean {
+  public hasError(): boolean {
     return this.error.title.length !== 0 || this.error.message.length !== 0;
   }
 
-  hasMessage(): boolean {
+  public hasMessage(): boolean {
     return this.message.title.length !== 0 || this.message.message.length !== 0;
   }
 }

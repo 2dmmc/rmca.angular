@@ -12,7 +12,7 @@ export class PlayerService {
    * @description 获取当前用户的角色列表. 返回包含若干不完整Role模型的集合.
    * @return {Promise<Object>}
    */
-  getRoles(): Promise<object> {
+  public getRoles(): Promise<object> {
     return this.http.get('/api/role')
       .toPromise();
   }
@@ -23,7 +23,7 @@ export class PlayerService {
    * @param {string} roleId 角色ID
    * @return {Promise<Object>}
    */
-  getRole(roleId: string): Promise<object> {
+  public getRole(roleId: string): Promise<object> {
     return this.http.get(`/api/role/${roleId}`)
       .toPromise();
   }
@@ -34,7 +34,7 @@ export class PlayerService {
    * @param {string} rolename 角色名称
    * @return {Promise<Object>}
    */
-  addRole(rolename: string): Promise<object> {
+  public addRole(rolename: string): Promise<object> {
     const params = new HttpParams()
       .set('rolename', rolename);
 
@@ -50,7 +50,7 @@ export class PlayerService {
    * @param {string} skin 皮肤
    * @return {Promise<Object>}
    */
-  updateRole(roleId: string, skinModel: string, skin: string): Promise<object> {
+  public updateRole(roleId: string, skinModel: string, skin: string): Promise<object> {
     // FIXME https://github.com/angular/angular/issues/18261
     // FUCK u Angular
     // const params = new HttpParams()
@@ -70,7 +70,7 @@ export class PlayerService {
    * @param {string} roldId 角色ID
    * @return {Promise<Object>}
    */
-  updateYggdrasilSkin(roldId: string): Promise<object> {
+  public updateYggdrasilSkin(roldId: string): Promise<object> {
     return this.http.patch(`/api/role/skin/${roldId}/yggdrasil`, {})
       .toPromise();
   }
@@ -81,7 +81,7 @@ export class PlayerService {
    * @param {string} roleId 角色ID
    * @return {Promise<Object>}
    */
-  updateDefaultRole(roleId: string): Promise<object> {
+  public updateDefaultRole(roleId: string): Promise<object> {
     const params = new HttpParams()
       .set('roleId', roleId);
 

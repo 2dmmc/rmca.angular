@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
@@ -11,21 +11,17 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 })
 
 export class UserInfoComponent implements OnInit {
-  constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
-              private userService: UserService,
-              private noticeService: NoticeService) {
-  }
-
+  @Input() user: any;
+  @Output() needGetUserProfile = new EventEmitter();
   submitted: boolean;
 
-  @Input()
-  user: any;
+  constructor(private noticeService: NoticeService,
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService) {
+    this.submitted = false;
+  }
 
-  @Output()
-  needGetUserProfile = new EventEmitter();
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(queryParams => {
       if (queryParams.hash) {
         // TODO 验证失败与否移除掉URL中的params
@@ -37,7 +33,7 @@ export class UserInfoComponent implements OnInit {
     this.submitted = false;
   }
 
-  updateProfile(): void {
+  public updateProfile(): void {
     this.submitted = true;
 
     this.userService.updateUserProfile(this.user.email)
@@ -52,7 +48,7 @@ export class UserInfoComponent implements OnInit {
       });
   }
 
-  verifyEmail(hash): void {
+  public verifyEmail(hash): void {
     this.userService.verifyEmail(hash)
       .then(updateState => {
         this.needGetUserProfile.emit();
@@ -75,7 +71,7 @@ export class UserInfoComponent implements OnInit {
       });
   }
 
-  resendVerifyEmail(): void {
+  public resendVerifyEmail(): void {
     this.userService.resendVerifyEmail()
       .then(resendState => {
         this.noticeService.success('发送验证邮件成功', '重新发送验证邮件成功, 请到邮箱去查看. 如没有收到,请尝试重新发送验证邮件或稍后重试');

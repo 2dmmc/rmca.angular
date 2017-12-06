@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
-import {UserService} from '../user.service';
 import {NoticeService} from '../../../@system/notice/notice.service';
+
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'ngx-profile',
@@ -10,13 +11,10 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 })
 
 export class ProfileComponent implements OnInit {
-  constructor(private userService: UserService,
-              private noticeService: NoticeService) {
-  }
-
   user: any;
 
-  ngOnInit() {
+  constructor(private noticeService: NoticeService,
+              private userService: UserService) {
     this.user = {
       email: '',
       password: '',
@@ -24,11 +22,13 @@ export class ProfileComponent implements OnInit {
       newPasswordRep: '',
       isEmailVerify: false,
     };
+  }
 
+  public ngOnInit(): void {
     this.getUserProfile();
   }
 
-  getUserProfile(): void {
+  public getUserProfile(): void {
     this.userService.getUserProfile()
       .then(userProfile => {
         this.user = userProfile;

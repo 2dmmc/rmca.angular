@@ -22,5 +22,6 @@ const components = [
     ...components,
   ],
 })
+
 export class ProfileModule {
 }

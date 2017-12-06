@@ -15,7 +15,7 @@ export class AuthService {
    * @param isKeepLogin 是否保持登陆状态
    * @return {Promise<Object>}
    */
-  login(username, password, isKeepLogin): Promise<object> {
+  public login(username, password, isKeepLogin): Promise<object> {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password)
@@ -30,7 +30,7 @@ export class AuthService {
    * @description 字面意思. 返回登出结果.
    * @return {Promise<Object>}
    */
-  logout(): Promise<object> {
+  public logout(): Promise<object> {
     return this.http.get('/api/user/logout')
       .toPromise();
   }
@@ -43,7 +43,7 @@ export class AuthService {
    * @param email 电子邮箱
    * @return {Promise<Object>}
    */
-  register(username, password, email) {
+  public register(username, password, email): Promise<object> {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password)
@@ -59,7 +59,7 @@ export class AuthService {
    * @param email 用户的电子邮箱
    * @return {Promise<Object>}
    */
-  requestResetPassword(email) {
+  public requestResetPassword(email): Promise<object> {
     const params = new HttpParams()
       .set('email', email);
 
@@ -74,7 +74,7 @@ export class AuthService {
    * @param password 用户填写的密码
    * @return {Promise<Object>}
    */
-  resetPassword(hash, password) {
+  public resetPassword(hash, password): Promise<object> {
     const params = new HttpParams()
       .set('password', password);
 
@@ -88,7 +88,7 @@ export class AuthService {
    * @param hash URL中的hash
    * @return {Promise<Object>}
    */
-  checkResetPasswordHash(hash) {
+  public checkResetPasswordHash(hash): Promise<object> {
     return this.http.get(`/api/user/reset/${hash}`)
       .toPromise();
   }
@@ -98,7 +98,7 @@ export class AuthService {
    * @description 获取当前用户的登陆状态. SAP的核心鉴权方法. 返回不完整的User模型或未登录.
    * @return {Promise<Object>}
    */
-  getLoginState() {
+  public getLoginState(): Promise<object> {
     return this.http.get('/api/user/login')
       .toPromise();
   }

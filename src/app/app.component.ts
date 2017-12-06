@@ -1,9 +1,4 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {ToasterConfig} from 'angular2-toaster';
 
 @Component({
@@ -14,11 +9,8 @@ import {ToasterConfig} from 'angular2-toaster';
   `,
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
   constructor() {
-  }
-
-  ngOnInit(): void {
   }
 
   public toasterConfig: ToasterConfig =

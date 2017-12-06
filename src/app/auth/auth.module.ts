@@ -45,5 +45,6 @@ const AUTH_COMPONENTS = [
     NeedAdminGuard,
   ],
 })
+
 export class AuthModule {
 }

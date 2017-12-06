@@ -21,5 +21,6 @@ const components = [
     ...components,
   ],
 })
+
 export class RolesModule {
 }

@@ -8,7 +8,7 @@ export class DashboardService {
   }
 
   // TODO 补充文档
-  getFinanceHistories(page): Promise<object> {
+  public getFinanceHistories(page): Promise<object> {
     const params = new HttpParams()
       .set('page', page);
 

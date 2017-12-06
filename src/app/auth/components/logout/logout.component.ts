@@ -1,26 +1,24 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+
 import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'ngx-logout',
   templateUrl: './logout.component.html',
 })
+
 export class NbLogoutComponent implements OnInit {
-
-  constructor(private router: Router,
-              private authService: AuthService) {
-  }
-
   error: any;
   message: any;
 
-  ngOnInit(): void {
+  constructor(private router: Router,
+              private authService: AuthService) {
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
+  }
+
+  public ngOnInit(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
 
@@ -55,11 +53,11 @@ export class NbLogoutComponent implements OnInit {
       });
   }
 
-  hasError(): boolean {
+  public hasError(): boolean {
     return this.error.title.length !== 0 || this.error.message.length !== 0;
   }
 
-  hasMessage(): boolean {
+  public hasMessage(): boolean {
     return this.message.title.length !== 0 || this.message.message.length !== 0;
   }
 }

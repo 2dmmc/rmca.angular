@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../../player.service';
@@ -10,26 +10,22 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './role-detail-modal.component.html',
 })
 
-export class RoleDetailModalComponent implements OnInit, AfterViewInit {
+export class RoleDetailModalComponent implements OnInit {
   @Input() roleId;
   @Output() event = new EventEmitter();
+  role: any;
+  submitted: boolean;
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
-  }
-
-  role: any;
-  submitted: boolean;
-
-  ngOnInit() {
     this.role = {
       rolename: '',
     };
     this.submitted = false;
   }
 
-  ngAfterViewInit(): void {
+  public ngOnInit(): void {
     this.playerService.getRole(this.roleId)
       .then(role => {
         this.role = role;
@@ -39,19 +35,19 @@ export class RoleDetailModalComponent implements OnInit, AfterViewInit {
       });
   }
 
-  getFiles(event): void {
+  public getFiles(event): void {
     const files = event.srcElement.files;
     const reader = new FileReader();
     reader.onload = this._handleReaderLoaded.bind(this);
     reader.readAsBinaryString(files[0]);
   }
 
-  _handleReaderLoaded(readerEvt): void {
+  private _handleReaderLoaded(readerEvt): void {
     const binaryString = readerEvt.target.result;
     this.role.file = btoa(binaryString);
   }
 
-  updateRole(): void {
+  public updateRole(): void {
     this.submitted = false;
 
     this.playerService.updateRole(this.role._id, this.role.userModel, this.role.file)
@@ -79,7 +75,7 @@ export class RoleDetailModalComponent implements OnInit, AfterViewInit {
       });
   }
 
-  closeModal(): void {
+  public closeModal(): void {
     this.activeModal.close();
   }
 }

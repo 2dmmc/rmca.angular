@@ -1,10 +1,10 @@
 import {Component, Input} from '@angular/core';
 import {Router} from '@angular/router';
 
-import {UserModel} from '../../user.model';
-
-import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
+
+import {UserModel} from '../../user.model';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'ngx-social-gravatar-state',
@@ -12,18 +12,18 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './social-gravatar-state.component.html',
 })
 export class SocialGravatarStateComponent {
+  @Input() user: UserModel;
+
   constructor(private router: Router,
               private userService: UserService,
               private noticeService: NoticeService) {
   }
 
-  @Input() user: UserModel;
-
-  toProfile(): void {
+  public goToProfile(): void {
     this.router.navigate(['./profile']);
   }
 
-  updateUserAvatar(): void {
+  public updateUserAvatar(): void {
     this.userService.updateUserAvatar('gravatar')
       .then(updateState => {
         this.noticeService.success('更换头像成功', 'RMCA头像已经更换为 Gravatar 头像');

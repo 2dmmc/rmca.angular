@@ -20,5 +20,6 @@ const components = [
     ...components,
   ],
 })
+
 export class YggdrasilModule {
 }

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../../player.service';
@@ -10,29 +10,21 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './role-add-modal.component.html',
 })
 
-export class RoleAddModalComponent implements OnInit, AfterViewInit {
+export class RoleAddModalComponent {
   @Output() event = new EventEmitter();
+  role: any;
+  submitted: boolean;
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
-  }
-
-  role: any;
-  submitted: boolean;
-
-  ngOnInit(): void {
     this.role = {
       rolename: '',
     };
     this.submitted = false;
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
-  addRole(): void {
+  public addRole(): void {
     this.playerService.addRole(this.role.rolename)
       .then(createState => {
         this.noticeService.success('创建成功', '添加角色成功');
@@ -62,7 +54,7 @@ export class RoleAddModalComponent implements OnInit, AfterViewInit {
       });
   }
 
-  closeModal(): void {
+  public closeModal(): void {
     this.activeModal.close();
   }
 }

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
@@ -9,27 +9,21 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './yggdrasil-info.component.html',
 })
 
-export class YggdrasilInfoComponent implements OnInit {
-  constructor(private userService: UserService,
-              private noticeService: NoticeService) {
-  }
-
-  @Output()
-  needGetYggdrasilInfo = new EventEmitter();
-
+export class YggdrasilInfoComponent {
+  @Output() needGetYggdrasilInfo = new EventEmitter();
   yggdrasil: any;
   submitted: boolean;
 
-  ngOnInit(): void {
+  constructor(private userService: UserService,
+              private noticeService: NoticeService) {
     this.yggdrasil = {
       username: '',
       password: '',
     };
-
     this.submitted = false;
   }
 
-  updateYggdrasil(): void {
+  public updateYggdrasil(): void {
     this.submitted = true;
 
     this.userService.updateUserYggdrasil(this.yggdrasil.username, this.yggdrasil.password)

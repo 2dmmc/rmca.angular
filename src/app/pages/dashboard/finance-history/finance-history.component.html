@@ -40,7 +40,7 @@
       </tbody>
     </table>
     <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
-         [(ngModel)]="page" (ngModelChange)="_pageEvent($event)" ngbRadioGroup>
+         [(ngModel)]="page" (ngModelChange)="pageChange($event)" ngbRadioGroup>
       <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
         <input ngbButton type="radio" [value]="page">
         {{page}}

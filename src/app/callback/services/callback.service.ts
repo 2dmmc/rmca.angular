@@ -8,7 +8,7 @@ export class CallbackService {
   }
 
   // TODO 补充文档
-  oauthQQCallback(accessToken: string, expiresIn: string): Promise<object> {
+  public oauthQQCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);
@@ -17,7 +17,7 @@ export class CallbackService {
       .toPromise();
   }
 
-  oauthWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
+  public oauthWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);
@@ -26,7 +26,7 @@ export class CallbackService {
       .toPromise();
   }
 
-  loginQQCallback(accessToken: string, expiresIn: string): Promise<object> {
+  public loginQQCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);
@@ -35,7 +35,7 @@ export class CallbackService {
       .toPromise();
   }
 
-  loginWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
+  public loginWeiboCallback(accessToken: string, expiresIn: string): Promise<object> {
     const params = new HttpParams()
       .set('accessToken', accessToken)
       .set('expiresIn', expiresIn);

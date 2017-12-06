@@ -6,8 +6,8 @@ import {Component, Input} from '@angular/core';
   templateUrl: './yggdrasil-state.component.html',
 })
 export class YggdrasilStateComponent {
+  @Input() yggdrasil: any;
+
   constructor() {
   }
-
-  @Input() yggdrasil: any;
 }

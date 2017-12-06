@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-auth-block',
@@ -8,7 +7,8 @@ import {Router} from '@angular/router';
     <ng-content></ng-content>
   `,
 })
+
 export class NbAuthBlockComponent {
-  constructor(protected router: Router) {
+  constructor() {
   }
 }

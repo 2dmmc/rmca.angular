@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
@@ -9,25 +9,21 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './user-password.component.html',
 })
 
-export class UserPasswordComponent implements OnInit {
-  constructor(private userService: UserService,
-              private noticeService: NoticeService) {
-  }
-
+export class UserPasswordComponent {
   user: any;
   submitted: boolean;
 
-  ngOnInit(): void {
+  constructor(private noticeService: NoticeService,
+              private userService: UserService) {
     this.user = {
       password: '',
       newPassword: '',
       confirmPassword: '',
     };
-
     this.submitted = false;
   }
 
-  updatePassword(): void {
+  public updatePassword(): void {
     this.submitted = true;
 
     this.userService.updateUserPassword(this.user.password, this.user.newPassword)

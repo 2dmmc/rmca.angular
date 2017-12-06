@@ -1,8 +1,3 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -12,17 +7,19 @@ import {CallbackService} from '../../services/callback.service';
   selector: 'ngx-oauth-weibo',
   templateUrl: './oauth-weibo.component.html',
 })
+
 export class OauthWeiboComponent implements OnInit {
+  error: any;
+  message: any;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService) {
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
   }
 
-  error: any;
-  message: any;
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
 
@@ -43,15 +40,15 @@ export class OauthWeiboComponent implements OnInit {
     });
   }
 
-  goToSocials() {
+  public goToSocials(): void {
     this.router.navigate(['/pages/user/socials']);
   }
 
-  hasError(): boolean {
+  public hasError(): boolean {
     return this.error.title.length !== 0 || this.error.message.length !== 0;
   }
 
-  hasMessage(): boolean {
+  public hasMessage(): boolean {
     return this.message.title.length !== 0 || this.message.message.length !== 0;
   }
 }

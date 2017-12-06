@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {UserService} from '../user.service';
+
 import {NoticeService} from '../../../@system/notice/notice.service';
+
+import {UserService} from '../user.service';
 
 @Component({
   selector: 'ngx-profile',
@@ -8,19 +10,18 @@ import {NoticeService} from '../../../@system/notice/notice.service';
   templateUrl: './yggdrasil.component.html',
 })
 export class YggdrasilComponent implements OnInit {
-  constructor(private userService: UserService,
-              private noticeService: NoticeService) {
-  }
+  yggdrasil: any;
 
-  yggdrasil: any = {};
-
-  ngOnInit() {
+  constructor(private noticeService: NoticeService,
+              private userService: UserService) {
     this.yggdrasil = {
       username: '未验证',
       uuid: '未验证',
       isAuth: false,
     };
+  }
 
+  ngOnInit() {
     this.getYggdrasilInfo();
   }
 

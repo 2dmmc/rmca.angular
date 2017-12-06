@@ -1,10 +1,5 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
-import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {Component} from '@angular/core';
+
 import {AuthService} from '../../services/auth.service';
 
 @Component({
@@ -12,24 +7,21 @@ import {AuthService} from '../../services/auth.service';
   styleUrls: ['./request-password.component.scss'],
   templateUrl: './request-password.component.html',
 })
-export class NbRequestPasswordComponent implements OnInit {
-  constructor(protected router: Router,
-              protected authService: AuthService) {
-  }
 
+export class NbRequestPasswordComponent {
   user: any;
   error: any;
   message: any;
   submitted: boolean;
 
-  ngOnInit(): void {
+  constructor(private authService: AuthService) {
     this.user = {};
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
     this.submitted = false;
   }
 
-  requestPass(): void {
+  public requestPassword(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
     this.submitted = true;
@@ -63,11 +55,11 @@ export class NbRequestPasswordComponent implements OnInit {
       });
   }
 
-  hasError(): boolean {
+  public hasError(): boolean {
     return this.error.title.length !== 0 || this.error.message.length !== 0;
   }
 
-  hasMessage(): boolean {
+  public hasMessage(): boolean {
     return this.message.title.length !== 0 || this.message.message.length !== 0;
   }
 }

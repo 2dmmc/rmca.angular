@@ -1,7 +1,8 @@
-import {AfterViewInit, Component} from '@angular/core';
-import {UserService} from '../user.service';
+import {Component, OnInit} from '@angular/core';
+
 import {NoticeService} from '../../../@system/notice/notice.service';
 
+import {UserService} from '../user.service';
 import {UserModel} from '../user.model';
 
 @Component({
@@ -9,19 +10,20 @@ import {UserModel} from '../user.model';
   styleUrls: ['./socials.component.scss'],
   templateUrl: './socials.component.html',
 })
-export class SocialsComponent implements AfterViewInit {
-  constructor(private userService: UserService,
-              private noticeService: NoticeService) {
+
+export class SocialsComponent implements OnInit {
+  user: UserModel;
+
+  constructor(private noticeService: NoticeService,
+              private userService: UserService) {
 
   }
 
-  user: UserModel;
-
-  ngAfterViewInit(): void {
+  public ngOnInit(): void {
     this.getUserProfile();
   }
 
-  getUserProfile(): void {
+  public getUserProfile(): void {
     this.userService.getUserProfile()
       .then(userProfile => {
         this.user = userProfile as UserModel;

@@ -11,7 +11,7 @@ export class NeedAdminGuard implements CanActivate {
               private noticeService: NoticeService) {
   }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.authUtilService.isAdmin()
         .then(isAdmin => {

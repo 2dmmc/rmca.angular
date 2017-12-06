@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {DashboardService} from '../dashboard.service';
 import {NoticeService} from '../../../@system/notice/notice.service';
@@ -8,26 +8,24 @@ import {NoticeService} from '../../../@system/notice/notice.service';
   styleUrls: ['./finance-history.component.scss'],
   templateUrl: './finance-history.component.html',
 })
-export class FinanceHistoryComponent implements OnInit, AfterViewInit {
-  constructor(private dashboardService: DashboardService,
-              private noticeService: NoticeService) {
-  }
 
+export class FinanceHistoryComponent implements OnInit {
   financeHistories: any;
   page: number;
   pageArray: number[];
 
-  ngOnInit(): void {
+  constructor(private noticeService: NoticeService,
+              private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.page = 1;
     this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   }
 
-  ngAfterViewInit(): void {
+  public ngOnInit(): void {
     this.getFinanceHistories(this.page);
   }
 
-  getFinanceHistories(page): void {
+  public getFinanceHistories(page): void {
     this.dashboardService.getFinanceHistories(page)
       .then(financeHistory => {
         this.financeHistories = financeHistory;
@@ -37,7 +35,7 @@ export class FinanceHistoryComponent implements OnInit, AfterViewInit {
       });
   }
 
-  _pageEvent(event): void {
-    this.getFinanceHistories(event);
+  public pageChange(page): void {
+    this.getFinanceHistories(page);
   }
 }

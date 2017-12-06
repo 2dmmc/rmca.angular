@@ -37,5 +37,6 @@ const components = [
     NoticeService,
   ],
 })
+
 export class UserModule {
 }

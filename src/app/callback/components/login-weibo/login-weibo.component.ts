@@ -1,8 +1,3 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -12,17 +7,19 @@ import {CallbackService} from '../../services/callback.service';
   selector: 'ngx-login-weibo',
   templateUrl: './login-weibo.component.html',
 })
+
 export class LoginWeiboComponent implements OnInit {
+  error: any;
+  message: any;
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService) {
+    this.error = {title: '', message: ''};
+    this.message = {title: '', message: ''};
   }
 
-  error: any;
-  message: any;
-
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.error = {title: '', message: ''};
     this.message = {title: '', message: ''};
 
@@ -43,7 +40,7 @@ export class LoginWeiboComponent implements OnInit {
     });
   }
 
-  goToLogin() {
+  public goToLogin(): void {
     this.router.navigate(['/auth/login']);
   }
 

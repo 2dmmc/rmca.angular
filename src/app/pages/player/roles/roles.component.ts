@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../player.service';
@@ -15,23 +15,20 @@ import {RoleModel} from './role.model';
   templateUrl: './roles.component.html',
 })
 
-export class RolesComponent implements OnInit, AfterViewInit {
-  constructor(private playerService: PlayerService,
-              private noticeService: NoticeService,
-              private modalService: NgbModal) {
-  }
-
+export class RolesComponent implements OnInit {
   roles: RoleModel[];
 
-  ngOnInit(): void {
+  constructor(private noticeService: NoticeService,
+              private playerService: PlayerService,
+              private modalService: NgbModal) {
     this.roles = [];
   }
 
-  ngAfterViewInit(): void {
+  public ngOnInit(): void {
     this.getRoles();
   }
 
-  getRoles(): void {
+  public getRoles(): void {
     this.playerService.getRoles()
       .then((roles: any) => {
         roles.forEach(role => {
@@ -45,7 +42,7 @@ export class RolesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  updateDefaultRole(role): void {
+  public updateDefaultRole(role): void {
     this.playerService.updateDefaultRole(role._id)
       .then(updateState => {
         this.noticeService.success('更新成功', `更新默认角色成功, 默认角色已更换为 ${role.rolename}`);
@@ -72,7 +69,7 @@ export class RolesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  updateYggdrasilSkin(roleId): void {
+  public updateYggdrasilSkin(roleId): void {
     this.playerService.updateYggdrasilSkin(roleId)
       .then(updateState => {
         this.noticeService.success('同步成功', '同步正版皮肤成功');
@@ -107,7 +104,7 @@ export class RolesComponent implements OnInit, AfterViewInit {
       });
   }
 
-  showRoleAddModal(): void {
+  public openRoleAddModal(): void {
     const activeModal = this.modalService.open(RoleAddModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -119,7 +116,7 @@ export class RolesComponent implements OnInit, AfterViewInit {
     });
   }
 
-  showRoleDetailModal(id): void {
+  public openRoleDetailModal(id): void {
     const activeModal = this.modalService.open(RoleDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',

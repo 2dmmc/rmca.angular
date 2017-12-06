@@ -28,5 +28,6 @@ const PAGES_COMPONENTS = [
     AuthUtilService,
   ],
 })
+
 export class PagesModule {
 }

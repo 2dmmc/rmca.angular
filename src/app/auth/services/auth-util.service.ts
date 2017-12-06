@@ -1,18 +1,16 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import 'rxjs/add/operator/toPromise';
 
 import {AuthService} from './auth.service';
 import {UserService} from '../../pages/user/user.service';
 
 @Injectable()
 export class AuthUtilService {
-  constructor(private http: HttpClient,
-              private authService: AuthService,
+  constructor(private authService: AuthService,
               private userService: UserService) {
   }
 
-  isUserAuthenticated(): Promise<boolean> {
+  // TODO 补齐文档
+  public isUserAuthenticated(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.authService.getLoginState()
         .then(user => {
@@ -29,7 +27,7 @@ export class AuthUtilService {
     });
   }
 
-  isAdmin(): Promise<boolean> {
+  public isAdmin(): Promise<boolean> {
     return new Promise((resolve, reject) => {
         this.userService.getUserProfile()
           .then(user => {
@@ -47,7 +45,7 @@ export class AuthUtilService {
     );
   }
 
-  isDeveloper(): Promise<boolean> {
+  public isDeveloper(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.userService.getUserProfile()
         .then(user => {

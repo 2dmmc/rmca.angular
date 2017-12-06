@@ -23,5 +23,6 @@ const components = [
     ...components,
   ],
 })
+
 export class SocialsModule {
 }

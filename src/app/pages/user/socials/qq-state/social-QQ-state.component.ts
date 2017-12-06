@@ -1,9 +1,9 @@
 import {Component, Input} from '@angular/core';
 
-import {UserModel} from '../../user.model';
-
-import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
+
+import {UserModel} from '../../user.model';
+import {UserService} from '../../user.service';
 
 @Component({
   selector: 'ngx-social-qq-state',
@@ -11,17 +11,17 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
   templateUrl: './social-QQ-state.component.html',
 })
 export class SocialQQStateComponent {
+  @Input() user: UserModel;
+
   constructor(private userService: UserService,
               private noticeService: NoticeService) {
   }
 
-  @Input() user: UserModel;
-
-  oAuth(): void {
+  public oAuth(): void {
     window.location.href = `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/oauth/qq`;
   }
 
-  updateUserAvatar(): void {
+  public updateUserAvatar(): void {
     this.userService.updateUserAvatar('qq')
       .then(updateState => {
         this.noticeService.success('更换头像成功', 'RMCA头像已经更换为 腾讯QQ 头像');

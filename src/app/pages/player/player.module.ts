@@ -36,5 +36,6 @@ const components = [
     RoleDetailModalComponent,
   ],
 })
+
 export class PlayerModule {
 }
