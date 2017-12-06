@@ -42,7 +42,7 @@ export class RolesComponent implements OnInit {
       });
   }
 
-  public updateDefaultRole(role): void {
+  public updateDefaultRole(role: RoleModel): void {
     this.playerService.updateDefaultRole(role._id)
       .then(updateState => {
         this.noticeService.success('更新成功', `更新默认角色成功, 默认角色已更换为 ${role.rolename}`);
@@ -81,14 +81,14 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  public openRoleDetailModal(id): void {
+  public openRoleDetailModal(roleId: string): void {
     const activeModal = this.modalService.open(RoleDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.roleId = id;
+    activeModal.componentInstance.roleId = roleId;
 
     activeModal.componentInstance.event.subscribe(() => {
       this.getRoles();
