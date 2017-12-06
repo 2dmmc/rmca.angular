@@ -1,21 +1,19 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
-import {ManagerComponent} from './manager.component';
+import {ServerComponent} from './server.component';
 import {ServersComponent} from './servers/servers.component';
-
-import {NeedAdminGuard} from '../../auth/guards/needAdmin.guard';
+import {FinanceComponent} from './finance/finance.component';
 
 const routes: Routes = [{
   path: '',
-  component: ManagerComponent,
-  canActivate: [NeedAdminGuard],
+  component: ServerComponent,
   children: [{
-    path: 'rmca',
-    // component: ProfileComponent,
-  }, {
     path: 'servers',
     component: ServersComponent,
+  }, {
+    path: 'finance',
+    component: FinanceComponent,
   }],
 }];
 
@@ -23,5 +21,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ManagerRoutingModule {
+export class ServerRoutingModule {
 }

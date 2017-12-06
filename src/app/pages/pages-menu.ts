@@ -53,15 +53,15 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '服务器列表',
-        link: '/pages/manager/servers',
+        link: '/pages/admin/server/servers',
       },
       {
         title: '服务器历史管理',
-        link: '/pages/manager/server/history/detail',
+        link: '/pages/admin/server/history',
       },
       {
         title: '财务历史管理',
-        link: '/pages/manager/server/money/detail',
+        link: '/pages/admin/server/finance',
       },
     ],
   },
@@ -71,11 +71,11 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '管理员列表',
-        link: '/pages/manager/rmca/admin/list',
+        link: '/pages/admin/rmca/admin',
       },
       {
-        title: '玩家管理',
-        link: '/pages/manager/rmca/player/list',
+        title: '用户管理',
+        link: '/pages/admin/rmca/user',
       },
     ],
   },

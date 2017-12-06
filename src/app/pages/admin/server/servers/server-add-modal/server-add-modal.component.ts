@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../../@system/notice/notice.service';
+import {AdminService} from '../../../admin.service';
 
-import {ManagerService} from '../../manager.service';
-import {ServerModel} from '../server.model';
+import {ServerModel} from '../../server.model';
 
 @Component({
   selector: 'ngx-server-add-modal',
@@ -19,7 +19,7 @@ export class ServerAddModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: ManagerService) {
+              private managerService: AdminService) {
     this.server = {
       name: '',
       endpoint: '',

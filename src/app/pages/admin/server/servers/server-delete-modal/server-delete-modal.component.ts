@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
-
-import {ManagerService} from '../../manager.service';
+import {NoticeService} from '../../../../../@system/notice/notice.service';
+import {AdminService} from '../../../admin.service';
 
 @Component({
   selector: 'ngx-server-detail-modal',
@@ -20,7 +19,7 @@ export class ServerDeleteModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: ManagerService) {
+              private managerService: AdminService) {
     this.formName = '';
     this.submitted = false;
   }

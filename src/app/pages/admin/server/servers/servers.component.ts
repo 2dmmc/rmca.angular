@@ -1,17 +1,17 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {ManagerService} from '../manager.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@system/notice/notice.service';
+import {AdminService} from '../../admin.service';
 
 import {ServerAddModalComponent} from './server-add-modal/server-add-modal.component';
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
-import {ServerModel} from './server.model';
+import {ServerModel} from '../server.model';
 
 @Component({
-  selector: 'ngx-services',
+  selector: 'ngx-servers',
   styleUrls: ['./servers.component.scss'],
   templateUrl: './servers.component.html',
 })
@@ -21,7 +21,7 @@ export class ServersComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private managerService: ManagerService) {
+              private managerService: AdminService) {
     this.servers = [];
   }
 

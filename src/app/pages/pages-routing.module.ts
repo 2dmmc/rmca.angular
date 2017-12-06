@@ -17,8 +17,8 @@ const routes: Routes = [{
     path: 'player',
     loadChildren: './player/player.module#PlayerModule',
   }, {
-    path: 'manager',
-    loadChildren: './manager/manager.module#ManagerModule',
+    path: 'admin',
+    loadChildren: './admin/admin.module#AdminModule',
   }, {
     path: '',
     redirectTo: 'dashboard',

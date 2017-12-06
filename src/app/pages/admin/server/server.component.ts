@@ -1,11 +1,11 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'ngx-manager',
+  selector: 'ngx-admin',
   template: `
     <router-outlet></router-outlet>
   `,
 })
 
-export class ManagerComponent {
+export class ServerComponent {
 }

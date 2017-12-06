@@ -20,7 +20,7 @@ export class FinanceHistoryComponent implements OnInit {
     this.financeHistories = [];
     this.page = 1;
     this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    this.limit = 13;
+    this.limit = 12;
   }
 
   public ngOnInit(): void {

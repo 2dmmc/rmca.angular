@@ -2,10 +2,10 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
-import {ServerModel} from './servers/server.model';
+import {ServerModel} from './server/server.model';
 
 @Injectable()
-export class ManagerService {
+export class AdminService {
   constructor(private http: HttpClient) {
   }
 
