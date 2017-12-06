@@ -27,7 +27,7 @@ export class RoleAddModalComponent {
   public addRole(): void {
     this.playerService.addRole(this.role.rolename)
       .then(createState => {
-        this.noticeService.success('创建成功', '添加角色成功');
+        this.noticeService.success('新增成功', '新增角色成功');
         this.event.emit();
         this.activeModal.close();
       })
@@ -50,7 +50,7 @@ export class RoleAddModalComponent {
           }
         }
 
-        this.noticeService.error('添加角色失败', errorMessage);
+        this.noticeService.error('新增角色失败', errorMessage);
       });
   }
 
