@@ -130,7 +130,6 @@ export class RoleDetailModalComponent implements OnInit {
       });
   }
 
-
   public closeModal(): void {
     this.activeModal.close();
   }
