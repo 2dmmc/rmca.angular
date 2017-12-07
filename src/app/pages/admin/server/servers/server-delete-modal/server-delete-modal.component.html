@@ -8,26 +8,21 @@
   </button>
 </div>
 <div class="modal-body">
-  <form #roleForm="ngForm" name="serverForm">
+  <form (ngSubmit)="deleteServer()" #deleteServerForm="ngForm" name="deleteServerForm">
     <p class="col-sm-12">请输入服务器名称: <code>{{serverName}}</code> 来删除该服务器</p>
-    <div class="form-group row">
-      <div class="col-sm-12">
-        <div class="input-group">
-          <input name='name' id="input-name" class="form-control" placeholder="请输入服务器名称"
-                 autofocus autocomplete=off
-                 [(ngModel)]="formName" #name="ngModel"
-                 [class.form-control-danger]="name.invalid && name.touched"
-                 [required]="true">
-          <span class="input-group-btn">
-            <button class="btn btn-danger"
-                    (click)="deleteServer()"
-                    [class.btn-pulse]="submitted"
-                    [disabled]="submitted || name.invalid || formName != serverName">
-              <i class="fa fa-trash"></i>
-              删除
-            </button>
-          </span>
-        </div>
+    <div class="input-group">
+      <input name='name' id="input-name" class="form-control" placeholder="请输入服务器名称"
+             autofocus autocomplete=off
+             [(ngModel)]="formName" #name="ngModel"
+             [class.form-control-danger]="name.invalid && name.touched || formName != serverName"
+             [required]="true">
+      <div class="input-group-btn">
+        <button class="btn btn-danger"
+                [class.btn-pulse]="submitted"
+                [disabled]="submitted || deleteServerForm.invalid || formName != serverName">
+          <i class="fa fa-trash"></i>
+          删除
+        </button>
       </div>
     </div>
   </form>
