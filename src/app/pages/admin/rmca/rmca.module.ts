@@ -10,6 +10,8 @@ import {RmcaComponent} from './rmca.component';
 import {UsersComponent} from './users/users.component';
 import {AdminsComponent} from './admins/admins.component';
 
+import {RmcaService} from './rmca.service';
+
 const components = [
   RmcaComponent,
   UsersComponent,
@@ -26,7 +28,9 @@ const components = [
   declarations: [
     ...components,
   ],
-  providers: [],
+  providers: [
+    RmcaService,
+  ],
 })
 
 export class RmcaModule {

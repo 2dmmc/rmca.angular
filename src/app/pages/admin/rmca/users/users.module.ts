@@ -2,7 +2,13 @@ import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../../../@theme/theme.module';
 
-const components = [];
+import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
+import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
+
+const components = [
+  UserBanModalComponent,
+  UserUnbanModalComponent,
+];
 
 @NgModule({
   imports: [
@@ -14,7 +20,10 @@ const components = [];
   declarations: [
     ...components,
   ],
-  entryComponents: [],
+  entryComponents: [
+    UserBanModalComponent,
+    UserUnbanModalComponent,
+  ],
 })
 
 export class UsersModule {

@@ -1,6 +1,13 @@
 import {Component, OnInit} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
+import {RmcaService} from '../rmca.service';
+
+import {UserModel} from '../../../@model/user.model';
+
+import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
+import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
 
 @Component({
   styleUrls: ['./users.component.scss'],
@@ -8,10 +15,51 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 })
 
 export class UsersComponent implements OnInit {
-  constructor(private noticeService: NoticeService) {
+  users: UserModel[];
+
+  constructor(private noticeService: NoticeService,
+              private modalService: NgbModal,
+              private rmcaService: RmcaService) {
+    this.users = [];
   }
 
   public ngOnInit(): void {
+    this.getUsers();
+  }
 
+  public banUser(user: UserModel): void {
+    const activeModal = this.modalService.open(UserBanModalComponent, {
+      size: 'lg',
+      container: 'nb-layout',
+      backdrop: 'static',
+    });
+
+    activeModal.componentInstance.user = user;
+    activeModal.componentInstance.event.subscribe((reason: string) => {
+      user.ban = reason;
+    });
+  }
+
+  public unBanUser(user: UserModel): void {
+    const activeModal = this.modalService.open(UserUnbanModalComponent, {
+      size: 'lg',
+      container: 'nb-layout',
+      backdrop: 'static',
+    });
+
+    activeModal.componentInstance.user = user;
+    activeModal.componentInstance.event.subscribe(() => {
+      user.ban = null;
+    });
+  }
+
+  private getUsers(): void {
+    this.rmcaService.getUsers()
+      .then(users => {
+        this.users = users as UserModel[];
+      })
+      .catch(error => {
+        this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
   }
 }

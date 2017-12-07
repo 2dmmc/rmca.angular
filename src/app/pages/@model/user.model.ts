@@ -1,8 +1,8 @@
 export class UserModel {
-  _id: any;
+  _id?: any;
   username: string;
   email: string;
-  isEmailVerify: boolean;
+  isEmailVerify?: boolean;
   avatar?: string;
   role?: string;
   admin?: boolean;

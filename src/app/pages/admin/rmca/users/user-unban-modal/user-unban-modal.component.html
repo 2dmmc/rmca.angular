@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <span>
+      <i class="fa fa-check"></i>
+      用户管理 - 解封用户
+  </span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="unbanUser()" #unbanForm="ngForm" name="unbanForm">
+    <p class="col-sm-12">请输入用户名称: <code>{{user.username}}</code> 来解封该用户</p>
+    <div class="input-group">
+      <input name='username' id="input-username" class="form-control" placeholder="请输入用户名称"
+             autofocus autocomplete=off
+             [(ngModel)]="username" #usernameInput="ngModel"
+             [class.form-control-danger]="usernameInput.invalid && usernameInput.touched || username != user.username"
+             [required]="true">
+      <div class="input-group-btn">
+        <button class="btn btn-success"
+                [class.btn-pulse]="submitted"
+                [disabled]="submitted || unbanForm.invalid || username != user.username">
+          <i class="fa fa-check"></i>
+          解封
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
