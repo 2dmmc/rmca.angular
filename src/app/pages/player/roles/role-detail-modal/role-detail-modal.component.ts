@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 import {PlayerService} from '../../player.service';
-import {UserModel} from '../../../user/user.model';
+import {UserModel} from '../../../@model/user.model';
 import {UserService} from '../../../user/user.service';
 
 @Component({

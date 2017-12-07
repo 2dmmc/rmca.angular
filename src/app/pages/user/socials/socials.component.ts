@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {NoticeService} from '../../../@system/notice/notice.service';
 
 import {UserService} from '../user.service';
-import {UserModel} from '../user.model';
+import {UserModel} from '../../@model/user.model';
 
 @Component({
   styleUrls: ['./socials.component.scss'],

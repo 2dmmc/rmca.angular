@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {AdminService} from '../../../admin.service';
 
-import {FinanceModel} from '../finance.model';
+import {FinanceModel} from '../../../../@model/finance.model';
 
 @Component({
   selector: 'ngx-finance-add-modal',

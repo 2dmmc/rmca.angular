@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
-import {UserModel} from '../../user.model';
+import {UserModel} from '../../../@model/user.model';
 import {UserService} from '../../user.service';
 
 @Component({

@@ -1,4 +1,4 @@
-import {UserModel} from '../../../user/user.model';
+import {UserModel} from './user.model';
 
 export class FinanceModel {
   _id?: number;

@@ -7,7 +7,7 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
-import {RoleModel} from './role.model';
+import {RoleModel} from '../../@model/role.model';
 
 @Component({
   styleUrls: ['./roles.component.scss'],

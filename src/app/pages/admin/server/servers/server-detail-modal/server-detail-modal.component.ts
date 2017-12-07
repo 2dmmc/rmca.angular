@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {AdminService} from '../../../admin.service';
 
-import {ServerModel} from '../../server.model';
+import {ServerModel} from '../../../../@model/server.model';
 
 @Component({
   selector: 'ngx-server-detail-modal',

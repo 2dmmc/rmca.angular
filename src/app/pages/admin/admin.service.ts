@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
-import {ServerModel} from './server/server.model';
-import {FinanceModel} from './server/finance/finance.model';
+import {ServerModel} from '../@model/server.model';
+import {FinanceModel} from '../@model/finance.model';
 
 @Injectable()
 export class AdminService {

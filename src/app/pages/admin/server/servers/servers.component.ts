@@ -8,7 +8,7 @@ import {ServerAddModalComponent} from './server-add-modal/server-add-modal.compo
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
-import {ServerModel} from '../server.model';
+import {ServerModel} from '../../../@model/server.model';
 
 @Component({
   selector: 'ngx-servers',
