@@ -10,6 +10,8 @@ export class ServerService {
   constructor(private http: HttpClient) {
   }
 
+  // TODO 补齐文档
+
   public getServers(): Promise<object> {
     return this.http.get('/api/admin/server/list')
       .toPromise();
