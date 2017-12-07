@@ -22,7 +22,7 @@
         </td>
         <td width="20%">
           <span class="accrual"
-                [class.success]="financeHistory.type == 'incoming'"
+                [class.success]="financeHistory.type == 'income'"
                 [class.danger]="financeHistory.type == 'expend'">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
