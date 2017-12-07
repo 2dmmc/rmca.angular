@@ -7,7 +7,7 @@ export class FinanceModel {
   /**
    * income,expend
    */
-  accrual: string;
+  accrual: number;
   balance?: number;
   comment?: string;
   user?: UserModel;
