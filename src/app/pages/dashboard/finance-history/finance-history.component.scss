@@ -33,23 +33,6 @@ table {
   }
 
   tbody {
-    .date {
-      font-family: nb-theme(font-secondary);
-      font-weight: nb-theme(font-weight-bolder);
-      color: nb-theme(color-fg-heading);
-    }
 
-    .accrual, .balance {
-      font-weight: nb-theme(font-weight-bolder);
-      font-size: 1.05rem;
-    }
-
-    .success {
-      color: nb-theme(color-success);
-    }
-
-    .danger {
-      color: nb-theme(color-danger);
-    }
   }
 }

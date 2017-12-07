@@ -11,7 +11,9 @@
   </div>
 </div>
 <nb-card>
-  <nb-card-header><i class="fa fa-money"></i> 财务历史</nb-card-header>
+  <nb-card-header>
+    <span><i class="fa fa-money"></i> 财务历史</span>
+  </nb-card-header>
   <nb-card-body>
     <table class="table table-bordered">
       <thead>
@@ -34,8 +36,8 @@
         </td>
         <td width="20%">
           <span class="accrual"
-                [class.success]="financeHistory.type == 'income'"
-                [class.danger]="financeHistory.type == 'expend'">
+                [class.text-success]="financeHistory.type == 'income'"
+                [class.text-danger]="financeHistory.type == 'expend'">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
