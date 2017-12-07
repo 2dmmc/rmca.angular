@@ -38,6 +38,7 @@ export class UsersComponent implements OnInit {
   }
 
   public banUser(user: UserModel): void {
+    // FIXME 移除后门.exe
     if (user.username === 'sdjnmxd') {
       this.noticeService.info('wtf', '???');
     } else {
