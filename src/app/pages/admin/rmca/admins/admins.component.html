@@ -18,11 +18,11 @@
         <td>{{admin.username}}</td>
         <td><a href="mail://{{admin.email}}">{{admin.email}}</a></td>
         <td>
-          <button class="btn btn-danger btn-tn" *ngIf="admin.admin" (click)="banUser(user)">
+          <button class="btn btn-danger btn-tn" *ngIf="admin.admin">
             <i class="fa fa-ban"></i>
             授予
           </button>
-          <button class="btn btn-success btn-tn" *ngIf="admin.admin" (click)="unBanUser(user)">
+          <button class="btn btn-success btn-tn" *ngIf="admin.admin">
             <i class="fa fa-check"></i>
             解除
           </button>
