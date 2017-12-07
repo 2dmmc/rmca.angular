@@ -10,7 +10,6 @@ import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.co
 import {RoleModel} from './role.model';
 
 @Component({
-  selector: 'ngx-roles',
   styleUrls: ['./roles.component.scss'],
   templateUrl: './roles.component.html',
 })

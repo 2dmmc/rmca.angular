@@ -5,7 +5,6 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 import {UserService} from '../user.service';
 
 @Component({
-  selector: 'ngx-profile',
   styleUrls: ['./profile.component.scss'],
   templateUrl: './profile.component.html',
 })

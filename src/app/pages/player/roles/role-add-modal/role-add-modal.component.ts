@@ -5,7 +5,6 @@ import {PlayerService} from '../../player.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-role-add-modal',
   styleUrls: ['./role-add-modal.component.scss'],
   templateUrl: './role-add-modal.component.html',
 })

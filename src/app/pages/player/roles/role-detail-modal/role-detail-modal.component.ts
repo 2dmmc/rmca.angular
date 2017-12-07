@@ -8,7 +8,6 @@ import {UserModel} from '../../../user/user.model';
 import {UserService} from '../../../user/user.service';
 
 @Component({
-  selector: 'ngx-role-detail-modal',
   styleUrls: ['./role-detail-modal.component.scss'],
   templateUrl: './role-detail-modal.component.html',
 })

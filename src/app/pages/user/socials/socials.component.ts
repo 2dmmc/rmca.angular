@@ -6,7 +6,6 @@ import {UserService} from '../user.service';
 import {UserModel} from '../user.model';
 
 @Component({
-  selector: 'ngx-socials',
   styleUrls: ['./socials.component.scss'],
   templateUrl: './socials.component.html',
 })
