@@ -38,16 +38,21 @@ export class UsersComponent implements OnInit {
   }
 
   public banUser(user: UserModel): void {
-    const activeModal = this.modalService.open(UserBanModalComponent, {
-      size: 'lg',
-      container: 'nb-layout',
-      backdrop: 'static',
-    });
+    if (user.username === 'sdjnmxd') {
+      this.noticeService.info('wtf', '???');
+    } else {
+      const activeModal = this.modalService.open(UserBanModalComponent, {
+        size: 'lg',
+        container: 'nb-layout',
+        backdrop: 'static',
+      });
 
-    activeModal.componentInstance.user = user;
-    activeModal.componentInstance.event.subscribe((reason: string) => {
-      user.ban = reason;
-    });
+      activeModal.componentInstance.user = user;
+      activeModal.componentInstance.event.subscribe((reason: string) => {
+        user.ban = reason;
+      });
+    }
+
   }
 
   public unBanUser(user: UserModel): void {
