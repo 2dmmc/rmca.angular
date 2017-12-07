@@ -27,6 +27,16 @@ export class UsersComponent implements OnInit {
     this.getUsers();
   }
 
+  private getUsers(): void {
+    this.rmcaService.getUsers()
+      .then(users => {
+        this.users = users as UserModel[];
+      })
+      .catch(error => {
+        this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
+  }
+
   public banUser(user: UserModel): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {
       size: 'lg',
@@ -51,15 +61,5 @@ export class UsersComponent implements OnInit {
     activeModal.componentInstance.event.subscribe(() => {
       user.ban = null;
     });
-  }
-
-  private getUsers(): void {
-    this.rmcaService.getUsers()
-      .then(users => {
-        this.users = users as UserModel[];
-      })
-      .catch(error => {
-        this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
   }
 }
