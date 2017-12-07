@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {ServerComponent} from './server.component';
 import {ServersComponent} from './servers/servers.component';
+import {HistoryComponent} from './history/history.component';
 import {FinanceComponent} from './finance/finance.component';
 
 const routes: Routes = [{
@@ -11,6 +12,9 @@ const routes: Routes = [{
   children: [{
     path: 'servers',
     component: ServersComponent,
+  }, {
+    path: 'history',
+    component: HistoryComponent,
   }, {
     path: 'finance',
     component: FinanceComponent,
@@ -21,5 +25,6 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
+
 export class ServerRoutingModule {
 }
