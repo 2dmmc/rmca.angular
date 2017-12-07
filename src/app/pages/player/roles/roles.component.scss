@@ -1,15 +1,7 @@
-@import '../../../@theme/styles/themes';
-@import '../../../../../node_modules/bootstrap/scss/mixins/breakpoints';
-@import '../../../../../node_modules/@nebular/theme/styles/global/bootstrap/breakpoints';
+@import '../../../@system/styles/extend/nb-card-header';
+@import '../../../@system/styles/tag';
 
 nb-card-header {
-  display: flex;
-  justify-content: space-between;
-
-  i {
-    margin-right: 0.5rem;
-  }
-
   button {
     line-height: 1rem;
     padding: 0.3rem 1rem;
@@ -23,16 +15,4 @@ nb-card-body {
       width: 10rem;
     }
   }
-}
-
-.tag {
-  font-size: 1rem;
-  line-height: 0.5rem;
-  padding: 0.5rem;
-  border-radius: 0.3rem;
-}
-
-.tag-success {
-  color: nb-theme(color-white);
-  background-color: nb-theme(color-success);
 }
