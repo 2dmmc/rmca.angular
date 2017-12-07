@@ -1,9 +1,1 @@
-@import '../../../@theme/styles/themes';
-@import '~bootstrap/scss/mixins/breakpoints';
-@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
-
-nb-card-header {
-  i {
-    margin-right: 0.5rem;
-  }
-}
+@import '../../../@system/styles/extend/nb-card-header';
