@@ -51,7 +51,7 @@ export class AdminService {
     const params = new HttpParams()
       .set('date', finance.date.toString())
       .set('type', finance.type)
-      .set('accrual', finance.accrual.toString())
+      .set('accrual', (finance.accrual * 100).toString())
       .set('comment', finance.comment);
 
     return this.http.post('/api/admin/finance', params)
