@@ -2,7 +2,7 @@ import {UserModel} from '../../../user/user.model';
 
 export class FinanceModel {
   _id?: number;
-  date: Date;
+  date: string;
   type: string;
   /**
    * income,expend

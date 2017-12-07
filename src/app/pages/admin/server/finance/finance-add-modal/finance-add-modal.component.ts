@@ -21,10 +21,10 @@ export class FinanceAddModalComponent {
               private activeModal: NgbActiveModal,
               private adminService: AdminService) {
     this.finance = {
-      date: new Date,
+      date: '',
       type: 'income',
       accrual: 0,
-      balance: 0,
+      comment: '',
     };
     this.submitted = false;
   }
