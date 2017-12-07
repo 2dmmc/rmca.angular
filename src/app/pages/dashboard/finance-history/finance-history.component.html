@@ -6,7 +6,7 @@
     </span>
   </nb-card-header>
   <nb-card-body>
-    <table class="table table-bordered">
+    <table class="table">
       <thead>
       <tr>
         <th>日期</th>
@@ -27,8 +27,8 @@
         </td>
         <td width="20%">
           <span class="accrual"
-                [class.success]="financeHistory.type == 'income'"
-                [class.danger]="financeHistory.type == 'expend'">
+                [class.text-success]="financeHistory.type == 'income'"
+                [class.text-danger]="financeHistory.type == 'expend'">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
@@ -36,8 +36,8 @@
         </td>
         <td width="20%" class="text-right">
           <span class="balance"
-                [class.success]="financeHistory.balance > 0"
-                [class.danger]="financeHistory.balance < 0">
+                [class.text-success]="financeHistory.balance > 0"
+                [class.text-danger]="financeHistory.balance < 0">
             {{financeHistory.balance | rmb | number:'1.2-3'}} 元
           </span>
         </td>

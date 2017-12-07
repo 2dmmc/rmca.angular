@@ -1,2 +1,16 @@
+@import '../../../@theme/styles/themes';
+@import '../../../@theme/styles/styles';
+
 @import '../../../@system/styles/table';
 @import '../../../@system/styles/extend/nb-card-header';
+
+.date {
+  font-family: nb-theme(font-secondary);
+  font-weight: nb-theme(font-weight-bolder);
+  color: nb-theme(color-fg-heading);
+}
+
+.accrual, .balance {
+  font-weight: nb-theme(font-weight-bolder);
+  font-size: 1.05rem;
+}
