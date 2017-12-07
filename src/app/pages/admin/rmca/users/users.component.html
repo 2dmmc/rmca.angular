@@ -15,23 +15,35 @@
       </thead>
       <tbody>
       <tr *ngFor="let user of users">
-        <td width="15%">{{user._id}}</td>
-        <td>{{user.username}}</td>
-        <td><a href="mail://{{user.email}}">{{user.email}}</a></td>
-        <td class="account-state">
-          <span class="tag tag-success" *ngIf="!user.ban">未封禁</span>
-          <span class="tag tag-danger" *ngIf="user.ban">已封禁: {{user.ban}}</span>
-          <span class="tag tag-danger" *ngIf="user.admin">管理员</span>
+        <td width="15%">
+          <span class="id">
+            {{user._id}}
+          </span>
         </td>
-        <td>
-          <button class="btn btn-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
-            <i class="fa fa-ban"></i>
-            封禁
-          </button>
-          <button class="btn btn-success btn-tn" *ngIf="user.ban" (click)="unBanUser(user)">
-            <i class="fa fa-check"></i>
-            解封
-          </button>
+        <td width="20%">
+          {{user.username}}
+        </td>
+        <td width="20%">
+          <a href="mail://{{user.email}}">{{user.email}}</a>
+        </td>
+        <td width="20%">
+          <div class="account-state">
+            <span class="tag tag-success" *ngIf="!user.ban">未封禁</span>
+            <span class="tag tag-danger" *ngIf="user.ban">已封禁: {{user.ban}}</span>
+            <span class="tag tag-danger" *ngIf="user.admin">管理员</span>
+          </div>
+        </td>
+        <td width="5%">
+          <div class="action">
+            <button class="btn btn-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
+              <i class="fa fa-ban"></i>
+              封禁
+            </button>
+            <button class="btn btn-success btn-tn" *ngIf="user.ban" (click)="unBanUser(user)">
+              <i class="fa fa-check"></i>
+              解封
+            </button>
+          </div>
         </td>
       </tr>
       </tbody>
