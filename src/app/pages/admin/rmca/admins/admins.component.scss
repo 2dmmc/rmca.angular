@@ -1,1 +1,16 @@
+@import '../../../../@theme/styles/themes';
+@import '../../../../@theme/styles/styles';
+
 @import '../../../../@system/styles/extend/nb-card-header';
+@import '../../../../@system/styles/table';
+@import '../../../../@system/styles/tag';
+
+.id {
+  font-family: nb-theme(font-secondary);
+  font-weight: nb-theme(font-weight-bolder);
+  color: nb-theme(color-fg-heading);
+}
+
+.action {
+  text-align: center;
+}

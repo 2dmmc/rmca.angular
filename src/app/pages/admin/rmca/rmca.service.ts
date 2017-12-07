@@ -11,7 +11,7 @@ export class RmcaService {
   // TODO 补齐文档
 
   public getAdmins(): Promise<object> {
-    return this.http.get('/api/admin/server/list')
+    return this.http.get('/api/admin/admin/list')
       .toPromise();
   }
 
