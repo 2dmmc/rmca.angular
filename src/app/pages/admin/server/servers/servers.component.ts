@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
-import {AdminService} from '../../admin.service';
+import {ServerService} from '../server.service';
 
 import {ServerAddModalComponent} from './server-add-modal/server-add-modal.component';
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
@@ -21,7 +21,7 @@ export class ServersComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private managerService: AdminService) {
+              private managerService: ServerService) {
     this.servers = [];
   }
 

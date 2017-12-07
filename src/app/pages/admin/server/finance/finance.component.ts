@@ -7,7 +7,6 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 
 @Component({
-  selector: 'ngx-services',
   styleUrls: ['./finance.component.scss'],
   templateUrl: './finance.component.html',
 })

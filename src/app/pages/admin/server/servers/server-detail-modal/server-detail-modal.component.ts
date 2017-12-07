@@ -2,12 +2,11 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@system/notice/notice.service';
-import {AdminService} from '../../../admin.service';
+import {ServerService} from '../../server.service';
 
 import {ServerModel} from '../../../../@model/server.model';
 
 @Component({
-  selector: 'ngx-server-detail-modal',
   styleUrls: ['./server-detail-modal.component.scss'],
   templateUrl: './server-detail-modal.component.html',
 })
@@ -20,7 +19,7 @@ export class ServerDetailModalComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: AdminService) {
+              private managerService: ServerService) {
     this.server = {
       _id: '',
       name: '获取中...',

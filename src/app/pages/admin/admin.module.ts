@@ -4,7 +4,7 @@ import {ThemeModule} from '../../@theme/theme.module';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
-import {AdminService} from './admin.service';
+import {ServerService} from './server/server.service';
 
 const components = [
   AdminComponent,
@@ -19,7 +19,7 @@ const components = [
     ...components,
   ],
   providers: [
-    AdminService,
+    ServerService,
   ],
 })
 export class AdminModule {

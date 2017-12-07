@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
-import {AdminService} from '../../admin.service';
 
 @Component({
   styleUrls: ['./admin.component.scss'],
@@ -9,8 +8,7 @@ import {AdminService} from '../../admin.service';
 })
 
 export class AdminComponent implements OnInit {
-  constructor(private noticeService: NoticeService,
-              private managerService: AdminService) {
+  constructor(private noticeService: NoticeService) {
   }
 
   public ngOnInit(): void {

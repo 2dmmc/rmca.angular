@@ -2,12 +2,11 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@system/notice/notice.service';
-import {AdminService} from '../../../admin.service';
+import {ServerService} from '../../server.service';
 
 import {FinanceModel} from '../../../../@model/finance.model';
 
 @Component({
-  selector: 'ngx-finance-add-modal',
   styleUrls: ['./finance-add-modal.component.scss'],
   templateUrl: './finance-add-modal.component.html',
 })
@@ -19,7 +18,7 @@ export class FinanceAddModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private adminService: AdminService) {
+              private adminService: ServerService) {
     this.finance = {
       date: null,
       type: 'income',
