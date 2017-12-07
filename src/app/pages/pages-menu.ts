@@ -70,12 +70,12 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-gears fa-fw',
     children: [
       {
-        title: '管理员列表',
-        link: '/pages/admin/rmca/admin',
-      },
-      {
         title: '用户管理',
         link: '/pages/admin/rmca/user',
+      },
+      {
+        title: '管理员管理',
+        link: '/pages/admin/rmca/admin',
       },
     ],
   },

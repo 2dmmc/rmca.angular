@@ -11,7 +11,7 @@ const routes: Routes = [{
   canActivate: [NeedAdminGuard],
   children: [{
     path: 'rmca',
-    loadChildren: './server/server.module#ServerModule',
+    loadChildren: './rmca/rmca.module#RmcaModule',
   }, {
     path: 'server',
     loadChildren: './server/server.module#ServerModule',
