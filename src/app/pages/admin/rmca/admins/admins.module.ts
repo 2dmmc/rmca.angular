@@ -17,5 +17,5 @@ const components = [];
   entryComponents: [],
 })
 
-export class AdminModule {
+export class AdminsModule {
 }

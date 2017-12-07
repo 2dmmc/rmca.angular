@@ -2,18 +2,18 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 
 import {RmcaComponent} from './rmca.component';
-import {UserComponent} from './user/user.component';
-import {AdminComponent} from './admin/admin.component';
+import {UsersComponent} from './users/users.component';
+import {AdminsComponent} from './admins/admins.component';
 
 const routes: Routes = [{
   path: '',
   component: RmcaComponent,
   children: [{
-    path: 'user',
-    component: UserComponent,
+    path: 'users',
+    component: UsersComponent,
   }, {
-    path: 'admin',
-    component: AdminComponent,
+    path: 'admins',
+    component: AdminsComponent,
   }],
 }];
 

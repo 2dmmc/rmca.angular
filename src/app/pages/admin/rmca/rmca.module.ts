@@ -1,27 +1,27 @@
 import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../../@theme/theme.module';
-import {UserModule} from './user/user.module';
-import {AdminModule} from './admin/admin.module';
+import {UsersModule} from './users/users.module';
+import {AdminsModule} from './admins/admins.module';
 
 import {RmcaRoutingModule} from './rmca-routing.module';
 
 import {RmcaComponent} from './rmca.component';
-import {UserComponent} from './user/user.component';
-import {AdminComponent} from './admin/admin.component';
+import {UsersComponent} from './users/users.component';
+import {AdminsComponent} from './admins/admins.component';
 
 const components = [
   RmcaComponent,
-  UserComponent,
-  AdminComponent,
+  UsersComponent,
+  AdminsComponent,
 ];
 
 @NgModule({
   imports: [
     ThemeModule,
     RmcaRoutingModule,
-    UserModule,
-    AdminModule,
+    UsersModule,
+    AdminsModule,
   ],
   declarations: [
     ...components,

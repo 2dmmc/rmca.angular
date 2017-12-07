@@ -71,11 +71,11 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '用户管理',
-        link: '/pages/admin/rmca/user',
+        link: '/pages/admin/rmca/users',
       },
       {
         title: '管理员管理',
-        link: '/pages/admin/rmca/admin',
+        link: '/pages/admin/rmca/admins',
       },
     ],
   },
