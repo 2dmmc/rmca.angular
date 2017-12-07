@@ -36,6 +36,7 @@ export class RoleDetailModalComponent implements OnInit {
     this.playerService.getRole(this.roleId)
       .then(role => {
         this.role = role;
+        this.role.random = Math.random();
       })
       .catch(error => {
         this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
