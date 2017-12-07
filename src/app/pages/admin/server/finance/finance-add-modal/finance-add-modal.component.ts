@@ -24,7 +24,7 @@ export class FinanceAddModalComponent {
       date: null,
       type: 'income',
       accrual: null,
-      comment: null,
+      comment: '',
     };
     this.submitted = false;
   }
