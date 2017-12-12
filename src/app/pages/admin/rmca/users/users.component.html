@@ -1,6 +1,29 @@
 <nb-card>
   <nb-card-header>
     <span><i class="fa fa-users"></i> 用户管理</span>
+    <div class="header-feature">
+      <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
+      <!--class="btn-group btn-toggle-group btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">-->
+      <!--<label ngbButtonLabel class="btn btn-outline-success">-->
+      <!--<input ngbButton type="radio" name="type" [value]="filter.types.all"> 全部-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+      <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="searchAdmin()"> 管理员-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+      <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyBan"> 被封禁-->
+      <!--</label>-->
+      <!--</div>-->
+      <div class="input-group">
+        <input class="form-control" placeholder="搜索用户名或电子邮箱" [(ngModel)]="search.keyWord">
+        <span class="input-group-btn">
+            <button class="btn btn-success"
+                    (click)="searchUser()" [class.btn-pulse]="search.submitted" [disabled]="search.submitted">
+              Google
+            </button>
+          </span>
+      </div>
+    </div>
   </nb-card-header>
   <nb-card-body>
     <table class="table">
@@ -36,30 +59,32 @@
         </td>
         <td width="20%">
           <div class="action">
-            <button class="btn btn-info btn-tn" (click)="goToUserDetail(user._id)">
+            <button class="btn btn-hero-info btn-tn" (click)="goToUserDetail(user._id)">
               <i class="fa fa-info"></i>
               详细资料
             </button>
-            <button class="btn btn-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
+            <button class="btn btn-hero-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
               <i class="fa fa-ban"></i>
               封禁用户
             </button>
-            <button class="btn btn-success btn-tn" *ngIf="user.ban" (click)="unBanUser(user)">
+            <button class="btn btn-hero-success btn-tn" *ngIf="user.ban" (click)="unBanUser(user)">
               <i class="fa fa-check"></i>
               解封用户
             </button>
           </div>
         </td>
       </tr>
+      <tr *ngIf="users.length <= 0">
+        <td colspan="5">无更多数据</td>
+      </tr>
       </tbody>
     </table>
-    <!--TODO 分页-->
-    <!--<div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"-->
-    <!--[(ngModel)]="page" (ngModelChange)="pageChange($event)" ngbRadioGroup>-->
-    <!--<label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">-->
-    <!--<input ngbButton type="radio" [value]="page">-->
-    <!--{{page}}-->
-    <!--</label>-->
-    <!--</div>-->
+    <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
+         [(ngModel)]="page" (ngModelChange)="pageChange($event)" ngbRadioGroup>
+      <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
+        <input ngbButton type="radio" [value]="page">
+        {{page}}
+      </label>
+    </div>
   </nb-card-body>
 </nb-card>

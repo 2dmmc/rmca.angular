@@ -20,8 +20,22 @@ export class RmcaService {
       .toPromise();
   }
 
-  public getUsers(): Promise<object> {
-    return this.http.get('/api/admin/user/list')
+  public getUsers(page: number, limit: number): Promise<object> {
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get('/api/admin/user/list', {params: params})
+      .toPromise();
+  }
+
+  public searchUsers(keyword: string, page: number, limit: number): Promise<object> {
+    const params = new HttpParams()
+      .set('keyword', keyword)
+      .set('page', page.toString())
+      .set('limit', limit.toString());
+
+    return this.http.get('/api/admin/user/search', {params: params})
       .toPromise();
   }
 
@@ -36,15 +50,6 @@ export class RmcaService {
       .set('reason', reason);
 
     return this.http.patch('/api/admin/user/ban', params)
-      .toPromise();
-  }
-
-  public searchUser(keyword: string, page: number): Promise<object> {
-    const params = new HttpParams()
-      .set('keyword', keyword)
-      .set('page', page.toString());
-
-    return this.http.post('/api/admin/user/search', params)
       .toPromise();
   }
 
