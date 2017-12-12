@@ -35,6 +35,10 @@
         </td>
         <td width="20%">
           <div class="action">
+            <button class="btn btn-info btn-tn">
+              <i class="fa fa-info"></i>
+              详细资料
+            </button>
             <button class="btn btn-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
               <i class="fa fa-ban"></i>
               封禁用户
