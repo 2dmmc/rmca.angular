@@ -1,6 +1,5 @@
 @import '../../../../@theme/styles/themes';
 @import '../../../../@theme/styles/styles';
-
 @import '../../../../@system/styles/extend/nb-card-header';
 @import '../../../../@system/styles/table';
 @import '../../../../@system/styles/tag';
@@ -14,9 +13,21 @@
 .account-state {
   .tag {
     margin-right: 0.5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
   }
 }
 
 .action {
   text-align: center;
+
+  button {
+    margin-right: 0.5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
