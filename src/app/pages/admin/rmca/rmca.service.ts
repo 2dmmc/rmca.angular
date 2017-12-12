@@ -25,6 +25,11 @@ export class RmcaService {
       .toPromise();
   }
 
+  public getUser(userId: string): Promise<object> {
+    return this.http.get(`/api/admin/user/${userId}`)
+      .toPromise();
+  }
+
   public banUser(userId: string, reason: string): Promise<object> {
     const params = new HttpParams()
       .set('userIds', userId)

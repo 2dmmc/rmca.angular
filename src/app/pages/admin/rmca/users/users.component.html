@@ -24,6 +24,7 @@
           {{user.username}}
         </td>
         <td width="20%">
+          <!--TODO 修正不安全的URL-->
           <a href="mail://{{user.email}}">{{user.email}}</a>
         </td>
         <td width="20%">
@@ -35,7 +36,7 @@
         </td>
         <td width="20%">
           <div class="action">
-            <button class="btn btn-info btn-tn">
+            <button class="btn btn-info btn-tn" (click)="goToUserDetail(user._id)">
               <i class="fa fa-info"></i>
               详细资料
             </button>

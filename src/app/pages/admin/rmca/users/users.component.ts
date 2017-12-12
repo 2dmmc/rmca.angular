@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
@@ -19,7 +20,8 @@ export class UsersComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private rmcaService: RmcaService) {
+              private rmcaService: RmcaService,
+              private router: Router) {
     this.users = [];
   }
 
@@ -35,6 +37,10 @@ export class UsersComponent implements OnInit {
       .catch(error => {
         this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
+  }
+
+  public goToUserDetail(userId): void {
+    this.router.navigate(['/pages/admin/rmca/user', userId]);
   }
 
   public banUser(user: UserModel): void {

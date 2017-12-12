@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {RmcaComponent} from './rmca.component';
 import {UsersComponent} from './users/users.component';
+import {UserComponent} from './user/user.component';
 import {AdminsComponent} from './admins/admins.component';
 
 const routes: Routes = [{
@@ -11,6 +12,9 @@ const routes: Routes = [{
   children: [{
     path: 'users',
     component: UsersComponent,
+  }, {
+    path: 'user/:userId',
+    component: UserComponent,
   }, {
     path: 'admins',
     component: AdminsComponent,

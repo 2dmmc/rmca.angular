@@ -73,10 +73,6 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
         title: '用户管理',
         link: '/pages/admin/rmca/users',
       },
-      {
-        title: '管理员管理',
-        link: '/pages/admin/rmca/admins',
-      },
     ],
   },
 ];
