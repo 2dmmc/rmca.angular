@@ -32,6 +32,7 @@ export class NbLogoutComponent implements OnInit {
 
               setTimeout(() => {
                 this.router.navigate(['/pages/dashboard']);
+                window.location.reload();
               }, 3e3);
             })
             .catch(error => {
