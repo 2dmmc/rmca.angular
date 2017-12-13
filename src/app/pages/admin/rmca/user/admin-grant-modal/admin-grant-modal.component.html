@@ -1,0 +1,31 @@
+<div class="modal-header">
+  <span>
+      <i class="fa fa-check"></i>
+      用户管理 - 授予管理员
+  </span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="grantAdmin()" #grantForm="ngForm" name="grantForm">
+    <div class="alert alert-warning" role="alert">
+      你正在试图授予<code>{{user.username}}</code>用户为管理员, <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
+    </div>
+    <div class="input-group">
+      <input name='username' id="input-username" class="form-control" placeholder="请输入用户名称"
+             autofocus autocomplete=off
+             [(ngModel)]="username" #usernameInput="ngModel"
+             [class.form-control-danger]="usernameInput.invalid && usernameInput.touched || username != user.username"
+             [required]="true">
+      <div class="input-group-btn">
+        <button class="btn btn-success"
+                [class.btn-pulse]="submitted"
+                [disabled]="submitted || grantForm.invalid || username != user.username">
+          <i class="fa fa-check"></i>
+          授予
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

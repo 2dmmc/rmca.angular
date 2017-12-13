@@ -32,21 +32,17 @@
           </button>
         </section>
         <section>
-          <button class="btn btn-hero-danger" *ngIf="user.admin">
+          <button class="btn btn-hero-danger" *ngIf="user.admin" (click)="revokeAdmin(user)">
             <i class="fa fa-audio-description"></i>
             解除管理员
           </button>
-          <button class="btn btn-hero-info" *ngIf="!user.admin">
+          <button class="btn btn-hero-info" *ngIf="!user.admin" (click)="grantAdmin(user)">
             <i class="fa fa-audio-description"></i>
             授予管理员
           </button>
         </section>
         <section>
-          <button class="btn btn-hero-danger" *ngIf="user.impersonate">
-            <i class="fa fa-snapchat-ghost"></i>
-            退出替身
-          </button>
-          <button class="btn btn-hero-warning" *ngIf="!user.impersonate">
+          <button class="btn btn-hero-warning" (click)="enterImpersonate()">
             <i class="fa fa-snapchat-ghost"></i>
             替身登陆
           </button>

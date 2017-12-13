@@ -102,4 +102,9 @@ export class AuthService {
     return this.http.get('/api/user/login')
       .toPromise();
   }
+
+  public logoutImpersonate(): Promise<object> {
+    return this.http.delete('/api/admin/user/impersonate')
+      .toPromise();
+  }
 }

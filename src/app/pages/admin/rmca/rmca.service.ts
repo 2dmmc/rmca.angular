@@ -15,8 +15,13 @@ export class RmcaService {
       .toPromise();
   }
 
-  public updateAdmin(userId: string): Promise<object> {
+  public grantAdmin(userId: string): Promise<object> {
     return this.http.patch(`/api/admin/admin/${userId}/admin`, {})
+      .toPromise();
+  }
+
+  public revokeAdmin(userId: string): Promise<object> {
+    return this.http.delete(`/api/admin/admin/${userId}/admin`, {})
       .toPromise();
   }
 
@@ -58,6 +63,11 @@ export class RmcaService {
       .set('userIds', userId);
 
     return this.http.patch('/api/admin/user/unban', params)
+      .toPromise();
+  }
+
+  public enterImpersonate(userId: string): Promise<object> {
+    return this.http.post(`/api/admin/user/${userId}/impersonate`, {})
       .toPromise();
   }
 }
