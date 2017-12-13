@@ -9,7 +9,9 @@
 </div>
 <div class="modal-body">
   <form (ngSubmit)="unbanUser()" #unbanForm="ngForm" name="unbanForm">
-    <p class="col-sm-12">请输入用户名称: <code>{{user.username}}</code> 来解封该用户</p>
+    <div class="alert alert-warning" role="alert">
+      你正在试图解除<code>{{user.username}}</code>用户的封禁. <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
+    </div>
     <div class="input-group">
       <input name='username' id="input-username" class="form-control" placeholder="请输入用户名称"
              autofocus autocomplete=off

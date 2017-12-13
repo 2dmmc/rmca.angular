@@ -9,7 +9,9 @@
 </div>
 <div class="modal-body">
   <form (ngSubmit)="deleteServer()" #deleteServerForm="ngForm" name="deleteServerForm">
-    <p class="col-sm-12">请输入服务器名称: <code>{{serverName}}</code> 来删除该服务器</p>
+    <div class="alert alert-warning" role="alert">
+      你正在试图删除名为: <code>{{serverName}}</code>服务器, <strong>这是一个敏感操作!</strong> 请输入该服务器名称
+    </div>
     <div class="input-group">
       <input name='name' id="input-name" class="form-control" placeholder="请输入服务器名称"
              autofocus autocomplete=off
