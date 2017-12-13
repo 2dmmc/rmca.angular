@@ -1,16 +1,24 @@
 <div class="modal-header">
   <span>
-      <i class="fa fa-bug"></i>
-      用户管理 - 授予管理员
+      <i class="fa fa-snapchat-ghost"></i>
+      用户管理 - 替身登陆
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
     <i class="fa fa-times" aria-hidden="true"></i>
   </button>
 </div>
 <div class="modal-body">
-  <form (ngSubmit)="grantAdmin()" #grantForm="ngForm" name="grantForm">
+  <form (ngSubmit)="enterImpersonate()" #enterImpersonateForm="ngForm" name="enterImpersonateForm">
     <div class="alert alert-warning" role="alert">
-      你正在试图授予<code>{{user.username}}</code>用户为管理员, <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
+      <p>
+        你即将以替身的身份登陆<code>{{user.username}}</code>用户的账户
+      </p>
+      <p>
+        进入替身模式后你将以该用户身份登陆, 且可以完成该用户的所有功能操作
+      </p>
+      <p>
+        <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
+      </p>
     </div>
     <div class="input-group">
       <input name='username' id="input-username" class="form-control" placeholder="请输入用户名称"
@@ -21,9 +29,9 @@
       <div class="input-group-btn">
         <button class="btn btn-success"
                 [class.btn-pulse]="submitted"
-                [disabled]="submitted || grantForm.invalid || username != user.username">
-          <i class="fa fa-bug"></i>
-          授予
+                [disabled]="submitted || enterImpersonateForm.invalid || username != user.username">
+          <i class="fa fa-check"></i>
+          翻滚吧小牛牛!
         </button>
       </div>
     </div>

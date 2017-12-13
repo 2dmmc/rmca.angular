@@ -1,6 +1,6 @@
 <div class="modal-header">
   <span>
-      <i class="fa fa-check"></i>
+      <i class="fa fa-bug"></i>
       用户管理 - 撤销管理员
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
@@ -22,7 +22,7 @@
         <button class="btn btn-success"
                 [class.btn-pulse]="submitted"
                 [disabled]="submitted || revokeForm.invalid || username != user.username">
-          <i class="fa fa-check"></i>
+          <i class="fa fa-bug"></i>
           撤销
         </button>
       </div>

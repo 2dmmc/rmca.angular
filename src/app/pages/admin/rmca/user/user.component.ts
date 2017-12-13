@@ -11,6 +11,7 @@ import {UserBanModalComponent} from '../users/user-ban-modal/user-ban-modal.comp
 import {UserUnbanModalComponent} from '../users/user-unban-modal/user-unban-modal.component';
 import {AdminGrantModalComponent} from './admin-grant-modal/admin-grant-modal.component';
 import {AdminRevokeModalComponent} from './admin-revoke-modal/admin-revoke-modal.component';
+import {EnterImpersonateModalComponent} from './enter-impersonate-modal/enter-impersonate-modal.component';
 
 @Component({
   styleUrls: ['./user.component.scss'],
@@ -92,29 +93,14 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public enterImpersonate(): void {
-    this.rmcaService.enterImpersonate(this.userId)
-      .then(enterState => {
-        this.noticeService.success('替身登陆成功', `替身登陆 ${this.user.username} 成功, 即将装弹`);
-        setTimeout(() => {
-          window.location.reload();
-        }, 3e3);
-      })
-      .catch(error => {
-        let errorMessage = '';
+  public enterImpersonate(user: UserModel): void {
+    const activeModal = this.modalService.open(EnterImpersonateModalComponent, {
+      size: 'lg',
+      container: 'nb-layout',
+      backdrop: 'static',
+    });
 
-        switch (error.status) {
-          case 409: {
-            errorMessage = '你当前已经处于替身模式下';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('替身登录失败', errorMessage);
-      });
+    activeModal.componentInstance.user = user;
   }
 
   private getUser(userId): void {
