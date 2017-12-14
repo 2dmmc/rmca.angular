@@ -4,10 +4,8 @@ export class UserModel {
   email: string;
   isEmailVerify?: boolean;
   avatar?: string;
-  role?: string;
   admin?: boolean;
   ban?: string;
-  qq?: string;
   yggdrasil?: {
     username: string,
     uuid: string,
@@ -16,6 +14,20 @@ export class UserModel {
     [key: string]: IUserAccount,
   };
 }
+
+export const EmptyUser = {
+  _id: null,
+  username: 'default',
+  email: 'default@email.com',
+  isEmailVerify: false,
+  avatar: '/assets/images/avatar/default.jpg',
+  admin: false,
+  ban: null,
+  yggdrasil: {
+    username: 'default',
+    uuid: null,
+  },
+};
 
 interface IUserAccount {
   uid: string;
