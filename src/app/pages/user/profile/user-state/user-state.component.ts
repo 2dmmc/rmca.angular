@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 
+import {UserModel} from '../../../@model/user.model';
+
 @Component({
   selector: 'ngx-user-state',
   styleUrls: ['./user-state.component.scss'],
@@ -7,7 +9,7 @@ import {Component, Input} from '@angular/core';
 })
 
 export class UserStateComponent {
-  @Input() user: any;
+  @Input() user: UserModel;
 
   constructor() {
   }
