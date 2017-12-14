@@ -1,14 +1,14 @@
 <nb-card>
   <nb-card-header>
-        <span>
-          <i class="fa fa-id-card"></i>个人资料
-        </span>
+    <span>
+      <i class="fa fa-id-card"></i>个人资料
+    </span>
     <span class="tag tag-success" *ngIf="user?.isEmailVerify">
-          已验证
-        </span>
+      已验证
+    </span>
     <span class="tag tag-warning" *ngIf="!user?.isEmailVerify">
-          未验证
-        </span>
+      未验证
+    </span>
   </nb-card-header>
   <nb-card-body>
     <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
