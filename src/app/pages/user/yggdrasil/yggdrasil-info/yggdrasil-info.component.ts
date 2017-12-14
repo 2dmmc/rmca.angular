@@ -11,22 +11,17 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 
 export class YggdrasilInfoComponent {
   @Output() needGetYggdrasilInfo = new EventEmitter();
-  yggdrasil: any;
   submitted: boolean;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService) {
-    this.yggdrasil = {
-      username: '',
-      password: '',
-    };
     this.submitted = false;
   }
 
-  public updateYggdrasil(): void {
+  public updateYggdrasil(yggdrasilForm): void {
     this.submitted = true;
 
-    this.userService.updateUserYggdrasil(this.yggdrasil.username, this.yggdrasil.password)
+    this.userService.updateUserYggdrasil(yggdrasilForm.username, yggdrasilForm.password)
       .then(updateState => {
         this.submitted = false;
         this.noticeService.success('更新成功', '更新正版验证状态成功');

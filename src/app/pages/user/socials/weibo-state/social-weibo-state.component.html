@@ -1,28 +1,28 @@
 <nb-card>
   <nb-card-header>
     <span><i class="fa fa-weibo"></i> 新浪微博账户</span>
-    <span class="tag tag-success" *ngIf="user?.accounts?.weibo">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user?.accounts?.weibo">未授权</span>
+    <span class="tag tag-success" *ngIf="user.accounts.weibo">已授权</span>
+    <span class="tag tag-warning" *ngIf="!user.accounts.weibo">未授权</span>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="!user?.accounts?.weibo">
+    <div *ngIf="!user.accounts.weibo">
       <small>你还未授权新浪微博账户</small>
     </div>
-    <div *ngIf="user?.accounts?.weibo" class="user-container">
+    <div *ngIf="user.accounts.weibo" class="user-container">
       <div class="user-picture">
-        <div class="background image" style.background-image="url({{user?.accounts?.weibo?.avatar}})"></div>
+        <div class="background image" style.background-image="url({{user.accounts.weibo.avatar}})"></div>
       </div>
       <div class="user-name">
-        {{user?.accounts?.weibo?.name}}
+        {{user.accounts.weibo.name}}
       </div>
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user?.accounts?.weibo" (click)="updateUserAvatar()">
+    <button class="btn btn-hero-success" *ngIf="user.accounts.weibo" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
     </button>
-    <button class="btn btn-hero-info" *ngIf="!user?.accounts?.weibo" (click)="oAuth()">
+    <button class="btn btn-hero-info" *ngIf="!user.accounts.weibo" (click)="oAuth()">
       <i class="fa fa-link"></i>
       去授权
     </button>

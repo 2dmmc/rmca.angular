@@ -1,28 +1,28 @@
 <nb-card>
   <nb-card-header>
     <span><i class="fa fa-chain"></i> Gravatar账户</span>
-    <span class="tag tag-success" *ngIf="user?.email">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user?.email">未授权</span>
+    <span class="tag tag-success" *ngIf="user.email">已授权</span>
+    <span class="tag tag-warning" *ngIf="!user.email">未授权</span>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="!user?.email">
+    <div *ngIf="!user.email">
       <small>你还未填写邮箱, 填写邮箱后即可获得授权</small>
     </div>
-    <div *ngIf="user?.email" class="user-container">
+    <div *ngIf="user.email" class="user-container">
       <div class="user-picture">
-        <div class="background image" style.background-image="url({{user?.accounts?.gravatar?.avatar}})"></div>
+        <div class="background image" style.background-image="url({{user.accounts.gravatar.avatar}})"></div>
       </div>
       <div class="user-name">
-        {{user?.email}}
+        {{user.email}}
       </div>
     </div>
   </nb-card-body>
   <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user?.email" (click)="updateUserAvatar()">
+    <button class="btn btn-hero-success" *ngIf="user.email" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
     </button>
-    <button class="btn btn-hero-info" *ngIf="!user?.email" (click)="goToProfile()">
+    <button class="btn btn-hero-info" *ngIf="!user.email" (click)="goToProfile()">
       <i class="fa fa-link"></i>
       去个人资料
     </button>

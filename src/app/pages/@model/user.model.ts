@@ -10,9 +10,7 @@ export class UserModel {
     username: string,
     uuid: string,
   };
-  accounts?: {
-    [key: string]: IUserAccount,
-  };
+  accounts?: any;
 }
 
 export const EmptyUser = {
@@ -27,12 +25,21 @@ export const EmptyUser = {
     username: 'default',
     uuid: null,
   },
+  accounts: {
+    gravatar: {
+      avatar: '/assets/images/avatar/default.jpg',
+    },
+    qq: {
+      avatar: '/assets/images/avatar/default.jpg',
+      expires: '1900-01-01T00:00:00.000Z',
+      name: 'default',
+      uid: null,
+    },
+    weibo: {
+      avatar: '/assets/images/avatar/default.jpg',
+      expires: '1900-01-01T00:00:00.000Z',
+      name: 'default',
+      uid: null,
+    },
+  },
 };
-
-interface IUserAccount {
-  uid: string;
-  name?: string;
-  avatar?: string;
-  accessToken: string;
-  expires: Date;
-}

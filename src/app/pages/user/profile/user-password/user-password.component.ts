@@ -10,23 +10,17 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 })
 
 export class UserPasswordComponent {
-  form: any;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,
               private userService: UserService) {
-    this.form = {
-      password: '',
-      newPassword: '',
-      confirmPassword: '',
-    };
     this.submitted = false;
   }
 
-  public updatePassword(): void {
+  public updatePassword(passwordForm): void {
     this.submitted = true;
 
-    this.userService.updateUserPassword(this.form.password, this.form.newPassword)
+    this.userService.updateUserPassword(passwordForm.password, passwordForm.newPassword)
       .then(updateState => {
         this.submitted = false;
         this.noticeService.success('更新密码成功', '更新密码成功');

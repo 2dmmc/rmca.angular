@@ -4,10 +4,10 @@
       <i class="fa fa-id-card"></i>个人资料
     </span>
     <section>
-      <span class="tag tag-success" *ngIf="user?.isEmailVerify">
+      <span class="tag tag-success" *ngIf="user.isEmailVerify">
         已验证
       </span>
-      <span class="tag tag-warning" *ngIf="!user?.isEmailVerify">
+      <span class="tag tag-warning" *ngIf="!user.isEmailVerify">
         未验证
       </span>
     </section>
@@ -19,7 +19,7 @@
         <div class="col-sm-10">
           <input name="email" id="input-email" class="form-control" placeholder="邮箱"
                  [(ngModel)]="user.email" #email="ngModel"
-                 [class.form-control-danger]="email?.invalid && email?.touched"
+                 [class.form-control-danger]="email.invalid && email.touched"
                  [required]="true" pattern=".+@.+..+">
           <small class="form-text error"
                  *ngIf="email.invalid && email.touched && email.errors?.required">

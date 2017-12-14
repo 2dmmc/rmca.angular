@@ -3,7 +3,7 @@ import {Component, OnInit} from '@angular/core';
 import {NoticeService} from '../../../@system/notice/notice.service';
 
 import {UserService} from '../user.service';
-import {UserModel} from '../../@model/user.model';
+import {EmptyUser, UserModel} from '../../@model/user.model';
 
 @Component({
   styleUrls: ['./socials.component.scss'],
@@ -15,7 +15,7 @@ export class SocialsComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private userService: UserService) {
-
+    this.user = EmptyUser;
   }
 
   public ngOnInit(): void {
