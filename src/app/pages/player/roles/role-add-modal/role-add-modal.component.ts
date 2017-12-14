@@ -11,22 +11,18 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 
 export class RoleAddModalComponent {
   @Output() event = new EventEmitter();
-  role: any;
   submitted: boolean;
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
-    this.role = {
-      rolename: '',
-    };
     this.submitted = false;
   }
 
-  public addRole(): void {
+  public addRole(roleForm): void {
     this.submitted = true;
 
-    this.playerService.addRole(this.role.rolename)
+    this.playerService.addRole(roleForm.rolename)
       .then(createState => {
         this.noticeService.success('新增成功', '新增角色成功');
         this.event.emit();

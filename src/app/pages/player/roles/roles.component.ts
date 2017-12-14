@@ -29,9 +29,9 @@ export class RolesComponent implements OnInit {
 
   public getRoles(): void {
     this.playerService.getRoles()
-      .then((roles: any) => {
+      .then((roles: RoleModel[]) => {
         roles.forEach(role => {
-          role['random'] = Math.random();
+          role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
         });
 
         this.roles = roles;

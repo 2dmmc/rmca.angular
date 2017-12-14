@@ -8,12 +8,12 @@
   </button>
 </div>
 <div class="modal-body">
-  <form (ngSubmit)="addRole()" #roleForm="ngForm" name="roleForm">
+  <form (ngSubmit)="addRole(roleForm)" #roleForm="ngForm" name="roleForm">
     <div class="form-group row">
       <label for="input-rolename" class="col-sm-2 col-form-label">角色名</label>
       <div class="col-sm-10">
         <input name="username" id="input-rolename" class="form-control" placeholder="角色名" autofocus
-               [(ngModel)]="role.rolename" #rolename="ngModel"
+               [(ngModel)]="roleForm.rolename" #rolename="ngModel"
                [class.form-control-danger]="rolename.invalid && rolename.touched"
                [required]="true" pattern="^[_a-zA-Z0-9]{1,16}$">
         <small class="form-text error"
