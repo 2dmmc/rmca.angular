@@ -1,7 +1,7 @@
 import {APP_BASE_HREF, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgModule} from '@angular/core';
+import {ErrorHandler, NgModule} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {CoreModule} from './@core/core.module';
 
@@ -20,6 +20,16 @@ import {AuthService} from './auth/services/auth.service';
 import {AuthUtilService} from './auth/services/auth-util.service';
 import {UserService} from './pages/user/user.service';
 
+import * as fundebug from 'fundebug-javascript';
+
+fundebug.apikey = '1638ea31bc784c1c860a2633d3fa409d3e30e3775917e498a2670e37eaa1b6d3';
+
+export class FundebugErrorHandler implements ErrorHandler {
+  handleError(err: any): void {
+    fundebug.notifyError(err);
+  }
+}
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -37,6 +47,7 @@ import {UserService} from './pages/user/user.service';
   providers: [
     {provide: LocationStrategy, useClass: PathLocationStrategy},
     {provide: APP_BASE_HREF, useValue: '/'},
+    {provide: ErrorHandler, useClass: FundebugErrorHandler},
     NeedAdminGuard,
     NeedLoginGuard,
     NeedUnLoginGuard,
