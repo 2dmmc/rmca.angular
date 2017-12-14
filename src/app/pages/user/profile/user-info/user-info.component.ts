@@ -4,6 +4,8 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
+import {UserModel} from '../../../@model/user.model';
+
 @Component({
   selector: 'ngx-user-info',
   styleUrls: ['./user-info.component.scss'],
@@ -11,7 +13,7 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 })
 
 export class UserInfoComponent implements OnInit {
-  @Input() user: any;
+  @Input() user: UserModel;
   @Output() needGetUserProfile = new EventEmitter();
   submitted: boolean;
 
@@ -29,8 +31,6 @@ export class UserInfoComponent implements OnInit {
         this.needGetUserProfile.emit();
       }
     });
-
-    this.submitted = false;
   }
 
   public updateProfile(): void {
@@ -38,8 +38,8 @@ export class UserInfoComponent implements OnInit {
 
     this.userService.updateUserProfile(this.user.email)
       .then(updateState => {
-        this.needGetUserProfile.emit();
         this.noticeService.success('更新个人资料成功', `更新个人资料成功, 你的邮箱已更换为${this.user.email}`);
+        this.needGetUserProfile.emit();
         this.submitted = false;
       })
       .catch(error => {
@@ -52,14 +52,14 @@ export class UserInfoComponent implements OnInit {
     this.userService.verifyEmail(hash)
       .then(updateState => {
         this.needGetUserProfile.emit();
-        this.noticeService.success('验证邮箱成功', '邮箱验证成功');
+        this.noticeService.success('验证邮箱成功', '验证邮箱成功');
       })
       .catch(error => {
         let errorMessage = '';
 
         switch (error.status) {
           case 404: {
-            errorMessage = '令牌无效或已被使用, 请重新找回密码';
+            errorMessage = '验证码无效或已被使用, 请重新验证邮箱';
             break;
           }
           default: {

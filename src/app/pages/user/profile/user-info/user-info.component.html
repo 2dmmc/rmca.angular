@@ -3,12 +3,14 @@
     <span>
       <i class="fa fa-id-card"></i>个人资料
     </span>
-    <span class="tag tag-success" *ngIf="user?.isEmailVerify">
-      已验证
-    </span>
-    <span class="tag tag-warning" *ngIf="!user?.isEmailVerify">
-      未验证
-    </span>
+    <section>
+      <span class="tag tag-success" *ngIf="user?.isEmailVerify">
+        已验证
+      </span>
+      <span class="tag tag-warning" *ngIf="!user?.isEmailVerify">
+        未验证
+      </span>
+    </section>
   </nb-card-header>
   <nb-card-body>
     <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
