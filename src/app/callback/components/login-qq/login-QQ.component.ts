@@ -16,7 +16,7 @@ export class LoginQQComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService) {
     this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
+    this.message = {title: '请稍候', message: '登录中'};
   }
 
   public ngOnInit(): void {

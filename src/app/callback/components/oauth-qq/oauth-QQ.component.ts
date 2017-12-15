@@ -16,7 +16,7 @@ export class OauthQQComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService) {
     this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
+    this.message = {title: '请稍候', message: '授权中'};
   }
 
   public ngOnInit(): void {
