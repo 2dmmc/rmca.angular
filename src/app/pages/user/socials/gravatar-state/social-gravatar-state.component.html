@@ -5,10 +5,13 @@
     <span class="tag tag-warning" *ngIf="!user.email">未授权</span>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="!user.email">
-      <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
-        你还未填写邮箱, 填写邮箱后即可获得授权
-      </div>
+    <div class="alert alert-warning" role="alert" *ngIf="!user.email">
+      你还未填写邮箱, 填写后即可自动获得授权, 授权后你将可以:
+      <ul>
+        <li>使用Gravatar账户作为RMCA系统头像</li>
+        <li>关于Gravatar的具体信息, 请查看<a target="_blank" href="https://cn.gravatar.com/">Gravator</a></li>
+      </ul>
+      <a href="javascript:void(0)" (click)="goToProfile()">去个人中心</a>
     </div>
     <div *ngIf="user.email" class="user-container">
       <div class="user-picture">
@@ -19,14 +22,10 @@
       </div>
     </div>
   </nb-card-body>
-  <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user.email" (click)="updateUserAvatar()">
+  <nb-card-footer *ngIf="user.email">
+    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
-    </button>
-    <button class="btn btn-hero-info" *ngIf="!user.email" (click)="goToProfile()">
-      <i class="fa fa-link"></i>
-      去个人资料
     </button>
   </nb-card-footer>
 </nb-card>
