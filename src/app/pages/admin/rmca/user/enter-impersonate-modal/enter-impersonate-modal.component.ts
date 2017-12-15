@@ -33,8 +33,10 @@ export class EnterImpersonateModalComponent {
       .then(enterState => {
         this.noticeService.success('替身登陆成功', `替身登陆 ${this.user.username} 成功, 即将装弹`);
         setTimeout(() => {
-          this.router.navigate(['/pages/dashboard']);
-          window.location.reload();
+          this.router.navigate(['/pages/dashboard'])
+            .then(navagateState => {
+              window.location.reload();
+            });
         }, 3e3);
       })
       .catch(error => {

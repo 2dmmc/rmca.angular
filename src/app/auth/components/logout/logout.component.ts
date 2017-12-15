@@ -15,7 +15,7 @@ export class NbLogoutComponent implements OnInit {
   constructor(private router: Router,
               private authService: AuthService) {
     this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
+    this.message = {title: '请稍候', message: '登出中...'};
   }
 
   public ngOnInit(): void {
@@ -31,8 +31,10 @@ export class NbLogoutComponent implements OnInit {
               this.message.message = '即将跳转到dashboard';
 
               setTimeout(() => {
-                this.router.navigate(['/pages/dashboard']);
-                window.location.reload();
+                this.router.navigate(['/pages/dashboard'])
+                  .then(navagateState => {
+                    window.location.reload();
+                  });
               }, 3e3);
             })
             .catch(error => {
@@ -84,9 +86,7 @@ export class NbLogoutComponent implements OnInit {
               this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
             });
         }
-      })
-
-    ;
+      });
   }
 
   public hasError(): boolean {
