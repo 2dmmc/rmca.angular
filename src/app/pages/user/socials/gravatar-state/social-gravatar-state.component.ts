@@ -19,10 +19,6 @@ export class SocialGravatarStateComponent {
               private noticeService: NoticeService) {
   }
 
-  public goToProfile(): void {
-    this.router.navigate(['./profile']);
-  }
-
   public updateUserAvatar(): void {
     this.userService.updateUserAvatar('gravatar')
       .then(updateState => {

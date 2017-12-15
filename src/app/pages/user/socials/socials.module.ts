@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
 import {ThemeModule} from '../../../@theme/theme.module';
 
@@ -14,6 +15,7 @@ const components = [
 
 @NgModule({
   imports: [
+    RouterModule,
     ThemeModule,
   ],
   exports: [

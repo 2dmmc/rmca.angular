@@ -11,7 +11,7 @@
         <li>使用Gravatar账户作为RMCA系统头像</li>
         <li>关于Gravatar的具体信息, 请查看<a target="_blank" href="https://cn.gravatar.com/">Gravator</a></li>
       </ul>
-      <a href="javascript:void(0)" (click)="goToProfile()">去个人中心</a>
+      <a routerLink="../profile">去个人中心</a>
     </div>
     <div *ngIf="user.email" class="user-container">
       <div class="user-picture">
