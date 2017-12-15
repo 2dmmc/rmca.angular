@@ -1,16 +1,12 @@
 <ngx-callback-block>
   <h2 class="title">新浪微博 OAuth登陆</h2>
-  <div class="alert alert-danger" role="alert"
-       *ngIf="hasError()">
-    <div><strong>{{error.title}}</strong></div>
-    <div>{{error.message}}</div>
-    <br>
-    <button class="btn btn-hero-danger" (click)="goToLogin()">返回常规登陆</button>
-  </div>
-
-  <div class="alert alert-success" role="alert"
-       *ngIf="hasMessage()">
-    <div><strong>{{message.title}}</strong></div>
-    <div>{{message.message}}</div>
+  <div class="alert alert-info" role="alert"
+       [class.alert-info]="notice.type == 'info'"
+       [class.alert-success]="notice.type == 'success'"
+       [class.alert-danger]="notice.type == 'danger'"
+       *ngIf="notice">
+    <div><strong>{{notice.title}}</strong></div>
+    <div>{{notice.message}}</div>
+    <button class="btn btn-hero-danger" routerLink="/auth/login" *ngIf="notice.type == 'danger'">返回常规登陆</button>
   </div>
 </ngx-callback-block>

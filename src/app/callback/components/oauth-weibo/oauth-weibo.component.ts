@@ -9,46 +9,38 @@ import {CallbackService} from '../../services/callback.service';
 })
 
 export class OauthWeiboComponent implements OnInit {
-  error: any;
-  message: any;
+  notice: {
+    type: 'info' | 'success' | 'danger',
+    title: string,
+    message: string,
+  };
 
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService) {
-    this.error = {title: '', message: ''};
-    this.message = {title: '请稍候', message: '授权中'};
+    this.sendNotice('info', '请稍后...', '授权中...');
   }
 
   public ngOnInit(): void {
-    this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
-
     this.activatedRoute.queryParams.subscribe(queryParams => {
       this.callbackService.oauthWeiboCallback(queryParams.accessToken, queryParams.expiresIn)
-        .then(oauthState => {
-          this.message.title = '授权成功';
-          this.message.message = '即将跳转到社交账户管理页';
-
+        .then(success => {
+          this.sendNotice('success', '授权成功', '即将跳转到dashboard');
           setTimeout(() => {
             this.router.navigate(['/pages/user/socials']);
           }, 3e3);
         })
         .catch(error => {
-          this.error.title = '授权失败';
-          this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+          this.sendNotice('danger', '授权失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
         });
     });
   }
 
-  public goToSocials(): void {
-    this.router.navigate(['/pages/user/socials']);
-  }
-
-  public hasError(): boolean {
-    return this.error.title.length !== 0 || this.error.message.length !== 0;
-  }
-
-  public hasMessage(): boolean {
-    return this.message.title.length !== 0 || this.message.message.length !== 0;
+  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string) {
+    this.notice = {
+      type: type,
+      title: title,
+      message: message,
+    };
   }
 }
