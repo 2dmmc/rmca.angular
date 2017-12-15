@@ -1,9 +1,8 @@
 import {NgModule} from '@angular/core';
 
 import {ThemeModule} from '../../@theme/theme.module';
-import {RolesModule} from './roles/roles.module';
 
-import {PlayerRoutingModule} from './player-routing.module';
+import {PlayerRoutingModule, routedComponents} from './player-routing.module';
 
 import {PlayerComponent} from './player.component';
 import {RolesComponent} from './roles/roles.component';
@@ -17,16 +16,18 @@ import {NoticeService} from '../../@system/notice/notice.service';
 const components = [
   PlayerComponent,
   RolesComponent,
+  RoleAddModalComponent,
+  RoleDetailModalComponent,
 ];
 
 @NgModule({
   imports: [
     ThemeModule,
     PlayerRoutingModule,
-    RolesModule,
   ],
   declarations: [
     ...components,
+    routedComponents,
   ],
   providers: [
     PlayerService,

@@ -19,3 +19,8 @@ const routes: Routes = [{
 })
 export class PlayerRoutingModule {
 }
+
+export const routedComponents = [
+  PlayerComponent,
+  RolesComponent,
+];
