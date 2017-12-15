@@ -12,16 +12,14 @@ export class NeedUnLoginGuard implements CanActivate {
   }
 
   public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.authUtilService.isUserAuthenticated()
-        .then(isLogin => {
-          this.noticeService.warning('Auth Router Guard (needUnLogin)', '你已经登录了');
-          this.router.navigate(['/pages/dashboard']);
-          return reject(isLogin);
-        })
-        .catch(notLogin => {
-          return resolve(notLogin);
-        });
-    });
+    return this.authUtilService.isUserAuthenticated()
+      .then(isLogin => {
+        this.noticeService.warning('Auth Router Guard (needUnLogin)', '你已经登录了');
+        this.router.navigate(['/pages/dashboard']);
+        return isLogin;
+      })
+      .catch(notLogin => {
+        return notLogin;
+      });
   }
 }

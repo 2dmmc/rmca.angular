@@ -15,9 +15,9 @@ export class AuthUtilService {
       this.authService.getLoginState()
         .then(user => {
           if (user) {
-            resolve(true);
+            resolve(user);
           } else {
-            reject(false);
+            reject(user);
           }
         })
         .catch(error => {
