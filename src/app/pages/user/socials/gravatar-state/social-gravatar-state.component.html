@@ -6,7 +6,9 @@
   </nb-card-header>
   <nb-card-body>
     <div *ngIf="!user.email">
-      <small>你还未填写邮箱, 填写邮箱后即可获得授权</small>
+      <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
+        你还未填写邮箱, 填写邮箱后即可获得授权
+      </div>
     </div>
     <div *ngIf="user.email" class="user-container">
       <div class="user-picture">

@@ -5,8 +5,14 @@
     <span class="tag tag-warning" *ngIf="!user.accounts.qq">未授权</span>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="!user.accounts.qq">
-      <small>你还未授权腾讯QQ账户</small>
+    <div class="alert alert-warning" role="alert" *ngIf="!user.accounts.qq">
+      你还未授权腾讯QQ账户, 授权后你将可以:
+      <ul>
+        <li>使用腾讯QQ账户作为RMCA系统头像</li>
+        <li>通过腾讯QQ账户登录RMCA系统</li>
+        <li>在腾讯相关App内打开RMCA系统可通过QQ账户一键登录</li>
+      </ul>
+      <a href="javascript:void(0)" (click)="oAuth()">去腾讯QQ授权</a>
     </div>
     <div *ngIf="user.accounts.qq" class="user-container">
       <div class="user-picture">
@@ -17,14 +23,10 @@
       </div>
     </div>
   </nb-card-body>
-  <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user.accounts.qq" (click)="updateUserAvatar()">
+  <nb-card-footer *ngIf="user.accounts.qq">
+    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
-    </button>
-    <button class="btn btn-hero-info" *ngIf="!user.accounts.qq" (click)="oAuth()">
-      <i class="fa fa-link"></i>
-      去授权
     </button>
   </nb-card-footer>
 </nb-card>

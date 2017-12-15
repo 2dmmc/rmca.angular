@@ -5,8 +5,14 @@
     <span class="tag tag-warning" *ngIf="!user.accounts.weibo">未授权</span>
   </nb-card-header>
   <nb-card-body>
-    <div *ngIf="!user.accounts.weibo">
-      <small>你还未授权新浪微博账户</small>
+    <div class="alert alert-warning" role="alert" *ngIf="!user.accounts.qq">
+      你还未授权新浪微博账户, 授权后你将可以:
+      <ul>
+        <li>使用新浪微博账户作为RMCA系统头像</li>
+        <li>通过新浪微博账户登录RMCA系统</li>
+        <li>在新浪相关App内打开RMCA系统可通过微博账户一键登录</li>
+      </ul>
+      <a href="javascript:void(0)" (click)="oAuth()">去新浪微博授权</a>
     </div>
     <div *ngIf="user.accounts.weibo" class="user-container">
       <div class="user-picture">
@@ -17,14 +23,10 @@
       </div>
     </div>
   </nb-card-body>
-  <nb-card-footer>
-    <button class="btn btn-hero-success" *ngIf="user.accounts.weibo" (click)="updateUserAvatar()">
+  <nb-card-footer *ngIf="user.accounts.weibo">
+    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
-    </button>
-    <button class="btn btn-hero-info" *ngIf="!user.accounts.weibo" (click)="oAuth()">
-      <i class="fa fa-link"></i>
-      去授权
     </button>
   </nb-card-footer>
 </nb-card>
