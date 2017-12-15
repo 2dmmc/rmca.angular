@@ -4,12 +4,12 @@ import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 @Component({
-  selector: 'ngx-password',
-  styleUrls: ['./user-password.component.scss'],
-  templateUrl: './user-password.component.html',
+  selector: 'ngx-profile-user-password',
+  styleUrls: ['./profile-user-password.component.scss'],
+  templateUrl: './profile-user-password.component.html',
 })
 
-export class UserPasswordComponent {
+export class ProfileUserPasswordComponent {
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,

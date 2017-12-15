@@ -27,3 +27,10 @@ const routes: Routes = [{
 })
 export class UserRoutingModule {
 }
+
+export const routedComponents = [
+  UserComponent,
+  ProfileComponent,
+  YggdrasilComponent,
+  SocialsComponent,
+];

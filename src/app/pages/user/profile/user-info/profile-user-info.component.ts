@@ -7,12 +7,12 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 import {UserModel} from '../../../@model/user.model';
 
 @Component({
-  selector: 'ngx-user-info',
-  styleUrls: ['./user-info.component.scss'],
-  templateUrl: './user-info.component.html',
+  selector: 'ngx-profile-user-info',
+  styleUrls: ['./profile-user-info.component.scss'],
+  templateUrl: './profile-user-info.component.html',
 })
 
-export class UserInfoComponent implements OnInit {
+export class ProfileUserInfoComponent implements OnInit {
   @Input() user: UserModel;
   @Output() needGetUserProfile = new EventEmitter();
   submitted: boolean;
