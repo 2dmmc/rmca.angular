@@ -28,7 +28,7 @@ import {
 
 import {CapitalizePipe, PluralPipe, RmbPipe, RoundPipe, TimingPipe} from './pipes';
 
-import {DonationModalComponent, SampleLayoutComponent,} from './layouts';
+import {DonationModalComponent, SampleLayoutComponent} from './layouts';
 
 import {DEFAULT_THEME} from './styles/theme.default';
 import {COSMIC_THEME} from './styles/theme.cosmic';
