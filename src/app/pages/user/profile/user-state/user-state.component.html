@@ -7,6 +7,11 @@
   </nb-card-header>
   <nb-card-body>
     <div class="user-state">
+      <div class="alert alert-danger" role="alert" *ngIf="user.ban">
+        你的账户已经被封禁, 封禁原因为:
+        <h4>{{user.ban}}</h4>
+      </div>
+
       <div class="user-container">
         <div class="user-picture">
           <div class="background image" style.background-image="url({{user.avatar}})"></div>
@@ -22,7 +27,7 @@
           账户状态: 正常
         </span>
         <span class="tag tag-danger" *ngIf="user.ban">
-          已封禁: {{user.ban}}
+          账户状态: 封禁
         </span>
         <span class="tag tag-danger" *ngIf="user.admin">
           管理员
