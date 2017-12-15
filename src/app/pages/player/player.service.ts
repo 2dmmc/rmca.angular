@@ -51,16 +51,11 @@ export class PlayerService {
    * @return {Promise<Object>}
    */
   public updateRole(roleId: string, skinModel: string, skin: string): Promise<object> {
-    // FIXME https://github.com/angular/angular/issues/18261
-    // FUCK u Angular
-    // const params = new HttpParams()
-    //   .set('model', skinModel)
-    //   .set('skin', skin);
+    const formData: any = new FormData();
+    formData.append('model', skinModel);
+    formData.append('skin', skin);
 
-    return this.http.post(`/api/role/skin/${roleId}`, {
-      model: skinModel,
-      skin: skin,
-    })
+    return this.http.post(`/api/role/skin/${roleId}`, formData)
       .toPromise();
   }
 

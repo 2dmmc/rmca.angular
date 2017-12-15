@@ -7,6 +7,8 @@ import {PlayerService} from '../../player.service';
 import {UserModel} from '../../../@model/user.model';
 import {UserService} from '../../../user/user.service';
 
+import {EmptyRole, RoleModel} from '../../../@model/role.model';
+
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
   templateUrl: './role-detail-modal.component.html',
@@ -15,7 +17,7 @@ import {UserService} from '../../../user/user.service';
 export class RoleDetailModalComponent implements OnInit {
   @Input() roleId;
   @Output() event = new EventEmitter();
-  role: any;
+  role: RoleModel;
   user: UserModel;
   submitted: boolean;
   skinType: any;
@@ -24,18 +26,16 @@ export class RoleDetailModalComponent implements OnInit {
               private userService: UserService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
-    this.role = {
-      rolename: '',
-    };
     this.submitted = false;
+    this.role = EmptyRole;
     this.skinType = 'upload';
   }
 
   public ngOnInit(): void {
     this.playerService.getRole(this.roleId)
-      .then(role => {
+      .then((role: RoleModel) => {
         this.role = role;
-        this.role.random = Math.random();
+        this.role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
       })
       .catch(error => {
         this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
@@ -50,22 +50,24 @@ export class RoleDetailModalComponent implements OnInit {
       });
   }
 
-  public getFiles(event): void {
+  public getFiles(event, roleForm): void {
     const files = event.srcElement.files;
-    const reader = new FileReader();
-    reader.onload = this._handleReaderLoaded.bind(this);
-    reader.readAsBinaryString(files[0]);
+
+    if (files.length > 0) {
+      this.role['file'] = files[0];
+    }
   }
 
-  private _handleReaderLoaded(readerEvt): void {
-    const binaryString = readerEvt.target.result;
-    this.role.file = btoa(binaryString);
-  }
+  // FIXME 图片预览被砍掉了, 有空的时候加上
+  // private _handleReaderLoaded(readerEvt): void {
+  //   const binaryString = readerEvt.target.result;
+  //   this.role.file = btoa(binaryString);
+  // }
 
   public updateRole(): void {
     this.submitted = true;
 
-    this.playerService.updateRole(this.role._id, this.role.userModel, this.role.file)
+    this.playerService.updateRole(this.role._id, this.role.userModel, this.role['file'])
       .then(updateState => {
         this.noticeService.success('更新成功', '更新角色详情成功');
         this.event.emit();
