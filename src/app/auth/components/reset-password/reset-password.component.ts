@@ -11,8 +11,11 @@ import {AuthService} from '../../services/auth.service';
 
 export class NbResetPasswordComponent implements OnInit {
   user: any;
-  error: any;
-  message: any;
+  notice: {
+    type: 'info' | 'success' | 'danger',
+    title: string,
+    message: string,
+  };
   submitted: boolean;
   hash: string;
 
@@ -20,8 +23,6 @@ export class NbResetPasswordComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private authService: AuthService) {
     this.user = {};
-    this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
     this.submitted = false;
     this.hash = '';
   }
@@ -33,15 +34,12 @@ export class NbResetPasswordComponent implements OnInit {
   }
 
   public resetPassword(): void {
-    this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
     this.submitted = true;
 
     this.authService.resetPassword(this.hash, this.user.password)
       .then(
         resetResult => {
-          this.message.title = '重置成功';
-          this.message.message = '请使用你的新密码登陆, 即将跳转到登陆页';
+          this.sendNotice('success', '重置成功', '请使用你的新密码登陆, 即将跳转到登陆页');
 
           setTimeout(() => {
             this.router.navigate(['/auth/login']);
@@ -49,27 +47,28 @@ export class NbResetPasswordComponent implements OnInit {
         },
       )
       .catch(error => {
+        let errorTitle;
         this.submitted = false;
 
         switch (error.status) {
-          case 403: {
-            this.error.title = '令牌无效或已被使用, 请重新找回密码';
+          case 403 : {
+            errorTitle = '令牌无效或已被使用, 请重新找回密码';
             break;
           }
           default: {
-            this.error.title = '未知错误, 请联系鹳狸猿';
+            errorTitle = '未知错误, 请联系鹳狸猿';
           }
         }
 
-        this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
   }
 
-  public hasError(): boolean {
-    return this.error.title.length !== 0 || this.error.message.length !== 0;
-  }
-
-  public hasMessage(): boolean {
-    return this.message.title.length !== 0 || this.message.message.length !== 0;
+  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
+    this.notice = {
+      type: type,
+      title: title,
+      message: message,
+    };
   }
 }

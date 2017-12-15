@@ -9,26 +9,24 @@ import {AuthService} from '../../services/auth.service';
 })
 
 export class NbLogoutComponent implements OnInit {
-  error: any;
-  message: any;
+  notice: {
+    type: 'info' | 'success' | 'danger',
+    title: string,
+    message: string,
+  };
 
   constructor(private router: Router,
               private authService: AuthService) {
-    this.error = {title: '', message: ''};
-    this.message = {title: '请稍候', message: '登出中...'};
+    this.sendNotice('info', '请稍候', '登出中...');
   }
 
   public ngOnInit(): void {
-    this.error = {title: '', message: ''};
-    this.message = {title: '', message: ''};
-
     this.authService.getLoginState()
       .then(userProfile => {
         if (userProfile['impersonate']) {
           this.authService.logoutImpersonate()
             .then(logoutResult => {
-              this.message.title = '退出替身登陆成功';
-              this.message.message = '即将跳转到dashboard';
+              this.sendNotice('success', '退出替身登陆成功', '即将跳转到dashboard');
 
               setTimeout(() => {
                 this.router.navigate(['/pages/dashboard'])
@@ -38,10 +36,11 @@ export class NbLogoutComponent implements OnInit {
               }, 3e3);
             })
             .catch(error => {
+              let noticeTitle;
+
               switch (error.status) {
                 case 406 : {
-                  this.error.title = '大兄弟你现在不在替身模式下';
-                  this.error.message = '即将跳转到登陆页';
+                  noticeTitle = '大兄弟你现在不在替身模式下';
 
                   setTimeout(() => {
                     this.router.navigate(['/auth/login']);
@@ -49,18 +48,17 @@ export class NbLogoutComponent implements OnInit {
                   break;
                 }
                 default: {
-                  this.error.title = '未知错误, 请联系鹳狸猿';
+                  noticeTitle = '未知错误, 请联系鹳狸猿';
                 }
               }
 
-              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+              this.sendNotice('danger', noticeTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
             });
         } else {
           this.authService.logout()
             .then(
               logoutResult => {
-                this.message.title = '登出成功';
-                this.message.message = '即将跳转到登陆页';
+                this.sendNotice('success', '登出成功', '即将跳转到dashboard');
 
                 setTimeout(() => {
                   this.router.navigate(['/auth/login']);
@@ -68,10 +66,11 @@ export class NbLogoutComponent implements OnInit {
               },
             )
             .catch(error => {
+              let noticeTitle;
+
               switch (error.status) {
                 case 401 : {
-                  this.error.title = '大兄弟你得先登陆';
-                  this.error.message = '即将跳转到登陆页';
+                  noticeTitle = '大兄弟你得先登陆';
 
                   setTimeout(() => {
                     this.router.navigate(['/auth/login']);
@@ -79,21 +78,21 @@ export class NbLogoutComponent implements OnInit {
                   break;
                 }
                 default: {
-                  this.error.title = '未知错误, 请联系鹳狸猿';
+                  noticeTitle = '未知错误, 请联系鹳狸猿';
                 }
               }
 
-              this.error.message = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+              this.sendNotice('danger', noticeTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
             });
         }
       });
   }
 
-  public hasError(): boolean {
-    return this.error.title.length !== 0 || this.error.message.length !== 0;
-  }
-
-  public hasMessage(): boolean {
-    return this.message.title.length !== 0 || this.message.message.length !== 0;
+  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
+    this.notice = {
+      type: type,
+      title: title,
+      message: message,
+    };
   }
 }

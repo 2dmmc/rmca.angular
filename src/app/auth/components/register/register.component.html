@@ -3,16 +3,13 @@
   <small class="form-text sub-title">Do u like RGB ?</small>
 
   <form (ngSubmit)="register()" #form="ngForm" autocomplete=off>
-    <div class="alert alert-danger" role="alert"
-         *ngIf="hasError()">
-      <div><strong>{{error.title}}</strong></div>
-      <div>{{error.message}}</div>
-    </div>
-
-    <div class="alert alert-success" role="alert"
-         *ngIf="hasMessage()">
-      <div><strong>{{message.title}}</strong></div>
-      <div>{{message.message}}</div>
+    <div class="alert alert-info" role="alert"
+         [class.alert-info]="notice.type == 'info'"
+         [class.alert-success]="notice.type == 'success'"
+         [class.alert-danger]="notice.type == 'danger'"
+         *ngIf="notice">
+      <div><strong>{{notice.title}}</strong></div>
+      <div>{{notice.message}}</div>
     </div>
 
     <div class="form-group">
