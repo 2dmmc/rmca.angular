@@ -36,7 +36,7 @@ export class LoginWeiboComponent implements OnInit {
     });
   }
 
-  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string) {
+  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
     this.notice = {
       type: type,
       title: title,
