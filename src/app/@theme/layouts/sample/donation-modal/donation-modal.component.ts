@@ -17,8 +17,4 @@ export class DonationModalComponent {
   closeModal() {
     this.activeModal.close();
   }
-
-  goToDashboard(): void {
-    this.router.navigate(['/pages/dashboard']);
-  }
 }
