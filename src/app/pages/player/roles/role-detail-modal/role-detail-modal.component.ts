@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 import {PlayerService} from '../../player.service';
-import {UserModel} from '../../../@model/user.model';
+import {EmptyUser, UserModel} from '../../../@model/user.model';
 import {UserService} from '../../../user/user.service';
 
 import {EmptyRole, RoleModel} from '../../../@model/role.model';
@@ -28,6 +28,7 @@ export class RoleDetailModalComponent implements OnInit {
               private activeModal: NgbActiveModal) {
     this.submitted = false;
     this.role = EmptyRole;
+    this.user = EmptyUser;
     this.skinType = 'upload';
   }
 
