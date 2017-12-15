@@ -17,8 +17,18 @@
   @include ngx-pace-theme();
 }
 
-;
-
 html {
-  font-size: 12px;
+  font-size: 16px;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media screen and (-moz-device-pixel-ratio: 2) {
+  html {
+    font-size: 12px;
+  }
 }
