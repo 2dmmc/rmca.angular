@@ -14,6 +14,9 @@
   </nb-card-header>
   <nb-card-body>
     <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
+      <div class="alert alert-info" role="alert" *ngIf="user.isEmailVerify">
+        你可通过<a class="alert-link" routerLink="../socials">社交账户授权</a>使用已绑定社交账户的头像作为RMCA的头像
+      </div>
       <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
         你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
         <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>
