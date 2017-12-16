@@ -9,9 +9,15 @@
     <div class="user-state">
       <div class="alert alert-danger" role="alert" *ngIf="user.ban">
         你的账户已经被封禁, 封禁原因为:
-        <h4>{{user.ban}}</h4>
-      </div>
+        <h5>
+          {{user.ban}}
+        </h5>
 
+        你将不能:
+        <ul>
+          <li>使用RMCA账号登陆游戏</li>
+        </ul>
+      </div>
       <div class="user-container">
         <div class="user-picture">
           <div class="background image" style.background-image="url({{user.avatar}})"></div>
