@@ -17,7 +17,6 @@ import {SocialQQStateComponent} from './socials/qq-state/social-QQ-state.compone
 import {SocialWeiboStateComponent} from './socials/weibo-state/social-weibo-state.component';
 
 import {UserService} from './user.service';
-import {NoticeService} from '../../@system/notice/notice.service';
 
 const components = [
   UserComponent,
@@ -45,7 +44,6 @@ const components = [
   ],
   providers: [
     UserService,
-    NoticeService,
   ],
 })
 
