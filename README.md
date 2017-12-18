@@ -15,3 +15,9 @@
 ## 备注
 
 - 由于使用了AOT而并非JIT, 构建过程会比较缓慢
+
+- 主题组件预览: `http://akveo.com/ngx-admin/`
+
+- 主题文档: `https://akveo.github.io/nebular/#/docs`
+
+- 后端接口文档: `https://2dmmc.gitlab.io/rmca.js/apidoc/`
