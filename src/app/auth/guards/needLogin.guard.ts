@@ -11,20 +11,22 @@ export class NeedLoginGuard implements CanActivate {
               private noticeService: NoticeService) {
   }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return this.authUtilService.isUserAuthenticated()
-      .then(isLogin => {
-        if (isLogin['impersonate']) {
-          this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${isLogin['username']}`);
-        } else {
-          this.noticeService.info('不要变成发抖的小喵喵', '|･ω･｀)');
-        }
-        return true;
-      })
-      .catch(notLogin => {
-        this.noticeService.warning('Auth Router Guard (needLogin)', '请先登录');
-        this.router.navigate(['/auth/login']);
-        return false;
-      });
+  public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    const isUserAuthenticated = await this.authUtilService.isUserAuthenticated();
+
+    if (isUserAuthenticated.isLogin) {
+      if (isUserAuthenticated.user.impersonate) {
+        this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${isUserAuthenticated.user.username}`);
+      } else {
+        this.noticeService.info('不要变成发抖的小喵喵', '|･ω･｀)');
+      }
+
+      return true;
+    } else {
+      this.noticeService.warning('Auth Router Guard (needLogin)', '请先登录');
+      this.router.navigate(['/auth/login']);
+
+      return false;
+    }
   }
 }

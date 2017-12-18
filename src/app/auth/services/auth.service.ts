@@ -98,7 +98,7 @@ export class AuthService {
    * @description 获取当前用户的登陆状态. SAP的核心鉴权方法. 返回不完整的User模型或未登录.
    * @return {Promise<Object>}
    */
-  public getLoginState(): Promise<object> {
+  public async getLoginState(): Promise<object> {
     return this.http.get('/api/user/login')
       .toPromise();
   }

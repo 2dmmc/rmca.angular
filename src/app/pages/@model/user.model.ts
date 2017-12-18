@@ -11,6 +11,7 @@ export class UserModel {
     uuid: string,
   };
   accounts?: any;
+  impersonate?: boolean;
 }
 
 export const EmptyUser = {

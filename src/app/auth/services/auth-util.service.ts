@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 
 import {AuthService} from './auth.service';
 import {UserService} from '../../pages/user/user.service';
+import {LoginStateResult} from '../@model/loginStateResult';
+import {UserModel} from '../../pages/@model/user.model';
 
 @Injectable()
 export class AuthUtilService {
@@ -10,20 +12,19 @@ export class AuthUtilService {
   }
 
   // TODO 补齐文档
-  public isUserAuthenticated(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.authService.getLoginState()
-        .then(user => {
-          if (user) {
-            resolve(user);
-          } else {
-            reject(user);
-          }
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+  public async isUserAuthenticated(): Promise<LoginStateResult> {
+    const loginState = await this.authService.getLoginState();
+    const loginStateResult = new LoginStateResult();
+
+    if (loginState) {
+      loginStateResult.isLogin = true;
+      loginStateResult.user = loginState as UserModel;
+      return loginStateResult;
+    } else {
+      loginStateResult.isLogin = false;
+      loginStateResult.user = null;
+      return loginStateResult;
+    }
   }
 
   public isAdmin(): Promise<boolean> {
