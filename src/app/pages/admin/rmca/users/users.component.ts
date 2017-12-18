@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {UserModel} from '../../../@model/user.model';
+import {User} from '../../../../@model/user/user.interface';
 
 import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
@@ -24,7 +24,7 @@ export class UsersComponent implements OnInit {
     keyWord: string,
     submitted: boolean;
   };
-  users: UserModel[];
+  users: User[];
   page: number;
   pageArray: number[];
   limit: number;
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
   // private getUsers(page: number, limit: number): void {
   //   this.rmcaService.getUsers(page, limit)
   //     .then(users => {
-  //       this.users = users as UserModel[];
+  //       this.users = users as User[];
   //     })
   //     .catch(error => {
   //       this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
@@ -72,7 +72,7 @@ export class UsersComponent implements OnInit {
     this.rmcaService.searchUsers(this.search.keyWord, this.page, this.limit)
       .then(users => {
         this.search.submitted = false;
-        this.users = users as UserModel[];
+        this.users = users as User[];
       })
       .catch(error => {
         this.search.submitted = false;
@@ -89,7 +89,7 @@ export class UsersComponent implements OnInit {
     this.router.navigate(['/pages/admin/rmca/user', userId]);
   }
 
-  public banUser(user: UserModel): void {
+  public banUser(user: User): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -102,7 +102,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public unBanUser(user: UserModel): void {
+  public unBanUser(user: User): void {
     const activeModal = this.modalService.open(UserUnbanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -119,7 +119,7 @@ export class UsersComponent implements OnInit {
   private getUsers(keyword: string, page: number, limit: number): void {
     this.rmcaService.searchUsers(keyword, page, limit)
       .then(users => {
-        this.users = users as UserModel[];
+        this.users = users as User[];
       })
       .catch(error => {
         this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);

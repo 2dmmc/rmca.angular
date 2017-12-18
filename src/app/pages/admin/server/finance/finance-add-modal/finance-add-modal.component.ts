@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {FinanceModel} from '../../../../@model/finance.model';
+import {FinanceModel} from '../../../../../@model/finance.model';
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],

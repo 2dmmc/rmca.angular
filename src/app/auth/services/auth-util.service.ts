@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 
 import {AuthService} from './auth.service';
 import {UserService} from '../../pages/user/user.service';
-import {LoginStateResult} from '../@model/loginStateResult';
-import {UserModel} from '../../pages/@model/user.model';
+import {LoginStateResult} from '../../@model/loginStateResult';
+import {LoginStateResultUser} from '../../@model/user/auth/login-state-result.interface';
 
 @Injectable()
 export class AuthUtilService {
@@ -18,7 +18,7 @@ export class AuthUtilService {
 
     if (loginState) {
       loginStateResult.isLogin = true;
-      loginStateResult.user = loginState as UserModel;
+      loginStateResult.user = loginState as LoginStateResultUser;
       return loginStateResult;
     } else {
       loginStateResult.isLogin = false;

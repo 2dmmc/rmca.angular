@@ -4,7 +4,9 @@ import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {UserService} from '../../../pages/user/user.service';
 
 import {NoticeService} from '../../../@system/notice/notice.service';
-import {EmptyUser, UserModel} from '../../../pages/@model/user.model';
+
+import {User} from '../../../@model/user/user.interface';
+import {DefaultUser} from '../../../@model/user/user.const';
 
 @Component({
   selector: 'ngx-header',
@@ -19,7 +21,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: UserModel;
+  user: User;
 
   userMenu = [{
     title: '个人中心',
@@ -33,13 +35,13 @@ export class HeaderComponent implements OnInit {
               private menuService: NbMenuService,
               private userService: UserService,
               private noticeService: NoticeService) {
-    this.user = EmptyUser;
+    this.user = DefaultUser;
   }
 
   ngOnInit() {
     this.userService.getUserProfile()
       .then(userProfile => {
-        this.user = userProfile as UserModel;
+        this.user = userProfile as User;
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);

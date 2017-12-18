@@ -4,7 +4,9 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 
 import {UserService} from '../user.service';
 
-import {EmptyUser, UserModel} from '../../@model/user.model';
+import {User} from '../../../@model/user/user.interface';
+import {DefaultUser} from '../../../@model/user/user.const';
+
 
 @Component({
   styleUrls: ['./profile.component.scss'],
@@ -12,11 +14,11 @@ import {EmptyUser, UserModel} from '../../@model/user.model';
 })
 
 export class ProfileComponent implements OnInit {
-  user: UserModel;
+  user: User;
 
   constructor(private noticeService: NoticeService,
               private userService: UserService) {
-    this.user = EmptyUser;
+    this.user = DefaultUser;
   }
 
   public ngOnInit(): void {
@@ -26,7 +28,7 @@ export class ProfileComponent implements OnInit {
   public getUserProfile(): void {
     this.userService.getUserProfile()
       .then(userProfile => {
-        this.user = userProfile as UserModel;
+        this.user = userProfile as User;
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);

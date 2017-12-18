@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
-import {UserModel} from '../../../@model/user.model';
+import {User} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {UserService} from '../../user.service';
   templateUrl: './social-QQ-state.component.html',
 })
 export class SocialQQStateComponent {
-  @Input() user: UserModel;
+  @Input() user: User;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService) {

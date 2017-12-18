@@ -4,7 +4,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {UserModel} from '../../../@model/user.model';
+import {User} from '../../../../@model/user/user.interface';
 
 @Component({
   styleUrls: ['./admins.component.scss'],
@@ -12,7 +12,7 @@ import {UserModel} from '../../../@model/user.model';
 })
 
 export class AdminsComponent implements OnInit {
-  admins: UserModel[];
+  admins: User[];
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
@@ -27,14 +27,14 @@ export class AdminsComponent implements OnInit {
   private getAdmins(): void {
     this.rmcaService.getAdmins()
       .then(users => {
-        this.admins = users as UserModel[];
+        this.admins = users as User[];
       })
       .catch(error => {
         this.noticeService.error('获取管理员列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
   }
 
-  // public banUser(user: UserModel): void {
+  // public banUser(user: User): void {
   //   const activeModal = this.modalService.open(UserBanModalComponent, {
   //     size: 'lg',
   //     container: 'nb-layout',
@@ -47,7 +47,7 @@ export class AdminsComponent implements OnInit {
   //   });
   // }
   //
-  // public unBanUser(user: UserModel): void {
+  // public unBanUser(user: User): void {
   //   const activeModal = this.modalService.open(UserUnbanModalComponent, {
   //     size: 'lg',
   //     container: 'nb-layout',

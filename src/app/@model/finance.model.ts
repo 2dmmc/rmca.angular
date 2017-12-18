@@ -1,4 +1,4 @@
-import {UserModel} from './user.model';
+import {User} from './user/user.interface';
 
 export class FinanceModel {
   _id?: number;
@@ -10,5 +10,5 @@ export class FinanceModel {
   accrual: number;
   balance?: number;
   comment?: string;
-  user?: UserModel;
+  user?: User;
 }

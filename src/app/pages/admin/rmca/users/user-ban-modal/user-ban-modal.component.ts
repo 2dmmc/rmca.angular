@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {RmcaService} from '../../rmca.service';
 
-import {UserModel} from '../../../../@model/user.model';
+import {User} from '../../../../../@model/user/user.interface';
 
 @Component({
   styleUrls: ['./user-ban-modal.component.scss'],
@@ -12,7 +12,7 @@ import {UserModel} from '../../../../@model/user.model';
 })
 
 export class UserBanModalComponent {
-  @Input() user: UserModel;
+  @Input() user: User;
   @Output() event = new EventEmitter();
   reason: string;
   submitted: boolean;

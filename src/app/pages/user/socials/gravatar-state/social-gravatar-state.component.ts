@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
-import {UserModel} from '../../../@model/user.model';
+import {User} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';
 
 @Component({
@@ -12,7 +12,7 @@ import {UserService} from '../../user.service';
   templateUrl: './social-gravatar-state.component.html',
 })
 export class SocialGravatarStateComponent {
-  @Input() user: UserModel;
+  @Input() user: User;
 
   constructor(private router: Router,
               private userService: UserService,

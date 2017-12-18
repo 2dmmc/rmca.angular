@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {ServerModel} from '../../../../@model/server.model';
+import {ServerModel} from '../../../../../@model/server.model';
 
 @Component({
   styleUrls: ['./server-add-modal.component.scss'],

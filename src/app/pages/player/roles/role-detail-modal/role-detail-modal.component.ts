@@ -4,10 +4,12 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 import {PlayerService} from '../../player.service';
-import {EmptyUser, UserModel} from '../../../@model/user.model';
 import {UserService} from '../../../user/user.service';
 
-import {EmptyRole, RoleModel} from '../../../@model/role.model';
+import {User} from '../../../../@model/user/user.interface';
+import {DefaultUser} from '../../../../@model/user/user.const';
+
+import {EmptyRole, RoleModel} from '../../../../@model/role.model';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -18,7 +20,7 @@ export class RoleDetailModalComponent implements OnInit {
   @Input() roleId;
   @Output() event = new EventEmitter();
   role: RoleModel;
-  user: UserModel;
+  user: User;
   submitted: boolean;
   skinType: any;
 
@@ -28,7 +30,7 @@ export class RoleDetailModalComponent implements OnInit {
               private activeModal: NgbActiveModal) {
     this.submitted = false;
     this.role = EmptyRole;
-    this.user = EmptyUser;
+    this.user = DefaultUser;
     this.skinType = 'upload';
   }
 
@@ -44,7 +46,7 @@ export class RoleDetailModalComponent implements OnInit {
 
     this.userService.getUserProfile()
       .then(user => {
-        this.user = user as UserModel;
+        this.user = user as User;
       })
       .catch(error => {
         this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);

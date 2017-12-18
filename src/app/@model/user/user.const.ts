@@ -1,20 +1,4 @@
-export class UserModel {
-  _id?: any;
-  username: string;
-  email: string;
-  isEmailVerify?: boolean;
-  avatar?: string;
-  admin?: boolean;
-  ban?: string;
-  yggdrasil?: {
-    username: string,
-    uuid: string,
-  };
-  accounts?: any;
-  impersonate?: boolean;
-}
-
-export const EmptyUser = {
+export const DefaultUser = {
   _id: null,
   username: 'default',
   email: 'default@email.com',
