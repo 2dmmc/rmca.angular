@@ -15,16 +15,23 @@ import {ToasterModule} from 'angular2-toaster';
 import {Ng2Webstorage} from 'ngx-webstorage';
 
 import {UserCacheService} from './@system/cache/service/user-cache.service';
+import {RolesCacheService} from './@system/cache/service/roles-cache.service';
+import {RoleCacheService} from './@system/cache/service/role-cache.service';
+
 import {NoticeService} from './@system/notice/notice.service';
 import {AuthService} from './auth/services/auth.service';
 import {AuthUtilService} from './auth/services/auth-util.service';
 import {UserService} from './pages/user/user.service';
+
 import {NeedLoginGuard} from './auth/guards/needLogin.guard';
 import {NeedAdminGuard} from './auth/guards/needAdmin.guard';
+
 import * as fundebug from 'fundebug-javascript';
 
 const cacheServices = [
   UserCacheService,
+  RolesCacheService,
+  RoleCacheService,
 ];
 
 const globalServices = [

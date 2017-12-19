@@ -7,6 +7,7 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 
 import {User} from '../../../@model/user/user.interface';
 import {DefaultUser} from '../../../@model/user/user.const';
+import {UserCacheService} from '../../../@system/cache/service/user-cache.service';
 
 @Component({
   selector: 'ngx-header',
@@ -33,19 +34,12 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
-              private noticeService: NoticeService) {
+              private userCacheService: UserCacheService) {
     this.user = DefaultUser;
   }
 
   ngOnInit() {
-    this.userService.getUserProfile()
-      .then(userProfile => {
-        this.user = userProfile as User;
-      })
-      .catch(error => {
-        this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+    this.user = this.userCacheService.getCache();
   }
 
   toggleSidebar(): boolean {

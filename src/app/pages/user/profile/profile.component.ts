@@ -27,7 +27,7 @@ export class ProfileComponent implements OnInit {
     this.user = this.userCacheService.getCache();
   }
 
-  public async getUserProfile() {
+  public async getUserProfile(): Promise<void> {
     try {
       const user = await this.userService.getUserProfile();
 

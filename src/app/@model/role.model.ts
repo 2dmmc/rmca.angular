@@ -1,7 +1,7 @@
 import {User} from './user/user.interface';
 import {DefaultUser} from './user/user.const';
 
-export class RoleModel {
+export class Role {
   _id: any;
   rolename: string;
   uuid: string;
@@ -12,7 +12,7 @@ export class RoleModel {
   skin?: string;
 }
 
-export const EmptyRole: RoleModel = {
+export const EmptyRole: Role = {
   _id: null,
   rolename: 'default',
   uuid: null,

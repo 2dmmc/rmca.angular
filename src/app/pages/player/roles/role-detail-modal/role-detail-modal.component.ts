@@ -4,12 +4,13 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
 import {PlayerService} from '../../player.service';
-import {UserService} from '../../../user/user.service';
 
 import {User} from '../../../../@model/user/user.interface';
 import {DefaultUser} from '../../../../@model/user/user.const';
 
-import {EmptyRole, RoleModel} from '../../../../@model/role.model';
+import {EmptyRole, Role} from '../../../../@model/role.model';
+import {RoleCacheService} from '../../../../@system/cache/service/role-cache.service';
+import {UserCacheService} from '../../../../@system/cache/service/user-cache.service';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -19,13 +20,14 @@ import {EmptyRole, RoleModel} from '../../../../@model/role.model';
 export class RoleDetailModalComponent implements OnInit {
   @Input() roleId;
   @Output() event = new EventEmitter();
-  role: RoleModel;
+  role: Role;
   user: User;
   submitted: boolean;
   skinType: any;
 
   constructor(private playerService: PlayerService,
-              private userService: UserService,
+              private userCacheService: UserCacheService,
+              private roleCacheService: RoleCacheService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
     this.submitted = false;
@@ -35,22 +37,30 @@ export class RoleDetailModalComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.playerService.getRole(this.roleId)
-      .then((role: RoleModel) => {
-        this.role = role;
-        this.role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
-      })
-      .catch(error => {
-        this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+    this.user = this.userCacheService.getCache();
+    const role = this.roleCacheService.getCache(this.roleId);
 
-    this.userService.getUserProfile()
-      .then(user => {
-        this.user = user as User;
-      })
-      .catch(error => {
-        this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+    console.log(role);
+
+    if (role == null) {
+      this.getRole();
+    } else {
+      this.role = role;
+    }
+  }
+
+  public async getRole() {
+    try {
+      const role = await this.playerService.getRole(this.roleId) as Role;
+
+      role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
+
+      this.roleCacheService.setCache(this.roleId, role as Role);
+      this.role = role;
+    } catch (error) {
+      this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      console.trace(error);
+    }
   }
 
   public getFiles(event, roleForm): void {
@@ -72,6 +82,7 @@ export class RoleDetailModalComponent implements OnInit {
 
     this.playerService.updateRole(this.role._id, this.role.userModel, this.role['file'])
       .then(updateState => {
+        this.roleCacheService.deleteUser(this.roleId);
         this.noticeService.success('更新成功', '更新角色详情成功');
         this.event.emit();
         this.activeModal.close();
