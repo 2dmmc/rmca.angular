@@ -40,8 +40,6 @@ export class RoleDetailModalComponent implements OnInit {
     this.user = this.userCacheService.getCache();
     const role = this.roleCacheService.getCache(this.roleId);
 
-    console.log(role);
-
     if (role == null) {
       this.getRole();
     } else {
