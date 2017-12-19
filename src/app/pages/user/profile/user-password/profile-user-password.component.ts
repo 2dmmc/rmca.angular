@@ -17,30 +17,29 @@ export class ProfileUserPasswordComponent {
     this.submitted = false;
   }
 
-  public updatePassword(passwordForm): void {
+  public async updatePassword(passwordForm) {
     this.submitted = true;
 
-    this.userService.updateUserPassword(passwordForm.password, passwordForm.newPassword)
-      .then(updateState => {
-        this.submitted = false;
-        this.noticeService.success('更新密码成功', '更新密码成功');
-      })
-      .catch(error => {
-        this.submitted = false;
+    try {
+      await this.userService.updateUserPassword(passwordForm.password, passwordForm.newPassword);
+      this.submitted = false;
+      this.noticeService.success('更新密码成功', '更新密码成功');
+    } catch (error) {
+      this.submitted = false;
 
-        let errorMessage = '';
+      let errorMessage = '';
 
-        switch (error.status) {
-          case 403: {
-            errorMessage = '当前密码错误';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
+      switch (error.status) {
+        case 403: {
+          errorMessage = '当前密码错误';
+          break;
         }
+        default: {
+          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        }
+      }
 
-        this.noticeService.error('更新密码失败', errorMessage);
-      });
+      this.noticeService.error('更新密码失败', errorMessage);
+    }
   }
 }

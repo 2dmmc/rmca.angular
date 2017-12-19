@@ -17,25 +17,24 @@ export class SocialGravatarStateComponent {
               private noticeService: NoticeService) {
   }
 
-  public updateUserAvatar(): void {
-    this.userService.updateUserAvatar('gravatar')
-      .then(updateState => {
-        this.noticeService.success('更换头像成功', 'RMCA头像已经更换为 Gravatar 头像');
-      })
-      .catch(error => {
-        let errorMessage = '';
+  public async updateUserAvatar() {
+    try {
+      await this.userService.updateUserAvatar('gravatar');
+      this.noticeService.success('更换头像成功', 'RMCA头像已经更换为 Gravatar 头像');
+    } catch (error) {
+      let errorMessage = '';
 
-        switch (error.status) {
-          case 406: {
-            errorMessage = '你还未绑定该社交账户';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
+      switch (error.status) {
+        case 406: {
+          errorMessage = '你还未绑定该社交账户';
+          break;
         }
+        default: {
+          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        }
+      }
 
-        this.noticeService.error('更换头像失败', errorMessage);
-      });
+      this.noticeService.error('更换头像失败', errorMessage);
+    }
   }
 }

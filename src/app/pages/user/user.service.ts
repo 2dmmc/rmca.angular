@@ -23,7 +23,7 @@ export class UserService {
    * @param {string} email 电子邮箱
    * @return {Promise<Object>}
    */
-  updateUserProfile(email: string): Promise<object> {
+  public async updateUserProfile(email: string): Promise<object> {
     const params = new HttpParams()
       .set('email', email);
 
@@ -38,7 +38,7 @@ export class UserService {
    * @param {string} newPassword 新密码
    * @return {Promise<Object>}
    */
-  updateUserPassword(password: string, newPassword: string): Promise<object> {
+  public async updateUserPassword(password: string, newPassword: string): Promise<object> {
     const params = new HttpParams()
       .set('password', password)
       .set('newPassword', newPassword);
@@ -54,7 +54,7 @@ export class UserService {
    * @param {string} password Mojang密码
    * @return {Promise<Object>}
    */
-  updateUserYggdrasil(username: string, password: string): Promise<object> {
+  public async updateUserYggdrasil(username: string, password: string): Promise<object> {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password);
@@ -69,7 +69,7 @@ export class UserService {
    * @param {string} hash URL中的hash
    * @return {Promise<Object>}
    */
-  verifyEmail(hash: string): Promise<object> {
+  public async verifyEmail(hash: string): Promise<object> {
     return this.http.patch(`/api/user/email-verify/${hash}`, {})
       .toPromise();
   }
@@ -79,13 +79,13 @@ export class UserService {
    * @description 重新发送"验证用户电子邮箱是否有效"的电子邮件. 返回发送结果.
    * @return {Promise<Object>}
    */
-  resendVerifyEmail(): Promise<object> {
+  public async resendVerifyEmail(): Promise<object> {
     return this.http.get('/api/user/resend-verify-email')
       .toPromise();
   }
 
   // TODO 补充文档
-  updateUserAvatar(socialType: string): Promise<object> {
+  public async updateUserAvatar(socialType: string): Promise<object> {
     return this.http.post(`/api/social/avatar/${socialType}`, {})
       .toPromise();
   }

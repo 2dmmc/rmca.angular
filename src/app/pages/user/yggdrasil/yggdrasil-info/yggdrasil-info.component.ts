@@ -18,35 +18,34 @@ export class YggdrasilInfoComponent {
     this.submitted = false;
   }
 
-  public updateYggdrasil(yggdrasilForm): void {
+  public async updateYggdrasil(yggdrasilForm) {
     this.submitted = true;
 
-    this.userService.updateUserYggdrasil(yggdrasilForm.username, yggdrasilForm.password)
-      .then(updateState => {
-        this.submitted = false;
-        this.noticeService.success('更新成功', '更新正版验证状态成功');
-        this.needGetYggdrasilInfo.emit();
-      })
-      .catch(error => {
-        this.submitted = false;
+    try {
+      await this.userService.updateUserYggdrasil(yggdrasilForm.username, yggdrasilForm.password);
+      this.submitted = false;
+      this.noticeService.success('更新成功', '更新正版验证状态成功');
+      this.needGetYggdrasilInfo.emit();
+    } catch (error) {
+      this.submitted = false;
 
-        let errorMessage = '';
+      let errorMessage = '';
 
-        switch (error.status) {
-          case 403: {
-            errorMessage = '用户名或密码错误';
-            break;
-          }
-          case 406: {
-            errorMessage = 'no selectedProfile 一般不会出现，需要去mojang页面手工选择一下profile';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
+      switch (error.status) {
+        case 403: {
+          errorMessage = '用户名或密码错误';
+          break;
         }
+        case 406: {
+          errorMessage = 'no selectedProfile 一般不会出现，需要去mojang页面手工选择一下profile';
+          break;
+        }
+        default: {
+          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        }
+      }
 
-        this.noticeService.error('更新正版验证状态失败', errorMessage);
-      });
+      this.noticeService.error('更新正版验证状态失败', errorMessage);
+    }
   }
 }
