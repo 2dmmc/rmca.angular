@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {StorageService} from '../../storage/storage.service';
-import {Role} from '../../../@model/role.model';
+import {Role} from '../../../@model/player/role/role.interface';
 
 @Injectable()
 export class RolesCacheService {

@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {ServerModel} from '../../../../../@model/server.model';
+import {Server} from '../../../../../@model/admin/server/server.interface';
 
 @Component({
   styleUrls: ['./server-add-modal.component.scss'],
@@ -13,7 +13,7 @@ import {ServerModel} from '../../../../../@model/server.model';
 
 export class ServerAddModalComponent {
   @Output() event = new EventEmitter();
-  server: ServerModel;
+  server: Server;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,

@@ -1,4 +1,4 @@
-import {LoginStateResultUser} from './user/auth/login-state-result.interface';
+import {LoginStateResultUser} from './login-state-result-user.interface';
 
 export class LoginStateResult {
   isLogin: boolean;

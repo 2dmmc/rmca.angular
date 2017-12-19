@@ -8,7 +8,9 @@ import {PlayerService} from '../../player.service';
 import {User} from '../../../../@model/user/user.interface';
 import {DefaultUser} from '../../../../@model/user/user.const';
 
-import {EmptyRole, Role} from '../../../../@model/role.model';
+import {Role} from '../../../../@model/player/role/role.interface';
+import {DefaultRole} from '../../../../@model/player/role/role.const';
+
 import {RoleCacheService} from '../../../../@system/cache/service/role-cache.service';
 import {UserCacheService} from '../../../../@system/cache/service/user-cache.service';
 
@@ -31,7 +33,7 @@ export class RoleDetailModalComponent implements OnInit {
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
     this.submitted = false;
-    this.role = EmptyRole;
+    this.role = DefaultRole;
     this.user = DefaultUser;
     this.skinType = 'upload';
   }

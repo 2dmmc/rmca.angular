@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {FinanceModel} from '../../../../../@model/finance.model';
+import {Finance} from '../../../../../@model/admin/server/finance.interface';
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],
@@ -13,7 +13,7 @@ import {FinanceModel} from '../../../../../@model/finance.model';
 
 export class FinanceAddModalComponent {
   @Output() event = new EventEmitter();
-  finance: FinanceModel;
+  finance: Finance;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,

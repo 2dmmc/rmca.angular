@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 
 import {AuthService} from './auth.service';
-import {LoginStateResult} from '../../@model/loginStateResult';
-import {LoginStateResultUser} from '../../@model/user/auth/login-state-result.interface';
+import {LoginStateResult} from '../../@model/auth/login-state-result.class';
+import {LoginStateResultUser} from '../../@model/auth/login-state-result-user.interface';
 
 import {UserCacheService} from '../../@system/cache/service/user-cache.service';
 

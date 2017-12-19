@@ -7,7 +7,7 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
-import {Role} from '../../../@model/role.model';
+import {Role} from '../../../@model/player/role/role.interface';
 import {RolesCacheService} from '../../../@system/cache/service/roles-cache.service';
 
 @Component({

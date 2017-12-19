@@ -8,7 +8,7 @@ import {ServerAddModalComponent} from './server-add-modal/server-add-modal.compo
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
-import {ServerModel} from '../../../../@model/server.model';
+import {Server} from '../../../../@model/admin/server/server.interface';
 
 @Component({
   selector: 'ngx-servers',
@@ -17,7 +17,7 @@ import {ServerModel} from '../../../../@model/server.model';
 })
 
 export class ServersComponent implements OnInit {
-  servers: ServerModel[];
+  servers: Server[];
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
@@ -31,7 +31,7 @@ export class ServersComponent implements OnInit {
 
   public getServers(): void {
     this.managerService.getServers()
-      .then((servers: ServerModel[]) => {
+      .then((servers: Server[]) => {
         this.servers = servers;
       })
       .catch(error => {
