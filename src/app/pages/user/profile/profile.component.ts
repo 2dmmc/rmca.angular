@@ -35,6 +35,7 @@ export class ProfileComponent implements OnInit {
       this.user = user as User;
     } catch (error) {
       this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      console.trace(error);
     }
   }
 }

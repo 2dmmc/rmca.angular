@@ -41,6 +41,7 @@ export class NeedLoginGuard implements CanActivate {
       }
 
     } catch (error) {
+      this.noticeService.error('[NeedLoginGuard] canActivate', error);
       console.trace(error);
     }
   }
