@@ -4,29 +4,44 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthUtilService} from '../services/auth-util.service';
 import {NoticeService} from '../../@system/notice/notice.service';
 
+import {UserCacheService} from '../../@system/cache/service/user-cache.service';
+import {UserService} from '../../pages/user/user.service';
+import {User} from '../../@model/user/user.interface';
+
 @Injectable()
 export class NeedLoginGuard implements CanActivate {
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
+              private userService: UserService,
+              private userCacheService: UserCacheService,
               private noticeService: NoticeService) {
   }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const isUserAuthenticated = await this.authUtilService.isUserAuthenticated();
+    try {
+      const isUserAuthenticated = await this.authUtilService.isUserAuthenticated();
 
-    if (isUserAuthenticated.isLogin) {
-      if (isUserAuthenticated.user.impersonate) {
-        this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${isUserAuthenticated.user.username}`);
+      if (isUserAuthenticated.isLogin) {
+        this.userCacheService.setCache(await this.userService.getUserProfile() as User);
+
+        if (isUserAuthenticated.user.impersonate) {
+          this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${isUserAuthenticated.user.username}`);
+        } else {
+          this.noticeService.info('不要变成发抖的小喵喵', '|･ω･｀)');
+        }
+
+        return true;
       } else {
-        this.noticeService.info('不要变成发抖的小喵喵', '|･ω･｀)');
+        this.userCacheService.deleteUser();
+
+        this.noticeService.warning('Auth Router Guard (needLogin)', '你还未登陆');
+        this.router.navigate(['/auth/login']);
+
+        return false;
       }
 
-      return true;
-    } else {
-      this.noticeService.warning('Auth Router Guard (needLogin)', '请先登录');
-      this.router.navigate(['/auth/login']);
-
-      return false;
+    } catch (error) {
+      throw new Error('[NeedLoginGuard] can not get login state');
     }
   }
 }

@@ -17,7 +17,7 @@ import {AuthUtilService} from '../auth/services/auth-util.service';
 })
 
 export class PagesComponent implements OnInit {
-  menu = [];
+  menu: any;
 
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
@@ -25,26 +25,18 @@ export class PagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.menu = USER_MENU_ITEMS;
+    let menu = [];
 
-    this.authUtilService.isAdmin()
-      .then(isAdmin => {
-        if (isAdmin) {
-          this.menuService.addItems(ADMIN_MENU_ITEMS);
-        }
-      })
-      .catch(error => {
+    menu.push.apply(menu, USER_MENU_ITEMS);
 
-      });
+    if (this.authUtilService.isAdmin()) {
+      menu.push.apply(menu, ADMIN_MENU_ITEMS);
+    }
 
-    this.authUtilService.isDeveloper()
-      .then(isDeveloper => {
-        if (isDeveloper) {
-          this.menuService.addItems(DEVELOPER_MENU_ITEMS);
-        }
-      })
-      .catch(error => {
+    if (this.authUtilService.isDeveloper()) {
+      menu.push.apply(menu, DEVELOPER_MENU_ITEMS);
+    }
 
-      });
+    this.menu = menu;
   }
 }

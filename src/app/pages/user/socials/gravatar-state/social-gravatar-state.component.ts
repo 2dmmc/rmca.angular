@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Router} from '@angular/router';
 
 import {NoticeService} from '../../../../@system/notice/notice.service';
 
@@ -14,8 +13,7 @@ import {UserService} from '../../user.service';
 export class SocialGravatarStateComponent {
   @Input() user: User;
 
-  constructor(private router: Router,
-              private userService: UserService,
+  constructor(private userService: UserService,
               private noticeService: NoticeService) {
   }
 

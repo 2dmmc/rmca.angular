@@ -11,15 +11,13 @@ export class NeedAdminGuard implements CanActivate {
               private noticeService: NoticeService) {
   }
 
-  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return this.authUtilService.isAdmin()
-      .then(isAdmin => {
-        return isAdmin;
-      })
-      .catch(notAdmin => {
-        this.noticeService.warning('Auth Router Guard (needAdmin)', '你又不是鹳狸猿');
-        this.router.navigate(['/pages/dashboard']);
-        return notAdmin;
-      });
+  public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+    if (this.authUtilService.isAdmin()) {
+      return true;
+    } else {
+      this.noticeService.warning('Auth Router Guard (needAdmin)', '你又不是鹳狸猿');
+      this.router.navigate(['/pages/dashboard']);
+      return false;
+    }
   }
 }

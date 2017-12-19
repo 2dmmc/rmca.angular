@@ -1,7 +1,5 @@
 import {Component} from '@angular/core';
 
-import {StateService} from '../../../@core/data/state.service';
-
 @Component({
   selector: 'ngx-theme-settings',
   styleUrls: ['./theme-settings.component.scss'],
@@ -33,12 +31,7 @@ export class ThemeSettingsComponent {
   layouts = [];
   sidebars = [];
 
-  constructor(protected stateService: StateService) {
-    this.stateService.getLayoutStates()
-      .subscribe((layouts: any[]) => this.layouts = layouts);
-
-    this.stateService.getSidebarStates()
-      .subscribe((sidebars: any[]) => this.sidebars = sidebars);
+  constructor() {
   }
 
   layoutSelect(layout: any): boolean {
@@ -48,7 +41,6 @@ export class ThemeSettingsComponent {
     });
 
     layout.selected = true;
-    this.stateService.setLayoutState(layout);
     return false;
   }
 
@@ -59,7 +51,6 @@ export class ThemeSettingsComponent {
     });
 
     sidebars.selected = true;
-    this.stateService.setSidebarState(sidebars);
     return false;
   }
 }

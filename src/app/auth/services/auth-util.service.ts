@@ -1,14 +1,15 @@
 import {Injectable} from '@angular/core';
 
 import {AuthService} from './auth.service';
-import {UserService} from '../../pages/user/user.service';
 import {LoginStateResult} from '../../@model/loginStateResult';
 import {LoginStateResultUser} from '../../@model/user/auth/login-state-result.interface';
+
+import {UserCacheService} from '../../@system/cache/service/user-cache.service';
 
 @Injectable()
 export class AuthUtilService {
   constructor(private authService: AuthService,
-              private userService: UserService) {
+              private userCacheService: UserCacheService) {
   }
 
   // TODO 补齐文档
@@ -27,37 +28,11 @@ export class AuthUtilService {
     }
   }
 
-  public isAdmin(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-        this.userService.getUserProfile()
-          .then(user => {
-            if (user['admin']) {
-              resolve(true);
-            } else {
-              reject(false);
-            }
-          })
-          .catch(error => {
-            reject(error);
-          });
-      },
-    );
+  public isAdmin(): boolean {
+    return this.userCacheService.getCache().admin;
   }
 
-  public isDeveloper(): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.userService.getUserProfile()
-        .then(user => {
-          if (user['username'] === 'sdjnmxd' || user['username'] === 'bangbang93') {
-            resolve(true);
-          } else {
-            reject(false);
-          }
-        })
-        .catch(error => {
-          console.error(error);
-          reject(error);
-        });
-    });
+  public isDeveloper(): boolean {
+    return this.userCacheService.getCache().username === 'sdjnmxd' || this.userCacheService.getCache().username === 'bangbang93';
   }
 }

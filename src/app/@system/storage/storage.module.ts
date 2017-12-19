@@ -5,5 +5,5 @@ import {NgModule} from '@angular/core';
   declarations: [],
   providers: [],
 })
-export class NoticeModule {
+export class StorageModule {
 }

@@ -12,7 +12,7 @@ export class UserService {
    * @description 获取当前用户的个人资料. 返回不完整的User模型.
    * @return {Promise<Object>}
    */
-  getUserProfile(): Promise<object> {
+  public async getUserProfile(): Promise<object> {
     return this.http.get('/api/user/profile')
       .toPromise();
   }
