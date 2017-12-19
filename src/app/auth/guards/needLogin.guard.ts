@@ -41,7 +41,7 @@ export class NeedLoginGuard implements CanActivate {
       }
 
     } catch (error) {
-      throw new Error('[NeedLoginGuard] can not get login state');
+      console.trace(error);
     }
   }
 }

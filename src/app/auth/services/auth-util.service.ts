@@ -12,19 +12,22 @@ export class AuthUtilService {
               private userCacheService: UserCacheService) {
   }
 
-  // TODO 补齐文档
   public async isUserAuthenticated(): Promise<LoginStateResult> {
-    const loginState = await this.authService.getLoginState();
-    const loginStateResult = new LoginStateResult();
+    try {
+      const loginState = await this.authService.getLoginState();
+      const loginStateResult = new LoginStateResult();
 
-    if (loginState) {
-      loginStateResult.isLogin = true;
-      loginStateResult.user = loginState as LoginStateResultUser;
-      return loginStateResult;
-    } else {
-      loginStateResult.isLogin = false;
-      loginStateResult.user = null;
-      return loginStateResult;
+      if (loginState) {
+        loginStateResult.isLogin = true;
+        loginStateResult.user = loginState as LoginStateResultUser;
+        return loginStateResult;
+      } else {
+        loginStateResult.isLogin = false;
+        loginStateResult.user = null;
+        return loginStateResult;
+      }
+    } catch (error) {
+      console.trace(error);
     }
   }
 
