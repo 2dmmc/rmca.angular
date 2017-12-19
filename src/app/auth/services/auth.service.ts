@@ -99,7 +99,7 @@ export class AuthService {
    * @return {Promise<Object>}
    */
   public async getLoginState(): Promise<object> {
-    return this.http.get('/api/user/khhjb')
+    return this.http.get('/api/user/login')
       .toPromise();
   }
 
