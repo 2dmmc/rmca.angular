@@ -20,9 +20,7 @@
         <button class="btn btn-info" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-header>
       <nb-card-body>
-        <div class="skin-viewer">
-          <img [src]="role.skin" alt="">
-        </div>
+        <rmca-skin-viewer [role]="role"></rmca-skin-viewer>
       </nb-card-body>
       <nb-card-footer>
         <button class="btn btn-hero-success"

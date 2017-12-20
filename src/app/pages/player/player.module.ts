@@ -6,6 +6,7 @@ import {PlayerRoutingModule, routedComponents} from './player-routing.module';
 
 import {PlayerComponent} from './player.component';
 import {RolesComponent} from './roles/roles.component';
+import {SkinViewerComponent} from './roles/skin-viewer/skin-viewer.component';
 import {RoleAddModalComponent} from './roles/role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './roles/role-detail-modal/role-detail-modal.component';
 
@@ -16,6 +17,7 @@ import {NoticeService} from '../../@system/notice/notice.service';
 const components = [
   PlayerComponent,
   RolesComponent,
+  SkinViewerComponent,
   RoleAddModalComponent,
   RoleDetailModalComponent,
 ];
