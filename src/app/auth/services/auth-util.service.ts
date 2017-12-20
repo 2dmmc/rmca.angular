@@ -13,9 +13,10 @@ export class AuthUtilService {
   }
 
   public async isUserAuthenticated(): Promise<LoginStateResult> {
+    const loginStateResult = new LoginStateResult();
+
     try {
       const loginState = await this.authService.getLoginState();
-      const loginStateResult = new LoginStateResult();
 
       if (loginState) {
         loginStateResult.isLogin = true;
@@ -27,7 +28,10 @@ export class AuthUtilService {
         return loginStateResult;
       }
     } catch (error) {
-      console.trace(error);
+      loginStateResult.isLogin = false;
+      loginStateResult.user = null;
+      loginStateResult.error = error;
+      return loginStateResult;
     }
   }
 
