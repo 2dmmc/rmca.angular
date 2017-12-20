@@ -16,21 +16,15 @@ export class AuthUtilService {
     const loginStateResult = new LoginStateResult();
 
     try {
-      const loginState = await this.authService.getLoginState();
+      loginStateResult.isLogin = true;
+      loginStateResult.user = await this.authService.getLoginState() as LoginStateResultUser;
 
-      if (loginState) {
-        loginStateResult.isLogin = true;
-        loginStateResult.user = loginState as LoginStateResultUser;
-        return loginStateResult;
-      } else {
-        loginStateResult.isLogin = false;
-        loginStateResult.user = null;
-        return loginStateResult;
-      }
+      return loginStateResult;
     } catch (error) {
       loginStateResult.isLogin = false;
       loginStateResult.user = null;
       loginStateResult.error = error;
+
       return loginStateResult;
     }
   }
