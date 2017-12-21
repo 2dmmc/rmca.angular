@@ -10,10 +10,15 @@
     }
   }
 
-  .skin-viewer {
-    img {
-      height: 5rem;
-      width: 10rem;
+  .skin-view-group {
+    width: 100%;
+    margin-top: 1rem;
+
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+
+    .skin-viewer {
     }
   }
 }
