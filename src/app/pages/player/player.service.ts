@@ -43,19 +43,34 @@ export class PlayerService {
   }
 
   /**
-   * @name 更新角色详情
-   * @description 更新某个角色的详情信息. 入参为要更新的字段. 返回更新结果.
+   * @name 更新角色皮肤
+   * @description 更新某个角色的皮肤. 入参为要更新的字段. 返回更新结果.
    * @param {string} roleId 角色id
    * @param {string} skinModel 皮肤模型
-   * @param {string} skin 皮肤
+   * @param {File} skin 皮肤文件
    * @return {Promise<Object>}
    */
-  public updateRole(roleId: string, skinModel: string, skin: string): Promise<object> {
+  public updateRoleSkin(roleId: string, skinModel: string, skin: File): Promise<object> {
     const formData: any = new FormData();
     formData.append('model', skinModel);
     formData.append('skin', skin);
 
     return this.http.post(`/api/role/skin/${roleId}`, formData)
+      .toPromise();
+  }
+
+  /**
+   * @name 更新角色披风
+   * @description 更新某个角色的披风. 入参为要更新的字段. 返回更新结果.
+   * @param {string} roleId 角色id
+   * @param {File} cape 披风文件
+   * @return {Promise<Object>}
+   */
+  public updateRoleCape(roleId: string, cape: string): Promise<object> {
+    const formData: any = new FormData();
+    formData.append('cape', cape);
+
+    return this.http.post(`/api/role/cape/${roleId}`, formData)
       .toPromise();
   }
 

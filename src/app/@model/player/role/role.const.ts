@@ -9,4 +9,5 @@ export const DefaultRole: Role = {
   isDefault: false,
   userModel: 'alex',
   skin: '/assets/images/skin/default.png',
+  cape: null,
 };

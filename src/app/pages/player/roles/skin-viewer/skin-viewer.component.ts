@@ -24,6 +24,7 @@ export class SkinViewerComponent implements AfterViewInit {
       domElement: document.getElementById(this.random),
       slim: this.role.userModel == 'alex',
       skinUrl: this.role.skin,
+      capeUrl: this.role.cape,
       animation: skinview3d.WalkAnimation
     });
 

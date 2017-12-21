@@ -33,6 +33,7 @@ export class RolesComponent implements OnInit {
 
       roles.forEach(role => {
         role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
+        role['cape'] = `/api/role/cape/${role._id}?${Math.random()}`;
       });
 
       this.roles = roles;
@@ -46,6 +47,7 @@ export class RolesComponent implements OnInit {
     try {
       const role = await this.playerService.getRole(roleId) as Role;
       role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
+      role['cape'] = `/api/role/cape/${role._id}?${Math.random()}`;
 
       return role;
     } catch (error) {

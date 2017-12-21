@@ -38,11 +38,23 @@ export class RoleDetailModalComponent implements OnInit {
 
   }
 
-  public getFiles(event, roleForm): void {
+  public getFiles(event, type): void {
     const files = event.srcElement.files;
 
     if (files.length > 0) {
-      this.role['file'] = files[0];
+      switch (type) {
+        case 'skin': {
+          this.role['skinFile'] = files[0];
+          break;
+        }
+        case 'cape': {
+          this.role['capeFile'] = files[0];
+          break;
+        }
+        default: {
+          console.warn('getFiles type is default');
+        }
+      }
     }
   }
 
@@ -52,32 +64,37 @@ export class RoleDetailModalComponent implements OnInit {
   //   this.role.file = btoa(binaryString);
   // }
 
-  public updateRole(): void {
+  public async updateRole() {
     this.submitted = true;
 
-    this.playerService.updateRole(this.role._id, this.role.userModel, this.role['file'])
-      .then(updateState => {
-        this.noticeService.success('更新成功', '更新角色详情成功');
-        this.event.emit();
-        this.activeModal.close();
-      })
-      .catch(error => {
-        this.submitted = false;
+    try {
+      if (this.role['skinFile']) {
+        await this.playerService.updateRoleSkin(this.role._id, this.role.userModel, this.role['skinFile']);
+      }
+      if (this.role['capeFile']) {
+        await this.playerService.updateRoleCape(this.role._id, this.role['capeFile']);
+      }
 
-        let errorMessage = '';
+      this.noticeService.success('更新成功', '更新角色详情成功');
+      this.event.emit();
+      this.activeModal.close();
+    } catch (error) {
+      this.submitted = false;
 
-        switch (error.status) {
-          case 415: {
-            errorMessage = '图片格式不符, 请上传png';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
+      let errorMessage = '';
+
+      switch (error.status) {
+        case 415: {
+          errorMessage = '图片格式不符, 请上传png';
+          break;
         }
+        default: {
+          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+        }
+      }
 
-        this.noticeService.error('更新角色详情失败', errorMessage);
-      });
+      this.noticeService.error('更新角色详情失败', errorMessage);
+    }
   }
 
   public updateYggdrasilSkin(roleId): void {
