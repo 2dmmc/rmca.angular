@@ -1080,7 +1080,7 @@
       
       this.camera = new THREE.PerspectiveCamera(65);
       this.camera.position.x = 20;
-      this.camera.position.y = 3.5;
+      this.camera.position.y = -4;
       this.camera.position.z = 25;
       this.renderer = new THREE.WebGLRenderer({angleRot: true, alpha: true, antialias: false});
       this.renderer.setSize(300, 300); // default size
