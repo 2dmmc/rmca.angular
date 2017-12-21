@@ -53,7 +53,7 @@ export class RoleDetailModalComponent implements OnInit {
     try {
       const role = await this.playerService.getRole(this.roleId) as Role;
 
-      role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
+      role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
 
       this.roleCacheService.setCache(this.roleId, role as Role);
       this.role = role;

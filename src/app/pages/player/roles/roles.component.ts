@@ -40,7 +40,7 @@ export class RolesComponent implements OnInit {
       const roles = await this.playerService.getRoles() as Role[];
 
       roles.forEach(role => {
-        role['skin'] = `https://rmca.bangbang93.com/api/role/skin/${role._id}?${Math.random()}`;
+        role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
       });
 
       this.rolesCacheService.setCache(roles as Role[]);
