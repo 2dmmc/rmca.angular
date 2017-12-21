@@ -9,9 +9,7 @@ import {User} from '../../../../@model/user/user.interface';
 import {DefaultUser} from '../../../../@model/user/user.const';
 
 import {Role} from '../../../../@model/player/role/role.interface';
-import {DefaultRole} from '../../../../@model/player/role/role.const';
 
-import {RoleCacheService} from '../../../../@system/cache/service/role-cache.service';
 import {UserCacheService} from '../../../../@system/cache/service/user-cache.service';
 
 @Component({
@@ -20,47 +18,24 @@ import {UserCacheService} from '../../../../@system/cache/service/user-cache.ser
 })
 
 export class RoleDetailModalComponent implements OnInit {
-  @Input() roleId;
+  @Input() role: Role;
   @Output() event = new EventEmitter();
-  role: Role;
   user: User;
+
   submitted: boolean;
   skinType: any;
 
   constructor(private playerService: PlayerService,
               private userCacheService: UserCacheService,
-              private roleCacheService: RoleCacheService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
-    this.submitted = false;
-    this.role = DefaultRole;
     this.user = DefaultUser;
+    this.submitted = false;
     this.skinType = 'upload';
   }
 
   public ngOnInit(): void {
-    this.user = this.userCacheService.getCache();
-    const role = this.roleCacheService.getCache(this.roleId);
 
-    if (role == null) {
-      this.getRole();
-    } else {
-      this.role = role;
-    }
-  }
-
-  public async getRole() {
-    try {
-      const role = await this.playerService.getRole(this.roleId) as Role;
-
-      role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
-
-      this.roleCacheService.setCache(this.roleId, role as Role);
-      this.role = role;
-    } catch (error) {
-      this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      console.trace(error);
-    }
   }
 
   public getFiles(event, roleForm): void {
@@ -82,7 +57,6 @@ export class RoleDetailModalComponent implements OnInit {
 
     this.playerService.updateRole(this.role._id, this.role.userModel, this.role['file'])
       .then(updateState => {
-        this.roleCacheService.deleteUser(this.roleId);
         this.noticeService.success('更新成功', '更新角色详情成功');
         this.event.emit();
         this.activeModal.close();

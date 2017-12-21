@@ -8,7 +8,6 @@ import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
 import {Role} from '../../../@model/player/role/role.interface';
-import {RolesCacheService} from '../../../@system/cache/service/roles-cache.service';
 
 @Component({
   styleUrls: ['./roles.component.scss'],
@@ -20,19 +19,12 @@ export class RolesComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private playerService: PlayerService,
-              private modalService: NgbModal,
-              private rolesCacheService: RolesCacheService) {
+              private modalService: NgbModal) {
     this.roles = [];
   }
 
   public ngOnInit(): void {
-    const roles = this.rolesCacheService.getCache();
-
-    if (roles == null) {
-      this.getRoles();
-    } else {
-      this.roles = roles as Role[];
-    }
+    this.getRoles();
   }
 
   public async getRoles(): Promise<void> {
@@ -43,10 +35,21 @@ export class RolesComponent implements OnInit {
         role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
       });
 
-      this.rolesCacheService.setCache(roles as Role[]);
       this.roles = roles;
     } catch (error) {
       this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      console.trace(error);
+    }
+  }
+
+  public async getRole(roleId: string): Promise<Role> {
+    try {
+      const role = await this.playerService.getRole(roleId) as Role;
+      role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
+
+      return role;
+    } catch (error) {
+      this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       console.trace(error);
     }
   }
@@ -90,15 +93,15 @@ export class RolesComponent implements OnInit {
     });
   }
 
-  public openRoleDetailModal(roleId: string): void {
+  public async openRoleDetailModal(roleId: string) {
+    const role = await this.getRole(roleId);
     const activeModal = this.modalService.open(RoleDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.roleId = roleId;
-
+    activeModal.componentInstance.role = role;
     activeModal.componentInstance.event.subscribe(() => {
       this.getRoles();
     });
