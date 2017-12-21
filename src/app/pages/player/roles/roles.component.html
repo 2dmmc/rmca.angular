@@ -1,18 +1,5 @@
 <div class="row">
-  <div class="col-lg-12">
-    <nb-card>
-      <nb-card-body>
-        <button class="btn btn-hero-success"
-                (click)="openRoleAddModal()">
-          <i class="fa fa-plus"></i>
-          新增角色
-        </button>
-      </nb-card-body>
-    </nb-card>
-  </div>
-</div>
-<div class="row" *ngFor="let role of roles">
-  <div class="col-lg-12">
+  <div class="col-lg-4" *ngFor="let role of roles">
     <nb-card>
       <nb-card-header>
         <span>{{role.rolename}}</span>
@@ -29,6 +16,20 @@
           编辑
         </button>
       </nb-card-footer>
+    </nb-card>
+  </div>
+  <div class="col-lg-4">
+    <nb-card>
+      <nb-card-header>
+        <span>新增角色</span>
+      </nb-card-header>
+      <nb-card-body>
+        <button class="btn btn-hero-success"
+                (click)="openRoleAddModal()">
+          <i class="fa fa-plus"></i>
+          新增角色
+        </button>
+      </nb-card-body>
     </nb-card>
   </div>
 </div>
