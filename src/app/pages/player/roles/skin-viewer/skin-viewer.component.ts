@@ -18,8 +18,6 @@ export class SkinViewerComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    console.info(this.role);
-
     let skinViewer = new skinview3d.SkinViewer({
       domElement: document.getElementById(this.random),
       slim: this.role.userModel == 'alex',
