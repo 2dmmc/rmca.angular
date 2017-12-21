@@ -35,7 +35,7 @@ export class RoleDetailModalComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-
+    this.user = this.userCacheService.getCache();
   }
 
   public getFiles(event, type): void {
