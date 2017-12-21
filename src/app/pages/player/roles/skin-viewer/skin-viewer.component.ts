@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
-import * as skinview3d from 'skinview3d/build/skinview3d.babel.js';
+import * as skinview3d from '../../../../../assets/vendors/skinview3d.babel.js';
 
 import {Role} from '../../../../@model/player/role/role.interface';
 

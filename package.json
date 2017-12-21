@@ -11,7 +11,7 @@
     "conventional-changelog": "conventional-changelog",
     "start": "ng serve --port 3000 --proxy-config proxy.conf.json",
     "start:hmr": "ng serve --hmr --host 0.0.0.0 --port 3000 --proxy-config proxy.conf.json --verbose",
-    "start:aot": "ng serve --aot --host 0.0.0.0 --port 3000 --proxy-config proxy.conf.json --verbose",
+    "start:aot": "ng serve --aot --port 3000 --proxy-config proxy.conf.json --verbose",
     "build": "rimraf dist && ng build",
     "build:prod": "npm run build -- --prod",
     "build:prod:aot": "npm run build:prod -- --aot",
