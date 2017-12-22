@@ -7,7 +7,7 @@
   
   THREE = THREE && THREE.hasOwnProperty('default') ? THREE['default'] : THREE;
   
-  var asyncGenerator = function () {
+  const asyncGenerator = function () {
     function AwaitValue(value) {
       this.value = value;
     }
@@ -679,7 +679,7 @@
             panUp(deltaY * (scope.object.top - scope.object.bottom) / scope.object.zoom / element.clientHeight, scope.object.matrix);
           } else {
             // camera neither orthographic nor perspective
-            console.warn("WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.");
+            console.warn(`[skinview] WARNING: OrbitControls.js encountered an unknown camera type - pan disabled.`);
             scope.enablePan = false;
           }
         };
@@ -693,7 +693,7 @@
           scope.object.updateProjectionMatrix();
           zoomChanged = true;
         } else {
-          console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
+          console.warn(`[skinview] WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`);
           scope.enableZoom = false;
         }
       }
@@ -706,7 +706,7 @@
           scope.object.updateProjectionMatrix();
           zoomChanged = true;
         } else {
-          console.warn("WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.");
+          console.warn(`[skinview] WARNING: OrbitControls.js encountered an unknown camera type - dolly/zoom disabled.`);
           scope.enableZoom = false;
         }
       }
@@ -989,21 +989,21 @@
   }(THREE.EventDispatcher);
   
   function copyImage(context, sX, sY, w, h, dX, dY, flipHorizontal) {
-    var imgData = context.getImageData(sX, sY, w, h);
+    const imgData = context.getImageData(sX, sY, w, h);
     if (flipHorizontal) {
-      for (var y = 0; y < h; y++) {
-        for (var x = 0; x < w / 2; x++) {
-          var index = (x + y * w) * 4;
-          var index2 = (w - x - 1 + y * w) * 4;
-          var pA1 = imgData.data[index];
-          var pA2 = imgData.data[index + 1];
-          var pA3 = imgData.data[index + 2];
-          var pA4 = imgData.data[index + 3];
-          
-          var pB1 = imgData.data[index2];
-          var pB2 = imgData.data[index2 + 1];
-          var pB3 = imgData.data[index2 + 2];
-          var pB4 = imgData.data[index2 + 3];
+      for (let y = 0; y < h; y++) {
+        for (let x = 0; x < w / 2; x++) {
+          const index = (x + y * w) * 4;
+          const index2 = (w - x - 1 + y * w) * 4;
+          const pA1 = imgData.data[index];
+          const pA2 = imgData.data[index + 1];
+          const pA3 = imgData.data[index + 2];
+          const pA4 = imgData.data[index + 3];
+      
+          const pB1 = imgData.data[index2];
+          const pB2 = imgData.data[index2 + 1];
+          const pB3 = imgData.data[index2 + 2];
+          const pB4 = imgData.data[index2 + 3];
           
           imgData.data[index] = pB1;
           imgData.data[index + 1] = pB2;
@@ -1021,8 +1021,8 @@
   }
   
   function convertSkinTo1_8(context, width) {
-    var scale = width / 64.0;
-    var copySkin = function copySkin(context, sX, sY, w, h, dX, dY, flipHorizontal) {
+    const scale = width / 64.0;
+    const copySkin = function copySkin(context, sX, sY, w, h, dX, dY, flipHorizontal) {
       return copyImage(context, sX * scale, sY * scale, w * scale, h * scale, dX * scale, dY * scale, flipHorizontal);
     };
     
@@ -1040,9 +1040,9 @@
     copySkin(context, 52, 20, 4, 12, 44, 52, true); // Back Arm
   }
   
-  var SkinViewer = function () {
+  const SkinViewer = function () {
     function SkinViewer(options) {
-      var _this = this;
+      const _this = this;
       
       classCallCheck(this, SkinViewer);
       
@@ -1095,22 +1095,22 @@
       // texture loading
       this.skinImg.crossOrigin = "";
       this.skinImg.onerror = function () {
-        return console.log("Failed loading " + _this.skinImg.src);
+        return console.error(`[skinview] 加载 ${_this.skinImg.src} 皮肤失败`);
       };
       this.skinImg.onload = function () {
-        var isOldFormat = false;
+        let isOldFormat = false;
         if (_this.skinImg.width !== _this.skinImg.height) {
           if (_this.skinImg.width === 2 * _this.skinImg.height) {
             isOldFormat = true;
           } else {
-            console.log("Bad skin size");
+            console.error(`[skinview] 皮肤大小不正确, 无法正常渲染`);
             return;
           }
         }
-        
-        var skinContext = _this.skinCanvas.getContext("2d");
+  
+        const skinContext = _this.skinCanvas.getContext("2d");
         if (isOldFormat) {
-          var width = _this.skinImg.width;
+          const width = _this.skinImg.width;
           _this.skinCanvas.width = width;
           _this.skinCanvas.height = width;
           skinContext.clearRect(0, 0, width, width);
@@ -1132,17 +1132,16 @@
       
       this.capeImg.crossOrigin = "";
       this.capeImg.onerror = function () {
-        return console.log("Failed loading " + _this.capeImg.src);
+        return console.error(`[skinview] 加载 ${_this.skinImg.src} 披风失败`);
       };
       this.capeImg.onload = function () {
-        // if (_this.capeImg.width !== 2 * _this.capeImg.height) {
-        // 	console.log("Bad cape size");
-        // 	return;
-        // }
+        if (_this.capeImg.width !== 2 * _this.capeImg.height) {
+          console.error(`[skinview] 披风大小不正确, 不过暴力渲染了`);
+        }
         
         _this.capeCanvas.width = _this.capeImg.width;
         _this.capeCanvas.height = _this.capeImg.height;
-        var capeContext = _this.capeCanvas.getContext("2d");
+        const capeContext = _this.capeCanvas.getContext("2d");
         capeContext.clearRect(0, 0, _this.capeCanvas.width, _this.capeCanvas.height);
         capeContext.drawImage(_this.capeImg, 0, 0, _this.capeCanvas.width, _this.capeCanvas.height);
         
@@ -1156,8 +1155,8 @@
       if (options.capeUrl) this.capeUrl = options.capeUrl;
       if (options.width) this.width = options.width;
       if (options.height) this.height = options.height;
-      
-      var draw = function draw() {
+  
+      const draw = function draw() {
         if (_this.disposed) return;
         window.requestAnimationFrame(draw);
         if (!_this.animationPaused) {
@@ -1223,9 +1222,9 @@
     return SkinViewer;
   }();
   
-  var SkinControl = function () {
+  const SkinControl = function () {
     function SkinControl(skinViewer) {
-      var _this2 = this;
+      const _this2 = this;
       
       classCallCheck(this, SkinControl);
       
@@ -1233,7 +1232,8 @@
       this.skinViewer = skinViewer;
       
       this.orbitControls = new OrbitControls(skinViewer.camera, skinViewer.renderer.domElement);
-      this.orbitControls.autoRotate = true
+      this.orbitControls.autoRotate = true;
+      this.orbitControls.autoRotateSpeed = 12;
       this.orbitControls.enablePan = false;
       this.orbitControls.target = new THREE.Vector3(0, -12, 0);
       this.orbitControls.minDistance = 10;
@@ -1259,9 +1259,9 @@
     return SkinControl;
   }();
   
-  var WalkAnimation = function WalkAnimation(player, time) {
-    var skin = player.skin;
-    var angleRot = time + Math.PI / 2;
+  const WalkAnimation = function WalkAnimation(player, time) {
+    const skin = player.skin;
+    const angleRot = time + Math.PI / 2;
     
     // Leg Swing
     skin.leftLeg.rotation.x = Math.cos(angleRot);
@@ -1270,7 +1270,7 @@
     // Arm Swing
     skin.leftArm.rotation.x = Math.cos(angleRot + Math.PI);
     skin.rightArm.rotation.x = Math.cos(angleRot);
-  
+    
     // Head Swing
     skin.head.rotation.y = Math.cos(angleRot + Math.PI);
   };
