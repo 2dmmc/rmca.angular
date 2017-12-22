@@ -1,5 +1,7 @@
 # RMCA.angular4
 
+[![pipeline status](https://gitlab.com/2dmmc/rmca.angular4/badges/master/pipeline.svg)](https://gitlab.com/2dmmc/rmca.angular4/commits/master)
+
 写了一年的RMCA angular版, 最最初规划的使用AngularJS开发到现在直接用Angular4开发, 也是一个大锅
 
 ## how to use
