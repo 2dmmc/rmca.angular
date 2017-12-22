@@ -1,0 +1,35 @@
+image: node:latest
+
+stages:
+  - setup
+  - test
+  - prebuild
+  - doc
+
+cache:
+  paths:
+  - node_modules/
+
+install-dependencies:
+  stage: setup
+  script:
+  - npm install
+
+lint-check:
+  stage: test
+  script:
+  - npm run lint:ci
+
+pre-build:
+  stage: prebuild
+  script:
+  - npm run build:ci
+
+generate-document:
+  stage: doc
+  script:
+  - npm run docs
+  - cp -r apidoc public/apidoc
+  artifacts:
+    paths:
+    - public
