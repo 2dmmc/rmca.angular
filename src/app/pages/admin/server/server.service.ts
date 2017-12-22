@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import {Server} from '../../../@model/admin/server/server.interface';
-import {Finance} from '../../../@model/admin/server/finance.interface';
+import {Finance} from '../../../@model/admin/server/finacne/finance.interface';
 
 @Injectable()
 export class ServerService {
@@ -52,7 +52,7 @@ export class ServerService {
   public addFinance(finance: Finance): Promise<object> {
     const params = new HttpParams()
       .set('date', finance.date.toString())
-      .set('type', finance.type)
+      .set('type', finance.type.toString())
       .set('accrual', (finance.accrual * 100).toString())
       .set('comment', finance.comment);
 
