@@ -1,9 +1,10 @@
-import {User} from '../../user/user.interface';
+import {User} from '../../../user/user.interface';
+import {FinanceType} from "./finance-type.enum";
 
 export interface Finance {
   _id?: number,
   date: string,
-  type: string,
+  type: FinanceType,
   /**
    * income,expend
    */
