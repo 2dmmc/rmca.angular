@@ -29,7 +29,7 @@
     "prepush": "npm run lint:ci",
     "release:changelog": "npm run conventional-changelog -- -p angular -i CHANGELOG.md -s",
     "dev": "npm run start:hmr",
-    "deploy": "rimraf dist && ng build \"--prod\" \"--aot\" && rm -rf public && cp -r dist public"
+    "deploy": "rimraf dist && ng build \"--prod\" \"--aot\" && rm -rf www && cp -r dist www"
   },
   "dependencies": {
     "@agm/core": "1.0.0-beta.0",
