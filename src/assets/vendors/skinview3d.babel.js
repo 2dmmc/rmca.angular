@@ -1270,6 +1270,9 @@
     // Arm Swing
     skin.leftArm.rotation.x = Math.cos(angleRot + Math.PI);
     skin.rightArm.rotation.x = Math.cos(angleRot);
+  
+    // Head Swing
+    skin.head.rotation.y = Math.cos(angleRot + Math.PI);
   };
   
   /**
