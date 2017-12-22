@@ -4,7 +4,8 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {Finance} from '../../../../../@model/admin/server/finance.interface';
+import {Finance} from '../../../../../@model/admin/server/finacne/finance.interface';
+import {FinanceType} from "../../../../../@model/admin/server/finacne/finance-type.enum";
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],
@@ -16,12 +17,13 @@ export class FinanceAddModalComponent {
   finance: Finance;
   submitted: boolean;
 
+  // TODO check financeType enum
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
               private adminService: ServerService) {
     this.finance = {
       date: null,
-      type: 'income',
+      type: FinanceType.INCOME,
       accrual: null,
       comment: '',
     };
