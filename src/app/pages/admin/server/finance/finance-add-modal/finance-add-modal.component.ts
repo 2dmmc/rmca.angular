@@ -5,7 +5,6 @@ import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
 import {Finance} from '../../../../../@model/admin/server/finacne/finance.interface';
-import {FinanceType} from "../../../../../@model/admin/server/finacne/finance-type.enum";
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],
@@ -23,7 +22,7 @@ export class FinanceAddModalComponent {
               private adminService: ServerService) {
     this.finance = {
       date: null,
-      type: FinanceType.INCOME,
+      type: 'income',
       accrual: null,
       comment: '',
     };

@@ -52,7 +52,7 @@ export class ServerService {
   public addFinance(finance: Finance): Promise<object> {
     const params = new HttpParams()
       .set('date', finance.date.toString())
-      .set('type', finance.type.toString())
+      .set('type', finance.type)
       .set('accrual', (finance.accrual * 100).toString())
       .set('comment', finance.comment);
 
