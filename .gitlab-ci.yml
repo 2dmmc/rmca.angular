@@ -8,7 +8,7 @@ stages:
 
 cache:
   paths:
-  - node_modules/
+  - node_modules
 
 install-dependencies:
   stage: setup
@@ -29,7 +29,7 @@ generate-document:
   stage: doc
   script:
   - npm run docs
-  - cp -r apidoc public/apidoc
+  - cp -r docs public/docs
   artifacts:
     paths:
     - public
