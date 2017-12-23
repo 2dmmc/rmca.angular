@@ -39,20 +39,22 @@ export class RoleDetailModalComponent implements OnInit {
   }
 
   public getFiles(event, type): void {
-    const files = event.srcElement.files;
+    if (event.srcElement) {
+      const files = event.srcElement.files;
 
-    if (files.length > 0) {
-      switch (type) {
-        case 'skin': {
-          this.role['skinFile'] = files[0];
-          break;
-        }
-        case 'cape': {
-          this.role['capeFile'] = files[0];
-          break;
-        }
-        default: {
-          console.warn('getFiles type is default');
+      if (files.length > 0) {
+        switch (type) {
+          case 'skin': {
+            this.role['skinFile'] = files[0];
+            break;
+          }
+          case 'cape': {
+            this.role['capeFile'] = files[0];
+            break;
+          }
+          default: {
+            console.warn('getFiles type is default');
+          }
         }
       }
     }
