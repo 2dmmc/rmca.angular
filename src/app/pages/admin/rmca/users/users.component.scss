@@ -39,3 +39,18 @@
     margin-bottom: 0;
   }
 }
+
+nb-card-header {
+  .header-feature {
+    .btn-group {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.page-switcher {
+  input {
+    width: 7rem;
+    text-align: center;
+  }
+}

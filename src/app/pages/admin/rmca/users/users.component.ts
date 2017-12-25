@@ -5,8 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@system/notice/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {User} from '../../../../@model/user/user.interface';
-
+import {AdminRmcaUsersUser} from '../../../../@model/admin/rmca/users/user.interface';
 import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
 
@@ -24,9 +23,8 @@ export class UsersComponent implements OnInit {
     keyWord: string,
     submitted: boolean;
   };
-  users: User[];
+  users: AdminRmcaUsersUser[];
   page: number;
-  pageArray: number[];
   limit: number;
 
   constructor(private noticeService: NoticeService,
@@ -41,55 +39,64 @@ export class UsersComponent implements OnInit {
       type: 'all',
       types: {
         all: 'all',
-        search: 'search',
         onlyAdmin: 'onlyAdmin',
         onlyBan: 'onlyBan',
       },
     };
     this.users = [];
     this.page = 1;
-    this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     this.limit = 10;
   }
 
   public ngOnInit(): void {
-    this.getUsers('', this.page, this.limit);
+    this.getUsers(this.page, this.limit);
   }
 
-  // FIXME 废弃了
-  // private getUsers(page: number, limit: number): void {
-  //   this.rmcaService.getUsers(page, limit)
-  //     .then(users => {
-  //       this.users = users as User[];
-  //     })
-  //     .catch(error => {
-  //       this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-  //     });
-
-  public searchUser(): void {
-    this.search.submitted = true;
-
-    this.rmcaService.searchUsers(this.search.keyWord, this.page, this.limit)
-      .then(users => {
-        this.search.submitted = false;
-        this.users = users as User[];
-      })
-      .catch(error => {
-        this.search.submitted = false;
-        this.noticeService.error('获取搜索结果失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+  public filterAll(): void {
+    this.page = 1;
+    this.getUsers(this.page, this.limit);
   }
 
-  public pageChange(page): void {
-    this.getUsers(this.search.keyWord, page, this.limit);
+  public filterAdmin(): void {
+    this.page = 1;
+    this.searchUser(this.search.keyWord, this.page, this.limit, true, false);
   }
 
-
-  public goToUserDetail(userId): void {
-    this.router.navigate(['/pages/admin/rmca/user', userId]);
+  public filterBanned(): void {
+    this.page = 1;
+    this.searchUser(this.search.keyWord, this.page, this.limit, false, true);
   }
 
-  public banUser(user: User): void {
+  public searchClick(): void {
+    this.page = 1;
+    this.searchUser(this.search.keyWord, this.page, this.limit, this.filter.type == this.filter.types.onlyAdmin, this.filter.type == this.filter.types.onlyBan);
+  }
+
+  public searchKeyDown(event): void {
+    if (event.keyCode == 13) {
+      this.searchClick();
+    }
+  }
+
+  public pageAdd(): void {
+    this.page++;
+    this._pageChange(this.page);
+  }
+
+  public pageKeyDown(event): void {
+    if (event.keyCode == 13) {
+      this._pageChange(this.page);
+    }
+  }
+
+  public pageMinus(): void {
+    if (this.page > 1) {
+      this.page--;
+      this._pageChange(this.page);
+    }
+  }
+
+  public banUser(user: AdminRmcaUsersUser): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -102,7 +109,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public unBanUser(user: User): void {
+  public unBanUser(user: AdminRmcaUsersUser): void {
     const activeModal = this.modalService.open(UserUnbanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -115,14 +122,36 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  // }
-  private getUsers(keyword: string, page: number, limit: number): void {
-    this.rmcaService.searchUsers(keyword, page, limit)
+  private getUsers(page: number, limit: number): void {
+    this.rmcaService.getUsers(page, limit)
       .then(users => {
-        this.users = users as User[];
+        this.users = users as AdminRmcaUsersUser[];
       })
       .catch(error => {
         this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
+  }
+
+  public goToUserDetail(userId): void {
+    this.router.navigate(['/pages/admin/rmca/user', userId]);
+  }
+
+  private searchUser(keyword: string, page: number, limit: number, isAdmin?: boolean, isBanned?: boolean): void {
+    this.search.submitted = true;
+
+    this.rmcaService.searchUsers(keyword, page, limit, isAdmin, isBanned)
+      .then(users => {
+        this.search.submitted = false;
+        this.users = users as AdminRmcaUsersUser[];
+      })
+      .catch(error => {
+        this.search.submitted = false;
+        this.noticeService.error('获取搜索结果失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      });
+  }
+
+  private _pageChange(page): void {
+    this.filter.type = this.filter.types.all;
+    this.getUsers(page, this.limit);
   }
 }

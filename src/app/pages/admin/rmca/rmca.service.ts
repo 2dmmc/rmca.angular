@@ -34,11 +34,13 @@ export class RmcaService {
       .toPromise();
   }
 
-  public searchUsers(keyword: string, page: number, limit: number): Promise<object> {
+  public searchUsers(keyword: string, page: number, limit: number, isAdmin?: boolean, isBanned?: boolean): Promise<object> {
     const params = new HttpParams()
       .set('keyword', keyword)
       .set('page', page.toString())
-      .set('limit', limit.toString());
+      .set('limit', limit.toString())
+      .append('isAdmin', isAdmin.toString())
+      .append('isBanned', isBanned.toString());
 
     return this.http.get('/api/admin/user/search', {params: params})
       .toPromise();

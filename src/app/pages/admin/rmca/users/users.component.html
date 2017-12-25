@@ -2,35 +2,37 @@
   <nb-card-header>
     <span><i class="fa fa-users"></i> 用户管理</span>
     <div class="header-feature">
-      <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
-      <!--class="btn-group btn-toggle-group btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">-->
-      <!--<label ngbButtonLabel class="btn btn-outline-success">-->
-      <!--<input ngbButton type="radio" name="type" [value]="filter.types.all"> 全部-->
-      <!--</label>-->
-      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
-      <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="searchAdmin()"> 管理员-->
-      <!--</label>-->
-      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
-      <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyBan"> 被封禁-->
-      <!--</label>-->
-      <!--</div>-->
+      <div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup
+           class="btn-group btn-toggle-group btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
+        <label ngbButtonLabel class="btn btn-outline-success">
+          <input ngbButton type="radio" name="type" [value]="filter.types.all" (click)="filterAll()"> 全部
+        </label>
+        <label ngbButtonLabel class="btn btn-outline-danger">
+          <input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="filterAdmin()"> 管理员
+        </label>
+        <label ngbButtonLabel class="btn btn-outline-danger">
+          <input ngbButton type="radio" name="type" [value]="filter.types.onlyBan" (click)="filterBanned()"> 被封禁
+        </label>
+      </div>
       <div class="input-group">
-        <input class="form-control" placeholder="搜索用户名或电子邮箱" [(ngModel)]="search.keyWord">
+        <input class="form-control" placeholder="搜索用户名或电子邮箱" [(ngModel)]="search.keyWord"
+               (keydown)="searchKeyDown($event)">
         <span class="input-group-btn">
             <button class="btn btn-success"
-                    (click)="searchUser()" [class.btn-pulse]="search.submitted" [disabled]="search.submitted">
+                    (click)="searchClick()" [class.btn-pulse]="search.submitted" [disabled]="search.submitted">
               Google
             </button>
           </span>
       </div>
     </div>
   </nb-card-header>
-  <nb-card-body>
+  <nb-card-body class="text-center">
     <table class="table">
       <thead>
       <tr>
         <th>ID</th>
         <th>用户名</th>
+        <th>默认角色名</th>
         <th>电子邮箱</th>
         <th>状态</th>
         <th>操作</th>
@@ -43,8 +45,11 @@
             {{user._id}}
           </span>
         </td>
-        <td width="20%">
+        <td width="10%">
           {{user.username}}
+        </td>
+        <td width="10%">
+          {{user.defaultRolename}}
         </td>
         <td width="20%">
           <!--TODO 修正不安全的URL-->
@@ -79,12 +84,14 @@
       </tr>
       </tbody>
     </table>
-    <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
-         [(ngModel)]="page" (ngModelChange)="pageChange($event)" ngbRadioGroup>
-      <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
-        <input ngbButton type="radio" [value]="page">
-        {{page}}
-      </label>
+    <div class="page-switcher btn-group">
+      <button type="button" class="btn btn-success" (click)="pageMinus()">
+        上一页
+      </button>
+      <input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">
+      <button type="button" class="btn btn-success" (click)="pageAdd()">
+        下一页
+      </button>
     </div>
   </nb-card-body>
 </nb-card>
