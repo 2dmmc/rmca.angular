@@ -5,51 +5,56 @@
       捐助记录
     </span>
   </nb-card-header>
-  <nb-card-body>
-    <table class="table">
+  <nb-card-body class="text-center">
+    <table class="table text-nowrap text-left">
       <thead>
       <tr>
         <th>日期</th>
         <th>备注</th>
         <th>金额</th>
         <th>结余</th>
+        <th>相关用户</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let financeHistory of financeHistories">
-        <td width="20%">
-          <span class="date">
+        <td>
+          <span class="font-secondary text-center">
             {{financeHistory.date  | date: 'yyyy-MM-dd'}}
           </span>
         </td>
-        <td width="40%">
+        <td>
           {{financeHistory.comment}}
         </td>
-        <td width="20%">
-          <span class="accrual"
-                [class.text-success]="financeHistory.type == 'income'"
+        <td>
+          <span [class.text-success]="financeHistory.type == 'income'"
                 [class.text-danger]="financeHistory.type == 'expend'">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
           </span>
         </td>
-        <td width="20%" class="text-right">
+        <td class="text-right">
           <span class="balance"
                 [class.text-success]="financeHistory.balance > 0"
                 [class.text-danger]="financeHistory.balance < 0">
             {{financeHistory.balance | rmb | number:'1.2-3'}} 元
           </span>
         </td>
+        <td class="text-center">
+          {{financeHistory.user || 'owjgowejfewwfwf'}}
+        </td>
       </tr>
       </tbody>
     </table>
-    <div class="btn-group btn-toggle-group btn-outline-toggle-group" data-toggle="buttons"
-         [(ngModel)]="page" (ngModelChange)="pageChange($event)" ngbRadioGroup>
-      <label ngbButtonLabel class="btn btn-outline-success" *ngFor="let page of pageArray">
-        <input ngbButton type="radio" [value]="page">
-        {{page}}
-      </label>
+    <div class="page-switcher btn-group">
+      <button type="button" class="btn btn-success" (click)="pageMinus()">
+        上一页
+      </button>
+      <input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">
+      <button type="button" class="btn btn-success" (click)="pageAdd()">
+        下一页
+      </button>
     </div>
   </nb-card-body>
 </nb-card>
