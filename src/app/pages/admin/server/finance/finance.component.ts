@@ -40,7 +40,25 @@ export class FinanceComponent implements OnInit {
       });
   }
 
-  public pageChange(page): void {
+  public pageAdd(): void {
+    this.page++;
+    this.pageChange(this.page);
+  }
+
+  public pageKeyDown(event): void {
+    if (event.keyCode == 13) {
+      this.pageChange(this.page);
+    }
+  }
+
+  public pageMinus(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.pageChange(this.page);
+    }
+  }
+
+  private pageChange(page): void {
     this.getFinanceHistories(page, this.limit);
   }
 
