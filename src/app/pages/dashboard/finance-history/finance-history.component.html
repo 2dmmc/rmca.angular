@@ -45,6 +45,9 @@
           {{financeHistory.user || 'owjgowejfewwfwf'}}
         </td>
       </tr>
+      <tr *ngIf="financeHistories.length <= 0">
+        <td colspan="6">无更多数据</td>
+      </tr>
       </tbody>
     </table>
     <div class="page-switcher btn-group">

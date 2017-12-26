@@ -12,15 +12,13 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 export class FinanceHistoryComponent implements OnInit {
   financeHistories: any;
   page: number;
-  pageArray: number[];
   limit: number;
 
   constructor(private noticeService: NoticeService,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.page = 1;
-    this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    this.limit = 14;
+    this.limit = 12;
   }
 
   public ngOnInit(): void {
@@ -37,7 +35,25 @@ export class FinanceHistoryComponent implements OnInit {
       });
   }
 
-  public pageChange(page): void {
+  public pageAdd(): void {
+    this.page++;
+    this.pageChange(this.page);
+  }
+
+  public pageKeyDown(event): void {
+    if (event.keyCode == 13) {
+      this.pageChange(this.page);
+    }
+  }
+
+  public pageMinus(): void {
+    if (this.page > 1) {
+      this.page--;
+      this.pageChange(this.page);
+    }
+  }
+
+  private pageChange(page): void {
     this.getFinanceHistories(page, this.limit);
   }
 }
