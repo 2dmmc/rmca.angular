@@ -5,28 +5,28 @@
       捐助记录
     </span>
   </nb-card-header>
-  <nb-card-body class="text-center">
+  <nb-card-body>
     <table class="table text-nowrap text-left">
       <thead>
       <tr>
         <th>日期</th>
-        <th>备注</th>
+        <th>相关用户</th>
         <th>金额</th>
         <th>结余</th>
-        <th>相关用户</th>
+        <th>备注</th>
       </tr>
       </thead>
       <tbody>
       <tr *ngFor="let financeHistory of financeHistories">
-        <td>
-          <span class="font-secondary text-center">
+        <td class="text-center" width="15%">
+          <span class="font-secondary">
             {{financeHistory.date  | date: 'yyyy-MM-dd'}}
           </span>
         </td>
-        <td>
-          {{financeHistory.comment}}
+        <td class="text-center" width="20%">
+          {{financeHistory.user || '未实现 | WIP'}}
         </td>
-        <td>
+        <td width="15%">
           <span [class.text-success]="financeHistory.type == 'income'"
                 [class.text-danger]="financeHistory.type == 'expend'">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
@@ -34,15 +34,15 @@
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
           </span>
         </td>
-        <td class="text-right">
+        <td class="text-right" width="20%">
           <span class="balance"
                 [class.text-success]="financeHistory.balance > 0"
                 [class.text-danger]="financeHistory.balance < 0">
             {{financeHistory.balance | rmb | number:'1.2-3'}} 元
           </span>
         </td>
-        <td class="text-center">
-          {{financeHistory.user || '未实现 | WIP'}}
+        <td width="30%">
+          {{financeHistory.comment}}
         </td>
       </tr>
       <tr *ngIf="financeHistories.length <= 0">
@@ -50,6 +50,8 @@
       </tr>
       </tbody>
     </table>
+  </nb-card-body>
+  <nb-card-footer class="text-center">
     <div class="page-switcher btn-group">
       <button type="button" class="btn btn-success" (click)="pageMinus()">
         上一页
@@ -59,5 +61,5 @@
         下一页
       </button>
     </div>
-  </nb-card-body>
+  </nb-card-footer>
 </nb-card>
