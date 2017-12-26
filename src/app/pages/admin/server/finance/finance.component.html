@@ -23,6 +23,7 @@
         <th>金额</th>
         <th>结余</th>
         <th>备注</th>
+        <th>操作</th>
       </tr>
       </thead>
       <tbody>
@@ -53,9 +54,17 @@
         <td width="30%">
           {{financeHistory.comment}}
         </td>
+        <td class="text-center" width="10%">
+          <div class="action">
+            <button class="btn btn-hero-info btn-tn">
+              <i class="fa fa-pencil"></i>
+              编辑
+            </button>
+          </div>
+        </td>
       </tr>
       <tr *ngIf="financeHistories.length <= 0">
-        <td colspan="6">无更多数据</td>
+        <td colspan="7">无更多数据</td>
       </tr>
       </tbody>
     </table>

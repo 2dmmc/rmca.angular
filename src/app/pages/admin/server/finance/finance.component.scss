@@ -3,6 +3,16 @@
 @import '../../../../@system/styles/table';
 @import '../../../../@system/styles/extend/nb-card-header';
 
+table {
+  button {
+    margin-right: 0.5rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
 .page-switcher {
   input {
     width: 7rem;
