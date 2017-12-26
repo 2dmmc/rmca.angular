@@ -29,7 +29,7 @@ export class FinanceAddModalComponent {
     this.submitted = false;
   }
 
-  public addServer(): void {
+  public addFinance(): void {
     this.submitted = true;
 
     this.adminService.addFinance(this.finance)
