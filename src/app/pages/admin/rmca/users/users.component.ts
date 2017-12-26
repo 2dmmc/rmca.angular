@@ -80,19 +80,19 @@ export class UsersComponent implements OnInit {
 
   public pageAdd(): void {
     this.page++;
-    this._pageChange(this.page);
+    this.pageChange(this.page);
   }
 
   public pageKeyDown(event): void {
     if (event.keyCode == 13) {
-      this._pageChange(this.page);
+      this.pageChange(this.page);
     }
   }
 
   public pageMinus(): void {
     if (this.page > 1) {
       this.page--;
-      this._pageChange(this.page);
+      this.pageChange(this.page);
     }
   }
 
@@ -150,7 +150,7 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  private _pageChange(page): void {
+  private pageChange(page): void {
     this.filter.type = this.filter.types.all;
     this.getUsers(page, this.limit);
   }
