@@ -5,6 +5,7 @@ import {NoticeService} from '../../../../@system/notice/notice.service';
 import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
+import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -70,6 +71,18 @@ export class FinanceComponent implements OnInit {
     });
 
     activeModal.componentInstance.event.subscribe(() => {
+      this.getFinanceHistories(this.page, this.limit);
+    });
+  }
+
+  public openFinanceDetailModal(financeHistory: any): void {
+    const activeModal = this.modalService.open(FinanceDetailModalComponent, {
+      size: 'lg',
+      container: 'nb-layout',
+      backdrop: 'static',
+    });
+
+    activeModal.componentInstance.activeModal.componentInstance.event.subscribe(() => {
       this.getFinanceHistories(this.page, this.limit);
     });
   }
