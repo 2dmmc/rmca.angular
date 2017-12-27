@@ -16,7 +16,6 @@ export class FinanceAddModalComponent {
   financeType = FinanceTypeEnum;
   submitted: boolean;
 
-  // TODO check financeType enum
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
               private adminService: ServerService) {
