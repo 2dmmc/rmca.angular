@@ -1,7 +1,12 @@
+import {FinanceTypeEnum} from './finance-type.enum';
+
 export interface Finance {
   _id?: number,
   date: string,
-  type: string,
+  type: FinanceTypeEnum,
+  /**
+   * income,expend
+   */
   accrual: number,
   balance?: number,
   comment?: string,

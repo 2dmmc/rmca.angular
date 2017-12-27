@@ -7,11 +7,7 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
 import {Finance} from '../../../../@model/admin/server/finacne/finance.interface';
-
-enum FinanceType {
-  INCOME = 'income',
-  EXPEND = 'expend',
-}
+import {FinanceTypeEnum} from "../../../../@model/admin/server/finacne/finance-type.enum";
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -20,7 +16,7 @@ enum FinanceType {
 
 export class FinanceComponent implements OnInit {
   financeHistories: Finance[];
-  financeType = FinanceType;
+  financeType = FinanceTypeEnum;
   page: number;
   pageArray: number[];
   limit: number;

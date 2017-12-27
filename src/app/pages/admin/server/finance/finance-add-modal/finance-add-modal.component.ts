@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
-import {Finance} from '../../../../../@model/admin/server/finacne/finance.interface';
+import {FinanceTypeEnum} from "../../../../../@model/admin/server/finacne/finance-type.enum";
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],
@@ -13,26 +13,20 @@ import {Finance} from '../../../../../@model/admin/server/finacne/finance.interf
 
 export class FinanceAddModalComponent {
   @Output() event = new EventEmitter();
-  finance: Finance;
+  financeType = FinanceTypeEnum;
   submitted: boolean;
 
   // TODO check financeType enum
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
               private adminService: ServerService) {
-    this.finance = {
-      date: null,
-      type: 'income',
-      accrual: null,
-      comment: '',
-    };
     this.submitted = false;
   }
 
-  public addFinance(): void {
+  public addFinanceHistory(financeForm): void {
     this.submitted = true;
 
-    this.adminService.addFinance(this.finance)
+    this.adminService.addFinanceHistory(financeForm)
       .then(createState => {
         this.noticeService.success('新增成功', '新增财务历史记录成功');
         this.event.emit();

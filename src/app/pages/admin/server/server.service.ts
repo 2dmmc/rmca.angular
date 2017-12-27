@@ -49,10 +49,10 @@ export class ServerService {
       .toPromise();
   }
 
-  public addFinance(finance: Finance): Promise<object> {
+  public addFinanceHistory(finance: Finance): Promise<object> {
     const params = new HttpParams()
       .set('date', finance.date.toString())
-      .set('type', finance.type)
+      .set('type', finance.type.toString())
       .set('accrual', (finance.accrual * 100).toString())
       .set('comment', finance.comment);
 
