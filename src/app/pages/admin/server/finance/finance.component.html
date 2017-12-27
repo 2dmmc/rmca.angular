@@ -37,10 +37,10 @@
           {{financeHistory.user || '未实现 | WIP'}}
         </td>
         <td width="15%">
-          <span [class.text-success]="financeHistory.type == 'income'"
-                [class.text-danger]="financeHistory.type == 'expend'">
-            <i class="fa fa-caret-up" *ngIf="financeHistory.type == 'income'" aria-hidden="true"></i>
-            <i class="fa fa-caret-down" *ngIf="financeHistory.type == 'expend'" aria-hidden="true"></i>
+          <span [class.text-success]="financeHistory.type == financeType.INCOME"
+                [class.text-danger]="financeHistory.type == financeType.EXPEND">
+            <i class="fa fa-caret-up" *ngIf="financeHistory.type == financeType.INCOME" aria-hidden="true"></i>
+            <i class="fa fa-caret-down" *ngIf="financeHistory.type == financeType.EXPEND" aria-hidden="true"></i>
             {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
           </span>
         </td>

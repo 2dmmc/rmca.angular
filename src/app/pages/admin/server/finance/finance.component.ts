@@ -6,6 +6,12 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
+import {Finance} from '../../../../@model/admin/server/finacne/finance.interface';
+
+enum FinanceType {
+  INCOME = 'income',
+  EXPEND = 'expend',
+}
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -13,7 +19,8 @@ import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail
 })
 
 export class FinanceComponent implements OnInit {
-  financeHistories: any;
+  financeHistories: Finance[];
+  financeType = FinanceType;
   page: number;
   pageArray: number[];
   limit: number;
@@ -23,7 +30,6 @@ export class FinanceComponent implements OnInit {
               private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.page = 1;
-    this.pageArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     this.limit = 12;
   }
 
@@ -34,7 +40,7 @@ export class FinanceComponent implements OnInit {
   public getFinanceHistories(page, limit): void {
     this.dashboardService.getFinanceHistories(page, limit)
       .then(financeHistory => {
-        this.financeHistories = financeHistory;
+        this.financeHistories = financeHistory as Finance[];
       })
       .catch(error => {
         this.noticeService.error('获取捐助记录失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
