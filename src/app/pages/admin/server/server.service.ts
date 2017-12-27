@@ -54,9 +54,19 @@ export class ServerService {
       .set('date', finance.date.toString())
       .set('type', finance.type.toString())
       .set('accrual', (finance.accrual * 100).toString())
-      .set('comment', finance.comment);
+      .set('comment', finance.comment)
+      .set('userId', finance.user);
 
     return this.http.post('/api/admin/finance', params)
+      .toPromise();
+  }
+
+  public updateFinanceHistory(finance: Finance): Promise<object> {
+    const params = new HttpParams()
+      .set('comment', finance.comment)
+      .set('userId', finance.user);
+
+    return this.http.patch(`/api/admin/finance/${finance._id}`, params)
       .toPromise();
   }
 }

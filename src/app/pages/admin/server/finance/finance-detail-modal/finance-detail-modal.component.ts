@@ -5,6 +5,7 @@ import {NoticeService} from '../../../../../@system/notice/notice.service';
 import {ServerService} from '../../server.service';
 
 import {Finance} from '../../../../../@model/admin/server/finacne/finance.interface';
+import {FinanceTypeEnum} from "../../../../../@model/admin/server/finacne/finance-type.enum";
 
 @Component({
   styleUrls: ['./finance-detail-modal.component.scss'],
@@ -12,46 +13,42 @@ import {Finance} from '../../../../../@model/admin/server/finacne/finance.interf
 })
 
 export class FinanceDetailModalComponent {
-  @Input() financeHistory: any;
+  @Input() financeHistory: Finance;
   @Output() event = new EventEmitter();
-  finance: Finance;
+  financeType = FinanceTypeEnum;
   submitted: boolean;
 
   // TODO check financeType enum
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
               private adminService: ServerService) {
-    this.financeHistory = {
-      date: null,
-      type: 'income',
-      accrual: null,
-      comment: '',
-    };
     this.submitted = false;
   }
+
+
 
   public updateFinanceHistory(): void {
     this.submitted = true;
 
-    // this.adminService.addFinance(this.finance)
-    //   .then(createState => {
-    //     this.noticeService.success('新增成功', '新增财务历史记录成功');
-    //     this.event.emit();
-    //     this.activeModal.close();
-    //   })
-    //   .catch(error => {
-    //     this.submitted = false;
-    //
-    //     let errorMessage = '';
-    //
-    //     switch (error.status) {
-    //       default: {
-    //         errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-    //       }
-    //     }
-    //
-    //     this.noticeService.error('新增财务历史记录失败', errorMessage);
-    //   });
+    this.adminService.updateFinanceHistory(this.financeHistory)
+      .then(createState => {
+        this.noticeService.success('更新成功', '更新财务历史记录成功');
+        this.event.emit();
+        this.activeModal.close();
+      })
+      .catch(error => {
+        this.submitted = false;
+
+        let errorMessage = '';
+
+        switch (error.status) {
+          default: {
+            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
+          }
+        }
+
+        this.noticeService.error('更新财务历史记录失败', errorMessage);
+      });
   }
 
   public closeModal(): void {

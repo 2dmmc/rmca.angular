@@ -77,14 +77,15 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-  public openFinanceDetailModal(financeHistory: any): void {
+  public openFinanceDetailModal(financeHistory: Finance): void {
     const activeModal = this.modalService.open(FinanceDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.activeModal.componentInstance.event.subscribe(() => {
+    activeModal.componentInstance.financeHistory = financeHistory;
+    activeModal.componentInstance.event.subscribe(() => {
       this.getFinanceHistories(this.page, this.limit);
     });
   }
