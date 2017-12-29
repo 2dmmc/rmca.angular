@@ -27,7 +27,7 @@ export class FinanceDetailModalComponent {
   public updateFinanceHistory(financeForm): void {
     this.submitted = true;
 
-    this.adminService.updateFinanceHistory(financeForm.comment, financeForm.userId)
+    this.adminService.updateFinanceHistory(financeForm.comment, financeForm.userId, this.financeHistory._id)
       .then(createState => {
         this.noticeService.success('更新成功', '更新财务历史记录成功');
         this.event.emit();

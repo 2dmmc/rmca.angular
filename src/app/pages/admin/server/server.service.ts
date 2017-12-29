@@ -61,12 +61,12 @@ export class ServerService {
       .toPromise();
   }
 
-  public updateFinanceHistory(comment: string, userId: string): Promise<object> {
+  public updateFinanceHistory(comment: string, userId: string, financeId: number): Promise<object> {
     const params = new HttpParams()
       .set('comment', comment)
       .set('userId', userId);
 
-    return this.http.patch(`/api/admin/finance/${userId}`, params)
+    return this.http.patch(`/api/admin/finance/${financeId.toString()}`, params)
       .toPromise();
   }
 }
