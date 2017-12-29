@@ -24,10 +24,10 @@ export class FinanceDetailModalComponent {
     this.submitted = false;
   }
 
-  public updateFinanceHistory(): void {
+  public updateFinanceHistory(financeForm): void {
     this.submitted = true;
 
-    this.adminService.updateFinanceHistory(this.financeHistory)
+    this.adminService.updateFinanceHistory(financeForm.comment, financeForm.userId)
       .then(createState => {
         this.noticeService.success('更新成功', '更新财务历史记录成功');
         this.event.emit();
