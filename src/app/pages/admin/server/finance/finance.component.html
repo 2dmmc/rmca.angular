@@ -34,7 +34,7 @@
           </span>
         </td>
         <td class="text-center" width="20%">
-          {{financeHistory.user || '未实现 | WIP'}}
+          {{financeHistory.user?.username || '未实现 | WIP'}}
         </td>
         <td width="15%">
           <span [class.text-success]="financeHistory.type == financeType.INCOME"
