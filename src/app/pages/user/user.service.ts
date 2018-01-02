@@ -23,6 +23,7 @@ export class UserService {
    * @param {string} email 电子邮箱
    * @return {Promise<Object>}
    */
+  public async updateUserProfile(email: string): Promise<object> {
     const params = new HttpParams()
       .set('email', email);
 
