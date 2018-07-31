@@ -53,7 +53,7 @@
       <label for="input-userId" class="col-sm-2 col-form-label">关联用户</label>
       <div class="col-sm-10">
         <input name="userId" id="input-userId" class="form-control" placeholder="与之关联的用户"
-               [ngModel]="financeHistory.user?._id" #userId="ngModel"
+               [ngModel]="financeHistory.user" #userId="ngModel"
                [class.form-control-danger]="userId.invalid && userId.touched">
       </div>
     </div>
