@@ -53,7 +53,7 @@ export class ServerService {
     const params = new HttpParams()
       .set('date', finance.date.toString())
       .set('type', finance.type.toString())
-      .set('accrual', (finance.accrual * 100).toString())
+      .set('accrual', (finance.accrual * 100).toFixed(0))
       .set('comment', finance.comment)
       .set('userId', finance.user);
 
