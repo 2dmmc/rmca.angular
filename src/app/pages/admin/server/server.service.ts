@@ -55,7 +55,7 @@ export class ServerService {
       .set('type', finance.type.toString())
       .set('accrual', (finance.accrual * 100).toString())
       .set('comment', finance.comment)
-      .set('userId', finance.user._id);
+      .set('userId', finance.user);
 
     return this.http.post('/api/admin/finance', params)
       .toPromise();

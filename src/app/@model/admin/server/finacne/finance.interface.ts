@@ -7,8 +7,5 @@ export interface Finance {
   accrual: number,
   balance?: number,
   comment?: string,
-  user?: {
-    _id?: string,
-    username?: string,
-  }
+  user?: string
 }
