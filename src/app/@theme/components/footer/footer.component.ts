@@ -11,7 +11,7 @@ import {Component} from '@angular/core';
       <b><a href="https://weibo.com/sdjnmxd" target="_blank">Icefox</a></b>
       &
       <b><a href="https://blog.bangbang93.com" target="_blank">Bangbang93</a></b>.
-      <b>RMCA</b>
+      <b>RMCA 2.0</b>
     </span>
     <div class="socials">
       <a href="https://weibo.com/forgecraft" target="_blank" class="fa fa-weibo"></a>

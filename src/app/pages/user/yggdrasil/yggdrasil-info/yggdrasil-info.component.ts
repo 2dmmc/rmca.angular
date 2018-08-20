@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 
 import {UserService} from '../../user.service';
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
 @Component({
   selector: 'ngx-yggdrasil-info',

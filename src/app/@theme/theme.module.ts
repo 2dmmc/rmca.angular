@@ -7,8 +7,11 @@ import {
   NbActionsModule,
   NbCardModule,
   NbCheckboxModule,
+  NbContextMenuModule,
   NbLayoutModule,
   NbMenuModule,
+  NbPopoverModule,
+  NbProgressBarModule,
   NbRouteTabsetModule,
   NbSearchModule,
   NbSidebarModule,
@@ -17,22 +20,14 @@ import {
   NbUserModule,
 } from '@nebular/theme';
 
-import {
-  FooterComponent,
-  HeaderComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
-  ThemeSwitcherComponent,
-  TinyMCEComponent,
-} from './components';
+import {NbSecurityModule} from '@nebular/security';
 
-import {CapitalizePipe, PluralPipe, RmbPipe, RoundPipe, TimingPipe} from './pipes';
-
-import {DonationModalComponent, SampleLayoutComponent} from './layouts';
-
+import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
+import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe, RmbPipe} from './pipes';
+import {RmcaLayoutComponent} from './layouts';
 import {DEFAULT_THEME} from './styles/theme.default';
 import {COSMIC_THEME} from './styles/theme.cosmic';
-import {RouterModule} from '@angular/router';
+import {CORPORATE_THEME} from './styles/theme.corporate';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -47,18 +42,18 @@ const NB_MODULES = [
   NbSearchModule,
   NbSidebarModule,
   NbCheckboxModule,
+  NbPopoverModule,
+  NbContextMenuModule,
   NgbModule,
+  NbSecurityModule, // *nbIsGranted directive,
+  NbProgressBarModule,
 ];
 
 const COMPONENTS = [
-  ThemeSwitcherComponent,
   HeaderComponent,
   FooterComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
   TinyMCEComponent,
-  SampleLayoutComponent,
-  DonationModalComponent,
+  RmcaLayoutComponent,
 ];
 
 const PIPES = [
@@ -66,6 +61,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
+  NumberWithCommasPipe,
   RmbPipe,
 ];
 
@@ -74,19 +70,16 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'cosmic',
     },
-    [DEFAULT_THEME, COSMIC_THEME],
+    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, RouterModule],
+  imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
-  entryComponents: [
-    DonationModalComponent,
-  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

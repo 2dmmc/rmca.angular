@@ -4,12 +4,9 @@ import {AuthService} from './auth.service';
 import {LoginStateResult} from '../../@model/auth/login-state-result.class';
 import {LoginStateResultUser} from '../../@model/auth/login-state-result-user.interface';
 
-import {UserCacheService} from '../../@system/cache/service/user-cache.service';
-
 @Injectable()
 export class AuthUtilService {
-  constructor(private authService: AuthService,
-              private userCacheService: UserCacheService) {
+  constructor(private authService: AuthService) {
   }
 
   public async isUserAuthenticated(): Promise<LoginStateResult> {
@@ -30,10 +27,12 @@ export class AuthUtilService {
   }
 
   public isAdmin(): boolean {
-    return this.userCacheService.getCache().admin;
+    return false;
+    // return this.userCacheService.getCache().admin;
   }
 
   public isDeveloper(): boolean {
-    return this.userCacheService.getCache().username === 'sdjnmxd' || this.userCacheService.getCache().username === 'bangbang93';
+    return false;
+    // return this.userCacheService.getCache().username === 'sdjnmxd' || this.userCacheService.getCache().username === 'bangbang93';
   }
 }

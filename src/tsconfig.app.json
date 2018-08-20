@@ -15,7 +15,13 @@
     }
   },
   "exclude": [
-    "src/test.ts",
-    "**/*.spec.ts"
+    "test.ts",
+    "**/*.spec.ts",
+    "../node_modules/@nebular/**/*.spec.ts"
+  ],
+  "include": [
+    "../src/*.ts",
+    "../src/**/*.ts",
+    "../node_modules/@nebular/**/*.ts"
   ]
 }

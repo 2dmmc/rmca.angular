@@ -12,7 +12,7 @@ import {RoleDetailModalComponent} from './roles/role-detail-modal/role-detail-mo
 
 import {PlayerService} from './player.service';
 import {UserService} from '../user/user.service';
-import {NoticeService} from '../../@system/notice/notice.service';
+import {NoticeService} from '../../@core/services/notice.service';
 
 const components = [
   PlayerComponent,

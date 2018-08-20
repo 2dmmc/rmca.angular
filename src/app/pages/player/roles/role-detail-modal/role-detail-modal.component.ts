@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {PlayerService} from '../../player.service';
 
@@ -9,8 +9,6 @@ import {User} from '../../../../@model/user/user.interface';
 import {DefaultUser} from '../../../../@model/user/user.const';
 
 import {Role} from '../../../../@model/player/role/role.interface';
-
-import {UserCacheService} from '../../../../@system/cache/service/user-cache.service';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -26,7 +24,6 @@ export class RoleDetailModalComponent implements OnInit {
   skinType: any;
 
   constructor(private playerService: PlayerService,
-              private userCacheService: UserCacheService,
               private noticeService: NoticeService,
               private activeModal: NgbActiveModal) {
     this.user = DefaultUser;
@@ -35,7 +32,7 @@ export class RoleDetailModalComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.user = this.userCacheService.getCache();
+    // this.user = this.userCacheService.getCache();
   }
 
   public getFiles(event, type): void {

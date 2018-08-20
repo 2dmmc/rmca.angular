@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {User} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';

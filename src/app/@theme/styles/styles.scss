@@ -3,6 +3,8 @@
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
+// global app font size
+@import './font-size';
 // loading progress bar theme
 @import './pace.theme';
 
@@ -15,20 +17,9 @@
 
   // loading progress bar
   @include ngx-pace-theme();
-}
 
-html {
-  font-size: 16px;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-  html {
-    font-size: 12px;
+  // fixed in rc.9 and can be removed after upgrade
+  .custom-control .custom-control-indicator {
+    border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
   }
-}
-
-@media screen and (-moz-device-pixel-ratio: 2) {
-  html {
-    font-size: 12px;
-  }
-}
+};

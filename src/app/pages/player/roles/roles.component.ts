@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../player.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {NoticeService} from '../../../@core/services/notice.service';
 
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
@@ -39,7 +39,6 @@ export class RolesComponent implements OnInit {
       this.roles = roles;
     } catch (error) {
       this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      console.trace(error);
     }
   }
 
@@ -52,7 +51,6 @@ export class RolesComponent implements OnInit {
       return role;
     } catch (error) {
       this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      console.trace(error);
     }
   }
 

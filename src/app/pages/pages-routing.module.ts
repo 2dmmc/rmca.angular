@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
 
 const routes: Routes = [{
   path: '',
@@ -20,9 +21,8 @@ const routes: Routes = [{
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
   }, {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+    path: '**',
+    component: NotFoundComponent,
   }],
 }];
 
@@ -30,6 +30,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-
 export class PagesRoutingModule {
 }

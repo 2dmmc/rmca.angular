@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 import {ServerService} from '../server.service';
 
 import {ServerAddModalComponent} from './server-add-modal/server-add-modal.component';

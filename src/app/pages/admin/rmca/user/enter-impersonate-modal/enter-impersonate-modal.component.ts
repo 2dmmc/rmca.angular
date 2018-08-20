@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../../@core/services/notice.service';
 import {RmcaService} from '../../rmca.service';
 
 import {User} from '../../../../../@model/user/user.interface';

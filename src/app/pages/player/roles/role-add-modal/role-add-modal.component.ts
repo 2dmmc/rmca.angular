@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../../player.service';
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
 @Component({
   styleUrls: ['./role-add-modal.component.scss'],

@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
 import {AdminRmcaUsersUser} from '../../../../@model/admin/rmca/users/user.interface';

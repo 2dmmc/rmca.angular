@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DashboardService} from '../dashboard.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {NoticeService} from '../../../@core/services/notice.service';
 
 @Component({
   selector: 'ngx-finance-history',

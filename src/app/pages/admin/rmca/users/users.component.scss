@@ -1,8 +1,8 @@
 @import '../../../../@theme/styles/themes';
 @import '../../../../@theme/styles/styles';
-@import '../../../../@system/styles/extend/nb-card-header';
-@import '../../../../@system/styles/table';
-@import '../../../../@system/styles/tag';
+@import '../../../../@theme/extend/nb-card-header';
+@import '../../../../@theme/extend/table';
+@import '../../../../@theme/extend/tag';
 
 .tag {
   margin-right: 0.5rem;

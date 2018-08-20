@@ -1,22 +1,12 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {UserService} from '../../../pages/user/user.service';
-
-import {NoticeService} from '../../../@system/notice/notice.service';
-
 import {User} from '../../../@model/user/user.interface';
-import {DefaultUser} from '../../../@model/user/user.const';
-import {UserCacheService} from '../../../@system/cache/service/user-cache.service';
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
-  providers: [
-    UserService,
-    NoticeService,
-  ],
 })
 export class HeaderComponent implements OnInit {
 
@@ -24,22 +14,14 @@ export class HeaderComponent implements OnInit {
 
   user: User;
 
-  userMenu = [{
-    title: '个人中心',
-    link: '/pages/user/profile',
-  }, {
-    title: '登出',
-    link: '/auth/logout',
-  }];
+  userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
-              private userCacheService: UserCacheService) {
-    this.user = DefaultUser;
+              private menuService: NbMenuService) {
   }
 
   ngOnInit() {
-    this.user = this.userCacheService.getCache();
+    // this.user = this.userCacheService.getCache();
   }
 
   toggleSidebar(): boolean {
