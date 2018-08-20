@@ -1,7 +1,7 @@
-import {LoginStateResultUser} from './login-state-result-user.interface';
+import {ILoginStateResultUser} from './login-state-result-user.interface';
 
 export class LoginStateResult {
   isLogin: boolean;
-  user: LoginStateResultUser;
+  user: ILoginStateResultUser;
   error?: string;
 }

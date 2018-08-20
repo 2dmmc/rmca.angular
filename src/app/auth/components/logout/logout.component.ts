@@ -52,7 +52,11 @@ export class NbLogoutComponent implements OnInit {
                 }
               }
 
-              this.sendNotice('danger', noticeTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+              this.sendNotice(
+                'danger',
+                noticeTitle,
+                `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+              );
             });
         } else {
           this.authService.logout()
@@ -82,7 +86,11 @@ export class NbLogoutComponent implements OnInit {
                 }
               }
 
-              this.sendNotice('danger', noticeTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+              this.sendNotice(
+                'danger',
+                noticeTitle,
+                `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+              );
             });
         }
       });

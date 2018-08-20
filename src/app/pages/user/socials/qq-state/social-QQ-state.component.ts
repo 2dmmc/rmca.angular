@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';
 
 @Component({
@@ -11,14 +11,15 @@ import {UserService} from '../../user.service';
   templateUrl: './social-QQ-state.component.html',
 })
 export class SocialQQStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService) {
   }
 
   public oAuth(): void {
-    window.location.href = `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/oauth/qq`;
+    window.location.href =
+      `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/oauth/qq`;
   }
 
   public async updateUserAvatar() {

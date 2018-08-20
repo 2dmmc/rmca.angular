@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ActivatedRoute, Params} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 
 import {UserBanModalComponent} from '../users/user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from '../users/user-unban-modal/user-unban-modal.component';
@@ -20,13 +20,12 @@ import {EnterImpersonateModalComponent} from './enter-impersonate-modal/enter-im
 
 export class UserComponent implements OnInit {
   userId: string;
-  user: User;
+  user: IUser;
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
-              private activatedRoute: ActivatedRoute,
-              private router: Router) {
+              private activatedRoute: ActivatedRoute) {
     this.user = {
       username: null,
       email: null,
@@ -41,7 +40,7 @@ export class UserComponent implements OnInit {
     this.getUser(this.userId);
   }
 
-  public banUser(user: User): void {
+  public banUser(user: IUser): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -54,7 +53,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public unBanUser(user: User): void {
+  public unBanUser(user: IUser): void {
     const activeModal = this.modalService.open(UserUnbanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -67,7 +66,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public grantAdmin(user: User): void {
+  public grantAdmin(user: IUser): void {
     const activeModal = this.modalService.open(AdminGrantModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -80,7 +79,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public revokeAdmin(user: User): void {
+  public revokeAdmin(user: IUser): void {
     const activeModal = this.modalService.open(AdminRevokeModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -93,7 +92,7 @@ export class UserComponent implements OnInit {
     });
   }
 
-  public enterImpersonate(user: User): void {
+  public enterImpersonate(user: IUser): void {
     const activeModal = this.modalService.open(EnterImpersonateModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -106,10 +105,13 @@ export class UserComponent implements OnInit {
   private getUser(userId): void {
     this.rmcaService.getUser(userId)
       .then(user => {
-        this.user = user as User;
+        this.user = user as IUser;
       })
       .catch(error => {
-        this.noticeService.error('获取用户详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取用户详情失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 }

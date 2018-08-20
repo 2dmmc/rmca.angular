@@ -4,13 +4,10 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthUtilService} from '../services/auth-util.service';
 import {NoticeService} from '../../@core/services/notice.service';
 
-import {UserService} from '../../pages/user/user.service';
-
 @Injectable()
 export class NeedLoginGuard implements CanActivate {
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
-              private userService: UserService,
               private noticeService: NoticeService) {
   }
 

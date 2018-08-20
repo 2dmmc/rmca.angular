@@ -6,7 +6,7 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
-import {Finance} from '../../../../@model/admin/server/finacne/finance.interface';
+import {IFinance} from '../../../../@model/admin/server/finacne/finance.interface';
 import {FinanceTypeEnum} from '../../../../@model/admin/server/finacne/finance-type.enum';
 
 @Component({
@@ -15,7 +15,7 @@ import {FinanceTypeEnum} from '../../../../@model/admin/server/finacne/finance-t
 })
 
 export class FinanceComponent implements OnInit {
-  financeHistories: Finance[];
+  financeHistories: IFinance[];
   financeType = FinanceTypeEnum;
   page: number;
   pageArray: number[];
@@ -36,10 +36,13 @@ export class FinanceComponent implements OnInit {
   public getFinanceHistories(page, limit): void {
     this.dashboardService.getFinanceHistories(page, limit)
       .then(financeHistory => {
-        this.financeHistories = financeHistory as Finance[];
+        this.financeHistories = financeHistory as IFinance[];
       })
       .catch(error => {
-        this.noticeService.error('获取捐助记录失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取捐助记录失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 
@@ -49,7 +52,7 @@ export class FinanceComponent implements OnInit {
   }
 
   public pageKeyDown(event): void {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.pageChange(this.page);
     }
   }
@@ -77,7 +80,7 @@ export class FinanceComponent implements OnInit {
     });
   }
 
-  public openFinanceDetailModal(financeHistory: Finance): void {
+  public openFinanceDetailModal(financeHistory: IFinance): void {
     const activeModal = this.modalService.open(FinanceDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',

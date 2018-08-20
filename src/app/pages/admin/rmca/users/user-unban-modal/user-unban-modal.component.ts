@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {RmcaService} from '../../rmca.service';
 
-import {User} from '../../../../../@model/user/user.interface';
+import {IUser} from '../../../../../@model/user/user.interface';
 
 @Component({
   styleUrls: ['./user-unban-modal.component.scss'],
@@ -12,7 +12,7 @@ import {User} from '../../../../../@model/user/user.interface';
 })
 
 export class UserUnbanModalComponent {
-  @Input() user: User;
+  @Input() user: IUser;
   @Output() event = new EventEmitter();
   username: string;
   submitted: boolean;

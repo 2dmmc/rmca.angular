@@ -7,7 +7,7 @@ import {NoticeService} from '../../../@core/services/notice.service';
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
-import {Role} from '../../../@model/player/role/role.interface';
+import {IRole} from '../../../@model/player/role/role.interface';
 
 @Component({
   styleUrls: ['./roles.component.scss'],
@@ -15,7 +15,7 @@ import {Role} from '../../../@model/player/role/role.interface';
 })
 
 export class RolesComponent implements OnInit {
-  roles: Role[];
+  roles: IRole[];
 
   constructor(private noticeService: NoticeService,
               private playerService: PlayerService,
@@ -29,7 +29,7 @@ export class RolesComponent implements OnInit {
 
   public async getRoles(): Promise<void> {
     try {
-      const roles = await this.playerService.getRoles() as Role[];
+      const roles = await this.playerService.getRoles() as IRole[];
 
       roles.forEach(role => {
         role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
@@ -38,23 +38,29 @@ export class RolesComponent implements OnInit {
 
       this.roles = roles;
     } catch (error) {
-      this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      this.noticeService.error(
+        '获取角色列表失败, 请刷新页面重试',
+        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+      );
     }
   }
 
-  public async getRole(roleId: string): Promise<Role> {
+  public async getRole(roleId: string): Promise<IRole> {
     try {
-      const role = await this.playerService.getRole(roleId) as Role;
+      const role = await this.playerService.getRole(roleId) as IRole;
       role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
       role['cape'] = `/api/role/cape/${role._id}?${Math.random()}`;
 
       return role;
     } catch (error) {
-      this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      this.noticeService.error(
+        '获取角色详情失败, 请刷新页面重试',
+        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+      );
     }
   }
 
-  public updateDefaultRole(role: Role): void {
+  public updateDefaultRole(role: IRole): void {
     this.playerService.updateDefaultRole(role._id)
       .then(updateState => {
         this.noticeService.success('更新成功', `更新默认角色成功, 默认角色已更换为 ${role.rolename}`);

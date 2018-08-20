@@ -1,4 +1,4 @@
-export interface Server {
+export interface IServer {
   _id?: string;
   name: string;
   endpoint: string;

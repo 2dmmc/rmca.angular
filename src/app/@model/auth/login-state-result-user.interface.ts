@@ -1,5 +1,5 @@
-import {User} from '../user/user.interface';
+import {IUser} from '../user/user.interface';
 
-export interface LoginStateResultUser extends User {
-  impersonate?: boolean,
+export interface ILoginStateResultUser extends IUser {
+  impersonate?: boolean;
 }

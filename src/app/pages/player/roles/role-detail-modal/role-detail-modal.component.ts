@@ -5,10 +5,10 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {PlayerService} from '../../player.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 import {DefaultUser} from '../../../../@model/user/user.const';
 
-import {Role} from '../../../../@model/player/role/role.interface';
+import {IRole} from '../../../../@model/player/role/role.interface';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -16,9 +16,9 @@ import {Role} from '../../../../@model/player/role/role.interface';
 })
 
 export class RoleDetailModalComponent implements OnInit {
-  @Input() role: Role;
+  @Input() role: IRole;
   @Output() event = new EventEmitter();
-  user: User;
+  user: IUser;
 
   submitted: boolean;
   skinType: any;

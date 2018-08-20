@@ -31,7 +31,11 @@ export class LoginQQComponent implements OnInit {
           }, 3e3);
         })
         .catch(error => {
-          this.sendNotice('danger', '授权登陆失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+          this.sendNotice(
+            'danger',
+            '授权登陆失败',
+            `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+          );
         });
     });
   }

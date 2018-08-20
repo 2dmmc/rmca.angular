@@ -31,7 +31,10 @@ export class FinanceHistoryComponent implements OnInit {
         this.financeHistories = financeHistory;
       })
       .catch(error => {
-        this.noticeService.error('获取捐助记录失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取捐助记录失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 
@@ -41,7 +44,7 @@ export class FinanceHistoryComponent implements OnInit {
   }
 
   public pageKeyDown(event): void {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.pageChange(this.page);
     }
   }

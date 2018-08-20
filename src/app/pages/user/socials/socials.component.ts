@@ -4,7 +4,7 @@ import {NoticeService} from '../../../@core/services/notice.service';
 
 import {UserService} from '../user.service';
 
-import {User} from '../../../@model/user/user.interface';
+import {IUser} from '../../../@model/user/user.interface';
 import {DefaultUser} from '../../../@model/user/user.const';
 
 @Component({
@@ -13,7 +13,7 @@ import {DefaultUser} from '../../../@model/user/user.const';
 })
 
 export class SocialsComponent implements OnInit {
-  user: User;
+  user: IUser;
 
   constructor(private noticeService: NoticeService,
               private userService: UserService) {
@@ -28,10 +28,13 @@ export class SocialsComponent implements OnInit {
     try {
       const user = await this.userService.getUserProfile();
 
-      // this.userCacheService.setCache(user as User);
-      this.user = user as User;
+      // this.userCacheService.setCache(user as IUser);
+      this.user = user as IUser;
     } catch (error) {
-      this.noticeService.error('获取用户信息失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      this.noticeService.error(
+        '获取用户信息失败, 请刷新页面重试',
+        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+      );
     }
   }
 }

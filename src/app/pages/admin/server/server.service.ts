@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
-import {Server} from '../../../@model/admin/server/server.interface';
-import {Finance} from '../../../@model/admin/server/finacne/finance.interface';
+import {IServer} from '../../../@model/admin/server/server.interface';
+import {IFinance} from '../../../@model/admin/server/finacne/finance.interface';
 
 @Injectable()
 export class ServerService {
@@ -22,7 +22,7 @@ export class ServerService {
       .toPromise();
   }
 
-  public addServer(server: Server): Promise<object> {
+  public addServer(server: IServer): Promise<object> {
     const params = new HttpParams()
       .set('name', server.name)
       .set('endpoint', server.endpoint)
@@ -33,7 +33,7 @@ export class ServerService {
       .toPromise();
   }
 
-  public updateServer(server: Server): Promise<object> {
+  public updateServer(server: IServer): Promise<object> {
     const params = new HttpParams()
       .set('name', server.name)
       .set('endpoint', server.endpoint)
@@ -49,7 +49,7 @@ export class ServerService {
       .toPromise();
   }
 
-  public addFinanceHistory(finance: Finance): Promise<object> {
+  public addFinanceHistory(finance: IFinance): Promise<object> {
     const params = new HttpParams()
       .set('date', finance.date.toString())
       .set('type', finance.type.toString())

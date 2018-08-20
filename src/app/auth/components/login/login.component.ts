@@ -29,7 +29,11 @@ export class NbLoginComponent {
     this.authService.login(this.user.username, this.user.password, this.user.isKeepLogin)
       .then(
         user => {
-          this.sendNotice('success', '登陆成功', `欢迎回来 ${user['username'] || '用户名获取失败'} (${user['email'] || '邮箱获取失败'}), 即将跳转到控制台`);
+          this.sendNotice(
+            'success',
+            '登陆成功',
+            `欢迎回来 ${user['username'] || '用户名获取失败'} (${user['email'] || '邮箱获取失败'}), 即将跳转到控制台`,
+          );
           setTimeout(() => {
             this.router.navigate(['/pages/dashboard']);
           }, 3e3);
@@ -49,16 +53,20 @@ export class NbLoginComponent {
           }
         }
 
-        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.sendNotice('danger',
+          errorTitle,
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
       });
   }
 
   public qqLogin(): void {
-    window.location.href = `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/login/qq`;
+    window.location.href =
+      `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/login/qq`;
   }
 
   public weiboLogin(): void {
-    window.location.href = `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
+    window.location.href =
+      `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
   }
 
   private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {

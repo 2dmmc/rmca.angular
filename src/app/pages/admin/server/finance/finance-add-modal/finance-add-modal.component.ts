@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {ServerService} from '../../server.service';
 
-import {FinanceTypeEnum} from "../../../../../@model/admin/server/finacne/finance-type.enum";
+import {FinanceTypeEnum} from '../../../../../@model/admin/server/finacne/finance-type.enum';
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],

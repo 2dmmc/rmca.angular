@@ -5,7 +5,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {RmcaService} from '../../rmca.service';
 
-import {User} from '../../../../../@model/user/user.interface';
+import {IUser} from '../../../../../@model/user/user.interface';
 
 @Component({
   styleUrls: ['./enter-impersonate-modal.component.scss'],
@@ -13,7 +13,7 @@ import {User} from '../../../../../@model/user/user.interface';
 })
 
 export class EnterImpersonateModalComponent {
-  @Input() user: User;
+  @Input() user: IUser;
   @Output() event = new EventEmitter();
   username: string;
   submitted: boolean;

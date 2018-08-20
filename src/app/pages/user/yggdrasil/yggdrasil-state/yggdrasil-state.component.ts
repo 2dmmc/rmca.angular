@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 
 @Component({
   selector: 'ngx-yggdrasil-state',
@@ -8,7 +8,7 @@ import {User} from '../../../../@model/user/user.interface';
   templateUrl: './yggdrasil-state.component.html',
 })
 export class YggdrasilStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
 
   constructor() {
   }

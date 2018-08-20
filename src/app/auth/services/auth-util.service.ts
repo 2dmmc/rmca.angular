@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 
 import {AuthService} from './auth.service';
 import {LoginStateResult} from '../../@model/auth/login-state-result.class';
-import {LoginStateResultUser} from '../../@model/auth/login-state-result-user.interface';
+import {ILoginStateResultUser} from '../../@model/auth/login-state-result-user.interface';
 
 @Injectable()
 export class AuthUtilService {
@@ -14,7 +14,7 @@ export class AuthUtilService {
 
     try {
       loginStateResult.isLogin = true;
-      loginStateResult.user = await this.authService.getLoginState() as LoginStateResultUser;
+      loginStateResult.user = await this.authService.getLoginState() as ILoginStateResultUser;
 
       return loginStateResult;
     } catch (error) {
@@ -31,8 +31,9 @@ export class AuthUtilService {
     // return this.userCacheService.getCache().admin;
   }
 
-  public isDeveloper(): boolean {
-    return false;
-    // return this.userCacheService.getCache().username === 'sdjnmxd' || this.userCacheService.getCache().username === 'bangbang93';
-  }
+  // public isDeveloper(): boolean {
+  //   return false;
+  //   return this.userCacheService.getCache().username === 'sdjnmxd' ||
+  // this.userCacheService.getCache().username === 'bangbang93';
+  // }
 }

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {User} from '../../../@model/user/user.interface';
+import {IUser} from '../../../@model/user/user.interface';
 
 @Component({
   selector: 'ngx-header',
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: User;
+  user: IUser;
 
   userMenu = [{title: 'Profile'}, {title: 'Log out'}];
 

@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {ServerService} from '../../server.service';
 
-import {Server} from '../../../../../@model/admin/server/server.interface';
+import {IServer} from '../../../../../@model/admin/server/server.interface';
 
 @Component({
   styleUrls: ['./server-detail-modal.component.scss'],
@@ -14,7 +14,7 @@ import {Server} from '../../../../../@model/admin/server/server.interface';
 export class ServerDetailModalComponent implements OnInit {
   @Input() serverId;
   @Output() event = new EventEmitter();
-  server: Server;
+  server: IServer;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,
@@ -33,10 +33,13 @@ export class ServerDetailModalComponent implements OnInit {
   public ngOnInit(): void {
     this.managerService.getServer(this.serverId)
       .then(server => {
-        this.server = server as Server;
+        this.server = server as IServer;
       })
       .catch(error => {
-        this.noticeService.error('获取服务器详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取服务器详情失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 

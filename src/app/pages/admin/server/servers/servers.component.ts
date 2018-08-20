@@ -8,7 +8,7 @@ import {ServerAddModalComponent} from './server-add-modal/server-add-modal.compo
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
-import {Server} from '../../../../@model/admin/server/server.interface';
+import {IServer} from '../../../../@model/admin/server/server.interface';
 
 @Component({
   selector: 'ngx-servers',
@@ -17,7 +17,7 @@ import {Server} from '../../../../@model/admin/server/server.interface';
 })
 
 export class ServersComponent implements OnInit {
-  servers: Server[];
+  servers: IServer[];
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
@@ -31,11 +31,14 @@ export class ServersComponent implements OnInit {
 
   public getServers(): void {
     this.managerService.getServers()
-      .then((servers: Server[]) => {
+      .then((servers: IServer[]) => {
         this.servers = servers;
       })
       .catch(error => {
-        this.noticeService.error('获取服务器列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取服务器列表失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 

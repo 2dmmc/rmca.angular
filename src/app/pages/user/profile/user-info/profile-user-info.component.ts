@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 
 @Component({
   selector: 'ngx-profile-user-info',
@@ -13,7 +13,7 @@ import {User} from '../../../../@model/user/user.interface';
 })
 
 export class ProfileUserInfoComponent implements OnInit {
-  @Input() user: User;
+  @Input() user: IUser;
   @Output() needGetUserProfile = new EventEmitter();
   submitted: boolean;
 

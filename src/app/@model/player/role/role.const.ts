@@ -1,7 +1,7 @@
 import {DefaultUser} from '../../user/user.const';
-import {Role} from './role.interface';
+import {IRole} from './role.interface';
 
-export const DefaultRole: Role = {
+export const DefaultRole: IRole = {
   _id: null,
   rolename: 'default',
   uuid: null,

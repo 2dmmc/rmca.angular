@@ -28,9 +28,13 @@ export class NbRequestPasswordComponent {
     this.authService.requestResetPassword(this.user.email)
       .then(
         requestResult => {
-          this.sendNotice('success', '发送成功', `我们已经发送了一封邮件到你的邮箱里 (${this.user.email}), 请根据邮件内容找回你的密码. 如没有收到,请尝试重新发送邮件或稍后重试`);
+          this.sendNotice(
+            'success',
+            '发送成功',
+            `我们已经发送了一封邮件到你的邮箱里 (${this.user.email}), 请根据邮件内容找回你的密码. 如没有收到,请尝试重新发送邮件或稍后重试`,
+          );
 
-          // FIXME 非常简单的倒计时
+          // TODO 非常简单的倒计时
           setTimeout(() => {
             this.submitted = false;
           }, 60e3);
@@ -50,7 +54,11 @@ export class NbRequestPasswordComponent {
           }
         }
 
-        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.sendNotice(
+          'danger',
+          errorTitle,
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 

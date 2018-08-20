@@ -60,7 +60,11 @@ export class NbResetPasswordComponent implements OnInit {
           }
         }
 
-        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.sendNotice(
+          'danger',
+          errorTitle,
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 

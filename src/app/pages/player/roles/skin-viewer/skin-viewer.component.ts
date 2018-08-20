@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
 import {RotatingAnimation, SkinViewer} from 'skinview3d';
 
-import {Role} from '../../../../@model/player/role/role.interface';
+import {IRole} from '../../../../@model/player/role/role.interface';
 
 @Component({
   selector: 'ngx-skin-viewer',
@@ -10,7 +10,7 @@ import {Role} from '../../../../@model/player/role/role.interface';
 })
 
 export class SkinViewerComponent implements AfterViewInit {
-  @Input() role: Role;
+  @Input() role: IRole;
   random: string;
 
   constructor() {
@@ -18,6 +18,7 @@ export class SkinViewerComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    // tslint:disable-next-line
     const skinViewer = new SkinViewer({
       domElement: document.getElementById(this.random),
       skinUrl: this.role.skin,

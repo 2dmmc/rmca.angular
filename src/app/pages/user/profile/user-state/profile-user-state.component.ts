@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 
 @Component({
   selector: 'ngx-profile-user-state',
@@ -9,7 +9,7 @@ import {User} from '../../../../@model/user/user.interface';
 })
 
 export class ProfileUserStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
 
   constructor() {
   }

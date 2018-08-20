@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';
 
 @Component({
@@ -11,14 +11,15 @@ import {UserService} from '../../user.service';
   templateUrl: './social-weibo-state.component.html',
 })
 export class SocialWeiboStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService) {
   }
 
   public oAuth(): void {
-    window.location.href = `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/oauth/weibo`;
+    window.location.href =
+      `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/oauth/weibo`;
   }
 
   public async updateUserAvatar() {

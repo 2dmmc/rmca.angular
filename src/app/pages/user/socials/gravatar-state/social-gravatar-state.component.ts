@@ -2,7 +2,7 @@ import {Component, Input} from '@angular/core';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {User} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/user/user.interface';
 import {UserService} from '../../user.service';
 
 @Component({
@@ -11,7 +11,7 @@ import {UserService} from '../../user.service';
   templateUrl: './social-gravatar-state.component.html',
 })
 export class SocialGravatarStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService) {

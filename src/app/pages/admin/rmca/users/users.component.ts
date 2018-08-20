@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {AdminRmcaUsersUser} from '../../../../@model/admin/rmca/users/user.interface';
+import {IAdminRmcaUsersUser} from '../../../../@model/admin/rmca/users/user.interface';
 import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
 
@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
     keyWord: string,
     submitted: boolean;
   };
-  users: AdminRmcaUsersUser[];
+  users: IAdminRmcaUsersUser[];
   page: number;
   limit: number;
 
@@ -69,11 +69,13 @@ export class UsersComponent implements OnInit {
 
   public searchClick(): void {
     this.page = 1;
-    this.searchUser(this.search.keyWord, this.page, this.limit, this.filter.type == this.filter.types.onlyAdmin, this.filter.type == this.filter.types.onlyBan);
+    this.searchUser(this.search.keyWord, this.page, this.limit,
+      this.filter.type === this.filter.types.onlyAdmin,
+      this.filter.type === this.filter.types.onlyBan);
   }
 
   public searchKeyDown(event): void {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this.searchClick();
     }
   }
@@ -84,7 +86,7 @@ export class UsersComponent implements OnInit {
   }
 
   public pageKeyDown(event): void {
-    if (event.keyCode == 13) {
+    if (event.keyCode === 13) {
       this._pageChange(this.page);
     }
   }
@@ -96,7 +98,7 @@ export class UsersComponent implements OnInit {
     }
   }
 
-  public banUser(user: AdminRmcaUsersUser): void {
+  public banUser(user: IAdminRmcaUsersUser): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -109,7 +111,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
-  public unBanUser(user: AdminRmcaUsersUser): void {
+  public unBanUser(user: IAdminRmcaUsersUser): void {
     const activeModal = this.modalService.open(UserUnbanModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -125,10 +127,13 @@ export class UsersComponent implements OnInit {
   private getUsers(page: number, limit: number): void {
     this.rmcaService.getUsers(page, limit)
       .then(users => {
-        this.users = users as AdminRmcaUsersUser[];
+        this.users = users as IAdminRmcaUsersUser[];
       })
       .catch(error => {
-        this.noticeService.error('获取用户列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取用户列表失败, 请刷新页面重试',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 
@@ -142,11 +147,14 @@ export class UsersComponent implements OnInit {
     this.rmcaService.searchUsers(keyword, page, limit, isAdmin, isBanned)
       .then(users => {
         this.search.submitted = false;
-        this.users = users as AdminRmcaUsersUser[];
+        this.users = users as IAdminRmcaUsersUser[];
       })
       .catch(error => {
         this.search.submitted = false;
-        this.noticeService.error('获取搜索结果失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+        this.noticeService.error(
+          '获取搜索结果失败',
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 
