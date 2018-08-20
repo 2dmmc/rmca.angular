@@ -20,8 +20,6 @@ import {
   NbUserModule,
 } from '@nebular/theme';
 
-import {NbSecurityModule} from '@nebular/security';
-
 import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
 import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe, RmbPipe} from './pipes';
 import {RmcaLayoutComponent} from './layouts';
@@ -45,7 +43,6 @@ const NB_MODULES = [
   NbPopoverModule,
   NbContextMenuModule,
   NgbModule,
-  NbSecurityModule, // *nbIsGranted directive,
   NbProgressBarModule,
 ];
 

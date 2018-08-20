@@ -12,7 +12,7 @@
     size="medium"
     [class.right]="position === 'normal'"
     [class.left]="position === 'inverse'">
-    <nb-action *nbIsGranted="['view', 'user']">
+    <nb-action>
       <nb-user [nbContextMenu]="userMenu" [name]="user?.username" [picture]="user?.avatar"></nb-user>
     </nb-action>
   </nb-actions>

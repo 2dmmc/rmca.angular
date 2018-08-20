@@ -14,7 +14,13 @@ export class HeaderComponent implements OnInit {
 
   user: IUser;
 
-  userMenu = [{title: 'Profile'}, {title: 'Log out'}];
+  userMenu = [{
+    title: '个人中心',
+    link: '/pages/user/profile',
+  }, {
+    title: '登出',
+    link: '/auth/logout',
+  }];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService) {
