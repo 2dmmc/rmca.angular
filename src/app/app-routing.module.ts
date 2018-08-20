@@ -17,7 +17,8 @@ const routes: Routes = [
 ];
 
 const config: ExtraOptions = {
-  useHash: true,
+  useHash: false,
+  enableTracing: false,
 };
 
 @NgModule({

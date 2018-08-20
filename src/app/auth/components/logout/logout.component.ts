@@ -93,6 +93,29 @@ export class NbLogoutComponent implements OnInit {
               );
             });
         }
+      })
+      .catch((error) => {
+        let noticeTitle;
+
+        switch (error.status) {
+          case 401 : {
+            noticeTitle = '大兄弟你得先登陆';
+
+            setTimeout(() => {
+              this.router.navigate(['/auth/login']);
+            }, 3e3);
+            break;
+          }
+          default: {
+            noticeTitle = '未知错误, 请联系鹳狸猿';
+          }
+        }
+
+        this.sendNotice(
+          'danger',
+          noticeTitle,
+          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
+        );
       });
   }
 

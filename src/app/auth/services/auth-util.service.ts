@@ -27,13 +27,13 @@ export class AuthUtilService {
   }
 
   public isAdmin(): boolean {
-    return false;
+    return true;
     // return this.userCacheService.getCache().admin;
   }
 
-  // public isDeveloper(): boolean {
-  //   return false;
-  //   return this.userCacheService.getCache().username === 'sdjnmxd' ||
-  // this.userCacheService.getCache().username === 'bangbang93';
-  // }
+  public isDeveloper(): boolean {
+    return true;
+    // return this.userCacheService.getCache().username === 'sdjnmxd' ||
+    // this.userCacheService.getCache().username === 'bangbang93';
+  }
 }

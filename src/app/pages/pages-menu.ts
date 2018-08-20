@@ -1,175 +1,110 @@
 import {NbMenuItem} from '@nebular/theme';
 
-export const MENU_ITEMS: NbMenuItem[] = [
+export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: '控制台',
-    icon: 'nb-home',
+    icon: 'fa fa-tachometer fa-fw',
     link: '/pages/dashboard',
     home: true,
   },
   {
-    title: 'FEATURES',
+    title: '常规设置',
     group: true,
   },
   {
-    title: 'UI Features',
-    icon: 'nb-keypad',
-    link: '/pages/ui-features',
+    title: '账户管理',
+    icon: 'fa fa-user fa-fw',
     children: [
       {
-        title: 'Buttons',
-        link: '/pages/ui-features/buttons',
+        title: '个人中心',
+        link: '/pages/user/profile',
       },
       {
-        title: 'Grid',
-        link: '/pages/ui-features/grid',
+        title: '正版验证',
+        link: '/pages/user/yggdrasil',
       },
       {
-        title: 'Icons',
-        link: '/pages/ui-features/icons',
-      },
-      {
-        title: 'Modals',
-        link: '/pages/ui-features/modals',
-      },
-      {
-        title: 'Popovers',
-        link: '/pages/ui-features/popovers',
-      },
-      {
-        title: 'Typography',
-        link: '/pages/ui-features/typography',
-      },
-      {
-        title: 'Animated Searches',
-        link: '/pages/ui-features/search-fields',
-      },
-      {
-        title: 'Tabs',
-        link: '/pages/ui-features/tabs',
+        title: '社交账户授权',
+        link: '/pages/user/socials',
       },
     ],
   },
   {
-    title: 'Forms',
-    icon: 'nb-compose',
+    title: '角色管理',
+    icon: 'fa fa-gamepad fa-fw',
     children: [
       {
-        title: 'Form Inputs',
-        link: '/pages/forms/inputs',
+        title: '角色列表',
+        link: '/pages/player/roles',
+      },
+    ],
+  },
+];
+
+
+export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
+  {
+    title: '高级设置(Admin)',
+    group: true,
+  },
+  {
+    title: '服务器管理',
+    icon: 'fa fa-sitemap fa-fw',
+    children: [
+      {
+        title: '服务器列表',
+        link: '/pages/admin/server/servers',
       },
       {
-        title: 'Form Layouts',
-        link: '/pages/forms/layouts',
+        title: '服务器历史管理',
+        link: '/pages/admin/server/history',
+      },
+      {
+        title: '财务历史管理',
+        link: '/pages/admin/server/finance',
       },
     ],
   },
   {
-    title: 'Components',
-    icon: 'nb-gear',
+    title: 'RMCA管理',
+    icon: 'fa fa-gears fa-fw',
     children: [
       {
-        title: 'Tree',
-        link: '/pages/components/tree',
-      }, {
-        title: 'Notifications',
-        link: '/pages/components/notifications',
+        title: '用户管理',
+        link: '/pages/admin/rmca/users',
       },
     ],
   },
+];
+
+export const DEVELOPER_MENU_ITEMS: NbMenuItem[] = [
   {
-    title: 'Maps',
-    icon: 'nb-location',
-    children: [
-      {
-        title: 'Google Maps',
-        link: '/pages/maps/gmaps',
-      },
-      {
-        title: 'Leaflet Maps',
-        link: '/pages/maps/leaflet',
-      },
-      {
-        title: 'Bubble Maps',
-        link: '/pages/maps/bubble',
-      },
-      {
-        title: 'Search Maps',
-        link: '/pages/maps/searchmap',
-      },
-    ],
-  },
-  {
-    title: 'Charts',
-    icon: 'nb-bar-chart',
-    children: [
-      {
-        title: 'Echarts',
-        link: '/pages/charts/echarts',
-      },
-      {
-        title: 'Charts.js',
-        link: '/pages/charts/chartjs',
-      },
-      {
-        title: 'D3',
-        link: '/pages/charts/d3',
-      },
-    ],
-  },
-  {
-    title: 'Editors',
-    icon: 'nb-title',
-    children: [
-      {
-        title: 'TinyMCE',
-        link: '/pages/editors/tinymce',
-      },
-      {
-        title: 'CKEditor',
-        link: '/pages/editors/ckeditor',
-      },
-    ],
-  },
-  {
-    title: 'Tables',
-    icon: 'nb-tables',
-    children: [
-      {
-        title: 'Smart Table',
-        link: '/pages/tables/smart-table',
-      },
-    ],
-  },
-  {
-    title: 'Miscellaneous',
-    icon: 'nb-shuffle',
-    children: [
-      {
-        title: '404',
-        link: '/pages/miscellaneous/404',
-      },
-    ],
+    title: '功能性入口(Debug)',
+    group: true,
   },
   {
     title: 'Auth',
-    icon: 'nb-locked',
+    icon: 'fa fa-lock fa-fw',
     children: [
       {
-        title: 'Login',
+        title: '登陆',
         link: '/auth/login',
       },
       {
-        title: 'Register',
+        title: '注册',
         link: '/auth/register',
       },
       {
-        title: 'Request Password',
+        title: '找回密码',
         link: '/auth/request-password',
       },
       {
-        title: 'Reset Password',
+        title: '重置密码',
         link: '/auth/reset-password',
+      },
+      {
+        title: '登出',
+        link: '/auth/logout',
       },
     ],
   },
