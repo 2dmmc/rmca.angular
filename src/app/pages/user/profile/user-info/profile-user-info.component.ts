@@ -4,7 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {UserService} from '../../user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {IUser} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/common/user/user.interface';
 
 @Component({
   selector: 'ngx-profile-user-info',

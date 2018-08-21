@@ -4,7 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {ServerService} from '../../server.service';
 
-import {IServer} from '../../../../../@model/admin/server/server.interface';
+import {IServer} from '../../../../../@model/common/admin/server/server.interface';
 
 @Component({
   styleUrls: ['./server-detail-modal.component.scss'],

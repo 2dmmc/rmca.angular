@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
+import {IUser} from '../../@model/common/user/user.interface';
+import {ILoginState} from '../../@model/response/auth/login-state.interface';
+
 @Injectable()
 export class AuthService {
   constructor(private http: HttpClient) {
@@ -10,28 +13,29 @@ export class AuthService {
   /**
    * @name 登陆
    * @description 登陆. 入参为用户名, 密码, 是否保持登陆状态. 返回登陆结果.
-   * @param username 用户名
-   * @param password 密码
-   * @param isKeepLogin 是否保持登陆状态
-   * @return {Promise<Object>}
+   *
+   * @param {string} username 用户名
+   * @param {string} password 密码
+   * @param {boolean} isKeepLogin 是否需要保持登陆状态
+   * @return {Promise<IUser>} 返回一个完整的用户
    */
-  public login(username, password, isKeepLogin): Promise<object> {
+  public login(username: string, password: string, isKeepLogin: boolean): Promise<IUser> {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password)
-      .set('isKeepLogin', isKeepLogin);
+      .set('isKeepLogin', isKeepLogin.toString());
 
-    return this.http.post('/api/user/login', params)
+    return this.http.post<IUser>('/api/user/login', params)
       .toPromise();
   }
 
   /**
    * @name 登出
    * @description 字面意思. 返回登出结果.
-   * @return {Promise<Object>}
+   * @return {Promise<void>}
    */
-  public logout(): Promise<object> {
-    return this.http.get('/api/user/logout')
+  public logout(): Promise<void> {
+    return this.http.get<void>('/api/user/logout')
       .toPromise();
   }
 
@@ -41,15 +45,15 @@ export class AuthService {
    * @param username 用户名
    * @param password 密码
    * @param email 电子邮箱
-   * @return {Promise<Object>}
+   * @return {Promise<void>}
    */
-  public register(username, password, email): Promise<object> {
+  public register(username: string, password: string, email: string): Promise<void> {
     const params = new HttpParams()
       .set('username', username)
       .set('password', password)
       .set('email', email);
 
-    return this.http.post('/api/user/register', params)
+    return this.http.post<void>('/api/user/register', params)
       .toPromise();
   }
 
@@ -57,13 +61,13 @@ export class AuthService {
    * @name 请求重置密码
    * @description 请求重置密码, 往用户邮箱里发一封包含密码重置链接的邮件. 入参为用户的电子邮箱. 返回发送结果.
    * @param email 用户的电子邮箱
-   * @return {Promise<Object>}
+   * @return {Promise<void>}
    */
-  public requestResetPassword(email): Promise<object> {
+  public requestResetPassword(email: string): Promise<void> {
     const params = new HttpParams()
       .set('email', email);
 
-    return this.http.post('/api/user/reset', params)
+    return this.http.post<void>('/api/user/reset', params)
       .toPromise();
   }
 
@@ -72,13 +76,13 @@ export class AuthService {
    * @description 通过hash重置用户密码. 入参为URL中的hash和用户填写的密码. 返回重置结果.
    * @param hash URL中的hash
    * @param password 用户填写的密码
-   * @return {Promise<Object>}
+   * @return {Promise<void>}
    */
-  public resetPassword(hash, password): Promise<object> {
+  public resetPassword(hash: string, password: string): Promise<void> {
     const params = new HttpParams()
       .set('password', password);
 
-    return this.http.post(`/api/user/reset/${hash}`, params)
+    return this.http.post<void>(`/api/user/reset/${hash}`, params)
       .toPromise();
   }
 
@@ -86,25 +90,30 @@ export class AuthService {
    * @name 检查重置密码hash有效性
    * @description 检测用户通过URL携带过来的重置密码Hash是否有效. 入参为待检测的Hash. 返回检测结果.
    * @param hash URL中的hash
-   * @return {Promise<Object>}
+   * @return {Promise<void>}
    */
-  public checkResetPasswordHash(hash): Promise<object> {
-    return this.http.get(`/api/user/reset/${hash}`)
+  public checkResetPasswordHash(hash): Promise<void> {
+    return this.http.get<void>(`/api/user/reset/${hash}`)
       .toPromise();
   }
 
   /**
    * @name 获取登陆状态
    * @description 获取当前用户的登陆状态. SAP的核心鉴权方法. 返回不完整的User模型或未登录.
-   * @return {Promise<Object>}
+   * @return {Promise<ILoginState>}
    */
-  public async getLoginState(): Promise<object> {
-    return this.http.get('/api/user/login')
+  public async getLoginState(): Promise<ILoginState> {
+    return this.http.get<ILoginState>('/api/user/login')
       .toPromise();
   }
 
-  public logoutImpersonate(): Promise<object> {
-    return this.http.delete('/api/admin/user/impersonate')
+  /**
+   * @name 退出替身登陆
+   * @description RT
+   * @return {Promise<void>}
+   */
+  public logoutImpersonate(): Promise<void> {
+    return this.http.delete<void>('/api/admin/user/impersonate')
       .toPromise();
   }
 }

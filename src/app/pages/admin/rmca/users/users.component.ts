@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {IAdminRmcaUsersUser} from '../../../../@model/admin/rmca/users/user.interface';
+import {IAdminRmcaUsersUser} from '../../../../@model/common/admin/rmca/users/user.interface';
 import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
 

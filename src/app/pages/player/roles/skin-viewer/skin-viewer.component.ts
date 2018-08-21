@@ -1,7 +1,7 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
 import {RotatingAnimation, SkinViewer} from 'skinview3d';
 
-import {IRole} from '../../../../@model/player/role/role.interface';
+import {IRole} from '../../../../@model/common/player/role/role.interface';
 
 @Component({
   selector: 'ngx-skin-viewer',

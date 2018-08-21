@@ -5,7 +5,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
-import {IUser} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/common/user/user.interface';
 
 import {UserBanModalComponent} from '../users/user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from '../users/user-unban-modal/user-unban-modal.component';
@@ -26,10 +26,6 @@ export class UserComponent implements OnInit {
               private modalService: NgbModal,
               private rmcaService: RmcaService,
               private activatedRoute: ActivatedRoute) {
-    this.user = {
-      username: null,
-      email: null,
-    };
   }
 
   public ngOnInit(): void {

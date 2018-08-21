@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../@core/data/auth.service';
 
 @Component({
   selector: 'ngx-request-password-page',

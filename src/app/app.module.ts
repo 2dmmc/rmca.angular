@@ -14,7 +14,6 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
 import {ToasterModule} from 'angular2-toaster';
 
 
@@ -35,10 +34,9 @@ import {ToasterModule} from 'angular2-toaster';
     AppRoutingModule,
 
     NgbModule.forRoot(),
+    ToasterModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-
-    ToasterModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [

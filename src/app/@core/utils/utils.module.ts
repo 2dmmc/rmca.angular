@@ -1,12 +1,10 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {AuthService} from './auth.service';
-import {CallbackService} from './callback.service';
+import {AuthUtilService} from './auth-util.service';
 
 const SERVICES = [
-  AuthService,
-  CallbackService,
+  AuthUtilService,
 ];
 
 @NgModule({
@@ -17,10 +15,10 @@ const SERVICES = [
     ...SERVICES,
   ],
 })
-export class DataModule {
+export class UtilsModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
-      ngModule: DataModule,
+      ngModule: UtilsModule,
       providers: [
         ...SERVICES,
       ],

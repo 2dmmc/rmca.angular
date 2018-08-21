@@ -7,7 +7,7 @@ import {NoticeService} from '../../../@core/services/notice.service';
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
-import {IRole} from '../../../@model/player/role/role.interface';
+import {IRole} from '../../../@model/common/player/role/role.interface';
 
 @Component({
   styleUrls: ['./roles.component.scss'],

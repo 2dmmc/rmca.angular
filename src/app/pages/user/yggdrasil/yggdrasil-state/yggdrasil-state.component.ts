@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
 
-import {IUser} from '../../../../@model/user/user.interface';
+import {IUser} from '../../../../@model/common/user/user.interface';
 
 @Component({
   selector: 'ngx-yggdrasil-state',

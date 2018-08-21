@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {CallbackRoutingModule} from './callback-routing.module';
 import {ThemeModule} from '../@theme/theme.module';
 
-import {CallbackService} from './services/callback.service';
+import {CallbackService} from '../@core/data/callback.service';
 
 import {CallbackComponent} from './callback.component';
 import {CallbackBlockComponent} from './components/callback-block/callback-block.component';

@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {IUser} from '../../../@model/user/user.interface';
+import {IUser} from '../../../@model/common/user/user.interface';
 
 @Component({
   selector: 'ngx-header',

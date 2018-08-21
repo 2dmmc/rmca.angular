@@ -5,7 +5,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {RmcaService} from '../../rmca.service';
 
-import {IUser} from '../../../../../@model/user/user.interface';
+import {IUser} from '../../../../../@model/common/user/user.interface';
 
 @Component({
   styleUrls: ['./enter-impersonate-modal.component.scss'],

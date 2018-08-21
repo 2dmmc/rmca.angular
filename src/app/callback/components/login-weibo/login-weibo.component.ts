@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import {CallbackService} from '../../services/callback.service';
+import {CallbackService} from '../../../@core/data/callback.service';
 
 @Component({
   selector: 'ngx-login-weibo',

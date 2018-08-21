@@ -5,10 +5,10 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {PlayerService} from '../../player.service';
 
-import {IUser} from '../../../../@model/user/user.interface';
-import {DefaultUser} from '../../../../@model/user/user.const';
+import {IUser} from '../../../../@model/common/user/user.interface';
+import {DefaultUser} from '../../../../@model/common/user/user.const';
 
-import {IRole} from '../../../../@model/player/role/role.interface';
+import {IRole} from '../../../../@model/common/player/role/role.interface';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],

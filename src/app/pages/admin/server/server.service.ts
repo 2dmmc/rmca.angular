@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
-import {IServer} from '../../../@model/admin/server/server.interface';
-import {IFinance} from '../../../@model/admin/server/finacne/finance.interface';
+import {IServer} from '../../../@model/common/admin/server/server.interface';
+import {IFinance} from '../../../@model/common/admin/server/finacne/finance.interface';
 
 @Injectable()
 export class ServerService {

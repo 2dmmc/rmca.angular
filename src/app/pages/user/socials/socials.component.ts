@@ -4,8 +4,8 @@ import {NoticeService} from '../../../@core/services/notice.service';
 
 import {UserService} from '../user.service';
 
-import {IUser} from '../../../@model/user/user.interface';
-import {DefaultUser} from '../../../@model/user/user.const';
+import {IUser} from '../../../@model/common/user/user.interface';
+import {DefaultUser} from '../../../@model/common/user/user.const';
 
 @Component({
   styleUrls: ['./socials.component.scss'],
