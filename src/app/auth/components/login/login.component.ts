@@ -1,29 +1,27 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../../@core/data/auth.service';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
+import {CommonUtilService} from '../../../@core/utils/common-util.service';
+
+import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
 
 @Component({
   selector: 'ngx-login',
   templateUrl: './login.component.html',
 })
 
-export class NbLoginComponent implements OnInit {
-  loginForm: FormGroup;
+export class LoginComponent implements OnInit {
+  public loginForm: FormGroup;
+  public submitted: boolean;
+  @ViewChild(AuthNoticeComponent) notice: AuthNoticeComponent;
 
-  notice: {
-    type: 'info' | 'success' | 'danger',
-    title: string,
-    message: string,
-  };
-  submitted: boolean;
-
-  constructor(private formBuilder: FormBuilder,
-              private router: Router,
+  constructor(private router: Router,
               private authService: AuthService,
-              private authUtilService: AuthUtilService) {
+              private authUtilService: AuthUtilService,
+              private commonUtilService: CommonUtilService) {
     this.submitted = false;
   }
 
@@ -65,31 +63,27 @@ export class NbLoginComponent implements OnInit {
       const user = await this.authService.login(this.username.value, this.password.value, this.isKeepLogin.value);
       this.authUtilService.user = user;
 
-      this.sendNotice(
+      this.notice.show(
         'success',
         '登陆成功',
         `欢迎回来 ${user.username || '用户名获取失败'} (${user.email || '邮箱获取失败'}), 即将跳转到控制台`,
       );
-      // setTimeout(() => {
-      //   return this.router.navigate(['/pages/dashboard']);
-      // }, 3e3);
+      await this.commonUtilService.sleep(3e3);
+      this.router.navigate(['/pages/dashboard']);
+
     } catch (error) {
       this.submitted = false;
-      let errorTitle;
 
-      switch (error.status) {
-        case 401 : {
-          errorTitle = '用户名或密码错误';
-          break;
-        }
-        default: {
-          errorTitle = '未知错误, 请联系鹳狸猿';
-        }
-      }
+      const errorTitleMap = {
+        401: '用户名或密码错误',
+      };
+      const errorTitle = errorTitleMap[error.status] || '未知错误, 请联系鹳狸猿';
 
-      this.sendNotice('danger',
-        errorTitle,
-        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
+      this.notice.show(
+        'danger',
+        '' + errorTitle,
+        `message: ${error.error.message} | code: ${error.status}`,
+      );
     }
   }
 
@@ -101,13 +95,5 @@ export class NbLoginComponent implements OnInit {
   public weiboLogin(): void {
     window.location.href =
       `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
-  }
-
-  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
-    this.notice = {
-      type: type,
-      title: title,
-      message: message,
-    };
   }
 }

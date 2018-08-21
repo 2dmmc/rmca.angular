@@ -8,7 +8,7 @@ import {AuthService} from '../../../@core/data/auth.service';
   templateUrl: './logout.component.html',
 })
 
-export class NbLogoutComponent implements OnInit {
+export class LogoutComponent implements OnInit {
   notice: {
     type: 'info' | 'success' | 'danger',
     title: string,

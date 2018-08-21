@@ -8,7 +8,7 @@ import {AuthService} from '../../../@core/data/auth.service';
   templateUrl: './request-password.component.html',
 })
 
-export class NbRequestPasswordComponent {
+export class RequestPasswordComponent {
   user: any;
   notice: {
     type: 'info' | 'success' | 'danger',

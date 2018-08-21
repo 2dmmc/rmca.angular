@@ -4,15 +4,7 @@
 
   <form autocomplete=off role="form"
         [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-    <div class="alert alert-info" role="alert"
-         [class.alert-info]="notice.type == 'info'"
-         [class.alert-success]="notice.type == 'success'"
-         [class.alert-danger]="notice.type == 'danger'"
-         *ngIf="notice">
-      <div><strong>{{notice.title}}</strong></div>
-      <div>{{notice.message}}</div>
-    </div>
-
+    <ngx-auth-notice></ngx-auth-notice>
     <div class="form-group">
       <input class="form-control" placeholder="用户名" autofocus
              id="username" formControlName="username" required
@@ -46,7 +38,7 @@
 
     <div class="form-group accept-group col-sm-12">
       <nb-checkbox
-        [formControlName]="isKeepLogin">
+        formControlName="isKeepLogin">
         保持登陆状态(公共电脑不要勾选)
       </nb-checkbox>
       <a class="forgot-password" routerLink="../request-password">忘记密码</a>
@@ -63,8 +55,8 @@
     <small class="form-text">使用第三方账号登陆:</small>
 
     <div class="socials">
-      <a href="javascript:void(0)" (click)="qqLogin()" class="fa fa-qq"></a>
-      <a href="javascript:void(0)" (click)="weiboLogin()" class="fa fa-weibo"></a>
+      <a href="javascript:void(0)" (click)="qqLogin()" class="fab fa-qq"></a>
+      <a href="javascript:void(0)" (click)="weiboLogin()" class="fab fa-weibo"></a>
     </div>
 
     <small class="form-text">

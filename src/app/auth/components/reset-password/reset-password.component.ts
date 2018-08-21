@@ -9,7 +9,7 @@ import {AuthService} from '../../../@core/data/auth.service';
   templateUrl: './reset-password.component.html',
 })
 
-export class NbResetPasswordComponent implements OnInit {
+export class ResetPasswordComponent implements OnInit {
   user: any;
   notice: {
     type: 'info' | 'success' | 'danger',

@@ -9,7 +9,7 @@ import {AuthService} from '../../../@core/data/auth.service';
   templateUrl: './register.component.html',
 })
 
-export class NbRegisterComponent {
+export class RegisterComponent {
   user: any;
   notice: {
     type: 'info' | 'success' | 'danger',
