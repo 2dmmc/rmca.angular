@@ -6,18 +6,28 @@ import {ServicesModule} from './services/services.module';
 import {DataModule} from './data/data.module';
 import {UtilsModule} from './utils/utils.module';
 
+import {RmbPipe} from './pipes';
+
 export const RMCA_CORE_PROVIDERS = [
   ...ServicesModule.forRoot().providers,
   ...DataModule.forRoot().providers,
   ...UtilsModule.forRoot().providers,
 ];
 
+const PIPES = [
+  RmbPipe,
+];
+
+const VALIDATION = [];
+
 @NgModule({
   imports: [
     CommonModule,
   ],
   exports: [],
-  declarations: [],
+  declarations: [
+    ...PIPES,
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {

@@ -21,7 +21,7 @@ import {
 } from '@nebular/theme';
 
 import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
-import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe, RmbPipe} from './pipes';
+import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
 import {RmcaLayoutComponent} from './layouts';
 import {DEFAULT_THEME} from './styles/theme.default';
 import {COSMIC_THEME} from './styles/theme.cosmic';
@@ -59,7 +59,6 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
-  RmbPipe,
 ];
 
 const NB_THEME_PROVIDERS = [
