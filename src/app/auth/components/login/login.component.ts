@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('isKeepLogin');
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(
         '', [
@@ -74,10 +74,10 @@ export class LoginComponent implements OnInit {
     } catch (error) {
       this.submitted = false;
 
-      const errorTitleMap = {
+      const errorMessageMap = {
         401: '用户名或密码错误',
       };
-      const errorTitle = errorTitleMap[error.status] || '未知错误, 请联系鹳狸猿';
+      const errorTitle = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.notice.show(
         'danger',
