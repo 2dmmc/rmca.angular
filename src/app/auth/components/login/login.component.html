@@ -6,8 +6,9 @@
         [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
     <ngx-auth-notice></ngx-auth-notice>
     <div class="form-group">
+      <label for="input-username" class="sr-only">用户名</label>
       <input class="form-control" placeholder="用户名" autofocus
-             id="username" formControlName="username" required
+             id="input-username" formControlName="username" required
              [class.form-control-success]="loginForm.get('username').valid && loginForm.get('username').touched"
              [class.form-control-danger]="loginForm.get('username').invalid && loginForm.get('username').touched">
       <small class="form-text error"
