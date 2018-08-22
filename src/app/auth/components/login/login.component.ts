@@ -25,18 +25,6 @@ export class LoginComponent implements OnInit {
     this.submitted = false;
   }
 
-  get username() {
-    return this.loginForm.get('username');
-  }
-
-  get password() {
-    return this.loginForm.get('password');
-  }
-
-  get isKeepLogin() {
-    return this.loginForm.get('isKeepLogin');
-  }
-
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       username: new FormControl(
@@ -56,11 +44,11 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public async login(): Promise<void> {
+  public async login(loginForm): Promise<void> {
     this.submitted = true;
 
     try {
-      const user = await this.authService.login(this.username.value, this.password.value, this.isKeepLogin.value);
+      const user = await this.authService.login(loginForm.username, loginForm.password, loginForm.isKeepLogin);
       this.authUtilService.user = user;
 
       this.notice.show(

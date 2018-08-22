@@ -8,14 +8,18 @@
     <div class="form-group">
       <input class="form-control" placeholder="用户名" autofocus
              id="username" formControlName="username" required
-             [class.form-control-success]="username.valid && username.touched"
-             [class.form-control-danger]="username.invalid && username.touched">
+             [class.form-control-success]="loginForm.get('username').valid && loginForm.get('username').touched"
+             [class.form-control-danger]="loginForm.get('username').invalid && loginForm.get('username').touched">
       <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors.required">
+             *ngIf="
+             loginForm.get('username').invalid && loginForm.get('username').touched &&
+             loginForm.get('username').hasError('required')">
         请填写用户名
       </small>
       <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors.pattern">
+             *ngIf="
+             loginForm.get('username').invalid && loginForm.get('username').touched &&
+             loginForm.get('username').hasError('pattern')">
         用户名格式不正确
       </small>
     </div>
@@ -24,14 +28,18 @@
       <label for="input-password" class="sr-only">Password</label>
       <input type="password" class="form-control" placeholder="密码"
              id="input-password" formControlName="password"
-             [class.form-control-success]="password.valid && password.touched"
-             [class.form-control-danger]="password.invalid && password.touched">
+             [class.form-control-success]="loginForm.get('password').valid && loginForm.get('password').touched"
+             [class.form-control-danger]="loginForm.get('password').invalid && loginForm.get('password').touched">
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && password.errors.required">
+             *ngIf="
+             loginForm.get('password').invalid && loginForm.get('password').touched &&
+             loginForm.get('password').hasError('required')">
         请填写密码
       </small>
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && (password.errors.minlength || password.errors?.maxlength)">
+             *ngIf="
+             loginForm.get('password').invalid && loginForm.get('password').touched &&
+             (loginForm.get('password').hasError('minlength') || loginForm.get('password').hasError('maxlength'))">
         密码应该在 6 - 32 位之间
       </small>
     </div>
