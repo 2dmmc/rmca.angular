@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  public async login(loginForm): Promise<void> {
+  public async login(loginForm: any): Promise<void> {
     this.submitted = true;
 
     try {
