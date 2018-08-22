@@ -5,10 +5,11 @@
   <form autocomplete=off role="form"
         [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
     <ngx-auth-notice></ngx-auth-notice>
+
     <div class="form-group">
       <label for="input-username" class="sr-only">用户名</label>
-      <input class="form-control" placeholder="用户名" autofocus
-             id="input-username" formControlName="username" required
+      <input class="form-control" placeholder="用户名" autofocus id="input-username"
+             formControlName="username" required
              [class.form-control-success]="loginForm.get('username').valid && loginForm.get('username').touched"
              [class.form-control-danger]="loginForm.get('username').invalid && loginForm.get('username').touched">
       <small class="form-text error"
@@ -27,8 +28,8 @@
 
     <div class="form-group">
       <label for="input-password" class="sr-only">Password</label>
-      <input type="password" class="form-control" placeholder="密码"
-             id="input-password" formControlName="password"
+      <input type="password" class="form-control" placeholder="密码" id="input-password"
+             formControlName="password"
              [class.form-control-success]="loginForm.get('password').valid && loginForm.get('password').touched"
              [class.form-control-danger]="loginForm.get('password').invalid && loginForm.get('password').touched">
       <small class="form-text error"
