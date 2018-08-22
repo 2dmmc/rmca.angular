@@ -47,11 +47,11 @@ export class AuthService {
    * @param email 电子邮箱
    * @return {Promise<void>}
    */
-  public register(username: string, password: string, email: string): Promise<void> {
+  public register(username: string, email: string, password: string): Promise<void> {
     const params = new HttpParams()
       .set('username', username)
-      .set('password', password)
-      .set('email', email);
+      .set('email', email)
+      .set('password', password);
 
     return this.http.post<void>('/api/user/register', params)
       .toPromise();

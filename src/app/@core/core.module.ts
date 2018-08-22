@@ -7,6 +7,8 @@ import {DataModule} from './data/data.module';
 import {UtilsModule} from './utils/utils.module';
 
 import {RmbPipe} from './pipes';
+import {PasswordEqualValidatorDirective} from './directives';
+
 
 export const RMCA_CORE_PROVIDERS = [
   ...ServicesModule.forRoot().providers,
@@ -18,7 +20,9 @@ const PIPES = [
   RmbPipe,
 ];
 
-const VALIDATION = [];
+const DIRECTIVES = [
+  PasswordEqualValidatorDirective,
+];
 
 @NgModule({
   imports: [
@@ -27,6 +31,7 @@ const VALIDATION = [];
   exports: [],
   declarations: [
     ...PIPES,
+    ...DIRECTIVES,
   ],
 })
 export class CoreModule {
