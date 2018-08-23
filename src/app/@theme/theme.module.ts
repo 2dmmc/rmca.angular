@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   NbActionsModule,
+  NbBadgeModule,
   NbCardModule,
   NbCheckboxModule,
   NbContextMenuModule,
@@ -44,6 +45,7 @@ const NB_MODULES = [
   NbContextMenuModule,
   NgbModule,
   NbProgressBarModule,
+  NbBadgeModule,
 ];
 
 const COMPONENTS = [
