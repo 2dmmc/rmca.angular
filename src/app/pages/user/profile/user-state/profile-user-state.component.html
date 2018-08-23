@@ -1,4 +1,4 @@
-<nb-card>
+<nb-card [accent]="userState">
   <nb-card-header>
     <span>
       <i class="fa fa-info"></i>
@@ -7,17 +7,6 @@
   </nb-card-header>
   <nb-card-body>
     <div class="user-state">
-      <div class="alert alert-danger" role="alert" *ngIf="user.ban">
-        你的账户已经被封禁, 封禁原因为:
-        <h5>
-          {{user.ban}}
-        </h5>
-
-        你将不能:
-        <ul>
-          <li>使用RMCA账号登陆游戏</li>
-        </ul>
-      </div>
       <div class="user-container">
         <div class="user-picture">
           <div class="background image" style.background-image="url({{user.avatar}})"></div>
@@ -29,17 +18,23 @@
         </div>
       </div>
       <div class="info-container">
-        <span class="tag tag-success" *ngIf="!user.ban">
+        <span class="tag tag-success" *ngIf="userState === 'success'">
           账户状态: 正常
         </span>
-        <span class="tag tag-danger" *ngIf="user.ban">
+        <span class="tag tag-warning" *ngIf="userState === 'warning'" nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登陆游戏"
+              nbPopoverMode="hover">
+          账户状态: 未验证
+          <i class="far fa-question-circle"></i>
+        </span>
+        <span class="tag tag-danger" *ngIf="userState === 'danger'" nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}"
+              nbPopoverMode="hover">
           账户状态: 封禁
+          <i class="far fa-question-circle"></i>
         </span>
         <span class="tag tag-danger" *ngIf="user.admin">
           管理员
         </span>
         <span class="tag tag-info" *ngIf="user.username == 'sdjnmxd' || user.username == 'bangbang93'">
-          <!--FIXME 更换为isDevelop判断-->
           Developer
         </span>
       </div>
