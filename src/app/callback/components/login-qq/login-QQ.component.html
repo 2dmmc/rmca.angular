@@ -1,12 +1,4 @@
 <ngx-callback-block>
   <h2 class="title">腾讯QQ OAuth登陆</h2>
-  <div class="alert alert-info" role="alert"
-       [class.alert-info]="notice.type == 'info'"
-       [class.alert-success]="notice.type == 'success'"
-       [class.alert-danger]="notice.type == 'danger'"
-       *ngIf="notice">
-    <div><strong>{{notice.title}}</strong></div>
-    <div>{{notice.message}}</div>
-    <button class="btn btn-hero-danger" routerLink="/auth/login" *ngIf="notice.type == 'danger'">返回常规登陆</button>
-  </div>
+  <ngx-callback-notice></ngx-callback-notice>
 </ngx-callback-block>
