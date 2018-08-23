@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {IUser} from '../../../@model/common/user/user.interface';
+import {AuthUtilService} from "../../../@core/utils/auth-util.service";
 
 @Component({
   selector: 'ngx-header',
@@ -23,11 +24,12 @@ export class HeaderComponent implements OnInit {
   }];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService) {
+              private menuService: NbMenuService,
+              private authUtilService: AuthUtilService) {
   }
 
   ngOnInit() {
-    // this.user = this.userCacheService.getCache();
+    this.user = this.authUtilService.user;
   }
 
   toggleSidebar(): boolean {

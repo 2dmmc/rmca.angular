@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 
+import {UserService} from '../data/user.service';
 import {AuthUtilService} from '../utils/auth-util.service';
 import {NoticeService} from '../services/notice.service';
 
@@ -8,12 +9,14 @@ import {NoticeService} from '../services/notice.service';
 export class NeedLoginGuard implements CanActivate {
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
+              private userService: UserService,
               private noticeService: NoticeService) {
   }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     try {
       const loginState = await this.authUtilService.isUserAuthenticated();
+      this.authUtilService.user = await this.userService.getUserProfile();
 
       if (loginState.impersonate) {
         this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${loginState.username}`);

@@ -49,7 +49,6 @@ export class LoginComponent implements OnInit {
 
     try {
       const user = await this.authService.login(loginForm.username, loginForm.password, loginForm.isKeepLogin);
-      this.authUtilService.user = user;
 
       this.notice.show(
         'success',

@@ -4,6 +4,8 @@ import {CommonModule} from '@angular/common';
 import {NeedLoginGuard} from './need-login.guard';
 import {NeedAdminGuard} from './need-admin.guard';
 
+import {UserService} from '../data/user.service';
+
 const SERVICES = [
   NeedLoginGuard,
   NeedAdminGuard,
@@ -22,6 +24,7 @@ export class GuardsModules {
     return <ModuleWithProviders>{
       ngModule: GuardsModules,
       providers: [
+        UserService,
         ...SERVICES,
       ],
     };
