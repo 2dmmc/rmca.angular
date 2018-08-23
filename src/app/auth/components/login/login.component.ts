@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
 import {AuthService} from '../../../@core/data/auth.service';
-import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 import {CommonUtilService} from '../../../@core/utils/common-util.service';
 
 import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private authService: AuthService,
-              private authUtilService: AuthUtilService,
               private commonUtilService: CommonUtilService) {
     this.submitted = false;
   }
