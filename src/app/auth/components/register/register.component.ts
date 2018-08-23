@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(
         '', [
           Validators.required,
-          Validators.pattern(/.+@.+..+/),
+          Validators.email,
         ],
       ),
       password: new FormControl(

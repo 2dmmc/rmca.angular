@@ -41,7 +41,7 @@
       <small class="form-text error"
              *ngIf="
              registryForm.get('email').invalid && registryForm.get('email').touched &&
-             registryForm.get('email').hasError('pattern')">
+             registryForm.get('email').hasError('email')">
         邮箱格式不正确
       </small>
     </div>
@@ -82,7 +82,7 @@
              *ngIf="
              registryForm.get('repeatPassword').invalid && registryForm.get('repeatPassword').touched &&
              registryForm.get('repeatPassword').hasError('repeatPassword')">
-        两次密码不匹配
+        两次密码不一致
       </small>
     </div>
 
