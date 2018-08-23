@@ -30,7 +30,8 @@ export class NeedLoginService implements CanActivate {
           break;
         }
         default: {
-          this.noticeService.error('[NeedLoginGuard] canActivate', error);
+          this.noticeService.error('[NeedLoginGuard] canActivate', '未知错误');
+          console.error(error);
         }
       }
 
