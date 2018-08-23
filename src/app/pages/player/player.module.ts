@@ -11,8 +11,6 @@ import {RoleAddModalComponent} from './roles/role-add-modal/role-add-modal.compo
 import {RoleDetailModalComponent} from './roles/role-detail-modal/role-detail-modal.component';
 
 import {PlayerService} from './player.service';
-import {UserService} from '../user/user.service';
-import {NoticeService} from '../../@core/services/notice.service';
 
 const components = [
   PlayerComponent,
@@ -33,8 +31,6 @@ const components = [
   ],
   providers: [
     PlayerService,
-    UserService,
-    NoticeService,
   ],
   entryComponents: [
     RoleAddModalComponent,
