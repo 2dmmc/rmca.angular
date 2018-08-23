@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {IUser} from '../../../@model/common/user/user.interface';
-import {AuthUtilService} from "../../../@core/utils/auth-util.service";
+import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
 @Component({
   selector: 'ngx-header',
