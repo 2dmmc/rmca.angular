@@ -16,8 +16,6 @@ import {SocialGravatarStateComponent} from './socials/gravatar-state/social-grav
 import {SocialQQStateComponent} from './socials/qq-state/social-QQ-state.component';
 import {SocialWeiboStateComponent} from './socials/weibo-state/social-weibo-state.component';
 
-import {UserService} from './user.service';
-
 const components = [
   UserComponent,
   ProfileComponent,
@@ -41,9 +39,6 @@ const components = [
   declarations: [
     routedComponents,
     ...components,
-  ],
-  providers: [
-    UserService,
   ],
 })
 

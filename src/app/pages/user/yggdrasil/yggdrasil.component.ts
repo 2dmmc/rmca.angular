@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 
 import {NoticeService} from '../../../@core/services/notice.service';
 
-import {UserService} from '../user.service';
+import {UserService} from '../../../@core/data/user.service';
 
 import {IUser} from '../../../@model/common/user/user.interface';
 import {DefaultUser} from '../../../@model/common/user/user.const';

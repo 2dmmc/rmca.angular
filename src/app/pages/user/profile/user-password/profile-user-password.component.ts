@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 
-import {UserService} from '../../user.service';
+import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
 @Component({

@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {IUser} from '../../../../@model/common/user/user.interface';
-import {UserService} from '../../user.service';
+import {UserService} from '../../../../@core/data/user.service';
 
 @Component({
   selector: 'ngx-social-weibo-state',

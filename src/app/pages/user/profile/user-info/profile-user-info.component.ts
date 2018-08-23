@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 
-import {UserService} from '../../user.service';
+import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {IUser} from '../../../../@model/common/user/user.interface';
