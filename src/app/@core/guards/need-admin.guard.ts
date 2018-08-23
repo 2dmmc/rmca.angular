@@ -5,7 +5,7 @@ import {NoticeService} from '../services/notice.service';
 import {AuthUtilService} from '../utils/auth-util.service';
 
 @Injectable()
-export class NeedAdminService implements CanActivate {
+export class NeedAdminGuard implements CanActivate {
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
               private noticeService: NoticeService) {

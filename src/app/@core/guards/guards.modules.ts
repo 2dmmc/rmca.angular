@@ -1,12 +1,12 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {NeedLoginService} from './need-login.service';
-import {NeedAdminService} from './need-admin.service';
+import {NeedLoginGuard} from './need-login.guard';
+import {NeedAdminGuard} from './need-admin.guard';
 
 const SERVICES = [
-  NeedLoginService,
-  NeedAdminService,
+  NeedLoginGuard,
+  NeedAdminGuard,
 ];
 
 @NgModule({

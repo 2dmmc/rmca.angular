@@ -5,7 +5,7 @@ import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
 
-import {NeedAdminService} from '../@core/guards/need-admin.service';
+import {NeedAdminGuard} from '../@core/guards/need-admin.guard';
 
 const routes: Routes = [{
   path: '',
@@ -22,7 +22,7 @@ const routes: Routes = [{
   }, {
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
-    canActivate: [NeedAdminService],
+    canActivate: [NeedAdminGuard],
   }, {
     path: '**',
     component: NotFoundComponent,
