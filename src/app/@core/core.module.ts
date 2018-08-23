@@ -5,15 +5,16 @@ import {throwIfAlreadyLoaded} from './module-import-guard';
 import {ServicesModule} from './services/services.module';
 import {DataModule} from './data/data.module';
 import {UtilsModule} from './utils/utils.module';
+import {GuardsModules} from './guards/guards.modules';
 
 import {RmbPipe} from './pipes';
 import {PasswordEqualValidatorDirective} from './directives';
-
 
 export const RMCA_CORE_PROVIDERS = [
   ...ServicesModule.forRoot().providers,
   ...DataModule.forRoot().providers,
   ...UtilsModule.forRoot().providers,
+  ...GuardsModules.forRoot().providers,
 ];
 
 const PIPES = [
@@ -28,7 +29,9 @@ const DIRECTIVES = [
   imports: [
     CommonModule,
   ],
-  exports: [],
+  exports: [
+    ...PIPES,
+  ],
   declarations: [
     ...PIPES,
     ...DIRECTIVES,

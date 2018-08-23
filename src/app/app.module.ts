@@ -16,7 +16,6 @@ import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {ToasterModule} from 'angular2-toaster';
 
-
 // fundebug.apikey = '1638ea31bc784c1c860a2633d3fa409d3e30e3775917e498a2670e37eaa1b6d3';
 
 // export class FundebugErrorHandler implements ErrorHandler {

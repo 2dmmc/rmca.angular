@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
 
+import {AuthService} from '../data/auth.service';
 import {IUser} from '../../@model/common/user/user.interface';
+import {ILoginState} from '../../@model/response/auth/login-state.interface';
 
 @Injectable()
 export class AuthUtilService {
   private _user: IUser;
 
-  constructor() {
+  constructor(private authService: AuthService) {
   }
 
   public get user(): IUser {
@@ -17,30 +19,15 @@ export class AuthUtilService {
     this._user = user;
   }
 
-  // public async isUserAuthenticated(): Promise<LoginStateResult> {
-  //   const loginStateResult = new LoginStateResult();
-  //
-  //   try {
-  //     loginStateResult.isLogin = true;
-  //     loginStateResult.user = await this.authService.getLoginState() as ILoginStateResultUser;
-  //
-  //     return loginStateResult;
-  //   } catch (error) {
-  //     loginStateResult.isLogin = false;
-  //     loginStateResult.user = null;
-  //     loginStateResult.error = error;
-  //
-  //     return loginStateResult;
-  //   }
-  // }
+  public async isUserAuthenticated(): Promise<ILoginState> {
+     return await this.authService.getLoginState();
+  }
 
   public isAdmin(): boolean {
     return this._user.admin;
   }
 
   public isDeveloper(): boolean {
-    return true;
-    // return this.userCacheService.getCache().username === 'sdjnmxd' ||
-    // this.userCacheService.getCache().username === 'bangbang93';
+    return this._user.username === 'sdjnmxd' || this._user.username === 'bangbang93';
   }
 }

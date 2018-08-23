@@ -12,12 +12,6 @@ import {RegisterComponent} from './components/register/register.component';
 import {RequestPasswordComponent} from './components/request-password/request-password.component';
 import {ResetPasswordComponent} from './components/reset-password/reset-password.component';
 
-import {AuthService} from '../@core/data/auth.service';
-import {AuthUtilService} from '../@core/utils/auth-util.service';
-
-import {UserService} from '../pages/user/user.service';
-// import {NeedLoginGuard} from './guards/needLogin.guard';
-// import {NeedAdminGuard} from './guards/needAdmin.guard';
 
 const AUTH_COMPONENTS = [
   AuthComponent,
@@ -37,14 +31,6 @@ const AUTH_COMPONENTS = [
   ],
   declarations: [
     ...AUTH_COMPONENTS,
-  ],
-  providers: [
-    UserService,
-    AuthService,
-    AuthUtilService,
-
-    // NeedLoginGuard,
-    // NeedAdminGuard,
   ],
 })
 

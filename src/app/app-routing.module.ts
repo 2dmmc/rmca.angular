@@ -1,10 +1,13 @@
 import {ExtraOptions, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
 
+import {NeedLoginService} from './@core/guards/need-login.service';
+
 const routes: Routes = [
   {
     path: 'pages',
     loadChildren: 'app/pages/pages.module#PagesModule',
+    canActivate: [NeedLoginService],
   }, {
     path: 'auth',
     loadChildren: 'app/auth/auth.module#AuthModule',
