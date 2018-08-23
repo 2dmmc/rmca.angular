@@ -69,7 +69,7 @@
     <div class="form-group">
       <label for="input-repeat-password" class="sr-only">重复密码</label>
       <input class="form-control" id="input-repeat-password" type="password" placeholder="重复密码"
-             formControlName="repeatPassword" ngx-validateEqual=""
+             formControlName="repeatPassword"
              [class.form-control-success]="registryForm.get('repeatPassword').valid && registryForm.get('repeatPassword').touched"
              [class.form-control-danger]="registryForm.get('repeatPassword').invalid && registryForm.get('repeatPassword').touched">
       <small class="form-text error"
