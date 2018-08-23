@@ -72,6 +72,7 @@ export class LoginComponent implements OnInit {
         '' + errorTitle,
         `message: ${error.error.message} | code: ${error.status}`,
       );
+      console.error(error);
     }
   }
 

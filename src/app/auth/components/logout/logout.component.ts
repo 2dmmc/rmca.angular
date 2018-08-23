@@ -61,6 +61,7 @@ export class LogoutComponent implements OnInit {
         '' + errorTitle,
         `message: ${error.error.message} | code: ${error.status}`,
       );
+      console.error(error);
 
       await this.commonUtilService.sleep(3e3);
       this.router.navigate(['/auth/login']);
