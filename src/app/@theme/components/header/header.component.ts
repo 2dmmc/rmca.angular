@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
 import {IUser} from '../../../@model/common/user/user.interface';
@@ -10,9 +10,6 @@ import {AuthUtilService} from '../../../@core/utils/auth-util.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-
-  @Input() position = 'normal';
-
   user: IUser;
 
   userMenu = [{
@@ -34,11 +31,6 @@ export class HeaderComponent implements OnInit {
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
-  }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
     return false;
   }
 

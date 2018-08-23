@@ -1,6 +1,4 @@
-<div class="header-container"
-     [class.left]="position === 'normal'"
-     [class.right]="position === 'inverse'">
+<div class="header-container left">
   <div class="logo-containter">
     <a (click)="toggleSidebar()" href="#" class="navigation"><i class="nb-menu"></i></a>
     <div class="logo" (click)="goToHome()">RMCA <span>2.0</span></div>
@@ -8,10 +6,7 @@
 </div>
 
 <div class="header-container">
-  <nb-actions
-    size="medium"
-    [class.right]="position === 'normal'"
-    [class.left]="position === 'inverse'">
+  <nb-actions class="right" size="large">
     <nb-action>
       <nb-user [nbContextMenu]="userMenu" [name]="user?.username" [picture]="user?.avatar"></nb-user>
     </nb-action>
