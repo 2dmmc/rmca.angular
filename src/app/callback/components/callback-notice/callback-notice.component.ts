@@ -18,7 +18,7 @@ interface INoticeConfig {
       <div><strong>{{noticeConfig.title}}</strong></div>
       <div>{{noticeConfig.message}}</div>
     </div>
-    <button class="btn btn-block btn-hero-danger"
+    <button class="btn btn-block btn-danger"
             routerLink="/auth/login" *ngIf="noticeConfig.type == 'danger'">
       返回常规登录
     </button>

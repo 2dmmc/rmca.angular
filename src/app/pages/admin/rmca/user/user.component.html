@@ -95,27 +95,27 @@
       </nb-card-header>
       <nb-card-body>
         <section>
-          <button class="btn btn-hero-success" *ngIf="user.ban" (click)="unBanUser(user)">
+          <button class="btn btn-success" *ngIf="user.ban" (click)="unBanUser(user)">
             <i class="fa fa-check"></i>
             解除封禁
           </button>
-          <button class="btn btn-hero-danger" *ngIf="!user.ban" (click)="banUser(user)">
+          <button class="btn btn-danger" *ngIf="!user.ban" (click)="banUser(user)">
             <i class="fa fa-ban"></i>
             封禁用户
           </button>
         </section>
         <section>
-          <button class="btn btn-hero-danger" *ngIf="user.admin" (click)="revokeAdmin(user)">
+          <button class="btn btn-danger" *ngIf="user.admin" (click)="revokeAdmin(user)">
             <i class="fa fa-bug"></i>
             解除管理员
           </button>
-          <button class="btn btn-hero-info" *ngIf="!user.admin" (click)="grantAdmin(user)">
+          <button class="btn btn-info" *ngIf="!user.admin" (click)="grantAdmin(user)">
             <i class="fa fa-bug"></i>
             授予管理员
           </button>
         </section>
         <section>
-          <button class="btn btn-hero-warning" (click)="enterImpersonate(user)">
+          <button class="btn btn-warning" (click)="enterImpersonate(user)">
             <i class="fa fa-snapchat-ghost"></i>
             替身登录
           </button>

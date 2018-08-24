@@ -107,13 +107,13 @@
     <hr>
     <div class="form-group row" *ngIf="skinType =='upload'">
       <div class="offset-sm-2 col-sm-10">
-        <button class="btn btn-hero-success"
+        <button class="btn btn-success"
                 [disabled]="submitted || !roleForm.form.valid"
                 [class.btn-pulse]="submitted">
           <i class="fa fa-pencil-square-o"></i>
           更新角色信息
         </button>
-        <button class="btn btn-md btn-hero-danger"
+        <button class="btn btn-md btn-danger"
                 (click)="closeModal()">
           <i class="fa fa-times" aria-hidden="true"></i>
           取消
@@ -123,14 +123,14 @@
   </form>
   <div class="form-group row" *ngIf="skinType == 'sync'">
     <div class="offset-sm-2 col-sm-10">
-      <button class="btn btn-hero-success"
+      <button class="btn btn-success"
               [disabled]="submitted"
               [class.btn-pulse]="submitted"
               (click)="updateYggdrasilSkin(role._id)">
         <i class="fa fa-pencil-square-o"></i>
         同步正版皮肤
       </button>
-      <button class="btn btn-md btn-hero-danger"
+      <button class="btn btn-md btn-danger"
               (click)="closeModal()">
         <i class="fa fa-times" aria-hidden="true"></i>
         取消
