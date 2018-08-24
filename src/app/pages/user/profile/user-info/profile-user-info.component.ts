@@ -74,7 +74,7 @@ export class ProfileUserInfoComponent implements OnInit {
       this.needGetUserProfile.emit();
     } catch (error) {
       const errorMessageMap = {
-        403: '验证码无效或已被使用, 请重新验证邮箱',
+        403: '验证码和邮箱不匹配',
         404: '验证码无效或已被使用, 请重新验证邮箱',
       };
       const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系管理员';
