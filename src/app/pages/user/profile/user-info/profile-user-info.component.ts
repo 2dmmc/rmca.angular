@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {UserService} from '../../../../@core/data/user.service';
@@ -19,7 +19,8 @@ export class ProfileUserInfoComponent implements OnInit {
   public profileForm: FormGroup;
   public submitted: boolean;
 
-  constructor(private noticeService: NoticeService,
+  constructor(private router: Router,
+              private noticeService: NoticeService,
               private activatedRoute: ActivatedRoute,
               private userService: UserService) {
     this.submitted = false;
@@ -37,8 +38,8 @@ export class ProfileUserInfoComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe(queryParams => {
       if (queryParams.hash) {
-        // TODO 验证失败与否移除掉URL中的params
         this.verifyEmail(queryParams.hash);
+        this.router.navigate([], {queryParams: {hash: null}, queryParamsHandling: 'merge'});
       }
     });
   }
