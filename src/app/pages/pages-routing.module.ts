@@ -24,6 +24,10 @@ const routes: Routes = [{
     loadChildren: './admin/admin.module#AdminModule',
     canActivate: [NeedAdminGuard],
   }, {
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  }, {
     path: '**',
     component: NotFoundComponent,
   }],
