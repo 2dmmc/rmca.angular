@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     width: auto;
+    cursor: pointer;
 
     .navigation {
       @include nb-ltr(padding-right, nb-theme(padding));
