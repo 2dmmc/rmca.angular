@@ -4,8 +4,10 @@ import {Router} from '@angular/router';
 
 import {AuthService} from '../../../@core/data/auth.service';
 import {CommonUtilService} from '../../../@core/utils/common-util.service';
+import {StorageService} from '../../../@core/services/storage.service';
 
 import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
+import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
 @Component({
   selector: 'ngx-login',
@@ -19,11 +21,13 @@ export class LoginComponent implements OnInit {
 
   constructor(private router: Router,
               private authService: AuthService,
-              private commonUtilService: CommonUtilService) {
+              private authUtilService: AuthUtilService,
+              private commonUtilService: CommonUtilService,
+              private storageService: StorageService) {
     this.submitted = false;
   }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.loginForm = new FormGroup({
       username: new FormControl(
         '', [
@@ -40,6 +44,13 @@ export class LoginComponent implements OnInit {
       ),
       isKeepLogin: new FormControl(false),
     });
+
+    try {
+      await this.authUtilService.isUserAuthenticated();
+      await this.doLogin();
+    } catch (e) {
+      // ignore error
+    }
   }
 
   public async login(loginForm: any): Promise<void> {
@@ -54,8 +65,7 @@ export class LoginComponent implements OnInit {
         `欢迎回来 ${user.username || '用户名获取失败'} (${user.email || '邮箱获取失败'}), 即将跳转到控制台`,
       );
       await this.commonUtilService.sleep(3e3);
-      this.router.navigate(['/pages/dashboard']);
-
+      await this.doLogin();
     } catch (error) {
       this.submitted = false;
 
@@ -81,5 +91,15 @@ export class LoginComponent implements OnInit {
   public weiboLogin(): void {
     window.location.href =
       `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
+  }
+
+  private async doLogin(): Promise<void> {
+    const next = decodeURIComponent(this.storageService.sessionStorageGetValue('next'));
+    if (next) {
+      this.storageService.sessionStorageDeleteValue('next');
+      this.router.navigateByUrl(next);
+    } else {
+      this.router.navigate(['/pages/dashboard']);
+    }
   }
 }

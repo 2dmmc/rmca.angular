@@ -14,7 +14,9 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 import {ThemeModule} from './@theme/theme.module';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 import {ToasterModule} from 'angular2-toaster';
+import {Ng2Webstorage} from 'ngx-webstorage';
 
 // fundebug.apikey = '1638ea31bc784c1c860a2633d3fa409d3e30e3775917e498a2670e37eaa1b6d3';
 
@@ -33,9 +35,11 @@ import {ToasterModule} from 'angular2-toaster';
     AppRoutingModule,
 
     NgbModule.forRoot(),
-    ToasterModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
+
+    ToasterModule.forRoot(),
+    Ng2Webstorage.forRoot({prefix: 'rmca', separator: '.'}),
   ],
   bootstrap: [AppComponent],
   providers: [

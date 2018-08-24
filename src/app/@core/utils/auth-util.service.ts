@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 
 import {AuthService} from '../data/auth.service';
+import {UserService} from '../data/user.service';
+
 import {IUser} from '../../@model/common/user/user.interface';
 import {ILoginState} from '../../@model/response/auth/login-state.interface';
 
@@ -8,7 +10,8 @@ import {ILoginState} from '../../@model/response/auth/login-state.interface';
 export class AuthUtilService {
   private _user: IUser;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,
+              private userService: UserService) {
   }
 
   public get user(): IUser {
@@ -19,8 +22,14 @@ export class AuthUtilService {
     this._user = user;
   }
 
+  public async updateUser(): Promise<IUser> {
+    const user = await this.userService.getUserProfile();
+    this._user = user;
+    return user;
+  }
+
   public async isUserAuthenticated(): Promise<ILoginState> {
-     return await this.authService.getLoginState();
+    return await this.authService.getLoginState();
   }
 
   public isAdmin(): boolean {

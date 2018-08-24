@@ -4,13 +4,15 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {UserService} from '../data/user.service';
 import {AuthUtilService} from '../utils/auth-util.service';
 import {NoticeService} from '../services/notice.service';
+import {StorageService} from '../services/storage.service';
 
 @Injectable()
 export class NeedLoginGuard implements CanActivate {
   constructor(private router: Router,
               private authUtilService: AuthUtilService,
               private userService: UserService,
-              private noticeService: NoticeService) {
+              private noticeService: NoticeService,
+              private storageService: StorageService) {
   }
 
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
@@ -29,7 +31,6 @@ export class NeedLoginGuard implements CanActivate {
       switch (error.status) {
         case 401: {
           this.noticeService.warning('Auth Router Guard (needLogin)', '你还未登陆');
-          this.router.navigate(['/auth/login']);
           break;
         }
         default: {
@@ -37,7 +38,8 @@ export class NeedLoginGuard implements CanActivate {
           console.error(error);
         }
       }
-
+      this.storageService.sessionStorageSetValue('next', state.url);
+      this.router.navigate(['/auth/login']);
       return false;
     }
   }

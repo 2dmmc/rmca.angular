@@ -36,7 +36,7 @@ export class LoginWeiboComponent implements OnInit {
           '即将跳转到dashboard',
         );
         await this.commonUtilService.sleep(3e3);
-        this.router.navigate(['/pages/dashboard']);
+        this.router.navigate(['/auth/login']);
       } catch (error) {
         this.notice.show(
           'danger',
