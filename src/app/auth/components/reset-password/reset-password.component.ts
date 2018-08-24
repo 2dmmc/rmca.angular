@@ -58,7 +58,7 @@ export class ResetPasswordComponent implements OnInit {
       this.notice.show(
         'success',
         '重置成功',
-        '请使用你的新密码登陆, 即将跳转到登陆页',
+        '请使用你的新密码登录, 即将跳转到登录页',
       );
       await this.commonUtilService.sleep(3e3);
       this.router.navigate(['/auth/login']);

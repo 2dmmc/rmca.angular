@@ -87,7 +87,7 @@ export const DEVELOPER_MENU_ITEMS: NbMenuItem[] = [
     icon: 'fa fa-lock fa-fw',
     children: [
       {
-        title: '登陆',
+        title: '登录',
         link: '/auth/login',
       },
       {

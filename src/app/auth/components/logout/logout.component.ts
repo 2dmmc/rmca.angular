@@ -33,7 +33,7 @@ export class LogoutComponent implements OnInit {
         await this.authService.logoutImpersonate();
         this.notice.show(
           'success',
-          '退出替身登陆成功',
+          '退出替身登录成功',
           '即将跳转到dashboard',
         );
         await this.commonUtilService.sleep(3e3);
@@ -51,7 +51,7 @@ export class LogoutComponent implements OnInit {
       }
     } catch (error) {
       const errorMessageMap = {
-        401: '大兄弟你得先登陆',
+        401: '大兄弟你得先登录',
         406: '大兄弟你现在不在替身模式下',
       };
       const errorTitle = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';

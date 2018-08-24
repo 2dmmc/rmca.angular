@@ -31,7 +31,7 @@ export class EnterImpersonateModalComponent {
 
     this.rmcaService.enterImpersonate(this.user._id)
       .then(enterState => {
-        this.noticeService.success('替身登陆成功', `替身登陆 ${this.user.username} 成功, 即将装弹`);
+        this.noticeService.success('替身登录成功', `替身登录 ${this.user.username} 成功, 即将装弹`);
         setTimeout(() => {
           this.router.navigate(['/pages/dashboard'])
             .then(navagateState => {

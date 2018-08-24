@@ -30,7 +30,7 @@ export class NeedLoginGuard implements CanActivate {
     } catch (error) {
       switch (error.status) {
         case 401: {
-          this.noticeService.warning('Auth Router Guard (needLogin)', '你还未登陆');
+          this.noticeService.warning('Auth Router Guard (needLogin)', '你还未登录');
           break;
         }
         default: {

@@ -11,12 +11,12 @@ export class AuthService {
   }
 
   /**
-   * @name 登陆
-   * @description 登陆. 入参为用户名, 密码, 是否保持登陆状态. 返回登陆结果.
+   * @name 登录
+   * @description 登录. 入参为用户名, 密码, 是否保持登录状态. 返回登录结果.
    *
    * @param {string} username 用户名
    * @param {string} password 密码
-   * @param {boolean} isKeepLogin 是否需要保持登陆状态
+   * @param {boolean} isKeepLogin 是否需要保持登录状态
    * @return {Promise<IUser>} 返回一个完整的用户
    */
   public login(username: string, password: string, isKeepLogin: boolean): Promise<IUser> {
@@ -98,8 +98,8 @@ export class AuthService {
   }
 
   /**
-   * @name 获取登陆状态
-   * @description 获取当前用户的登陆状态. SAP的核心鉴权方法. 返回不完整的User模型或未登录.
+   * @name 获取登录状态
+   * @description 获取当前用户的登录状态. SAP的核心鉴权方法. 返回不完整的User模型或未登录.
    * @return {Promise<ILoginState>}
    */
   public async getLoginState(): Promise<ILoginState> {
@@ -108,7 +108,7 @@ export class AuthService {
   }
 
   /**
-   * @name 退出替身登陆
+   * @name 退出替身登录
    * @description RT
    * @return {Promise<void>}
    */

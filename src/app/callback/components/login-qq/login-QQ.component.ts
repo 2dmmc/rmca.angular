@@ -32,7 +32,7 @@ export class LoginQQComponent implements OnInit {
         await this.callbackService.loginQQCallback(queryParams.accessToken, queryParams.expiresIn);
         this.notice.show(
           'success',
-          '授权登陆成功',
+          '授权登录成功',
           '即将跳转到dashboard',
         );
         await this.commonUtilService.sleep(3e3);
@@ -40,7 +40,7 @@ export class LoginQQComponent implements OnInit {
       } catch (error) {
         this.notice.show(
           'danger',
-          '授权登陆失败',
+          '授权登录失败',
           `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
         );
         console.error(error);

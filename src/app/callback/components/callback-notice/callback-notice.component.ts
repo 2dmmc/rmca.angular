@@ -20,7 +20,7 @@ interface INoticeConfig {
     </div>
     <button class="btn btn-block btn-hero-danger"
             routerLink="/auth/login" *ngIf="noticeConfig.type == 'danger'">
-      返回常规登陆
+      返回常规登录
     </button>
   `,
 })

@@ -1,7 +1,7 @@
 <div class="modal-header">
   <span>
       <i class="fa fa-snapchat-ghost"></i>
-      用户管理 - 替身登陆
+      用户管理 - 替身登录
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
     <i class="fa fa-times" aria-hidden="true"></i>
@@ -11,10 +11,10 @@
   <form (ngSubmit)="enterImpersonate()" #enterImpersonateForm="ngForm" name="enterImpersonateForm">
     <div class="alert alert-warning" role="alert">
       <p>
-        你即将以替身的身份登陆<code>{{user.username}}</code>用户的账户
+        你即将以替身的身份登录<code>{{user.username}}</code>用户的账户
       </p>
       <p>
-        进入替身模式后你将以该用户身份登陆, 且可以完成该用户的所有功能操作
+        进入替身模式后你将以该用户身份登录, 且可以完成该用户的所有功能操作
       </p>
       <p>
         <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作

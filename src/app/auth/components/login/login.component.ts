@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
 
       this.notice.show(
         'success',
-        '登陆成功',
+        '登录成功',
         `欢迎回来 ${user.username || '用户名获取失败'} (${user.email || '邮箱获取失败'}), 即将跳转到控制台`,
       );
       await this.commonUtilService.sleep(3e3);
