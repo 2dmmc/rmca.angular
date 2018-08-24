@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
           Validators.maxLength(32),
         ],
       ),
-      isKeepLogin: new FormControl(false),
+      isKeepLogin: new FormControl(true),
     });
 
     try {
