@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
   }
 
   private async doLogin(): Promise<void> {
-    const next = decodeURIComponent(this.storageService.sessionStorageGetValue('next'));
+    const next = this.storageService.sessionStorageGetValue('next');
     if (next) {
       this.storageService.sessionStorageDeleteValue('next');
       this.router.navigateByUrl(next);
