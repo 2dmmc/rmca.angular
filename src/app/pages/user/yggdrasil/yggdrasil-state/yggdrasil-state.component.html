@@ -1,13 +1,7 @@
-<nb-card>
+<nb-card [accent]="user.yggdrasil ? 'success' : 'warning'">
   <nb-card-header>
     <span>
         <i class="fa fa-info"></i> 正版验证状态
-    </span>
-    <span class="tag tag-success" *ngIf="user.yggdrasil">
-      已验证
-    </span>
-    <span class="tag tag-warning" *ngIf="!user.yggdrasil">
-      未验证
     </span>
   </nb-card-header>
   <nb-card-body>
