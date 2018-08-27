@@ -29,7 +29,7 @@ export class ProfileUserInfoComponent implements OnInit {
   public ngOnInit(): void {
     this.profileForm = new FormGroup({
       username: new FormControl(
-        this.user.username, [
+        {value: this.user.username, disabled: true}, [
           Validators.required,
         ],
       ),
