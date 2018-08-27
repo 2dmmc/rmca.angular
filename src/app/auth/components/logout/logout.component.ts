@@ -54,11 +54,11 @@ export class LogoutComponent implements OnInit {
         401: '大兄弟你得先登录',
         406: '大兄弟你现在不在替身模式下',
       };
-      const errorTitle = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.notice.show(
         'danger',
-        '' + errorTitle,
+        '' + errorMessage,
         `message: ${error.error.message} | code: ${error.status}`,
       );
       console.error(error);

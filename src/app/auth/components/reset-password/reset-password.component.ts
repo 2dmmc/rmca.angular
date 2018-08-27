@@ -63,19 +63,19 @@ export class ResetPasswordComponent implements OnInit {
       await this.commonUtilService.sleep(3e3);
       this.router.navigate(['/auth/login']);
     } catch (error) {
-      this.submitted = false;
-
       const errorMessageMap = {
         403: '令牌无效或已被使用, 请重新找回密码',
       };
-      const errorTitle = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.notice.show(
         'danger',
-        '' + errorTitle,
+        '' + errorMessage,
         `message: ${error.error.message} | code: ${error.status}`,
       );
       console.error(error);
     }
+
+    this.submitted = false;
   }
 }

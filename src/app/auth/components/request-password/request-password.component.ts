@@ -43,21 +43,20 @@ export class RequestPasswordComponent implements OnInit {
         `我们已经发送了一封邮件到你的邮箱里 (${requestPasswordForm.email}), 请根据邮件内容找回你的密码. 如没有收到,请查看垃圾箱或尝试重新发送邮件`,
       );
       await this.commonUtilService.sleep(60e3);
-      this.submitted = false;
     } catch (error) {
-      this.submitted = false;
-
       const errorMessageMap = {
         404: '邮箱不存在',
       };
-      const errorTitle = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.notice.show(
         'danger',
-        '' + errorTitle,
+        '' + errorMessage,
         `message: ${error.error.message} | code: ${error.status}`,
       );
       console.error(error);
     }
+
+    this.submitted = false;
   }
 }
