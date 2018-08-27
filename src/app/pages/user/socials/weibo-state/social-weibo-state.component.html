@@ -1,8 +1,6 @@
-<nb-card>
+<nb-card [accent]="user.accounts.weibo ? 'success' : 'warning'">
   <nb-card-header>
-    <span><i class="fa fa-weibo"></i> 新浪微博账户</span>
-    <span class="tag tag-success" *ngIf="user.accounts.weibo">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user.accounts.weibo">未授权</span>
+    <span><i class="fab fa-weibo"></i> 新浪微博账户</span>
   </nb-card-header>
   <nb-card-body>
     <div class="alert alert-warning" role="alert" *ngIf="!user.accounts.weibo">
@@ -24,7 +22,7 @@
     </div>
   </nb-card-body>
   <nb-card-footer *ngIf="user.accounts.weibo">
-    <button class="btn btn-success" (click)="updateUserAvatar()">
+    <button class="btn btn-block btn-success" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
     </button>

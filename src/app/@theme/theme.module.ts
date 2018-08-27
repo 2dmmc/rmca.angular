@@ -19,6 +19,7 @@ import {
   NbTabsetModule,
   NbThemeModule,
   NbUserModule,
+  NbSpinnerModule,
 } from '@nebular/theme';
 
 import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
@@ -46,6 +47,7 @@ const NB_MODULES = [
   NgbModule,
   NbProgressBarModule,
   NbBadgeModule,
+  NbSpinnerModule,
 ];
 
 const COMPONENTS = [

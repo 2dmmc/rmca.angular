@@ -1,8 +1,6 @@
-<nb-card>
+<nb-card [accent]="user.email ? 'success' : 'warning'">
   <nb-card-header>
-    <span><i class="fa fa-chain"></i> Gravatar账户</span>
-    <span class="tag tag-success" *ngIf="user.email">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user.email">未授权</span>
+    <span><i class="fas fa-link"></i> Gravatar账户</span>
   </nb-card-header>
   <nb-card-body>
     <div class="alert alert-warning" role="alert" *ngIf="!user.email">
@@ -23,7 +21,7 @@
     </div>
   </nb-card-body>
   <nb-card-footer *ngIf="user.email">
-    <button class="btn btn-success" (click)="updateUserAvatar()">
+    <button class="btn btn-block btn-success" (click)="updateUserAvatar()">
       <i class="fa fa-image"></i>
       使用该头像作为RMCA头像
     </button>
