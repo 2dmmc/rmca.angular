@@ -25,7 +25,7 @@ export class ProfileUserPasswordComponent implements OnInit {
 
   public ngOnInit() {
     this.changePasswordForm = new FormGroup({
-      nowPassword: new FormControl(
+      currentPassword: new FormControl(
         '', [
           Validators.required,
           Validators.minLength(6),
@@ -52,7 +52,7 @@ export class ProfileUserPasswordComponent implements OnInit {
     this.submitted = true;
 
     try {
-      await this.userService.updateUserPassword(passwordForm.password, passwordForm.newPassword);
+      await this.userService.updateUserPassword(passwordForm.currentPassword, passwordForm.newPassword);
       this.noticeService.success('更新密码成功', '更新密码成功');
     } catch (error) {
       const errorMessageMap = {
