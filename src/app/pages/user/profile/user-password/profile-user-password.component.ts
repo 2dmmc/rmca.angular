@@ -55,18 +55,15 @@ export class ProfileUserPasswordComponent implements OnInit {
       await this.userService.updateUserPassword(passwordForm.password, passwordForm.newPassword);
       this.noticeService.success('更新密码成功', '更新密码成功');
     } catch (error) {
-      let errorMessage = '';
+      const errorMessageMap = {
+        403: '当前密码错误',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
-      switch (error.status) {
-        case 403: {
-          errorMessage = '当前密码错误';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
-      this.noticeService.error('更新密码失败', errorMessage);
+      this.noticeService.error(
+        '更新密码失败',
+        errorMessage,
+      );
       console.error(error);
     }
 
