@@ -5,7 +5,6 @@ import {NoticeService} from '../../../@core/services/notice.service';
 import {IUser} from '../../../@model/common/user/user.interface';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
-
 @Component({
   styleUrls: ['./profile.component.scss'],
   templateUrl: './profile.component.html',
