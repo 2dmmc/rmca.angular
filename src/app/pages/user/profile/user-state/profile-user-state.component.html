@@ -1,4 +1,4 @@
-<nb-card [accent]="userState">
+<nb-card [accent]="userState" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ...">
   <nb-card-header>
     <span>
       <i class="fa fa-info"></i>
@@ -7,6 +7,11 @@
   </nb-card-header>
   <nb-card-body>
     <div class="user-state">
+      <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
+        你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
+        <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>
+        或稍后重试
+      </div>
       <div class="user-container">
         <div class="user-picture">
           <div class="background image" style.background-image="url({{user.avatar}})"></div>
