@@ -23,16 +23,18 @@
         </div>
       </div>
       <div class="info-container">
-        <span class="tag tag-success" *ngIf="userState === 'success'">
+        <span class="tag tag-success" *ngIf="userState === 'success'"
+              nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" nbPopoverMode="hover">
           账户状态: 正常
+          <i class="far fa-question-circle"></i>
         </span>
-        <span class="tag tag-warning" *ngIf="userState === 'warning'" nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏"
-              nbPopoverMode="hover">
+        <span class="tag tag-warning" *ngIf="userState === 'warning'"
+              nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏" nbPopoverMode="hover">
           账户状态: 未验证
           <i class="far fa-question-circle"></i>
         </span>
-        <span class="tag tag-danger" *ngIf="userState === 'danger'" nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}"
-              nbPopoverMode="hover">
+        <span class="tag tag-danger" *ngIf="userState === 'danger'"
+              nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}" nbPopoverMode="hover">
           账户状态: 封禁
           <i class="far fa-question-circle"></i>
         </span>
