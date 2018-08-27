@@ -5,9 +5,8 @@ import {routedComponents, UserRoutingModule} from './user-routing.module';
 
 import {UserComponent} from './user.component';
 import {ProfileComponent} from './profile/profile.component';
-import {ProfileUserInfoComponent} from './profile/user-info/profile-user-info.component';
 import {ProfileUserPasswordComponent} from './profile/user-password/profile-user-password.component';
-import {ProfileUserStateComponent} from './profile/user-state/profile-user-state.component';
+import {ProfileUserInfoComponent} from './profile/user-info/profile-user-info.component';
 import {YggdrasilComponent} from './yggdrasil/yggdrasil.component';
 import {YggdrasilInfoComponent} from './yggdrasil/yggdrasil-info/yggdrasil-info.component';
 import {YggdrasilStateComponent} from './yggdrasil/yggdrasil-state/yggdrasil-state.component';
@@ -19,9 +18,8 @@ import {SocialWeiboStateComponent} from './socials/weibo-state/social-weibo-stat
 const components = [
   UserComponent,
   ProfileComponent,
-  ProfileUserInfoComponent,
   ProfileUserPasswordComponent,
-  ProfileUserStateComponent,
+  ProfileUserInfoComponent,
   YggdrasilComponent,
   YggdrasilInfoComponent,
   YggdrasilStateComponent,
