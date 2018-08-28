@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {Router} from '@angular/router';
 
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,8 +9,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class DonationModalComponent {
-  constructor(private activeModal: NgbActiveModal,
-              private router: Router) {
+  constructor(private activeModal: NgbActiveModal) {
   }
 
   closeModal() {
