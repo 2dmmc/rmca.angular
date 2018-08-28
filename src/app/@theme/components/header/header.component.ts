@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {IUser} from '../../../@model/common/user/user.interface';
+import {IUserExtend} from '../../../@model/common/user/user.interface';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
 @Component({
@@ -10,7 +10,7 @@ import {AuthUtilService} from '../../../@core/utils/auth-util.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-  user: IUser;
+  user: IUserExtend;
 
   userMenu = [{
     title: '个人中心',

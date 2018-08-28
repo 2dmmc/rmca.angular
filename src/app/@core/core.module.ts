@@ -8,6 +8,7 @@ import {UtilsModule} from './utils/utils.module';
 import {GuardsModules} from './guards/guards.modules';
 
 import {RmbPipe} from './pipes';
+
 import {PasswordEqualValidatorDirective} from './directives';
 
 export const RMCA_CORE_PROVIDERS = [

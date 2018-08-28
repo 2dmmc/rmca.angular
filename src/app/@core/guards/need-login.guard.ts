@@ -5,6 +5,7 @@ import {UserService} from '../data/user.service';
 import {AuthUtilService} from '../utils/auth-util.service';
 import {NoticeService} from '../services/notice.service';
 import {StorageService} from '../services/storage.service';
+import {IUserExtend} from '../../@model/common/user/user.interface';
 
 @Injectable()
 export class NeedLoginGuard implements CanActivate {
@@ -18,10 +19,10 @@ export class NeedLoginGuard implements CanActivate {
   public async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     try {
       const loginState = await this.authUtilService.isUserAuthenticated();
-      this.authUtilService.user = await this.userService.getUserProfile();
+      this.authUtilService.user = await this.userService.getUserProfile() as IUserExtend;
 
       if (loginState.impersonate) {
-        this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为${loginState.username}`);
+        this.noticeService.warning('替身模式装弹成功!', `当前正处于替身模式, 替身用户为 ${loginState.username}(${loginState.email})`);
       } else {
         this.noticeService.info('不要变成发抖的小喵喵', '|･ω･｀)');
       }
