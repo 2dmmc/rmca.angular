@@ -1,0 +1,39 @@
+<div class="modal-header">
+  <i class="ion ion-social-yen"></i>
+  <span>捐助我们</span>
+  <button class="close" aria-label="Close" (click)="closeModal()">
+    <i class="fa fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="alert alert-warning" role="alert">
+    请在进行捐助时, 备注填写自己的QQ号或游戏ID等关键信息, 以便我们做记录, 谢谢!
+  </div>
+  <p>
+    <del>我，服务姬，打钱</del>
+  </p>
+  <p>
+    服务器的发展离不开您的支持，玩家老爷行行好呗~
+  </p>
+  <p>
+    我们收到的每一分捐助都将用于服务器的日常运营，您可以在 <a routerLink="/pages/dashboard" (click)="closeModal()">捐助记录</a> 查看收支详情。
+  </p>
+  <hr>
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="qr-code">
+        <h5> 支付宝 | Alipay</h5>
+        <img src="../../../../../assets/images/donation/alipay.jpg" alt="">
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="qr-code">
+        <h5> 微信 | WeChat</h5>
+        <img src="../../../../../assets/images/donation/wechat.jpg" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-hero-primary" (click)="closeModal()">溜了溜了</button>
+</div>

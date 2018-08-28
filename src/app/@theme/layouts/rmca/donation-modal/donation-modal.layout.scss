@@ -1,0 +1,22 @@
+@import '../../../styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+.qr-code {
+  text-align: center;
+
+  img {
+    height: 16rem;
+    width: 16rem;
+  }
+}

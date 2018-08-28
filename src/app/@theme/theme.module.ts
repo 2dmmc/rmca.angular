@@ -16,16 +16,18 @@ import {
   NbRouteTabsetModule,
   NbSearchModule,
   NbSidebarModule,
+  NbSpinnerModule,
   NbTabsetModule,
   NbThemeModule,
   NbUserModule,
-  NbSpinnerModule,
 } from '@nebular/theme';
 
 import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
 import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
 import {RmcaLayoutComponent} from './layouts';
 import {COSMIC_THEME} from './styles/theme.cosmic';
+
+import {DonationModalComponent} from './layouts/rmca/donation-modal/donation-modal.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -53,6 +55,7 @@ const COMPONENTS = [
   FooterComponent,
   TinyMCEComponent,
   RmcaLayoutComponent,
+  DonationModalComponent,
 ];
 
 const PIPES = [
@@ -78,6 +81,9 @@ const NB_THEME_PROVIDERS = [
   imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
+  entryComponents: [
+    DonationModalComponent,
+  ],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

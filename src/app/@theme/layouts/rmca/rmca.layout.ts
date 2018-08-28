@@ -1,13 +1,14 @@
 import {Component, OnDestroy} from '@angular/core';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {delay, takeWhile, withLatestFrom} from 'rxjs/operators';
 import {
   NbMediaBreakpoint,
   NbMediaBreakpointsService,
-  NbMenuItem,
   NbMenuService,
   NbSidebarService,
   NbThemeService,
 } from '@nebular/theme';
+import {DonationModalComponent} from './donation-modal/donation-modal.component';
 
 @Component({
   selector: 'ngx-rmca-layout',
@@ -22,10 +23,11 @@ import {
                   tag="menu-sidebar"
                   responsive
       >
-        <nb-sidebar-header *ngIf="currentTheme !== 'corporate'">
-          <a href="#" class="btn btn-hero-primary main-btn">
-            <i class="ion ion-social-yen"></i> <span>穷 !</span>
-          </a>
+        <nb-sidebar-header>
+          <button (click)="showDonationModal()" class="btn btn-hero-success main-btn">
+            <!-- TODO 把字改成实时的欠款金额 -->
+            <i class="ion ion-social-yen"></i> <span>穷!</span>
+          </button>
         </nb-sidebar-header>
         <ng-content select="nb-menu"></ng-content>
       </nb-sidebar>
@@ -41,48 +43,6 @@ import {
   `,
 })
 export class RmcaLayoutComponent implements OnDestroy {
-
-  subMenu: NbMenuItem[] = [
-    {
-      title: 'PAGE LEVEL MENU',
-      group: true,
-    },
-    {
-      title: 'Buttons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/buttons',
-    },
-    {
-      title: 'Grid',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/grid',
-    },
-    {
-      title: 'Icons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/icons',
-    },
-    {
-      title: 'Modals',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/modals',
-    },
-    {
-      title: 'Typography',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/typography',
-    },
-    {
-      title: 'Animated Searches',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/search-fields',
-    },
-    {
-      title: 'Tabs',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/tabs',
-    },
-  ];
   layout: any = {};
   currentTheme: string;
   private alive = true;
@@ -90,7 +50,8 @@ export class RmcaLayoutComponent implements OnDestroy {
   constructor(protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              private modalService: NgbModal) {
 
     const isBp = this.bpService.getByName('is');
     this.menuService.onItemSelect()
@@ -111,6 +72,10 @@ export class RmcaLayoutComponent implements OnDestroy {
       .subscribe(theme => {
         this.currentTheme = theme.name;
       });
+  }
+
+  showDonationModal(): void {
+    this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
   }
 
   ngOnDestroy() {
