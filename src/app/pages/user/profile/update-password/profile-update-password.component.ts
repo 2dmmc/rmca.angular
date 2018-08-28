@@ -8,12 +8,12 @@ import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 import {passwordEqualValidator} from '../../../../@core/directives';
 
 @Component({
-  selector: 'ngx-profile-user-password',
-  styleUrls: ['./profile-user-password.component.scss'],
-  templateUrl: './profile-user-password.component.html',
+  selector: 'ngx-profile-update-password',
+  styleUrls: ['./profile-update-password.component.scss'],
+  templateUrl: './profile-update-password.component.html',
 })
 
-export class ProfileUserPasswordComponent implements OnInit {
+export class ProfileUpdatePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;
   public submitted: boolean;
 

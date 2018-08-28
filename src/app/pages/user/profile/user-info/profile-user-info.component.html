@@ -41,10 +41,10 @@
               账户状态: 被封禁
               <i class="far fa-question-circle"></i>
             </span>
-            <span class="tag tag-danger" *ngIf="AuthUtilService.isAdmin()">
+            <span class="tag tag-danger" *ngIf="authUtilService.isAdmin()">
               管理员
             </span>
-            <span class="tag tag-info" *ngIf="AuthUtilService.isDeveloper()">
+            <span class="tag tag-info" *ngIf="authUtilService.isDeveloper()">
               Developer
             </span>
           </div>
@@ -72,14 +72,14 @@
                      [class.form-control-danger]="profileForm.get('email').invalid && profileForm.get('email').touched">
               <small class="form-text error"
                      *ngIf="
-             profileForm.get('email').invalid && profileForm.get('email').touched &&
-             profileForm.get('email').hasError('required')">
+                     profileForm.get('email').invalid && profileForm.get('email').touched &&
+                     profileForm.get('email').hasError('required')">
                 请填写邮箱
               </small>
               <small class="form-text error"
                      *ngIf="
-             profileForm.get('email').invalid && profileForm.get('email').touched &&
-             profileForm.get('email').hasError('email')">
+                     profileForm.get('email').invalid && profileForm.get('email').touched &&
+                     profileForm.get('email').hasError('email')">
                 邮箱格式不正确
               </small>
             </div>
@@ -87,7 +87,7 @@
 
           <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-              <button class="btn btn-success"
+              <button class="btn btn-success" (wheel)="flipCard()"
                       [disabled]="submitted || profileForm.invalid"
                       [class.btn-pulse]="submitted">
                 <i class="fa fa-pencil-square-o"></i>

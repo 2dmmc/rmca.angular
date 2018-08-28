@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
     this.user = ProfileComponent.extendUser(this.authUtilService.user);
   }
 
-  public async getUserProfile(): Promise<void> {
+  public async updateUserProfile(): Promise<void> {
     try {
       this.user = ProfileComponent.extendUser(await this.authUtilService.updateUser());
     } catch (error) {

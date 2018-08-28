@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, forwardRef, Inject, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {IUserExtendProfile} from '../profile.component';
+import {IUserExtendProfile, ProfileComponent} from '../profile.component';
 import {UserState} from '../../../../@model/common/user/user.interface';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
@@ -18,11 +18,13 @@ import {UserService} from '../../../../@core/data/user.service';
 
 export class ProfileUserInfoComponent implements OnInit {
   @Input() user: IUserExtendProfile;
+  @Input() instance: any;
   public UserStateEnum = UserState;
-  public AuthUtilService = this.authUtilService;
+
   public updating: boolean;
   public submitted: boolean;
   public flaped: boolean;
+
   public profileForm: FormGroup;
 
   constructor(private activatedRoute: ActivatedRoute,
@@ -30,7 +32,8 @@ export class ProfileUserInfoComponent implements OnInit {
               private noticeService: NoticeService,
               private userService: UserService,
               private commonUtilService: CommonUtilService,
-              private authUtilService: AuthUtilService) {
+              public authUtilService: AuthUtilService,
+              @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
     this.updating = false;
     this.submitted = false;
     this.flaped = false;
@@ -52,7 +55,6 @@ export class ProfileUserInfoComponent implements OnInit {
         ],
       ),
     });
-
   }
 
   public flipCard(): void {
@@ -99,8 +101,7 @@ export class ProfileUserInfoComponent implements OnInit {
       console.error(error);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
-    this.updating = false;
+    await this.updateUserProfile();
   }
 
   public async updateProfile(profileForm: any): Promise<void> {
@@ -123,5 +124,16 @@ export class ProfileUserInfoComponent implements OnInit {
     await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
     this.flipCard();
+
+    await this.updateUserProfile();
+  }
+
+  public async updateUserProfile() {
+    this.updating = true;
+
+    await this._parent.updateUserProfile();
+
+    await this.commonUtilService.sleep(0.7e3);
+    this.updating = false;
   }
 }
