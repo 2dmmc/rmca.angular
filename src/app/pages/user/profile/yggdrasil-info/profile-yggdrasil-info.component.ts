@@ -1,24 +1,35 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, forwardRef, Inject, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
+import {IUser} from '../../../../@model/common/user/user.interface';
+import {ProfileComponent} from '../profile.component';
+
 @Component({
-  selector: 'ngx-yggdrasil-info',
-  styleUrls: ['./yggdrasil-info.component.scss'],
-  templateUrl: './yggdrasil-info.component.html',
+  selector: 'ngx-profile-yggdrasil-info',
+  styleUrls: ['./profile-yggdrasil-info.component.scss'],
+  templateUrl: './profile-yggdrasil-info.component.html',
 })
 
-export class YggdrasilInfoComponent implements OnInit {
-  public updateYggdrasilInfoForm: FormGroup;
+export class ProfileYggdrasilInfoComponent implements OnInit {
+  @Input() user: IUser;
+
+  public updating: boolean;
   public submitted: boolean;
+  public flaped: boolean;
+
+  public updateYggdrasilInfoForm: FormGroup;
 
   constructor(private userService: UserService,
               private noticeService: NoticeService,
-              private commonUtilService: CommonUtilService) {
+              private commonUtilService: CommonUtilService,
+              @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
+    this.updating = false;
     this.submitted = false;
+    this.flaped = false;
   }
 
   public async ngOnInit() {
@@ -34,6 +45,10 @@ export class YggdrasilInfoComponent implements OnInit {
         ],
       ),
     });
+  }
+
+  public flipCard(): void {
+    this.flaped = !this.flaped;
   }
 
   public async updateYggdrasil(yggdrasilForm) {
@@ -59,5 +74,18 @@ export class YggdrasilInfoComponent implements OnInit {
 
     await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
+
+    this.flipCard();
+
+    await this.updateUserProfile();
+  }
+
+  public async updateUserProfile() {
+    this.updating = true;
+
+    await this._parent.updateUserProfile();
+
+    await this.commonUtilService.sleep(0.7e3);
+    this.updating = false;
   }
 }

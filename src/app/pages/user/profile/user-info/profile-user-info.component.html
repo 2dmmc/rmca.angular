@@ -1,6 +1,7 @@
 <nb-flip-card [flipped]="flaped" [showToggleButton]="false">
   <nb-card-front>
-    <nb-card [accent]="user.stateColor" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ...">
+    <nb-card [accent]="user.stateColor" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ..."
+             size="small">
       <nb-card-header>
         <span>
           <i class="fa fa-info"></i>
@@ -8,24 +9,27 @@
         </span>
       </nb-card-header>
       <nb-card-body>
-        <div class="user-state">
-          <div class="alert alert-warning" role="alert" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
-            你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
-            <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>
-            或稍后重试
-          </div>
+        <div class="alert alert-warning" role="alert" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
+          你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
+          <a href="javascript:void(0)" class="alert-link" (click)="resendVerifyEmail()">重新发送验证邮件</a>
+          或稍后重试
+        </div>
+        <div class="user-info-container">
           <div class="user-container">
-            <div class="user-picture">
-              <div class="background image" style.background-image="url({{user.avatar}})"></div>
-            </div>
+            <a routerLink="../socials">
+              <div class="user-picture">
+                <div class="background image" style.background-image="url({{user.avatar}})"></div>
+              </div>
+            </a>
             <div class="user-name">
-              <p>
+              <span>
                 {{user.username}} ({{user.email}})
                 <a href="javascript:void(0)" (click)="flipCard()"><i class="far fa-edit"></i>修改</a>
-              </p>
+              </span>
             </div>
           </div>
-          <div class="info-container" [ngSwitch]="user.state">
+          <hr>
+          <div class="tag-container" [ngSwitch]="user.state">
             <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL"
                   nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" nbPopoverMode="hover">
               账户状态: 正常
@@ -53,7 +57,7 @@
     </nb-card>
   </nb-card-front>
   <nb-card-back>
-    <nb-card [nbSpinner]="submitted" nbSpinnerStatus="info" nbSpinnerMessage="个人资料更新中 ...">
+    <nb-card [nbSpinner]="submitted" nbSpinnerStatus="info" nbSpinnerMessage="个人资料更新中 ..." size="small">
       <nb-card-header>
     <span>
       <i class="fa fa-id-card"></i>个人资料
