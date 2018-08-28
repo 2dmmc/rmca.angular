@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {NoticeService} from '../../../@core/services/notice.service';
-
 import {IUser} from '../../../@model/common/user/user.interface';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
@@ -13,8 +11,7 @@ import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 export class SocialsComponent implements OnInit {
   public user: IUser;
 
-  constructor(private noticeService: NoticeService,
-              private authUtilService: AuthUtilService) {
+  constructor(private authUtilService: AuthUtilService) {
   }
 
   public ngOnInit(): void {
