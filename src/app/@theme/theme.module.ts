@@ -70,7 +70,7 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'cosmic',
     },
-    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME],
+    [COSMIC_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
