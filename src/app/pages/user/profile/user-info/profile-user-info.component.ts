@@ -2,10 +2,13 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {IUser} from '../../../../@model/common/user/user.interface';
-import {UserService} from '../../../../@core/data/user.service';
+import {IUserExtendProfile} from '../profile.component';
+import {UserState} from '../../../../@model/common/user/user.interface';
+
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {CommonUtilService} from '../../../../@core/utils/common-util.service';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {UserService} from '../../../../@core/data/user.service';
 
 @Component({
   selector: 'ngx-profile-user-info',
@@ -14,8 +17,9 @@ import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 })
 
 export class ProfileUserInfoComponent implements OnInit {
-  @Input() user: IUser;
-  public userState: 'danger' | 'warning' | 'success';
+  @Input() user: IUserExtendProfile;
+  public UserStateEnum = UserState;
+  public AuthUtilService = this.authUtilService;
   public updating: boolean;
   public submitted: boolean;
   public flaped: boolean;
@@ -25,7 +29,8 @@ export class ProfileUserInfoComponent implements OnInit {
               private router: Router,
               private noticeService: NoticeService,
               private userService: UserService,
-              private commonUtilService: CommonUtilService) {
+              private commonUtilService: CommonUtilService,
+              private authUtilService: AuthUtilService) {
     this.updating = false;
     this.submitted = false;
     this.flaped = false;
@@ -48,15 +53,6 @@ export class ProfileUserInfoComponent implements OnInit {
       ),
     });
 
-    if (this.user.ban) {
-      this.userState = 'danger';
-      return;
-    }
-    if (!this.user.isEmailVerify) {
-      this.userState = 'warning';
-      return;
-    }
-    this.userState = 'success';
   }
 
   public flipCard(): void {

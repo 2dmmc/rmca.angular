@@ -1,6 +1,6 @@
 <nb-flip-card [flipped]="flaped" [showToggleButton]="false">
   <nb-card-front>
-    <nb-card [accent]="userState" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ...">
+    <nb-card [accent]="user.stateColor" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ...">
       <nb-card-header>
         <span>
           <i class="fa fa-info"></i>
@@ -9,7 +9,7 @@
       </nb-card-header>
       <nb-card-body>
         <div class="user-state">
-          <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
+          <div class="alert alert-warning" role="alert" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
             你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
             <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>
             或稍后重试
@@ -25,28 +25,28 @@
               </p>
             </div>
           </div>
-          <div class="info-container">
-        <span class="tag tag-success" *ngIf="userState === 'success'"
-              nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" nbPopoverMode="hover">
-          账户状态: 正常
-          <i class="far fa-question-circle"></i>
-        </span>
-            <span class="tag tag-warning" *ngIf="userState === 'warning'"
+          <div class="info-container" [ngSwitch]="user.state">
+            <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL"
+                  nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" nbPopoverMode="hover">
+              账户状态: 正常
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-warning" *ngSwitchCase="UserStateEnum.NEED_EMAIL_VALIDATION"
                   nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏" nbPopoverMode="hover">
-          账户状态: 未验证
-          <i class="far fa-question-circle"></i>
-        </span>
-            <span class="tag tag-danger" *ngIf="userState === 'danger'"
+              账户状态: 未验证
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
                   nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}" nbPopoverMode="hover">
-          账户状态: 封禁
-          <i class="far fa-question-circle"></i>
-        </span>
-            <span class="tag tag-danger" *ngIf="user.admin">
-          管理员
-        </span>
-            <span class="tag tag-info" *ngIf="user.username == 'sdjnmxd' || user.username == 'bangbang93'">
-          Developer
-        </span>
+              账户状态: 被封禁
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-danger" *ngIf="AuthUtilService.isAdmin()">
+              管理员
+            </span>
+            <span class="tag tag-info" *ngIf="AuthUtilService.isDeveloper()">
+              Developer
+            </span>
           </div>
         </div>
       </nb-card-body>
