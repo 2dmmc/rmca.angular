@@ -18,7 +18,6 @@ import {UserService} from '../../../../@core/data/user.service';
 
 export class ProfileUserInfoComponent implements OnInit {
   @Input() user: IUserExtendProfile;
-  @Input() instance: any;
   public UserStateEnum = UserState;
 
   public updating: boolean;
