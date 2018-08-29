@@ -24,7 +24,13 @@
   }
 }
 
+// 修正导航菜单图标大小, 这玩意无法从layout里覆盖, 样式优先权太高, FML
 .nb-theme-cosmic nb-menu .menu-item .menu-icon {
   font-size: 2.2rem;
   width: 3rem;
+}
+
+// 干掉全局nbButton的outline
+button[nbButton] {
+  outline: 0;
 }

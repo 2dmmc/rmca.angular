@@ -5,6 +5,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   NbActionsModule,
+  NbButtonModule,
   NbBadgeModule,
   NbCardModule,
   NbCheckboxModule,
@@ -32,6 +33,7 @@ import {COSMIC_THEME} from './styles/theme.cosmic';
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
+  NbButtonModule,
   NbCardModule,
   NbLayoutModule,
   NbTabsetModule,

@@ -1,0 +1,28 @@
+@import '../../@theme/styles/themes';
+
+.btn-add {
+  outline: 0;
+
+  background: transparent;
+  height: 100%;
+  width: 100%;
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.7);
+
+  i {
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+  }
+
+  &:hover {
+    background-color: transparent;
+    color: white;
+  }
+}
