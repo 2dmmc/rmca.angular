@@ -25,9 +25,8 @@ import {
 import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
 import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
 import {RmcaLayoutComponent} from './layouts';
-import {COSMIC_THEME} from './styles/theme.cosmic';
-
 import {DonationModalComponent} from './layouts/rmca/donation-modal/donation-modal.component';
+import {COSMIC_THEME} from './styles/theme.cosmic';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
