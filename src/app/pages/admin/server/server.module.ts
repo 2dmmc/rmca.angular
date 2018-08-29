@@ -30,7 +30,6 @@ const components = [
   declarations: [
     ...components,
   ],
-  providers: [],
 })
 
 export class ServerModule {

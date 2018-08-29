@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
-import {ServerService} from '../../server.service';
+import {ServerService} from '../../../../../@core/data/server.service';
 
 import {IServer} from '../../../../../@model/common/admin/server/server.interface';
 

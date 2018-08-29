@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
-import {ServerService} from '../../server.service';
+import {ServerService} from '../../../../../@core/data/server.service';
 
 import {IFinance} from '../../../../../@model/common/admin/server/finacne/finance.interface';
 import {FinanceTypeEnum} from '../../../../../@model/common/admin/server/finacne/finance-type.enum';
