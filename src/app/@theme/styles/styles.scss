@@ -22,4 +22,9 @@
   .custom-control .custom-control-indicator {
     border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
   }
-};
+}
+
+.nb-theme-cosmic nb-menu .menu-item .menu-icon {
+  font-size: 2rem;
+  width: 3rem;
+}
