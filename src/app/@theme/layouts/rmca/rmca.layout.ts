@@ -1,13 +1,5 @@
-import {Component, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {delay, takeWhile, withLatestFrom} from 'rxjs/operators';
-import {
-  NbMediaBreakpoint,
-  NbMediaBreakpointsService,
-  NbMenuService,
-  NbSidebarService,
-  NbThemeService,
-} from '@nebular/theme';
 import {DonationModalComponent} from './donation-modal/donation-modal.component';
 
 @Component({
@@ -42,43 +34,11 @@ import {DonationModalComponent} from './donation-modal/donation-modal.component'
     </nb-layout>
   `,
 })
-export class RmcaLayoutComponent implements OnDestroy {
-  layout: any = {};
-  currentTheme: string;
-  private alive = true;
-
-  constructor(protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService,
-              private modalService: NgbModal) {
-
-    const isBp = this.bpService.getByName('is');
-    this.menuService.onItemSelect()
-      .pipe(
-        takeWhile(() => this.alive),
-        withLatestFrom(this.themeService.onMediaQueryChange()),
-        delay(20),
-      )
-      .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
-
-        if (bpTo.width <= isBp.width) {
-          this.sidebarService.collapse('menu-sidebar');
-        }
-      });
-
-    this.themeService.getJsTheme()
-      .pipe(takeWhile(() => this.alive))
-      .subscribe(theme => {
-        this.currentTheme = theme.name;
-      });
+export class RmcaLayoutComponent {
+  constructor(private modalService: NgbModal) {
   }
 
   showDonationModal(): void {
     this.modalService.open(DonationModalComponent, {size: 'lg', container: 'nb-layout'});
-  }
-
-  ngOnDestroy() {
-    this.alive = false;
   }
 }
