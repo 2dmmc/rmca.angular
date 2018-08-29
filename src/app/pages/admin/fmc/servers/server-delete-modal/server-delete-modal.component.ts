@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
-import {ServerService} from '../../../../../@core/data/server.service';
+import {FmcService} from '../../../../../@core/data/fmc.service';
 
 @Component({
   styleUrls: ['./server-delete-modal.component.scss'],
@@ -18,7 +18,7 @@ export class ServerDeleteModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: ServerService) {
+              private managerService: FmcService) {
     this.formName = '';
     this.submitted = false;
   }

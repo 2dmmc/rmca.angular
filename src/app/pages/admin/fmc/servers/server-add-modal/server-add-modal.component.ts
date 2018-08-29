@@ -2,7 +2,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
-import {ServerService} from '../../../../../@core/data/server.service';
+import {FmcService} from '../../../../../@core/data/fmc.service';
 
 import {IServer} from '../../../../../@model/common/admin/fmc/server/server.interface';
 
@@ -18,7 +18,7 @@ export class ServerAddModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: ServerService) {
+              private managerService: FmcService) {
     this.server = {
       name: '',
       endpoint: '',

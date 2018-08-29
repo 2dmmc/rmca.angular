@@ -6,7 +6,7 @@ import {IServer} from '../../@model/common/admin/fmc/server/server.interface';
 import {IFinance} from '../../@model/common/admin/fmc/finacne/finance.interface';
 
 @Injectable()
-export class ServerService {
+export class FmcService {
   constructor(private http: HttpClient) {
   }
 

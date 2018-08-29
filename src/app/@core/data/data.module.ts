@@ -4,13 +4,13 @@ import {CommonModule} from '@angular/common';
 import {AuthService} from './auth.service';
 import {CallbackService} from './callback.service';
 import {UserService} from './user.service';
-import {ServerService} from './server.service';
+import {FmcService} from './fmc.service';
 
 const SERVICES = [
   AuthService,
   CallbackService,
   UserService,
-  ServerService,
+  FmcService,
 ];
 
 @NgModule({

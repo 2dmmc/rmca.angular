@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
-import {ServerService} from '../../../../../@core/data/server.service';
+import {FmcService} from '../../../../../@core/data/fmc.service';
 
 import {IFinance} from '../../../../../@model/common/admin/fmc/finacne/finance.interface';
 import {FinanceTypeEnum} from '../../../../../@model/common/admin/fmc/finacne/finance-type.enum';
@@ -20,7 +20,7 @@ export class FinanceDetailModalComponent {
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private adminService: ServerService) {
+              private adminService: FmcService) {
     this.submitted = false;
   }
 
