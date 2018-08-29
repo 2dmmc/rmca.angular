@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 
 import {ADMIN_MENU_ITEMS, DEVELOPER_MENU_ITEMS, USER_MENU_ITEMS} from './pages-menu';
 
+import {AuthUtilService} from '../@core/utils/auth-util.service';
+import {IUserExtend} from '../@model/common/user/user.interface';
+
 @Component({
   selector: 'ngx-pages',
   template: `
@@ -12,9 +15,10 @@ import {ADMIN_MENU_ITEMS, DEVELOPER_MENU_ITEMS, USER_MENU_ITEMS} from './pages-m
   `,
 })
 export class PagesComponent implements OnInit {
-  menu: any;
+  public user: IUserExtend;
+  public menu: any;
 
-  constructor() {
+  constructor(private authUtilService: AuthUtilService) {
   }
 
   ngOnInit() {
@@ -22,11 +26,11 @@ export class PagesComponent implements OnInit {
 
     menu.push.apply(menu, USER_MENU_ITEMS);
 
-    if (1 === 1) {
+    if (this.authUtilService.isAdmin()) {
       menu.push.apply(menu, ADMIN_MENU_ITEMS);
     }
 
-    if (1 === 1) {
+    if (this.authUtilService.isDeveloper()) {
       menu.push.apply(menu, DEVELOPER_MENU_ITEMS);
     }
 
