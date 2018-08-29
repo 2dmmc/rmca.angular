@@ -9,6 +9,7 @@
         </span>
       </nb-card-header>
       <nb-card-body>
+        <!-- //TODO 主题标准操作是使用nb-alert声明该提示的, 但官方UI Demo和文档不一致, 因此先使用UI Demo内声明方式-->
         <div class="alert alert-warning" role="alert" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
           你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
           <a href="javascript:void(0)" class="alert-link" (click)="resendVerifyEmail()">重新发送验证邮件</a>
