@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
 @Component({
-  selector: 'ngx-admin',
+  selector: 'ngx-fmc',
   template: `
     <router-outlet></router-outlet>
   `,
