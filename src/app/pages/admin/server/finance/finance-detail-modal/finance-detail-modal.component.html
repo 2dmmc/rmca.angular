@@ -4,7 +4,7 @@
     财务历史管理 - 财务详情
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fa fa-times" aria-hidden="true"></i>
+    <i class="fas fa-times" aria-hidden="true"></i>
   </button>
 </div>
 <div class="modal-body">
@@ -34,7 +34,7 @@
     <div class="col-sm-10">
       <div class="input-group">
         <input type="number" name="accrual" id="input-accrual" class="form-control" placeholder="金额"
-               [value]="financeHistory.accrual | rmb" readonly>
+               [value]="financeHistory.accrual" readonly>
         <span class="input-group-addon">元</span>
       </div>
     </div>
@@ -62,11 +62,11 @@
         <button class="btn btn-success"
                 [disabled]="submitted || !financeForm.form.valid"
                 [class.btn-pulse]="submitted">
-          <i class="fa fa-plus"></i>
+          <i class="fas fa-plus"></i>
           更新财务历史记录
         </button>
         <button class="btn btn-md btn-danger" (click)="closeModal()">
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fas fa-times" aria-hidden="true"></i>
           取消
         </button>
       </div>
