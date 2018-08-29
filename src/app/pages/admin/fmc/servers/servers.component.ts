@@ -8,7 +8,7 @@ import {ServerAddModalComponent} from './server-add-modal/server-add-modal.compo
 import {ServerDetailModalComponent} from './server-detail-modal/server-detail-modal.component';
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
-import {IServer} from '../../../../@model/common/admin/server/server.interface';
+import {IServer} from '../../../../@model/common/admin/fmc/server/server.interface';
 
 @Component({
   selector: 'ngx-servers',

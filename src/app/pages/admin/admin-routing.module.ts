@@ -13,8 +13,8 @@ const routes: Routes = [{
     path: 'rmca',
     loadChildren: './rmca/rmca.module#RmcaModule',
   }, {
-    path: 'server',
-    loadChildren: './server/server.module#ServerModule',
+    path: 'fmc',
+    loadChildren: './fmc/fmc.module#FmcModule',
   }],
 }];
 

@@ -3,7 +3,7 @@
     <nb-card>
       <nb-card-body>
         <button class="btn btn-success" (click)="openFinanceAddModal()">
-          <i class="fa fa-plus"></i>
+          <i class="fas fa-plus"></i>
           新增财务历史记录
         </button>
       </nb-card-body>
@@ -41,14 +41,14 @@
                 [class.text-danger]="financeHistory.type == financeType.EXPEND">
             <i class="fa fa-caret-up" *ngIf="financeHistory.type == financeType.INCOME" aria-hidden="true"></i>
             <i class="fa fa-caret-down" *ngIf="financeHistory.type == financeType.EXPEND" aria-hidden="true"></i>
-            {{financeHistory.accrual | rmb | number:'1.2-3'}} 元
+            {{financeHistory.accrual | number:'1.2-3'}} 元
           </span>
         </td>
         <td class="text-right" width="20%">
           <span class="balance"
                 [class.text-success]="financeHistory.balance > 0"
                 [class.text-danger]="financeHistory.balance < 0">
-            {{financeHistory.balance | rmb | number:'1.2-3'}} 元
+            {{financeHistory.balance | number:'1.2-3'}} 元
           </span>
         </td>
         <td width="30%">

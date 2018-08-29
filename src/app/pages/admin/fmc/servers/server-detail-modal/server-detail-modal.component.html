@@ -1,13 +1,17 @@
 <div class="modal-header">
   <span>
-    <i class="fa fa-pencil-square-o"></i>
+    <i class="far fa-edit"></i>
     服务器管理 - 服务器详情
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fa fa-times" aria-hidden="true"></i>
+    <i class="fas fa-times" aria-hidden="true"></i>
   </button>
 </div>
 <div class="modal-body">
+  <div class="alert alert-info" role="alert">
+    服务器公告支持的变量:
+    <code nbPopover="欠款总额" nbPopoverMode="hover">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
+  </div>
   <form (ngSubmit)="updateServer()" #serverForm="ngForm" name="serverForm">
     <div class="form-group row">
       <label for="input-name" class="col-sm-2 col-form-label">服务器名称</label>
@@ -70,11 +74,11 @@
         <button class="btn btn-success"
                 [disabled]="submitted || !serverForm.form.valid"
                 [class.btn-pulse]="submitted">
-          <i class="fa fa-pencil-square-o"></i>
+          <i class="far fa-edit"></i>
           更新服务器信息
         </button>
         <button class="btn btn-md btn-danger" (click)="closeModal()">
-          <i class="fa fa-times" aria-hidden="true"></i>
+          <i class="fas fa-times" aria-hidden="true"></i>
           取消
         </button>
       </div>

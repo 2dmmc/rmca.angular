@@ -4,36 +4,30 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {ServerService} from '../../../../../@core/data/server.service';
 
-import {IServer} from '../../../../../@model/common/admin/server/server.interface';
+import {FinanceTypeEnum} from '../../../../../@model/common/admin/fmc/finacne/finance-type.enum';
 
 @Component({
-  styleUrls: ['./server-add-modal.component.scss'],
-  templateUrl: './server-add-modal.component.html',
+  styleUrls: ['./finance-add-modal.component.scss'],
+  templateUrl: './finance-add-modal.component.html',
 })
 
-export class ServerAddModalComponent {
+export class FinanceAddModalComponent {
   @Output() event = new EventEmitter();
-  server: IServer;
+  financeType = FinanceTypeEnum;
   submitted: boolean;
 
   constructor(private noticeService: NoticeService,
               private activeModal: NgbActiveModal,
-              private managerService: ServerService) {
-    this.server = {
-      name: '',
-      endpoint: '',
-      announce: '',
-      dynmap: '',
-    };
+              private adminService: ServerService) {
     this.submitted = false;
   }
 
-  public addServer(): void {
+  public addFinanceHistory(financeForm): void {
     this.submitted = true;
 
-    this.managerService.addServer(this.server)
+    this.adminService.addFinanceHistory(financeForm)
       .then(createState => {
-        this.noticeService.success('新增成功', '新增服务器成功');
+        this.noticeService.success('新增成功', '新增财务历史记录成功');
         this.event.emit();
         this.activeModal.close();
       })
@@ -43,16 +37,12 @@ export class ServerAddModalComponent {
         let errorMessage = '';
 
         switch (error.status) {
-          case 409: {
-            errorMessage = '服务器名已存在';
-            break;
-          }
           default: {
             errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
           }
         }
 
-        this.noticeService.error('新增服务器失败', errorMessage);
+        this.noticeService.error('新增财务历史记录失败', errorMessage);
       });
   }
 

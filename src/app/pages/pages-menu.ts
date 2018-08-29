@@ -49,15 +49,15 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: '服务器列表',
-        link: '/pages/admin/server/servers',
+        link: '/pages/admin/fmc/servers',
       },
       {
         title: '服务器历史管理',
-        link: '/pages/admin/server/history',
+        link: '/pages/admin/fmc/history',
       },
       {
         title: '财务历史管理',
-        link: '/pages/admin/server/finance',
+        link: '/pages/admin/fmc/finance',
       },
     ],
   },

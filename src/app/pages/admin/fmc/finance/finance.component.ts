@@ -6,8 +6,8 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
-import {IFinance} from '../../../../@model/common/admin/server/finacne/finance.interface';
-import {FinanceTypeEnum} from '../../../../@model/common/admin/server/finacne/finance-type.enum';
+import {IFinance} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
+import {FinanceTypeEnum} from '../../../../@model/common/admin/fmc/finacne/finance-type.enum';
 
 @Component({
   styleUrls: ['./finance.component.scss'],

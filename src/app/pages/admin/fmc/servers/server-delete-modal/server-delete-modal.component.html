@@ -1,10 +1,10 @@
 <div class="modal-header">
   <span>
-      <i class="fa fa-trash"></i>
+      <i class="fas fa-trash"></i>
       服务器管理 - 删除服务器
   </span>
   <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fa fa-times" aria-hidden="true"></i>
+    <i class="fas fa-times" aria-hidden="true"></i>
   </button>
 </div>
 <div class="modal-body">
@@ -22,7 +22,7 @@
         <button class="btn btn-danger"
                 [class.btn-pulse]="submitted"
                 [disabled]="submitted || deleteServerForm.invalid || formName != serverName">
-          <i class="fa fa-trash"></i>
+          <i class="fas fa-trash"></i>
           删除
         </button>
       </div>
