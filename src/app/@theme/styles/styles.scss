@@ -34,3 +34,17 @@
 button[nbButton] {
   outline: 0;
 }
+
+// 给code一个样式, FML, 默认样式竟然没了
+code {
+  padding: .2rem .4rem;
+  font-size: 90%;
+  background-color: #f8f9fa;
+  border-radius: .25rem;
+  margin: 0 .2rem;
+}
+
+// 修正这玩意在模态里导致按钮和它不平齐的问题
+.input-group-btn {
+  display: flex;
+}
