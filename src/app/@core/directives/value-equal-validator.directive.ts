@@ -1,5 +1,5 @@
 import {Directive, Input} from '@angular/core';
-import {AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn} from '@angular/forms';
+import {AbstractControl, NG_VALIDATORS, Validator, ValidatorFn} from '@angular/forms';
 
 export function valueEqualValidator(value: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
