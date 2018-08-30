@@ -34,7 +34,7 @@
     <div class="form-group row">
       <label for="input-endpoint" class="col-lg-3 col-form-label">连接地址</label>
       <div class="col-lg-9">
-        <input class="form-control" id="input-endpoint" placeholder="连接地址" autofocus
+        <input class="form-control" id="input-endpoint" placeholder="连接地址"
                formControlName="endpoint"
                [class.form-control-success]="serverForm.get('endpoint').valid && serverForm.get('endpoint').touched"
                [class.form-control-danger]="serverForm.get('endpoint').invalid && serverForm.get('endpoint').touched">
@@ -50,7 +50,7 @@
     <div class="form-group row">
       <label for="input-dynmap" class="col-lg-3 col-form-label">大地图地址(可选)</label>
       <div class="col-lg-9">
-        <input class="form-control" id="input-dynmap" placeholder="大地图地址" autofocus
+        <input class="form-control" id="input-dynmap" placeholder="大地图地址"
                formControlName="dynmap"
                [class.form-control-success]="serverForm.get('dynmap').valid && serverForm.get('dynmap').touched"
                [class.form-control-danger]="serverForm.get('dynmap').invalid && serverForm.get('dynmap').touched">
@@ -85,13 +85,13 @@
 
     <div class="form-group submit-group row">
       <div class="offset-lg-3 col-lg-9">
-        <button nbButton status="success" type="submit"
+        <button nbButton [status]="'success'" type="submit"
                 [disabled]="submitted || serverForm.invalid"
                 [class.btn-pulse]="submitted">
           <i class="fas fa-plus"></i>
           新增服务器
         </button>
-        <button nbButton status="danger" type="button"
+        <button nbButton [status]="'danger'" type="button"
                 (click)="activeModal.close()">
           <i class="fas fa-times"></i>
           取消
