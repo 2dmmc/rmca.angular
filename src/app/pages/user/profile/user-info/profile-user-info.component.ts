@@ -113,10 +113,7 @@ export class ProfileUserInfoComponent implements OnInit {
         `更新个人资料成功, 你的邮箱已更换为${profileForm.email}`,
       );
     } catch (error) {
-      this.noticeService.error(
-        '更新个人资料失败',
-        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-      );
+      this.noticeService.error('更新个人资料失败', '更新个人资料失败, 请刷新页面重试');
       console.error(error);
     }
 

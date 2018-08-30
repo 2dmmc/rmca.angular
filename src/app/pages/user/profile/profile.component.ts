@@ -35,10 +35,7 @@ export class ProfileComponent implements OnInit {
     try {
       this.user = ProfileComponent.extendUser(await this.authUtilService.updateUser());
     } catch (error) {
-      this.noticeService.error(
-        '获取用户信息失败, 请刷新页面重试',
-        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-      );
+      this.noticeService.error('获取用户信息失败', '获取用户信息失败, 请刷新页面重试');
     }
   }
 
