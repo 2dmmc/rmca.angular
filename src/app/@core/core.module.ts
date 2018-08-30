@@ -9,7 +9,7 @@ import {GuardsModules} from './guards/guards.modules';
 
 import {RmbPipe} from './pipes';
 
-import {PasswordEqualValidatorDirective} from './directives';
+import {PasswordEqualValidatorDirective, ValueEqualValidatorDirective} from './directives';
 
 export const RMCA_CORE_PROVIDERS = [
   ...ServicesModule.forRoot().providers,
@@ -24,6 +24,7 @@ const PIPES = [
 
 const DIRECTIVES = [
   PasswordEqualValidatorDirective,
+  ValueEqualValidatorDirective,
 ];
 
 @NgModule({
