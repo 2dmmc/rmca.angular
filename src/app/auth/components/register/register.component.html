@@ -93,7 +93,7 @@
       </nb-checkbox>
     </div>
 
-    <button class="btn btn-block btn-success"
+    <button nbButton [status]="'success'" [fullWidth]="true"
             [disabled]="submitted || registryForm.invalid"
             [class.btn-pulse]="submitted">
       注册

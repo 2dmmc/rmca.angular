@@ -54,7 +54,7 @@
       <a class="forgot-password" routerLink="../request-password" tabindex="9999">忘记密码</a>
     </div>
 
-    <button class="btn btn-block btn-success"
+    <button nbButton [status]="'success'" [fullWidth]="true"
             [disabled]="submitted || loginForm.invalid"
             [class.btn-pulse]="submitted">
       登录
