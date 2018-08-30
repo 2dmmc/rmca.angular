@@ -21,7 +21,7 @@ export class ServersComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private managerService: FmcService) {
+              private fmcService: FmcService) {
     this.servers = [];
   }
 
@@ -29,17 +29,12 @@ export class ServersComponent implements OnInit {
     this.getServers();
   }
 
-  public getServers(): void {
-    this.managerService.getServers()
-      .then((servers: IServer[]) => {
-        this.servers = servers;
-      })
-      .catch(error => {
-        this.noticeService.error(
-          '获取服务器列表失败, 请刷新页面重试',
-          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-        );
-      });
+  public async getServers(): Promise<void> {
+    try {
+      this.servers = await this.fmcService.getServers();
+    } catch (error) {
+      this.noticeService.error('获取服务器列表失败', '获取服务器列表失败, 请刷新页面重试');
+    }
   }
 
   public openServerAddModal(): void {
@@ -49,21 +44,21 @@ export class ServersComponent implements OnInit {
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.event.subscribe(() => {
+    activeModal.componentInstance.event.subscribe((serverForm: IServer) => {
       this.getServers();
     });
   }
 
-  public openServerDetailModal(serverId: string): void {
+  public openServerDetailModal(server: IServer): void {
     const activeModal = this.modalService.open(ServerDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.serverId = serverId;
+    activeModal.componentInstance.server = server;
 
-    activeModal.componentInstance.event.subscribe(() => {
+    activeModal.componentInstance.event.subscribe((serverForm: IServer) => {
       this.getServers();
     });
   }

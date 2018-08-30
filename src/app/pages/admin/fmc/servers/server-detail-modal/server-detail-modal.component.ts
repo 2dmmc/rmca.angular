@@ -13,7 +13,7 @@ import {IServer} from '../../../../../@model/common/admin/fmc/server/server.inte
 })
 
 export class ServerDetailModalComponent implements OnInit {
-  @Input() serverId;
+  @Input() server: IServer;
   @Output() event = new EventEmitter();
 
   public serverForm: FormGroup;
@@ -46,7 +46,7 @@ export class ServerDetailModalComponent implements OnInit {
         '',
       ),
     });
-    this.getServer(this.serverId);
+    this.getServer(this.server._id);
   }
 
   private async getServer(id: string): Promise<void> {
@@ -72,7 +72,7 @@ export class ServerDetailModalComponent implements OnInit {
     this.submitted = true;
 
     try {
-      await this.fmcService.updateServer(this.serverId, serverForm);
+      await this.fmcService.updateServer(this.server._id, serverForm);
       this.noticeService.success(
         '更新成功',
         '更新服务器详情成功',

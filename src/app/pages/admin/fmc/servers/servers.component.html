@@ -13,7 +13,7 @@
             大地图地址
           </label>
           <div class="col-sm-9">
-            <input name="dynmap" id="input-dynmap" class="form-control" readonly
+            <input class="form-control" id="input-dynmap" readonly
                    [ngModel]="server.dynmap">
           </div>
         </div>
@@ -22,17 +22,17 @@
             服务器公告
           </label>
           <div class="col-sm-9">
-          <textarea name="announce" id="textarea-announce" class="form-control" cols="5" rows="5" readonly
+          <textarea class="form-control" id="textarea-announce" cols="5" rows="5" readonly
                     [ngModel]="server.announce"></textarea>
           </div>
         </div>
       </nb-card-body>
       <nb-card-footer>
-        <button nbButton status="info" (click)="openServerDetailModal(server._id)">
+        <button nbButton [status]="'info'" (click)="openServerDetailModal(server)">
           <i class="far fa-edit"></i>
           编辑
         </button>
-        <button nbButton status="danger" (click)="openServerDeleteModal(server)">
+        <button nbButton [status]="'danger'" (click)="openServerDeleteModal(server)">
           <i class="fas fa-trash"></i>
           删除
         </button>
