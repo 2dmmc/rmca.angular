@@ -37,11 +37,11 @@ button[nbButton] {
 
 // 给code一个样式, FML, 默认样式竟然没了
 code {
-  padding: .2rem .4rem;
+  padding: 0.2rem 0.4rem;
   font-size: 90%;
   background-color: #f8f9fa;
-  border-radius: .25rem;
-  margin: 0 .2rem;
+  border-radius: 0.25rem;
+  margin: 0 0.2rem;
 }
 
 // 修正这玩意在模态里导致按钮和它不平齐的问题
