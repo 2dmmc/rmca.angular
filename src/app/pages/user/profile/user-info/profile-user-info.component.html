@@ -1,20 +1,20 @@
 <nb-flip-card [flipped]="flaped" [showToggleButton]="false">
   <nb-card-front>
-    <nb-card [accent]="user.stateColor" [nbSpinner]="updating" nbSpinnerStatus="info" nbSpinnerMessage="状态更新中 ..."
-             size="small">
+    <nb-card [accent]="user.stateColor" [size]="'small'"
+             [nbSpinner]="updating" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'状态更新中 ...'">
       <nb-card-header>
         <span>
-          <i class="fa fa-info"></i>
+          <i class="fas fa-info"></i>
           我的账户
         </span>
       </nb-card-header>
       <nb-card-body>
-        <!-- //TODO 主题标准操作是使用nb-alert声明该提示的, 但官方UI Demo和文档不一致, 因此先使用UI Demo内声明方式-->
-        <div class="alert alert-warning" role="alert" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
+        <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
           你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
           <a href="javascript:void(0)" class="alert-link" (click)="resendVerifyEmail()">重新发送验证邮件</a>
           或稍后重试
-        </div>
+        </ngb-alert>
+
         <div class="user-info-container">
           <div class="user-container">
             <a routerLink="../socials">
@@ -31,17 +31,17 @@
           </div>
           <div class="tag-container" [ngSwitch]="user.state">
             <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL"
-                  nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" nbPopoverMode="hover">
+                  nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" [nbPopoverMode]="'hover'">
               账户状态: 正常
               <i class="far fa-question-circle"></i>
             </span>
             <span class="tag tag-warning" *ngSwitchCase="UserStateEnum.NEED_EMAIL_VALIDATION"
-                  nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏" nbPopoverMode="hover">
+                  nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏" [nbPopoverMode]="'hover'">
               账户状态: 未验证
               <i class="far fa-question-circle"></i>
             </span>
             <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
-                  nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}" nbPopoverMode="hover">
+                  nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}" [nbPopoverMode]="'hover'">
               账户状态: 被封禁
               <i class="far fa-question-circle"></i>
             </span>
@@ -57,10 +57,10 @@
     </nb-card>
   </nb-card-front>
   <nb-card-back>
-    <nb-card [nbSpinner]="submitted" nbSpinnerStatus="info" nbSpinnerMessage="个人资料更新中 ..." size="small">
+    <nb-card [size]="'small'" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'个人资料更新中 ...'">
       <nb-card-header>
     <span>
-      <i class="fa fa-id-card"></i>个人资料
+      <i class="fas fa-id-card"></i>个人资料
     </span>
       </nb-card-header>
       <nb-card-body>
@@ -91,7 +91,7 @@
 
           <div class="form-group row">
             <div class="offset-sm-2 col-sm-10">
-              <button class="btn btn-success" (wheel)="flipCard()"
+              <button nbButton [status]="'success'"
                       [disabled]="submitted || profileForm.invalid"
                       [class.btn-pulse]="submitted">
                 <i class="far fa-edit"></i>

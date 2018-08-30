@@ -58,6 +58,9 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
       await this.userService.updateUserYggdrasil(yggdrasilForm.username, yggdrasilForm.password);
       this.noticeService.success('更新成功', '更新正版验证状态成功');
       this.updateYggdrasilInfoForm.reset();
+
+      this.flipCard();
+      await this.updateUserProfile();
     } catch (error) {
       const errorMessageMap = {
         403: '用户名或密码错误',
@@ -74,12 +77,9 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
 
     await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
-
-    this.flipCard();
-
-    await this.updateUserProfile();
   }
 
+  // FIXME 整体逻辑需优化, 太冗余
   public async updateUserProfile() {
     this.updating = true;
 

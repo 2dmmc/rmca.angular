@@ -127,6 +127,7 @@ export class ProfileUserInfoComponent implements OnInit {
     await this.updateUserProfile();
   }
 
+  // FIXME 整体逻辑需优化, 太冗余
   public async updateUserProfile() {
     this.updating = true;
 
