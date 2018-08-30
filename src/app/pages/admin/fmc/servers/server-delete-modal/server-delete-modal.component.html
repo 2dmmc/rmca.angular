@@ -3,25 +3,25 @@
       <i class="fas fa-trash"></i>
       服务器管理 - 删除服务器
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
-  <form (ngSubmit)="deleteServer()" #deleteServerForm="ngForm" name="deleteServerForm">
-    <div class="alert alert-warning" role="alert">
-      你正在试图删除名为: <code>{{serverName}}</code>服务器, <strong>这是一个敏感操作!</strong> 请输入该服务器名称来确认操作
-    </div>
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'删除中...'">
+  <form autocomplete="off" role="form"
+        [formGroup]="serverForm" (ngSubmit)="deleteServer(serverForm.value)">
+    <ngb-alert [dismissible]="false" [type]="'warning'">
+      你正在试图删除名为: <code>{{server.name}}</code>服务器, <strong>这是一个敏感操作!</strong> 请输入该服务器名称来确认操作
+    </ngb-alert>
+
     <div class="input-group">
-      <input name='name' id="input-name" class="form-control" placeholder="请输入服务器名称"
-             autofocus autocomplete=off
-             [(ngModel)]="formName" #name="ngModel"
-             [class.form-control-danger]="name.invalid && name.touched || formName != serverName"
-             [required]="true">
+      <input class="form-control" id="input-name" placeholder="请输入服务器名称" autofocus
+             formControlName="name"
+             [class.form-control-danger]="serverForm.get('name').invalid && serverForm.get('name').touched">
       <div class="input-group-btn">
-        <button class="btn btn-danger"
-                [class.btn-pulse]="submitted"
-                [disabled]="submitted || deleteServerForm.invalid || formName != serverName">
+        <button nbButton [status]="'danger'" type="submit" class="btn"
+                [disabled]="submitted || serverForm.invalid"
+                [class.btn-pulse]="submitted">
           <i class="fas fa-trash"></i>
           删除
         </button>

@@ -68,15 +68,14 @@ export class ServersComponent implements OnInit {
     });
   }
 
-  public openServerDeleteModal(serverId: string, serverName: string): void {
+  public openServerDeleteModal(server: IServer): void {
     const activeModal = this.modalService.open(ServerDeleteModalComponent, {
       size: 'lg',
       container: 'nb-layout',
       backdrop: 'static',
     });
 
-    activeModal.componentInstance.serverId = serverId;
-    activeModal.componentInstance.serverName = serverName;
+    activeModal.componentInstance.server = server;
 
     activeModal.componentInstance.event.subscribe(() => {
       this.getServers();
