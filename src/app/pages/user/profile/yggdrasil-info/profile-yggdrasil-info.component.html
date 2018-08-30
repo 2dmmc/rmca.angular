@@ -11,7 +11,9 @@
           以下内容从Mojang获取, 不可修改. 你可以<a class="alert-link" href="javascript:void(0)" (click)="flipCard()">更新正版验证信息</a>
         </ngb-alert>
         <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="!user.yggdrasil">
-          你还没有通过正版验证, <a class="alert-link" href="javascript:void(0)" (click)="flipCard()">验证 Mojang 账户</a>后可使用以下功能:
+          你还没有通过正版验证,
+          <a class="alert-link" href="javascript:void(0)" (click)="flipCard()">验证 Mojang 账户</a>
+          后可使用以下功能:
           <ul>
             <li>使用Mojang Minecraft角色皮肤作为炉心角色皮肤</li>
             <li>使用Mojang Minecraft角色披风作为炉心角色披风</li>
