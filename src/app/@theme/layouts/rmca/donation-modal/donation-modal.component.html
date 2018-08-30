@@ -1,14 +1,14 @@
 <div class="modal-header">
   <i class="ion ion-social-yen"></i>
   <span>捐助我们</span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
 <div class="modal-body">
-  <div class="alert alert-warning" role="alert">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
     请在进行捐助时, 备注填写自己的QQ号或游戏ID等关键信息, 以便我们做记录, 谢谢!
-  </div>
+  </ngb-alert>
   <p>
     <del>我，服务姬，打钱</del>
   </p>
@@ -16,9 +16,12 @@
     服务器的发展离不开您的支持，玩家老爷行行好呗~
   </p>
   <p>
-    我们收到的每一分捐助都将用于服务器的日常运营，您可以在 <a routerLink="/pages/dashboard" (click)="closeModal()">捐助记录</a> 查看收支详情。
+    我们收到的每一分捐助都将用于服务器的日常运营，您可以在 <a routerLink="/pages/dashboard" (click)="activeModal.close()">捐助记录</a> 查看收支详情。
   </p>
   <hr>
+  <ngb-alert [dismissible]="false" [type]="'info'">
+    如需要其他方式的捐助入口可以通过任何方式联系我们 <del>甚至支持Q币, Bitcoin, ETH, etc.</del>
+  </ngb-alert>
   <div class="row">
     <div class="col-lg-6">
       <div class="qr-code">
@@ -35,5 +38,5 @@
   </div>
 </div>
 <div class="modal-footer">
-  <button class="btn btn-hero-primary" (click)="closeModal()">溜了溜了</button>
+  <button nbButton [hero]="true" [status]="'primary'" (click)="activeModal.close()">溜了溜了</button>
 </div>

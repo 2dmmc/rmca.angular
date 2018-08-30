@@ -9,10 +9,6 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class DonationModalComponent {
-  constructor(private activeModal: NgbActiveModal) {
-  }
-
-  closeModal() {
-    this.activeModal.close();
+  constructor(public activeModal: NgbActiveModal) {
   }
 }
