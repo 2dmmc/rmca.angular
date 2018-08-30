@@ -22,7 +22,7 @@ export class ServerDeleteModalComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               public activeModal: NgbActiveModal,
-              private managerService: FmcService) {
+              private fmcService: FmcService) {
     this.submitted = false;
   }
 
@@ -41,7 +41,7 @@ export class ServerDeleteModalComponent implements OnInit {
     this.submitted = true;
 
     try {
-      this.managerService.deleteServer(this.server._id);
+      await this.fmcService.deleteServer(this.server._id);
       this.noticeService.success(
         '删除成功',
         `删除${this.server.name}服务器成功`,
