@@ -50,18 +50,19 @@ export class FmcService {
 
   /**
    * @name 更新服务器信息
-   * @description 更新服务器信息, 入参为完整的IServer结构. 返回更新结果
+   * @description 更新服务器信息, 入参为完整的IServer结构和ID. 返回更新结果
+   * @param {string} id
    * @param {IServer} server
    * @return {Promise<object>}
    */
-  public updateServer(server: IServer): Promise<object> {
+  public updateServer(id: string, server: IServer): Promise<object> {
     const params = new HttpParams()
       .set('name', server.name)
       .set('endpoint', server.endpoint)
       .set('announce', server.announce)
       .set('dynmap', server.dynmap);
 
-    return this.http.put(`/api/admin/server/${server._id}`, params)
+    return this.http.put(`/api/admin/server/${id}`, params)
       .toPromise();
   }
 
