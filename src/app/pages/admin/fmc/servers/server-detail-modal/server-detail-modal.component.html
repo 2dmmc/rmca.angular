@@ -3,82 +3,98 @@
     <i class="far fa-edit"></i>
     服务器管理 - 服务器详情
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
-  <div class="alert alert-info" role="alert">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中...'">
+  <ngb-alert [dismissible]="false" [type]="'info'">
     服务器公告支持的变量:
-    <code nbPopover="欠款总额" nbPopoverMode="hover">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
-  </div>
-  <form (ngSubmit)="updateServer()" #serverForm="ngForm" name="serverForm">
+    <code nbPopover="欠款总额" [nbPopoverMode]="'hover'">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="serverForm" (ngSubmit)="updateServer(serverForm.value)">
+
     <div class="form-group row">
-      <label for="input-name" class="col-sm-2 col-form-label">服务器名称</label>
-      <div class="col-sm-10">
-        <input name="name" id="input-name" class="form-control" placeholder="服务器名称" autofocus
-               [(ngModel)]="server.name" #name="ngModel"
-               [class.form-control-danger]="name.invalid && name.touched"
-               [required]="true">
+      <label for="input-name" class="col-lg-3 col-form-label">服务器名称</label>
+      <div class="col-lg-9">
+        <input class="form-control" id="input-name" placeholder="服务器名称"
+               formControlName="name"
+               [class.form-control-success]="serverForm.get('name').valid && serverForm.get('name').touched"
+               [class.form-control-danger]="serverForm.get('name').invalid && serverForm.get('name').touched">
         <small class="form-text error"
-               *ngIf="name.invalid && name.touched && name.errors?.required">
+               *ngIf="
+               serverForm.get('name').invalid && serverForm.get('name').touched &&
+               serverForm.get('name').hasError('required')">
           请填写服务器名称
         </small>
       </div>
     </div>
+
     <div class="form-group row">
-      <label for="input-endpoint" class="col-sm-2 col-form-label">连接地址</label>
-      <div class="col-sm-10">
-        <input name="endpoint" id="input-endpoint" class="form-control" placeholder="连接地址"
-               [(ngModel)]="server.endpoint" #endpoint="ngModel"
-               [class.form-control-danger]="endpoint.invalid && endpoint.touched"
-               [required]="true">
+      <label for="input-endpoint" class="col-lg-3 col-form-label">连接地址</label>
+      <div class="col-lg-9">
+        <input class="form-control" id="input-endpoint" placeholder="连接地址"
+               formControlName="endpoint"
+               [class.form-control-success]="serverForm.get('endpoint').valid && serverForm.get('endpoint').touched"
+               [class.form-control-danger]="serverForm.get('endpoint').invalid && serverForm.get('endpoint').touched">
         <small class="form-text error"
-               *ngIf="endpoint.invalid && endpoint.touched && endpoint.errors?.required">
+               *ngIf="
+               serverForm.get('endpoint').invalid && serverForm.get('endpoint').touched &&
+               serverForm.get('endpoint').hasError('required')">
           请填写连接地址
         </small>
       </div>
     </div>
+
     <div class="form-group row">
-      <label for="input-dynmap" class="col-sm-2 col-form-label">大地图地址(可选)</label>
-      <div class="col-sm-10">
-        <input name="dynmap" id="input-dynmap" class="form-control" placeholder="大地图地址"
-               [(ngModel)]="server.dynmap" #dynmap="ngModel">
+      <label for="input-dynmap" class="col-lg-3 col-form-label">大地图地址(可选)</label>
+      <div class="col-lg-9">
+        <input class="form-control" id="input-dynmap" placeholder="大地图地址"
+               formControlName="dynmap"
+               [class.form-control-success]="serverForm.get('dynmap').valid && serverForm.get('dynmap').touched"
+               [class.form-control-danger]="serverForm.get('dynmap').invalid && serverForm.get('dynmap').touched">
       </div>
     </div>
+
     <div class="form-group row">
-      <label for="textarea-announce" class="col-sm-2 col-form-label">
+      <label for="textarea-announce" class="col-lg-3 col-form-label">
         服务器公告<br>
         <b>
           <small>
             第一行服务器名<br>
             剩下四行公告<br>
-            务必保持五行<br>
           </small>
         </b>
       </label>
-      <div class="col-sm-10">
-        <textarea name="announce" id="textarea-announce" class="form-control" cols="5" rows="5" placeholder="服务器公告"
-                  [(ngModel)]="server.announce" #announce="ngModel"
-                  [class.form-control-danger]="announce.invalid && announce.touched"
-                  [required]="true">
+      <div class="col-lg-9">
+        <textarea class="form-control" id="textarea-announce" placeholder="服务器公告" cols="5" rows="5"
+                  formControlName="announce"
+                  [class.form-control-success]="serverForm.get('announce').valid && serverForm.get('announce').touched"
+                  [class.form-control-danger]="serverForm.get('announce').invalid && serverForm.get('announce').touched">
         </textarea>
+
         <small class="form-text error"
-               *ngIf="announce.invalid && announce.touched && announce.errors?.required">
+               *ngIf="
+               serverForm.get('announce').invalid && serverForm.get('announce').touched &&
+               serverForm.get('announce').hasError('required')">
           请填写服务器公告
         </small>
       </div>
     </div>
-    <div class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
-        <button class="btn btn-success"
-                [disabled]="submitted || !serverForm.form.valid"
+
+    <div class="form-group submit-group row">
+      <div class="offset-sm-3 col-sm-9">
+        <button nbButton [status]="'success'" type="submit"
+                [disabled]="submitted || serverForm.invalid"
                 [class.btn-pulse]="submitted">
           <i class="far fa-edit"></i>
           更新服务器信息
         </button>
-        <button class="btn btn-md btn-danger" (click)="closeModal()">
-          <i class="fas fa-times" aria-hidden="true"></i>
+        <button nbButton [status]="'danger'" type="button"
+                (click)="activeModal.close()">
+          <i class="fas fa-times"></i>
           取消
         </button>
       </div>

@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
@@ -14,64 +15,80 @@ import {IServer} from '../../../../../@model/common/admin/fmc/server/server.inte
 export class ServerDetailModalComponent implements OnInit {
   @Input() serverId;
   @Output() event = new EventEmitter();
-  server: IServer;
-  submitted: boolean;
+
+  public serverForm: FormGroup;
+  public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
-              private activeModal: NgbActiveModal,
-              private managerService: FmcService) {
-    this.server = {
-      _id: '',
-      name: '获取中...',
-      endpoint: '获取中...',
-      announce: '获取中...',
-      dynmap: '获取中...',
-    };
+              public activeModal: NgbActiveModal,
+              private fmcService: FmcService) {
     this.submitted = false;
   }
 
-  public ngOnInit(): void {
-    this.managerService.getServer(this.serverId)
-      .then(server => {
-        this.server = server as IServer;
-      })
-      .catch(error => {
-        this.noticeService.error(
-          '获取服务器详情失败, 请刷新页面重试',
-          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-        );
-      });
+  public async ngOnInit(): Promise<void> {
+    this.serverForm = new FormGroup({
+      name: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      endpoint: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      announce: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      dynmap: new FormControl(
+        '',
+      ),
+    });
+    this.getServer(this.serverId);
   }
 
-  public updateServer(): void {
+  private async getServer(id: string): Promise<void> {
     this.submitted = true;
 
-    this.managerService.updateServer(this.server)
-      .then(updateState => {
-        this.noticeService.success('更新成功', '更新服务器详情成功');
-        this.event.emit();
-        this.activeModal.close();
-      })
-      .catch(error => {
-        this.submitted = false;
-
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 404: {
-            errorMessage = '找不到这个服务器';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('更新角色详情失败', errorMessage);
+    try {
+      const server = await this.fmcService.getServer(id);
+      this.serverForm.setValue({
+        name: server.name,
+        endpoint: server.endpoint,
+        announce: server.announce,
+        dynmap: server.dynmap,
       });
+    } catch (error) {
+      this.noticeService.error('获取服务器详情失败', '获取服务器详情失败, 请刷新页面重试');
+      console.error(error);
+    }
+
+    this.submitted = false;
   }
 
-  public closeModal(): void {
-    this.activeModal.close();
+  public async updateServer(serverForm: IServer): Promise<void> {
+    this.submitted = true;
+
+    try {
+      await this.fmcService.updateServer(this.serverId, serverForm);
+      this.noticeService.success(
+        '更新成功',
+        '更新服务器详情成功',
+      );
+      this.event.emit(serverForm);
+      this.activeModal.close();
+    } catch (error) {
+      const errorMessageMap = {
+        404: '服务器不存在',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+
+      this.noticeService.error('更新服务器详情失败', errorMessage);
+      console.error(error);
+    }
+
+    this.submitted = false;
   }
 }
