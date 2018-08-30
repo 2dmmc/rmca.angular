@@ -7,9 +7,10 @@
   </button>
 </div>
 <div class="modal-body">
-  <div class="alert alert-info" role="alert">
-    服务器公告支持的变量: <code nbPopover="欠款总额" nbPopoverMode="hover">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
-  </div>
+  <ngb-alert [dismissible]="false" [type]="'info'">
+    服务器公告支持的变量:
+    <code nbPopover="欠款总额" nbPopoverMode="hover">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
+  </ngb-alert>
 
   <form autocomplete="off" role="form"
         [formGroup]="serverForm" (ngSubmit)="addServer(serverForm.value)">
