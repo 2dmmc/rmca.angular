@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {FmcService} from '../../../../../@core/data/fmc.service';
-
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IServer} from '../../../../../@model/common/admin/fmc/server/server.interface';
 
 @Component({
@@ -11,52 +11,62 @@ import {IServer} from '../../../../../@model/common/admin/fmc/server/server.inte
   templateUrl: './server-add-modal.component.html',
 })
 
-export class ServerAddModalComponent {
+export class ServerAddModalComponent implements OnInit {
   @Output() event = new EventEmitter();
-  server: IServer;
-  submitted: boolean;
+
+  public serverForm: FormGroup;
+  public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
-              private activeModal: NgbActiveModal,
-              private managerService: FmcService) {
-    this.server = {
-      name: '',
-      endpoint: '',
-      announce: '',
-      dynmap: '',
-    };
+              public activeModal: NgbActiveModal,
+              private fmcService: FmcService) {
     this.submitted = false;
   }
 
-  public addServer(): void {
-    this.submitted = true;
-
-    this.managerService.addServer(this.server)
-      .then(createState => {
-        this.noticeService.success('新增成功', '新增服务器成功');
-        this.event.emit();
-        this.activeModal.close();
-      })
-      .catch(error => {
-        this.submitted = false;
-
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 409: {
-            errorMessage = '服务器名已存在';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('新增服务器失败', errorMessage);
-      });
+  public ngOnInit(): void {
+    this.serverForm = new FormGroup({
+      name: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      endpoint: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      announce: new FormControl(
+        '', [
+          Validators.required,
+        ],
+      ),
+      dynmap: new FormControl(
+        '',
+      ),
+    });
   }
 
-  public closeModal(): void {
-    this.activeModal.close();
+
+  public async addServer(serverForm: IServer): Promise<void> {
+    this.submitted = true;
+
+    try {
+      await this.fmcService.addServer(serverForm);
+      this.noticeService.success(
+        '新增成功',
+        '新增服务器成功',
+      );
+      this.event.emit(serverForm);
+      this.activeModal.close();
+    } catch (error) {
+      const errorMessageMap = {
+        409: '服务器名已存在',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+
+      this.noticeService.error('新增服务器失败', errorMessage);
+    }
+
+    this.submitted = false;
   }
 }

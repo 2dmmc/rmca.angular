@@ -8,6 +8,19 @@
   }
 }
 
+.modal-body {
+  .submit-group {
+    button[nbButton] {
+      outline: 0;
+      margin-right: 0.75rem;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
 .modal-footer {
   button[nbButton] {
     outline: 0;
