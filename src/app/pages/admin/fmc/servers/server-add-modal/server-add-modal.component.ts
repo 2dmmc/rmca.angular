@@ -47,7 +47,6 @@ export class ServerAddModalComponent implements OnInit {
     });
   }
 
-
   public async addServer(serverForm: IServer): Promise<void> {
     this.submitted = true;
 

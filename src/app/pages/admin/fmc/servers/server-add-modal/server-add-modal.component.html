@@ -6,10 +6,10 @@
     <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'新增中...'">
   <ngb-alert [dismissible]="false" [type]="'info'">
     服务器公告支持的变量:
-    <code nbPopover="欠款总额" nbPopoverMode="hover">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
+    <code nbPopover="欠款总额" [nbPopoverMode]="'hover'">{{ '{' }}{{ '{' }}finance{{ '}' }}{{ '}' }}</code>
   </ngb-alert>
 
   <form autocomplete="off" role="form"
