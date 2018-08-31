@@ -21,53 +21,14 @@ table tr td {
 table tr th,
 table tr td {
   position: relative;
-  padding: nb-theme(smart-table-padding);
+  // 继承smart-table-padding太大了, 缩小一点
+  padding: 1rem;
   border: 1px solid nb-theme(smart-table-separator);
   vertical-align: middle;
 }
 
-table tr.ng2-smart-titles {
-  th {
-    padding: nb-theme(smart-table-padding);
-    padding-right: 1.75rem;
-  }
-
-  th a {
-    &:hover, &:active, &:visited {
-      color: nb-theme(smart-table-header-fg);
-      text-decoration: none;
-    }
-    &.sort.asc, &.sort.desc {
-
-      font-weight: nb-theme(smart-table-header-font-weight);
-
-      &::after {
-        border-bottom-color: nb-theme(smart-table-fg-secondary);
-        border-width: 0.375rem;
-        position: absolute;
-        margin: 0;
-        right: 0.75rem;
-        top: 50%;
-        transform: translate(0, -50%);
-      }
-
-      &.desc::after {
-        transform: translate(0, -50%) rotate(180deg);
-      }
-    }
-  }
-}
-
 thead tr {
   background: nb-theme(smart-table-header-bg);
-
-  &.ng2-smart-filters th {
-    padding: nb-theme(smart-table-filter-padding);
-
-    .ng2-smart-filter input {
-      line-height: nb-theme(smart-table-line-height);
-    }
-  }
 }
 
 tbody tr {
