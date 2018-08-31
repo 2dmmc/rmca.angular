@@ -7,7 +7,7 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
 
-import {IFinanceResponse, FinanceType} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
+import {FinanceType, IFinanceResponse} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -16,30 +16,36 @@ import {IFinanceResponse, FinanceType} from '../../../../@model/common/admin/fmc
 
 export class FinanceComponent implements OnInit {
   public financeHistories: IFinanceResponse[];
+  public pages: number;
+  public limit: number;
+  public count: number;
 
   public FinanceType = FinanceType;
+
+  public updating: boolean;
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
+    this.pages = 1;
+    this.limit = 10;
+    this.count = 1;
+    this.updating = false;
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(1, 12);
+    this.getFinanceHistories(this.pages, this.limit);
   }
 
-  public getFinanceHistories(page, limit): void {
-    this.dashboardService.getFinanceHistories(1, 12)
-      .then(financeHistory => {
-        this.financeHistories = financeHistory as IFinanceResponse[];
-      })
-      .catch(error => {
-        this.noticeService.error(
-          '获取捐助记录失败, 请刷新页面重试',
-          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-        );
-      });
+  public async getFinanceHistories(page: number, limit: number): Promise<void> {
+    try {
+      const financeHistories = await this.dashboardService.getFinanceHistories(page, limit);
+      this.financeHistories = financeHistories['data'];
+      this.count = financeHistories['count'];
+    } catch (error) {
+      this.noticeService.error('获取捐助记录失败', '获取捐助记录失败, 请刷新页面重试');
+    }
   }
 
   public openFinanceAddModal(): void {

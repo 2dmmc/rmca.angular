@@ -1,21 +1,2 @@
-@import '../../../../@theme/styles/themes';
-@import '../../../../@theme/styles/styles';
 @import '../../../../@theme/extend/table';
 @import '../../../../@theme/extend/nb-card';
-
-table {
-  button {
-    margin-right: 0.5rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
-.page-switcher {
-  input {
-    width: 7rem;
-    text-align: center;
-  }
-}
