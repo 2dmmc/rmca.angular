@@ -6,7 +6,8 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
-import {IFinanceResponse} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
+
+import {IFinanceResponse, FinanceType} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -15,6 +16,8 @@ import {IFinanceResponse} from '../../../../@model/common/admin/fmc/finacne/fina
 
 export class FinanceComponent implements OnInit {
   public financeHistories: IFinanceResponse[];
+
+  public FinanceType = FinanceType;
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,

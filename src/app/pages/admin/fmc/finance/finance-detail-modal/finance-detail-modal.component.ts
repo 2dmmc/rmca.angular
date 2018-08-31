@@ -66,7 +66,7 @@ export class FinanceDetailModalComponent implements OnInit {
       this.financeHistoryForm.patchValue({
         date: moment(financeHistory.date).format('YYYY-MM-DD'),
         type: financeHistory.type,
-        accrual: financeHistory.accrual,
+        accrual: ((financeHistory.accrual / 100).toFixed(2)),
         comment: financeHistory.comment,
         user: financeHistory.user,
       });
