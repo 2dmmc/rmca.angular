@@ -97,9 +97,9 @@ export class LoginComponent implements OnInit {
     const next = this.storageService.sessionStorageGetValue('next');
     if (next) {
       this.storageService.sessionStorageDeleteValue('next');
-      this.router.navigateByUrl(next);
+      await this.router.navigateByUrl(next);
     } else {
-      this.router.navigate(['/pages/dashboard']);
+      await this.router.navigate(['/pages/dashboard']);
     }
   }
 }
