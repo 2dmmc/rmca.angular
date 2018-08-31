@@ -13,7 +13,7 @@ export class DashboardService {
   public getFinanceHistories(page: number, limit: number): Promise<object> {
     const params = new HttpParams()
       .set('page', page.toString())
-      .set('limit', limit.toString() || '12');
+      .set('limit', limit.toString() || '10');
 
     return this.http.get('/api/finance', {params: params})
       .toPromise();
