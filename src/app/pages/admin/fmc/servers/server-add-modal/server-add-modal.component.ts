@@ -65,6 +65,7 @@ export class ServerAddModalComponent implements OnInit {
       const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.noticeService.error('新增服务器失败', errorMessage);
+      console.error(error);
     }
 
     this.submitted = false;
