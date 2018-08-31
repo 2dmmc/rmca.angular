@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import {IServer} from '../../@model/common/admin/fmc/server/server.interface';
-import {IFinance} from '../../@model/common/admin/fmc/finacne/finance.interface';
+import {IFinanceRequest} from '../../@model/common/admin/fmc/finacne/finance.interface';
 
 @Injectable()
 export class FmcService {
@@ -78,24 +78,24 @@ export class FmcService {
   }
 
   // TODO 补齐文档
-  public addFinanceHistory(finance: IFinance): Promise<object> {
+  public addFinanceHistory(finance: IFinanceRequest): Promise<object> {
     const params = new HttpParams()
       .set('date', finance.date.toString())
       .set('type', finance.type.toString())
       .set('accrual', (finance.accrual * 100).toFixed(0))
       .set('comment', finance.comment)
-      .set('userId', finance.user);
+      .set('userId', finance.userId);
 
     return this.http.post('/api/admin/finance', params)
       .toPromise();
   }
 
-  public updateFinanceHistory(comment: string, userId: string, financeId: number): Promise<object> {
+  public updateFinanceHistory(id: string, finance: IFinanceRequest): Promise<object> {
     const params = new HttpParams()
-      .set('comment', comment)
-      .set('userId', userId);
+      .set('comment', finance.comment)
+      .set('userId', finance.userId);
 
-    return this.http.patch(`/api/admin/finance/${financeId.toString()}`, params)
+    return this.http.patch(`/api/admin/finance/${id}`, params)
       .toPromise();
   }
 }

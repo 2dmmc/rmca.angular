@@ -34,15 +34,15 @@
           </span>
         </td>
         <td class="text-center" width="20%">
-          {{financeHistory.user?.username || '未实现 | WIP'}}
+          <!--{{ financeHistory.user.username || '未关联'}}-->
         </td>
         <td width="15%">
-          <span [class.text-success]="financeHistory.type == financeType.INCOME"
-                [class.text-danger]="financeHistory.type == financeType.EXPEND">
-            <i class="fa fa-caret-up" *ngIf="financeHistory.type == financeType.INCOME" aria-hidden="true"></i>
-            <i class="fa fa-caret-down" *ngIf="financeHistory.type == financeType.EXPEND" aria-hidden="true"></i>
-            {{financeHistory.accrual | number:'1.2-3'}} 元
-          </span>
+          <!--<span [class.text-success]="financeHistory.type == financeType.INCOME"-->
+          <!--[class.text-danger]="financeHistory.type == financeType.EXPEND">-->
+          <!--<i class="fa fa-caret-up" *ngIf="financeHistory.type == financeType.INCOME" aria-hidden="true"></i>-->
+          <!--<i class="fa fa-caret-down" *ngIf="financeHistory.type == financeType.EXPEND" aria-hidden="true"></i>-->
+          <!--{{financeHistory.accrual | number:'1.2-3'}} 元-->
+          <!--</span>-->
         </td>
         <td class="text-right" width="20%">
           <span class="balance"
@@ -71,13 +71,13 @@
   </nb-card-body>
   <nb-card-footer class="text-center">
     <div class="page-switcher btn-group">
-      <button type="button" class="btn btn-success" (click)="pageMinus()">
-        上一页
-      </button>
-      <input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">
-      <button type="button" class="btn btn-success" (click)="pageAdd()">
-        下一页
-      </button>
+      <!--<button type="button" class="btn btn-success" (click)="pageMinus()">-->
+        <!--上一页-->
+      <!--</button>-->
+      <!--<input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">-->
+      <!--<button type="button" class="btn btn-success" (click)="pageAdd()">-->
+        <!--下一页-->
+      <!--</button>-->
     </div>
   </nb-card-footer>
 </nb-card>

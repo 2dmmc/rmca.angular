@@ -3,70 +3,79 @@
     <i class="fa fa-pencil"></i>
     财务历史管理 - 财务详情
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
+  <button class="close" (click)="activeModal.close()">
     <i class="fas fa-times" aria-hidden="true"></i>
   </button>
 </div>
-<div class="modal-body">
-  <div class="alert alert-success" role="alert">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中...'">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
     日期, 财务类型, 金额, 仅提供展示, 无法修改
-  </div>
-  <div class="form-group row">
-    <label for="input-date" class="col-sm-2 col-form-label">日期</label>
-    <div class="col-sm-10">
-      <input name="date" id="input-date" class="form-control" placeholder="日期" autofocus
-             [value]="financeHistory.date | date: 'yyyy-MM-dd'" readonly>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="input-date" class="col-sm-2 col-form-label">类型</label>
-    <div class="col-sm-10">
-        <span class="tag tag-success" *ngIf="financeHistory.type == financeType.INCOME">
-          收入
-        </span>
-      <span class="tag tag-danger" *ngIf="financeHistory.type == financeType.EXPEND">
-          支出
-        </span>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label for="input-accrual" class="col-sm-2 col-form-label">金额</label>
-    <div class="col-sm-10">
-      <div class="input-group">
-        <input type="number" name="accrual" id="input-accrual" class="form-control" placeholder="金额"
-               [value]="financeHistory.accrual" readonly>
-        <span class="input-group-addon">元</span>
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="financeHistoryForm" (ngSubmit)="updateFinanceHistory(financeHistoryForm.value)">
+    <div class="form-group row">
+      <label for="input-date" class="col-sm-2 col-form-label">日期</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="input-date" placeholder="日期" type="date" readonly
+               [value]="financeHistoryForm.get('date').value">
       </div>
     </div>
-  </div>
-  <hr>
-  <form (ngSubmit)="updateFinanceHistory(financeForm)" #financeForm="ngForm" name="financeForm">
+
+    <div class="form-group row">
+      <label for="input-date" class="col-sm-2 col-form-label">类型</label>
+      <div class="col-sm-10">
+        <span class="tag tag-success" *ngIf="financeHistoryForm.get('type').value === FinanceType.INCOME">
+          收入
+        </span>
+        <span class="tag tag-danger" *ngIf="financeHistoryForm.get('type').value === FinanceType.EXPEND">
+          支出
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input-accrual" class="col-sm-2 col-form-label">金额</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <input class="form-control" id="input-accrual" placeholder="金额" type="number" readonly
+                 [value]="financeHistoryForm.get('accrual').value">
+        </div>
+      </div>
+    </div>
+    <hr>
+
     <div class="form-group row">
       <label for="input-comment" class="col-sm-2 col-form-label">备注</label>
       <div class="col-sm-10">
-        <input name="comment" id="input-comment" class="form-control" placeholder="备注"
-               [ngModel]="financeHistory.comment" #comment="ngModel"
-               [class.form-control-danger]="comment.invalid && comment.touched">
+        <input class="form-control" id="input-comment" placeholder="备注"
+               formControlName="comment"
+               [class.form-control-success]="financeHistoryForm.get('comment').valid && financeHistoryForm.get('comment').touched"
+               [class.form-control-danger]="financeHistoryForm.get('comment').invalid && financeHistoryForm.get('comment').touched">
       </div>
     </div>
+
     <div class="form-group row">
-      <label for="input-userId" class="col-sm-2 col-form-label">关联用户</label>
+      <label for="input-user-id" class="col-sm-2 col-form-label">关联用户</label>
       <div class="col-sm-10">
-        <input name="userId" id="input-userId" class="form-control" placeholder="与之关联的用户"
-               [ngModel]="financeHistory.user" #userId="ngModel"
-               [class.form-control-danger]="userId.invalid && userId.touched">
+        <input class="form-control" id="input-user-id" placeholder="与之关联的用户"
+               formControlName="userId"
+               [class.form-control-success]="financeHistoryForm.get('userId').valid && financeHistoryForm.get('userId').touched"
+               [class.form-control-danger]="financeHistoryForm.get('userId').invalid && financeHistoryForm.get('userId').touched">
       </div>
     </div>
-    <div class="form-group row">
+
+    <div class="form-group submit-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button class="btn btn-success"
-                [disabled]="submitted || !financeForm.form.valid"
+        <button nbButton [status]="'success'" type="submit"
+                [disabled]="submitted || financeHistoryForm.invalid"
                 [class.btn-pulse]="submitted">
           <i class="fas fa-plus"></i>
           更新财务历史记录
         </button>
-        <button class="btn btn-md btn-danger" (click)="closeModal()">
-          <i class="fas fa-times" aria-hidden="true"></i>
+        <button nbButton [status]="'danger'" type="button"
+                (click)="activeModal.close()">
+          <i class="fas fa-times"></i>
           取消
         </button>
       </div>

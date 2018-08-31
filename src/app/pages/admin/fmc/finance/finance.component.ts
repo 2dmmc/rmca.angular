@@ -6,8 +6,7 @@ import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
-import {IFinance} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
-import {FinanceTypeEnum} from '../../../../@model/common/admin/fmc/finacne/finance-type.enum';
+import {IFinanceResponse} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -15,28 +14,22 @@ import {FinanceTypeEnum} from '../../../../@model/common/admin/fmc/finacne/finan
 })
 
 export class FinanceComponent implements OnInit {
-  financeHistories: IFinance[];
-  financeType = FinanceTypeEnum;
-  page: number;
-  pageArray: number[];
-  limit: number;
+  public financeHistories: IFinanceResponse[];
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
-    this.page = 1;
-    this.limit = 12;
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(this.page, this.limit);
+    this.getFinanceHistories(1, 12);
   }
 
   public getFinanceHistories(page, limit): void {
-    this.dashboardService.getFinanceHistories(page, limit)
+    this.dashboardService.getFinanceHistories(1, 12)
       .then(financeHistory => {
-        this.financeHistories = financeHistory as IFinance[];
+        this.financeHistories = financeHistory as IFinanceResponse[];
       })
       .catch(error => {
         this.noticeService.error(
@@ -44,28 +37,6 @@ export class FinanceComponent implements OnInit {
           `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
         );
       });
-  }
-
-  public pageAdd(): void {
-    this.page++;
-    this.pageChange(this.page);
-  }
-
-  public pageKeyDown(event): void {
-    if (event.keyCode === 13) {
-      this.pageChange(this.page);
-    }
-  }
-
-  public pageMinus(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.pageChange(this.page);
-    }
-  }
-
-  private pageChange(page): void {
-    this.getFinanceHistories(page, this.limit);
   }
 
   public openFinanceAddModal(): void {
@@ -76,11 +47,11 @@ export class FinanceComponent implements OnInit {
     });
 
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(this.page, this.limit);
+      this.getFinanceHistories(1, 12);
     });
   }
 
-  public openFinanceDetailModal(financeHistory: IFinance): void {
+  public openFinanceDetailModal(financeHistory: IFinanceResponse): void {
     const activeModal = this.modalService.open(FinanceDetailModalComponent, {
       size: 'lg',
       container: 'nb-layout',
@@ -89,7 +60,7 @@ export class FinanceComponent implements OnInit {
 
     activeModal.componentInstance.financeHistory = financeHistory;
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(this.page, this.limit);
+      this.getFinanceHistories(1, 12);
     });
   }
 }

@@ -1,11 +1,28 @@
-import {FinanceTypeEnum} from './finance-type.enum';
-
-export interface IFinance {
-  _id?: number;
+export interface IFinanceResponse {
+  _id?: string;
   date: string;
-  type: FinanceTypeEnum;
+  type: FinanceType;
   accrual: number;
-  balance?: number;
+  balance: number;
   comment?: string;
-  user?: string;
+  user?: IUserFinance;
+}
+
+export interface IFinanceRequest {
+  _id?: string;
+  date: string;
+  type: FinanceType;
+  accrual: number;
+  comment?: string;
+  userId?: string;
+}
+
+export enum FinanceType {
+  INCOME = 'income',
+  EXPEND = 'expend',
+}
+
+export interface IUserFinance {
+  _id?: string;
+  username: string;
 }
