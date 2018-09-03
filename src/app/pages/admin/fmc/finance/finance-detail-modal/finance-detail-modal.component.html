@@ -1,6 +1,6 @@
 <div class="modal-header">
   <span>
-    <i class="fa fa-pencil"></i>
+    <i class="far fa-edit"></i>
     财务历史管理 - 财务详情
   </span>
   <button class="close" (click)="activeModal.close()">
@@ -70,7 +70,7 @@
         <button nbButton [status]="'success'" type="submit"
                 [disabled]="submitted || financeHistoryForm.invalid"
                 [class.btn-pulse]="submitted">
-          <i class="fas fa-plus"></i>
+          <i class="far fa-edit"></i>
           更新财务历史记录
         </button>
         <button nbButton [status]="'danger'" type="button"
