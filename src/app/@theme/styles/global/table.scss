@@ -1,5 +1,4 @@
-@import '../../@theme/styles/themes';
-@import '../../@theme/styles/styles';
+@import '../themes';
 
 table tr th,
 table tr th a {
@@ -39,4 +38,8 @@ tbody tr {
   &:nth-child(2n) {
     background-color: nb-theme(smart-table-bg-even);
   }
+}
+
+.table th, .table td, .table thead th {
+  border: 1px solid nb-theme(smart-table-separator);
 }
