@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import {IFinanceResponse} from '../../@model/common/admin/fmc/finacne/finance.interface';
+import {delay} from 'rxjs/operators';
 
 @Injectable()
 export class DashboardService {
@@ -16,6 +17,7 @@ export class DashboardService {
       .set('limit', limit.toString() || '10');
 
     return this.http.get('/api/finance', {params: params})
+      .pipe(delay(150))
       .toPromise();
   }
 
