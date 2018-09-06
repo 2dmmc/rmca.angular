@@ -1,2 +1,5 @@
-@import '../../../../@theme/extend/table';
-@import '../../../../@theme/extend/nb-card';
+@import '../../../../@theme/styles/extend/nb-card';
+
+.add-btn-hack {
+  margin-bottom: 1rem;
+}

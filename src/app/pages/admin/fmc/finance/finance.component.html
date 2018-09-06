@@ -3,7 +3,10 @@
     <span><i class="far fa-money-bill-alt"></i> 财务历史</span>
   </nb-card-header>
   <nb-card-body>
-
+    <button class="add-btn-hack" nbButton [status]="'info'" [fullWidth]="false" (click)="openFinanceAddModal()">
+      <i class="fas fa-plus"></i>
+      新增财务历史记录
+    </button>
     <table class="table text-norap text-center">
       <thead>
       <tr>
@@ -50,22 +53,10 @@
     </table>
   </nb-card-body>
   <nb-card-footer class="text-center">
-    <button nbButton [status]="'info'" [fullWidth]="true" (click)="openFinanceAddModal()">
-      <i class="fas fa-plus"></i>
-      新增财务历史记录
-    </button>
     <ngb-pagination class="d-flex justify-content-center" [ellipses]="true" [maxSize]="5" [rotate]="true"
+                    [directionLinks]="false"
                     [(collectionSize)]="count" [(page)]="pages" [(pageSize)]="limit"
                     (pageChange)="getFinanceHistories(pages, limit)">
     </ngb-pagination>
-    <div class="page-switcher btn-group">
-      <!--<button type="button" class="btn btn-success" (click)="pageMinus()">-->
-      <!--上一页-->
-      <!--</button>-->
-      <!--<input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">-->
-      <!--<button type="button" class="btn btn-success" (click)="pageAdd()">-->
-      <!--下一页-->
-      <!--</button>-->
-    </div>
   </nb-card-footer>
 </nb-card>
