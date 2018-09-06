@@ -3,7 +3,6 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {DashboardService} from '../../../dashboard/dashboard.service';
-import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
@@ -27,8 +26,7 @@ export class FinanceComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private dashboardService: DashboardService,
-              private commonUtilService: CommonUtilService) {
+              private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.pages = 1;
     this.limit = 10;
