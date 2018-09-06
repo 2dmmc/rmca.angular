@@ -22,7 +22,7 @@ export class FinanceHistoryComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(this.page, this.limit);
+    // this.getFinanceHistories(this.page, this.limit);
   }
 
   public getFinanceHistories(page, limit): void {
