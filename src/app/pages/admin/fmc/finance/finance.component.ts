@@ -23,7 +23,7 @@ export class FinanceComponent implements OnInit {
 
   public FinanceType = FinanceType;
 
-  public updating: boolean;
+  public loading: boolean;
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
@@ -33,7 +33,7 @@ export class FinanceComponent implements OnInit {
     this.pages = 1;
     this.limit = 10;
     this.count = 1;
-    this.updating = false;
+    this.loading = false;
   }
 
   public ngOnInit(): void {
@@ -41,7 +41,7 @@ export class FinanceComponent implements OnInit {
   }
 
   public async getFinanceHistories(page: number, limit: number): Promise<void> {
-    this.updating = true;
+    this.loading = true;
 
     try {
       const financeHistories = await this.dashboardService.getFinanceHistories(page, limit);
@@ -51,7 +51,7 @@ export class FinanceComponent implements OnInit {
       this.noticeService.error('获取捐助记录失败', '获取捐助记录失败, 请刷新页面重试');
     }
 
-    this.updating = false;
+    this.loading = false;
   }
 
   public openFinanceAddModal(): void {
