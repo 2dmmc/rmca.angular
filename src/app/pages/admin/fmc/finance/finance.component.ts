@@ -3,6 +3,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {DashboardService} from '../../../dashboard/dashboard.service';
+import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
@@ -26,7 +27,8 @@ export class FinanceComponent implements OnInit {
 
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
-              private dashboardService: DashboardService) {
+              private dashboardService: DashboardService,
+              private commonUtilService: CommonUtilService) {
     this.financeHistories = [];
     this.pages = 1;
     this.limit = 10;
@@ -39,6 +41,8 @@ export class FinanceComponent implements OnInit {
   }
 
   public async getFinanceHistories(page: number, limit: number): Promise<void> {
+    this.updating = true;
+
     try {
       const financeHistories = await this.dashboardService.getFinanceHistories(page, limit);
       this.financeHistories = financeHistories['data'];
@@ -46,6 +50,8 @@ export class FinanceComponent implements OnInit {
     } catch (error) {
       this.noticeService.error('获取捐助记录失败', '获取捐助记录失败, 请刷新页面重试');
     }
+
+    this.updating = false;
   }
 
   public openFinanceAddModal(): void {
@@ -56,7 +62,7 @@ export class FinanceComponent implements OnInit {
     });
 
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(1, 12);
+      this.getFinanceHistories(1, this.limit);
     });
   }
 
@@ -69,7 +75,7 @@ export class FinanceComponent implements OnInit {
 
     activeModal.componentInstance.financeHistory = financeHistory;
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(1, 12);
+      this.getFinanceHistories(this.pages, this.limit);
     });
   }
 }
