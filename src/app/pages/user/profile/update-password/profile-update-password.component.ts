@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
-import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
 import {passwordEqualValidator} from '../../../../@core/directives';
 
@@ -18,8 +17,7 @@ export class ProfileUpdatePasswordComponent implements OnInit {
   public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
-              private userService: UserService,
-              private commonUtilService: CommonUtilService) {
+              private userService: UserService) {
     this.submitted = false;
   }
 
@@ -67,7 +65,6 @@ export class ProfileUpdatePasswordComponent implements OnInit {
       console.error(error);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
   }
 }

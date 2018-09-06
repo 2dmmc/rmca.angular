@@ -5,7 +5,6 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 import {IUser} from '../../../../@model/common/user/user.interface';
 import {UserService} from '../../../../@core/data/user.service';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
-import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
 @Component({
   selector: 'ngx-social-gravatar-state',
@@ -18,8 +17,7 @@ export class SocialGravatarStateComponent {
 
   constructor(private userService: UserService,
               private noticeService: NoticeService,
-              private authUtilService: AuthUtilService,
-              private commonUtilService: CommonUtilService) {
+              private authUtilService: AuthUtilService) {
     this.updating = false;
   }
 
@@ -41,7 +39,6 @@ export class SocialGravatarStateComponent {
       this.noticeService.error('更换头像失败', errorMessage);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
     this.updating = false;
   }
 }

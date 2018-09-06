@@ -6,7 +6,6 @@ import {IUserExtendProfile, ProfileComponent} from '../profile.component';
 import {UserState} from '../../../../@model/common/user/user.interface';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
-import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {UserService} from '../../../../@core/data/user.service';
 
@@ -30,7 +29,6 @@ export class ProfileUserInfoComponent implements OnInit {
               private router: Router,
               private noticeService: NoticeService,
               private userService: UserService,
-              private commonUtilService: CommonUtilService,
               public authUtilService: AuthUtilService,
               @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
     this.updating = false;
@@ -76,7 +74,6 @@ export class ProfileUserInfoComponent implements OnInit {
       console.error(error);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
     this.updating = false;
   }
 
@@ -117,7 +114,6 @@ export class ProfileUserInfoComponent implements OnInit {
       console.error(error);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
     this.flipCard();
 
@@ -130,7 +126,6 @@ export class ProfileUserInfoComponent implements OnInit {
 
     await this._parent.updateUserProfile();
 
-    await this.commonUtilService.sleep(0.7e3);
     this.updating = false;
   }
 }

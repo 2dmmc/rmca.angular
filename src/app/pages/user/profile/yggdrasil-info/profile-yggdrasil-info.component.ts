@@ -3,7 +3,6 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
-import {CommonUtilService} from '../../../../@core/utils/common-util.service';
 
 import {IUser} from '../../../../@model/common/user/user.interface';
 import {ProfileComponent} from '../profile.component';
@@ -25,7 +24,6 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
 
   constructor(private userService: UserService,
               private noticeService: NoticeService,
-              private commonUtilService: CommonUtilService,
               @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
     this.updating = false;
     this.submitted = false;
@@ -75,7 +73,6 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
       console.error(error);
     }
 
-    await this.commonUtilService.sleep(0.7e3);
     this.submitted = false;
   }
 
@@ -85,7 +82,6 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
 
     await this._parent.updateUserProfile();
 
-    await this.commonUtilService.sleep(0.7e3);
     this.updating = false;
   }
 }

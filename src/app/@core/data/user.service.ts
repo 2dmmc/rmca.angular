@@ -3,6 +3,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 
 import {IUser} from '../../@model/common/user/user.interface';
+import {delay} from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,7 @@ export class UserService {
    */
   public async getUserProfile(): Promise<IUser> {
     return this.http.get<IUser>('/api/user/profile')
+      .pipe(delay(300))
       .toPromise();
   }
 
@@ -30,6 +32,7 @@ export class UserService {
       .set('email', email);
 
     return this.http.post('/api/user/profile', params)
+      .pipe(delay(700))
       .toPromise();
   }
 
@@ -46,6 +49,7 @@ export class UserService {
       .set('newPassword', newPassword);
 
     return this.http.post('/api/user/password', params)
+      .pipe(delay(700))
       .toPromise();
   }
 
@@ -62,6 +66,7 @@ export class UserService {
       .set('password', password);
 
     return this.http.post('/api/user/yggdrasil', params)
+      .pipe(delay(300))
       .toPromise();
   }
 
@@ -73,6 +78,7 @@ export class UserService {
    */
   public async verifyEmail(hash: string): Promise<object> {
     return this.http.patch(`/api/user/email-verify/${hash}`, {})
+      .pipe(delay(700))
       .toPromise();
   }
 
@@ -83,12 +89,14 @@ export class UserService {
    */
   public async resendVerifyEmail(): Promise<object> {
     return this.http.get('/api/user/resend-verify-email')
+      .pipe(delay(700))
       .toPromise();
   }
 
   // TODO 补充文档
   public async updateUserAvatar(socialType: string): Promise<object> {
     return this.http.post(`/api/social/avatar/${socialType}`, {})
+      .pipe(delay(300))
       .toPromise();
   }
 }
