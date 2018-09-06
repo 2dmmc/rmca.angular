@@ -41,6 +41,7 @@ export class FinanceComponent implements OnInit {
   }
 
   public async getFinanceHistories(page: number, limit: number): Promise<void> {
+    // TODO 修改page后用query记录
     this.loading = true;
 
     try {
