@@ -1,14 +1,10 @@
-<nb-card [nbSpinner]="loading" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'加载中...'">
+<nb-card [size]="'xlarge'" [nbSpinner]="loading" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'加载中...'">
   <nb-card-header>
     <span><i class="far fa-money-bill-alt"></i> 财务历史</span>
   </nb-card-header>
   <nb-card-body>
-    <button class="add-btn-hack" nbButton [status]="'info'" [fullWidth]="false" (click)="openFinanceAddModal()">
-      <i class="fas fa-plus"></i>
-      新增财务历史记录
-    </button>
     <table class="table text-norap text-center">
-      <thead>
+      <thead (dblclick)="openFinanceAddModal()">
       <tr>
         <th>日期</th>
         <th>关联用户</th>
@@ -53,6 +49,7 @@
     </table>
   </nb-card-body>
   <nb-card-footer class="text-center">
+
     <ngb-pagination class="d-flex justify-content-center" [ellipses]="true" [maxSize]="5" [rotate]="true"
                     [directionLinks]="false"
                     [(collectionSize)]="count" [(page)]="pages" [(pageSize)]="limit"
