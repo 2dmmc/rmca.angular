@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 import {CallbackService} from '../../../@core/data/callback.service';
 import {CommonUtilService} from '../../../@core/utils/common-util.service';
@@ -16,7 +16,6 @@ export class LoginQQComponent implements OnInit {
   @ViewChild(CallbackNoticeComponent) notice: CallbackNoticeComponent;
 
   constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
               private callbackService: CallbackService,
               private commonUtilService: CommonUtilService,
               private routeService: RouteService) {

@@ -1,5 +1,4 @@
 import {Component, forwardRef, Inject, Input, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {IUserExtendProfile, ProfileComponent} from '../profile.component';
@@ -26,9 +25,7 @@ export class ProfileUserInfoComponent implements OnInit {
 
   public profileForm: FormGroup;
 
-  constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
-              private noticeService: NoticeService,
+  constructor(private noticeService: NoticeService,
               private userService: UserService,
               private routeService: RouteService,
               public authUtilService: AuthUtilService,

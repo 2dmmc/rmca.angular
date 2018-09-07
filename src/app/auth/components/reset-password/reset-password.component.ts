@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 import {AuthService} from '../../../@core/data/auth.service';
 import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
@@ -22,7 +22,6 @@ export class ResetPasswordComponent implements OnInit {
   @ViewChild(AuthNoticeComponent) notice: AuthNoticeComponent;
 
   constructor(private router: Router,
-              private activatedRoute: ActivatedRoute,
               private authService: AuthService,
               private commonUtilService: CommonUtilService,
               private routeService: RouteService) {
