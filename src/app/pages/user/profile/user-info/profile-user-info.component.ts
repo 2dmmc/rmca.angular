@@ -8,6 +8,7 @@ import {UserState} from '../../../../@model/common/user/user.interface';
 import {NoticeService} from '../../../../@core/services/notice.service';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {UserService} from '../../../../@core/data/user.service';
+import {RouteService} from '../../../../@core/services/route.service';
 
 @Component({
   selector: 'ngx-profile-user-info',
@@ -29,6 +30,7 @@ export class ProfileUserInfoComponent implements OnInit {
               private router: Router,
               private noticeService: NoticeService,
               private userService: UserService,
+              private routeService: RouteService,
               public authUtilService: AuthUtilService,
               @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
     this.updating = false;
@@ -37,12 +39,11 @@ export class ProfileUserInfoComponent implements OnInit {
   }
 
   public async ngOnInit(): Promise<void> {
-    this.activatedRoute.queryParams.subscribe(async (queryParams) => {
-      if (queryParams.hash) {
-        await this.verifyEmail(queryParams.hash);
-        this.router.navigate([], {queryParams: {hash: null}, queryParamsHandling: 'merge'});
-      }
-    });
+    const hash = await this.routeService.getQuery('hash');
+    if (hash) {
+      await this.verifyEmail(hash);
+      await this.routeService.removeQuery('hash');
+    }
 
     this.profileForm = new FormGroup({
       email: new FormControl(

@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AuthService} from '../../../@core/data/auth.service';
 import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
 import {CommonUtilService} from '../../../@core/utils/common-util.service';
+import {RouteService} from '../../../@core/services/route.service';
 
 import {passwordEqualValidator} from '../../../@core/directives';
 
@@ -23,15 +24,14 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private router: Router,
               private activatedRoute: ActivatedRoute,
               private authService: AuthService,
-              private commonUtilService: CommonUtilService) {
+              private commonUtilService: CommonUtilService,
+              private routeService: RouteService) {
     this.submitted = false;
     this.hash = '';
   }
 
-  public ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      this.hash = queryParams.hash;
-    });
+  public async ngOnInit(): Promise<void> {
+    this.hash = await this.routeService.getQuery('hash');
 
     this.resetPasswordForm = new FormGroup({
       password: new FormControl(
