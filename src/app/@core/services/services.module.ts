@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 
 import {NoticeService} from './notice.service';
 import {StorageService} from './storage.service';
+import {RouteService} from './route.service';
 
 const SERVICES = [
   NoticeService,
   StorageService,
+  RouteService,
 ];
 
 @NgModule({
