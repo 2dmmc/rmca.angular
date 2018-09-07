@@ -52,8 +52,8 @@
 
     <ngb-pagination class="d-flex justify-content-center" [ellipses]="true" [maxSize]="5" [rotate]="true"
                     [directionLinks]="false"
-                    [(collectionSize)]="count" [(page)]="pages" [(pageSize)]="limit"
-                    (pageChange)="getFinanceHistories(pages, limit)">
+                    [(collectionSize)]="count" [(page)]="page" [(pageSize)]="limit"
+                    (pageChange)="getFinanceHistories(page, limit)">
     </ngb-pagination>
   </nb-card-footer>
 </nb-card>

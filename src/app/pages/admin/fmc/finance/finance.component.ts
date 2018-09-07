@@ -16,7 +16,7 @@ import {FinanceType, IFinanceResponse} from '../../../../@model/common/admin/fmc
 
 export class FinanceComponent implements OnInit {
   public financeHistories: IFinanceResponse[];
-  public pages: number;
+  public page: number;
   public limit: number;
   public count: number;
 
@@ -28,14 +28,14 @@ export class FinanceComponent implements OnInit {
               private modalService: NgbModal,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
-    this.pages = 1;
+    this.page = 1;
     this.limit = 10;
     this.count = 1;
     this.loading = false;
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(this.pages, this.limit);
+    this.getFinanceHistories(this.page, this.limit);
   }
 
   public async getFinanceHistories(page: number, limit: number): Promise<void> {
@@ -74,7 +74,7 @@ export class FinanceComponent implements OnInit {
 
     activeModal.componentInstance.financeHistory = financeHistory;
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(this.pages, this.limit);
+      this.getFinanceHistories(this.page, this.limit);
     });
   }
 }
