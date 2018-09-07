@@ -61,7 +61,8 @@ export class FinanceComponent implements OnInit {
     });
 
     activeModal.componentInstance.event.subscribe(() => {
-      this.getFinanceHistories(1, this.limit);
+      this.page = 1;
+      this.getFinanceHistories(this.page, this.limit);
     });
   }
 
