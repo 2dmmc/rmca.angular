@@ -71,7 +71,7 @@ export class FinanceDetailModalComponent implements OnInit {
         user: financeHistory.user,
       });
 
-      // // TODO 针对空User的Hack处理, 不太优雅
+      // TODO 针对空User的Hack处理, 不太优雅
       if (financeHistory.user) {
         this.financeHistoryForm.patchValue({
           userId: financeHistory.user._id,
