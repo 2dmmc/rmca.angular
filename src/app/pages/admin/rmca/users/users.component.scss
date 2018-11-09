@@ -1,5 +1,6 @@
 @import '../../../../@theme/styles/themes';
 @import '../../../../@theme/styles/styles';
+
 @import '../../../../@theme/styles/extend/nb-card';
 @import '../../../../@theme/styles/extend/tag';
 
@@ -8,22 +9,5 @@
 
   &:last-child {
     margin-right: 0;
-  }
-}
-
-table {
-  button {
-    margin-right: 0.5rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
-.page-switcher {
-  input {
-    width: 7rem;
-    text-align: center;
   }
 }
