@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
-import {RotatingAnimation, SkinViewer} from 'skinview3d';
+import {CompositeAnimation, createOrbitControls, RotatingAnimation, SkinViewer, WalkingAnimation} from 'skinview3d';
 
 import {IRole} from '../../../../@model/common/player/role/role.interface';
 
@@ -18,12 +18,21 @@ export class SkinViewerComponent implements AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    // tslint:disable-next-line
+    const animation = new CompositeAnimation();
+    animation.add(WalkingAnimation);
+    animation.add(RotatingAnimation);
+
     const skinViewer = new SkinViewer({
       domElement: document.getElementById(this.random),
       skinUrl: this.role.skin,
       capeUrl: this.role.cape,
-      animation: RotatingAnimation,
+      animation: animation,
     });
+
+    const control = createOrbitControls(skinViewer);
+    control.enableRotate = true;
+    control.enableZoom = true;
+
+    skinViewer.setSize(275, 275);
   }
 }
