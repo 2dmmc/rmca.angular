@@ -8,7 +8,7 @@ import {
   WalkingAnimation,
 } from 'skinview3d';
 
-import {ISkinViewerOptions} from '../../../../@model/components/skin-viewer/options';
+import {ISkinViewerOptions} from '../../../@model/components/skin-viewer/options';
 
 @Component({
   selector: 'ngx-skin-viewer',
