@@ -7,7 +7,8 @@
         </span>
       </nb-card-header>
       <nb-card-body>
-        <ngx-skin-viewer [role]="role"></ngx-skin-viewer>
+        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
+                         [options]="{RotatingAnimation: true, RunningAnimation: true}"></ngx-skin-viewer>
       </nb-card-body>
       <nb-card-footer>
         <button nbButton [status]="'info'" (click)="openRoleDetailModal(role._id)">
