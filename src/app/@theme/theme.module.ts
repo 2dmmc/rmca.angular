@@ -24,7 +24,7 @@ import {
   NbAlertModule,
 } from '@nebular/theme';
 
-import {FooterComponent, HeaderComponent, TinyMCEComponent} from './components';
+import {FooterComponent, HeaderComponent, TinyMCEComponent, SkinViewerComponent} from './components';
 import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
 import {RmcaLayoutComponent} from './layouts';
 import {DonationModalComponent} from './layouts/rmca/donation-modal/donation-modal.component';
@@ -57,6 +57,7 @@ const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   TinyMCEComponent,
+  SkinViewerComponent,
   RmcaLayoutComponent,
   DonationModalComponent,
 ];
