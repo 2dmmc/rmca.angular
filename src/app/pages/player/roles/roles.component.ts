@@ -15,7 +15,7 @@ import {IRole} from '../../../@model/common/player/role/role.interface';
 })
 
 export class RolesComponent implements OnInit {
-  roles: IRole[];
+  public roles: IRole[];
 
   constructor(private noticeService: NoticeService,
               private playerService: PlayerService,
