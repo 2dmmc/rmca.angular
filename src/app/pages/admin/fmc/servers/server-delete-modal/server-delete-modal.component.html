@@ -9,7 +9,7 @@
 </div>
 <div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'删除中...'">
   <form autocomplete="off" role="form"
-        [formGroup]="serverForm" (ngSubmit)="deleteServer(serverForm.value)">
+        [formGroup]="serverForm" (ngSubmit)="deleteServer()">
     <ngb-alert [dismissible]="false" [type]="'warning'">
       你正在试图删除名为: <code>{{server.name}}</code>服务器, <strong>这是一个敏感操作!</strong> 请输入该服务器名称来确认操作
     </ngb-alert>
