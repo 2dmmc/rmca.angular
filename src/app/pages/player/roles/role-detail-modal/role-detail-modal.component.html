@@ -7,55 +7,39 @@
     <i class="fas fa-times" aria-hidden="true"></i>
   </button>
 </div>
-<div class="modal-body">
-  <div class="alert alert-success" role="alert">
-    角色名仅提供展示, 无法修改
-  </div>
-  <div class="form-group row">
-    <label for="input-rolename" class="col-sm-2 col-form-label">角色名</label>
-    <div class="col-sm-10">
-      <input name="rolename" id="input-rolename" class="form-control" placeholder="角色名" readonly
-             [ngModel]="role.rolename">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中...'">
+  <div class="row">
+    <div class="col-sm-12">
+      <div ngbRadioGroup class="btn-group btn-group-toggle btn-group-full-width" [(ngModel)]="skinType">
+        <label ngbButtonLabel class="btn btn-outline-info">
+          <input ngbButton type="radio" name="type" [value]="'upload'"> 手动上传
+        </label>
+        <label ngbButtonLabel class="btn btn-outline-info">
+          <input ngbButton type="radio" name="type" [value]="'async'"> 同步正版
+        </label>
+      </div>
     </div>
   </div>
-  <div class="form-group row">
+  <div class="row">
     <div class="skin-view-group">
       <div class="skin-viewer">
         <h5>当前角色预览</h5>
-        <rmca-skin-viewer [role]="role"></rmca-skin-viewer>
+        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
+                         [options]="{RotatingAnimation: true, RunningAnimation: true,
+                         width: 200, height: 200}"></ngx-skin-viewer>
       </div>
       <div class="skin-viewer">
-        <h5>更新角色后预览(未实现)</h5>
-        <rmca-skin-viewer [role]="role"></rmca-skin-viewer>
+        <h5>更新角色后预览</h5>
+        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
+                         [options]="{RotatingAnimation: true, RunningAnimation: true,
+                         width: 200, height: 200}"></ngx-skin-viewer>
       </div>
     </div>
   </div>
   <hr>
-  <div class="alert alert-warning" role="alert" *ngIf="!user.yggdrasil">
-    你还没有通过正版验证, 验证Mojang账户后可享受:
-    <ul>
-      <li>使用Mojang账户皮肤作为炉心角色皮肤</li>
-    </ul>
-    <a routerLink="/pages/user/yggdrasil" (click)="closeModal()">去验证</a>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-2 col-form-label">皮肤类型</label>
-    <div class="col-sm-10">
-      <label class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" name="skin-type" value="upload" [(ngModel)]="skinType">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">手动上传</span>
-      </label>
-      <label class="custom-control custom-radio">
-        <input type="radio" class="custom-control-input" name="skin-type" value="sync"
-               [(ngModel)]="skinType" [disabled]="!user?.yggdrasil">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">同步正版皮肤</span>
-      </label>
-    </div>
-  </div>
-  <form (ngSubmit)="updateRole()" enctype="multipart/form-data" #roleForm="ngForm" name="roleForm">
-    <section *ngIf="skinType == 'upload'">
+
+  <section *ngIf="skinType == 'upload'">
+    <form (ngSubmit)="updateRole()" enctype="multipart/form-data" #roleForm="ngForm" name="roleForm">
       <div class="form-group row">
         <label class="col-sm-2 col-form-label">模型类型</label>
         <div class="col-sm-10">
@@ -77,64 +61,62 @@
         <label for="input-skin" class="col-sm-2 col-form-label">皮肤上传</label>
         <div class="col-sm-10">
           <button type="button" class="btn btn-info" (click)="skinFile.click()">
-            <span *ngIf="!role.skinFile">选择文件</span>
-            <span *ngIf="role.skinFile">文件已选择</span>
+            <span *ngIf="!skinFile">选择文件</span>
+            <span *ngIf="skinFile">文件已选择</span>
           </button>
           <input type="file" #skinFile name="skin" id="input-skin" class="form-control" placeholder="皮肤上传"
                  ngModel (change)="getFiles($event, 'skin')" style="display: none">
         </div>
       </div>
-      <div class="form-group row" *ngIf="user.admin">
+      <div class="form-group row">
         <label for="input-skin" class="col-sm-2 col-form-label">披风上传</label>
         <div class="col-sm-10">
           <button type="button" class="btn btn-info" (click)="capeFile.click()">
-            <span *ngIf="!role.capeFile">选择文件</span>
-            <span *ngIf="role.capeFile">文件已选择</span>
+            <span *ngIf="!capeFile">选择文件</span>
+            <span *ngIf="capeFile">文件已选择</span>
           </button>
-          <input type="file" #capeFile name="cape" id="input-cape" class="form-control" placeholder="皮肤上传"
+          <input type="file" #capeFile name="cape" id="input-cape" class="form-control" placeholder="披风上传"
                  ngModel (change)="getFiles($event, 'cape')" style="display: none">
         </div>
       </div>
-      <!--<div class="form-group row" *ngIf="role.file">-->
-      <!--<label class="col-sm-2 col-form-label">待上传皮肤</label>-->
-      <!--<div class="col-sm-10">-->
-      <!--<div class="skin-viewer">-->
-      <!--<img src="data:image/png;base64,{{role.file}}" alt="">-->
-      <!--</div>-->
-      <!--</div>-->
-      <!--</div>-->
-    </section>
-    <hr>
-    <div class="form-group row" *ngIf="skinType =='upload'">
+      <div class="form-group submit-group row" *ngIf="skinType =='upload'">
+        <div class="offset-sm-2 col-sm-10">
+          <button nbButton [status]="'success'" type="submit"
+                  [disabled]="submitted || !roleForm.form.valid"
+                  [class.btn-pulse]="submitted">
+            <i class="far fa-edit"></i>
+            更新角色信息
+          </button>
+          <button nbButton [status]="'danger'" type="button"
+                  (click)="closeModal()">
+            <i class="fas fa-times"></i>
+            取消
+          </button>
+        </div>
+      </div>
+    </form>
+  </section>
+  <section *ngIf="skinType == 'async'">
+    <div class="alert alert-warning" role="alert" *ngIf="!authUtilService.user.yggdrasil">
+      你还没有通过正版验证, 验证Mojang账户后可享受:
+      <ul>
+        <li>使用Mojang账户皮肤作为炉心角色皮肤</li>
+      </ul>
+      <a routerLink="/pages/user/yggdrasil" (click)="closeModal()">去验证</a>
+    </div>
+    <div class="form-group submit-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button class="btn btn-success"
-                [disabled]="submitted || !roleForm.form.valid"
-                [class.btn-pulse]="submitted">
+        <button nbButton [status]="'success'" type="submit"
+                (click)="updateYggdrasilSkin(role._id)">
           <i class="far fa-edit"></i>
-          更新角色信息
+          同步正版皮肤
         </button>
-        <button class="btn btn-md btn-danger"
+        <button nbButton [status]="'danger'" type="button"
                 (click)="closeModal()">
-          <i class="fas fa-times" aria-hidden="true"></i>
+          <i class="fas fa-times"></i>
           取消
         </button>
       </div>
     </div>
-  </form>
-  <div class="form-group row" *ngIf="skinType == 'sync'">
-    <div class="offset-sm-2 col-sm-10">
-      <button class="btn btn-success"
-              [disabled]="submitted"
-              [class.btn-pulse]="submitted"
-              (click)="updateYggdrasilSkin(role._id)">
-        <i class="far fa-edit"></i>
-        同步正版皮肤
-      </button>
-      <button class="btn btn-md btn-danger"
-              (click)="closeModal()">
-        <i class="fas fa-times" aria-hidden="true"></i>
-        取消
-      </button>
-    </div>
-  </div>
+  </section>
 </div>

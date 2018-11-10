@@ -1,14 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup} from '@angular/forms';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {PlayerService} from '../../player.service';
 
-import {IUser} from '../../../../@model/common/user/user.interface';
-import {DefaultUser} from '../../../../@model/common/user/user.const';
-
 import {IRole} from '../../../../@model/common/player/role/role.interface';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -18,21 +17,26 @@ import {IRole} from '../../../../@model/common/player/role/role.interface';
 export class RoleDetailModalComponent implements OnInit {
   @Input() role: IRole;
   @Output() event = new EventEmitter();
-  user: IUser;
 
-  submitted: boolean;
-  skinType: any;
+  public skinType: string;
+  public roleForm: FormGroup;
+  public submitted: boolean;
+
+  public skinFile: File;
+  public capeFile: File;
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
-              private activeModal: NgbActiveModal) {
-    this.user = DefaultUser;
+              public authUtilService: AuthUtilService,
+              public activeModal: NgbActiveModal) {
     this.submitted = false;
     this.skinType = 'upload';
+    this.skinFile = null;
+    this.capeFile = null;
   }
 
   public ngOnInit(): void {
-    // this.user = this.userCacheService.getCache();
+    this.roleForm = new FormGroup({});
   }
 
   public getFiles(event, type): void {
@@ -42,11 +46,11 @@ export class RoleDetailModalComponent implements OnInit {
       if (files.length > 0) {
         switch (type) {
           case 'skin': {
-            this.role['skinFile'] = files[0];
+            this.skinFile = files[0];
             break;
           }
           case 'cape': {
-            this.role['capeFile'] = files[0];
+            this.capeFile = files[0];
             break;
           }
           default: {
@@ -63,7 +67,7 @@ export class RoleDetailModalComponent implements OnInit {
   //   this.role.file = btoa(binaryString);
   // }
 
-  public async updateRole() {
+  public async updateRole(): Promise<void> {
     this.submitted = true;
 
     try {
@@ -78,65 +82,39 @@ export class RoleDetailModalComponent implements OnInit {
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      this.submitted = false;
-
-      let errorMessage = '';
-
-      switch (error.status) {
-        case 415: {
-          errorMessage = '图片格式不符, 请上传png';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
+      const errorMessageMap = {
+        415: '图片格式不符, 请上传png',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
       this.noticeService.error('更新角色详情失败', errorMessage);
+      console.error(error);
+
+      this.submitted = false;
     }
   }
 
-  public updateYggdrasilSkin(roleId): void {
+  public async updateYggdrasilSkin(roleId): Promise<void> {
     this.submitted = true;
 
-    this.playerService.updateYggdrasilSkin(roleId)
-      .then(updateState => {
-        this.noticeService.success('同步成功', '同步正版皮肤成功');
-        this.event.emit();
-        this.activeModal.close();
-      })
-      .catch(error => {
-        this.submitted = false;
+    try {
+      await this.playerService.updateYggdrasilSkin(roleId);
+      this.noticeService.success('同步成功', '同步正版皮肤成功');
+      this.event.emit();
+      this.activeModal.close();
+    } catch (error) {
+      const errorMessageMap = {
+        404: '角色不存在',
+        406: '你还没有进行正版验证',
+        550: '服务器找不见这个uuid，理论上应该不会有这个情况',
+        551: '你的正版账号还没设置皮肤',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
 
-        let errorMessage = '';
+      this.noticeService.error('同步正版皮肤失败', errorMessage);
+      console.error(error);
 
-        switch (error.status) {
-          case 404: {
-            errorMessage = '角色不存在';
-            break;
-          }
-          case 406: {
-            errorMessage = '你还没有进行正版验证';
-            break;
-          }
-          case 550: {
-            errorMessage = '服务器找不见这个uuid，理论上应该不会有这个情况';
-            break;
-          }
-          case 551: {
-            errorMessage = '你的正版账号还没设置皮肤';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('同步正版皮肤失败', errorMessage);
-      });
-  }
-
-  public closeModal(): void {
-    this.activeModal.close();
+      this.submitted = false;
+    }
   }
 }
