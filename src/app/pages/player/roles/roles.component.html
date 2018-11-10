@@ -1,31 +1,27 @@
 <div class="row">
   <div class="col-lg-4" *ngFor="let role of roles">
-    <nb-card>
+    <nb-card [accent]="role.isDefault ? 'success' : 'default'" size="medium">
       <nb-card-header>
-        <span>{{role.rolename}}</span>
-        <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
-        <button class="btn btn-info" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
+        <span>
+          <span>{{role.rolename}}</span>
+        </span>
       </nb-card-header>
       <nb-card-body>
-        <rmca-skin-viewer [role]="role"></rmca-skin-viewer>
+        <ngx-skin-viewer [role]="role"></ngx-skin-viewer>
       </nb-card-body>
       <nb-card-footer>
-        <button class="btn btn-success"
-                (click)="openRoleDetailModal(role._id)">
+        <button nbButton [status]="'info'" (click)="openRoleDetailModal(role._id)">
           <i class="far fa-edit"></i>
           编辑
         </button>
+        <button nbButton [status]="'success'" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-footer>
     </nb-card>
   </div>
   <div class="col-lg-4">
-    <nb-card>
-      <nb-card-header>
-        <span>新增角色</span>
-      </nb-card-header>
+    <nb-card size="medium">
       <nb-card-body>
-        <button class="btn btn-success"
-                (click)="openRoleAddModal()">
+        <button class="btn-add" (click)="openRoleAddModal()">
           <i class="fas fa-plus"></i>
           新增角色
         </button>
