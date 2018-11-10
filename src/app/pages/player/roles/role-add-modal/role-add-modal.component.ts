@@ -37,7 +37,7 @@ export class RoleAddModalComponent implements OnInit {
     this.submitted = true;
 
     try {
-      await this.playerService.addRole(roleForm);
+      await this.playerService.addRole(roleForm.name);
       this.noticeService.success(
         '新增成功',
         '新增角色成功',
