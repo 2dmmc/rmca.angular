@@ -33,11 +33,11 @@ export class RoleAddModalComponent implements OnInit {
     });
   }
 
-  public async addRole(roleForm): Promise<void> {
+  public async addRole(roleForm: any): Promise<void> {
     this.submitted = true;
 
     try {
-      await this.playerService.addRole(roleForm.name);
+      await this.playerService.addRole(roleForm.rolename);
       this.noticeService.success(
         '新增成功',
         '新增角色成功',
@@ -53,6 +53,8 @@ export class RoleAddModalComponent implements OnInit {
 
       this.noticeService.error('新增角色失败', errorMessage);
       console.error(error);
+
+      this.submitted = false;
     }
   }
 }

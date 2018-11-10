@@ -13,7 +13,7 @@
   </ngb-alert>
 
   <form autocomplete="off" role="form"
-        [formGroup]="roleForm" (ngSubmit)="addRole(roleForm)">
+        [formGroup]="roleForm" (ngSubmit)="addRole(roleForm.value)">
 
     <div class="form-group row">
       <label for="input-rolename" class="col-lg-2 col-form-label">角色名</label>
