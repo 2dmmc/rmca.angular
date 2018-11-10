@@ -1,7 +1,14 @@
 import {AfterViewInit, Component, Input} from '@angular/core';
-import {CompositeAnimation, createOrbitControls, RotatingAnimation, SkinViewer, WalkingAnimation} from 'skinview3d';
+import {
+  CompositeAnimation,
+  createOrbitControls,
+  RotatingAnimation,
+  RunningAnimation,
+  SkinViewer,
+  WalkingAnimation,
+} from 'skinview3d';
 
-import {IRole} from '../../../../@model/common/player/role/role.interface';
+import {ISkinViewerOptions} from '../../../../@model/components/skin-viewer/options';
 
 @Component({
   selector: 'ngx-skin-viewer',
@@ -10,8 +17,10 @@ import {IRole} from '../../../../@model/common/player/role/role.interface';
 })
 
 export class SkinViewerComponent implements AfterViewInit {
-  @Input() role: IRole;
-  random: string;
+  @Input() skinUrl: string;
+  @Input() capeUrl: string;
+  @Input() options?: ISkinViewerOptions;
+  public random: string;
 
   constructor() {
     this.random = Math.random().toString(36).substr(2);
@@ -19,20 +28,28 @@ export class SkinViewerComponent implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     const animation = new CompositeAnimation();
-    animation.add(WalkingAnimation);
-    animation.add(RotatingAnimation);
+
+    if (this.options.RotatingAnimation) {
+      animation.add(RotatingAnimation);
+    }
+    if (this.options.WalkingAnimation) {
+      animation.add(WalkingAnimation);
+    }
+    if (this.options.RunningAnimation) {
+      animation.add(RunningAnimation);
+    }
 
     const skinViewer = new SkinViewer({
       domElement: document.getElementById(this.random),
-      skinUrl: this.role.skin,
-      capeUrl: this.role.cape,
+      skinUrl: this.skinUrl || undefined,
+      capeUrl: this.capeUrl || undefined,
       animation: animation,
     });
 
     const control = createOrbitControls(skinViewer);
-    control.enableRotate = true;
-    control.enableZoom = true;
+    control.enableRotate = this.options.enableRotate || true;
+    control.enableZoom = this.options.enableZoom || true;
 
-    skinViewer.setSize(275, 275);
+    skinViewer.setSize(this.options.width || 275, this.options.height || 275);
   }
 }
