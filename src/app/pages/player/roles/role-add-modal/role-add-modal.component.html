@@ -3,40 +3,51 @@
     <i class="fas fa-plus"></i>
     角色管理 - 新增角色
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
-  <form (ngSubmit)="addRole(roleForm)" #roleForm="ngForm" name="roleForm">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'新增中...'">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
+    现阶段一个账号最多只可以添加<code>1</code>个角色, 角色名即为游戏ID, 请谨慎添加
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="roleForm" (ngSubmit)="addRole(roleForm)">
+
     <div class="form-group row">
-      <label for="input-rolename" class="col-sm-2 col-form-label">角色名</label>
-      <div class="col-sm-10">
-        <input name="username" id="input-rolename" class="form-control" placeholder="角色名" autofocus
-               [(ngModel)]="roleForm.rolename" #rolename="ngModel"
-               [class.form-control-danger]="rolename.invalid && rolename.touched"
-               [required]="true" pattern="^[_a-zA-Z0-9]{1,16}$">
+      <label for="input-rolename" class="col-lg-2 col-form-label">角色名</label>
+      <div class="col-lg-10">
+        <input class="form-control" id="input-rolename" placeholder="角色名" autofocus
+               formControlName="rolename"
+               [class.form-control-success]="roleForm.get('rolename').valid && roleForm.get('rolename').touched"
+               [class.form-control-danger]="roleForm.get('rolename').invalid && roleForm.get('rolename').touched">
         <small class="form-text error"
-               *ngIf="rolename.invalid && rolename.touched && rolename.errors?.required">
-          请填写角色名
+               *ngIf="
+               roleForm.get('rolename').invalid && roleForm.get('rolename').touched &&
+               roleForm.get('rolename').hasError('required')">
+          请填写服务器名称
         </small>
         <small class="form-text error"
-               *ngIf="rolename.invalid && rolename.touched && rolename.errors?.pattern">
-          角色名格式不正确
+               *ngIf="
+               roleForm.get('rolename').invalid && roleForm.get('rolename').touched &&
+               roleForm.get('rolename').hasError('pattern')">
+          角色名格式不正确, 只允许 <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, 最大<code>16</code>个字符
         </small>
       </div>
     </div>
-    <div class="form-group row">
+
+    <div class="form-group submit-group row">
       <div class="offset-sm-2 col-sm-10">
-        <button class="btn btn-success"
-                [disabled]="submitted || !roleForm.form.valid"
+        <button nbButton [status]="'success'" type="submit"
+                [disabled]="submitted || roleForm.invalid"
                 [class.btn-pulse]="submitted">
           <i class="fas fa-plus"></i>
           新增角色
         </button>
-        <button class="btn btn-md btn-danger"
-                (click)="closeModal()">
-          <i class="fas fa-times" aria-hidden="true"></i>
+        <button nbButton [status]="'danger'" type="button"
+                (click)="activeModal.close()">
+          <i class="fas fa-times"></i>
           取消
         </button>
       </div>
