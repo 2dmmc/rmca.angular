@@ -17,7 +17,8 @@ export class ProfileUpdatePasswordComponent implements OnInit {
   public changePasswordForm: FormGroup;
   public submitted: boolean;
 
-  constructor(private noticeService: NoticeService,
+  constructor(private router: Router,
+              private noticeService: NoticeService,
               private userService: UserService) {
     this.submitted = false;
   }
@@ -53,6 +54,7 @@ export class ProfileUpdatePasswordComponent implements OnInit {
     try {
       await this.userService.updateUserPassword(passwordForm.currentPassword, passwordForm.repeatPassword);
       this.noticeService.success('更新密码成功', '更新密码成功');
+      this.router.navigate(['/auth/logout']);
     } catch (error) {
       const errorMessageMap = {
         403: '当前密码错误',
