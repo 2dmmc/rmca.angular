@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 import {UserService} from '../../../../@core/data/user.service';
@@ -50,7 +51,7 @@ export class ProfileUpdatePasswordComponent implements OnInit {
     this.submitted = true;
 
     try {
-      await this.userService.updateUserPassword(passwordForm.currentPassword, passwordForm.newPassword);
+      await this.userService.updateUserPassword(passwordForm.currentPassword, passwordForm.repeatPassword);
       this.noticeService.success('更新密码成功', '更新密码成功');
     } catch (error) {
       const errorMessageMap = {
