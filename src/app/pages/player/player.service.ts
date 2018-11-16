@@ -66,7 +66,7 @@ export class PlayerService {
    * @param {File} cape 披风文件
    * @return {Promise<Object>}
    */
-  public updateRoleCape(roleId: string, cape: string): Promise<object> {
+  public updateRoleCape(roleId: string, cape: File): Promise<object> {
     const formData: any = new FormData();
     formData.append('cape', cape);
 
