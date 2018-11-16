@@ -8,6 +8,17 @@ import {PlayerService} from '../../player.service';
 
 import {IRole} from '../../../../@model/common/player/role/role.interface';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../../@theme/components';
+
+interface ISkinFile {
+  skin: File;
+  cape: File;
+}
+
+enum SkinType {
+  upload,
+  async,
+}
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -18,39 +29,101 @@ export class RoleDetailModalComponent implements OnInit {
   @Input() role: IRole;
   @Output() event = new EventEmitter();
 
-  public skinType: string;
+  public skinViewerInitOptions: {
+    skin: ISkin,
+    skinViewerOptions: ISkinViewerOptions,
+    animationOptions: IAnimationOptions,
+    controlOptions: IOrbitControlsOptions,
+  };
+
   public roleForm: FormGroup;
   public submitted: boolean;
 
-  public skinFile: File;
-  public capeFile: File;
+  public SkinType = SkinType;
+  public skinType: SkinType;
+  public skinFile: ISkinFile;
+  public previewSkin: ISkin;
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
               public authUtilService: AuthUtilService,
               public activeModal: NgbActiveModal) {
     this.submitted = false;
-    this.skinType = 'upload';
-    this.skinFile = null;
-    this.capeFile = null;
+    this.skinType = SkinType.upload;
+    this.previewSkin = {
+      skinSrc: '',
+      capeSrc: '',
+    };
+    this.skinFile = {
+      skin: null,
+      cape: null,
+    };
+    this.skinViewerInitOptions = {
+      skin: {
+        skinSrc: '',
+        capeSrc: '',
+      },
+      animationOptions: {
+        rotating: true,
+        running: true,
+      },
+      controlOptions: {
+        rotate: true,
+        zoom: true,
+      },
+      skinViewerOptions: {
+        height: 275,
+        width: 275,
+      },
+    };
   }
+
 
   public ngOnInit(): void {
     this.roleForm = new FormGroup({});
+    this.previewSkin = {
+      skinSrc: this.role.skin,
+      capeSrc: this.role.cape,
+    };
   }
 
-  public getFiles(event, type): void {
+  public async skinTypeEventHandler(skinType: SkinType) {
+    switch (skinType) {
+      case SkinType.upload:
+        this.previewSkin = {
+          skinSrc: await this.file2base64(this.skinFile.skin) || this.role.skin,
+          capeSrc: await this.file2base64(this.skinFile.cape) || this.role.cape,
+        };
+        break;
+      case SkinType.async:
+        this.previewSkin = {
+          skinSrc: '/api/yggdrasil/skin',
+          capeSrc: '/api/yggdrasil/cape',
+        };
+        break;
+    }
+  }
+
+  public async getFiles(event, type): Promise<void> {
     if (event.srcElement) {
       const files = event.srcElement.files;
 
       if (files.length > 0) {
         switch (type) {
           case 'skin': {
-            this.skinFile = files[0];
+            this.skinFile.skin = files[0];
+            this.previewSkin = {
+              skinSrc: await this.file2base64(files[0]) || this.previewSkin.skinSrc,
+              capeSrc: this.previewSkin.capeSrc,
+            };
             break;
           }
           case 'cape': {
-            this.capeFile = files[0];
+            this.skinFile.cape = files[0];
+            this.previewSkin = {
+              skinSrc: this.previewSkin.skinSrc,
+              capeSrc: await this.file2base64(files[0]) || this.previewSkin.capeSrc,
+            };
             break;
           }
           default: {
@@ -61,21 +134,15 @@ export class RoleDetailModalComponent implements OnInit {
     }
   }
 
-  // FIXME 图片预览被砍掉了, 有空的时候加上
-  // private _handleReaderLoaded(readerEvt): void {
-  //   const binaryString = readerEvt.target.result;
-  //   this.role.file = btoa(binaryString);
-  // }
-
   public async updateRole(): Promise<void> {
     this.submitted = true;
 
     try {
-      if (this.role['skinFile']) {
-        await this.playerService.updateRoleSkin(this.role._id, this.role.userModel, this.role['skinFile']);
+      if (this.skinFile.skin) {
+        await this.playerService.updateRoleSkin(this.role._id, this.role.userModel, this.skinFile.skin);
       }
-      if (this.role['capeFile']) {
-        await this.playerService.updateRoleCape(this.role._id, this.role['capeFile']);
+      if (this.skinFile.cape) {
+        await this.playerService.updateRoleCape(this.role._id, this.skinFile.cape);
       }
 
       this.noticeService.success('更新成功', '更新角色详情成功');
@@ -116,5 +183,22 @@ export class RoleDetailModalComponent implements OnInit {
 
       this.submitted = false;
     }
+  }
+
+  private async file2base64(file: File): Promise<string> {
+    if (!file) {
+      return;
+    }
+
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event => {
+        resolve(reader.result);
+      });
+      reader.onerror = (error => {
+        reject(error);
+      });
+    });
   }
 }
