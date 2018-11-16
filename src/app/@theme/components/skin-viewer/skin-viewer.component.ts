@@ -34,10 +34,15 @@ export class SkinViewerComponent implements AfterViewInit, OnChanges {
       return;
     }
 
-    await this.loadImageToMemory(changes.skinUrl.currentValue);
-    this.skinView.skinUrl = changes.skinUrl.currentValue;
-    await this.loadImageToMemory(changes.capeUrl.currentValue);
-    this.skinView.capeUrl = changes.capeUrl.currentValue;
+    if ('skinUrl' in changes) {
+      await this.loadImageToMemory(changes.skinUrl.currentValue);
+      this.skinView.skinUrl = changes.skinUrl.currentValue;
+    }
+
+    if ('capeUrl' in changes) {
+      await this.loadImageToMemory(changes.capeUrl.currentValue);
+      this.skinView.capeUrl = changes.capeUrl.currentValue;
+    }
 
     this.loading = false;
   }
