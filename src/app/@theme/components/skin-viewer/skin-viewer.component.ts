@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {
   CompositeAnimation,
   createOrbitControls,
@@ -16,17 +16,33 @@ import {ISkinViewerOptions} from '../../../@model/components/skin-viewer/options
   templateUrl: './skin-viewer.component.html',
 })
 
-export class SkinViewerComponent implements AfterViewInit {
+export class SkinViewerComponent implements AfterViewInit, OnChanges {
   @Input() skinUrl: string;
   @Input() capeUrl: string;
   @Input() options?: ISkinViewerOptions;
-  public random: string;
+  public randomId: string;
+  public skinView: SkinViewer;
+  public loading: boolean;
 
   constructor() {
-    this.random = Math.random().toString(36).substr(2);
+    this.randomId = Math.random().toString(36).substr(2);
+    this.loading = true;
   }
 
-  public ngAfterViewInit(): void {
+  public async ngOnChanges(changes: SimpleChanges) {
+    if (this.skinView === undefined) {
+      return;
+    }
+
+    await this.loadImageToMemory(changes.skinUrl.currentValue);
+    this.skinView.skinUrl = changes.skinUrl.currentValue;
+    await this.loadImageToMemory(changes.capeUrl.currentValue);
+    this.skinView.capeUrl = changes.capeUrl.currentValue;
+
+    this.loading = false;
+  }
+
+  public async ngAfterViewInit(): Promise<void> {
     const animation = new CompositeAnimation();
 
     if (this.options.RotatingAnimation) {
@@ -39,17 +55,40 @@ export class SkinViewerComponent implements AfterViewInit {
       animation.add(RunningAnimation);
     }
 
+    await this.loadImageToMemory(this.skinUrl);
+    await this.loadImageToMemory(this.capeUrl);
+
     const skinViewer = new SkinViewer({
-      domElement: document.getElementById(this.random),
-      skinUrl: this.skinUrl || undefined,
-      capeUrl: this.capeUrl || undefined,
+      domElement: document.getElementById(this.randomId),
+      skinUrl: this.skinUrl || '',
+      capeUrl: this.capeUrl || '',
       animation: animation,
     });
+
+    this.skinView = skinViewer;
 
     const control = createOrbitControls(skinViewer);
     control.enableRotate = this.options.enableRotate || true;
     control.enableZoom = this.options.enableZoom || true;
 
     skinViewer.setSize(this.options.width || 275, this.options.height || 275);
+    this.loading = false;
+  }
+
+  public async loadImageToMemory(imageSrc: string) {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = imageSrc;
+      img.onload = event => {
+        document.body.removeChild(img);
+        resolve();
+      };
+      img.onerror = () => {
+        document.body.removeChild(img);
+        resolve();
+      };
+      document.body.appendChild(img);
+    });
   }
 }
