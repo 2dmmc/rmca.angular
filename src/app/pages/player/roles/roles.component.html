@@ -14,8 +14,11 @@
         </span>
       </nb-card-header>
       <nb-card-body>
-        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
-                         [options]="{RotatingAnimation: true, RunningAnimation: true}"></ngx-skin-viewer>
+        <ngx-skin-viewer [skin]="{skinSrc: role.skin, capeSrc: role.cape}"
+                         [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
+                         [animationOptions]="skinViewerInitOptions.animationOptions"
+                         [controlOptions]="skinViewerInitOptions.controlOptions"
+        ></ngx-skin-viewer>
       </nb-card-body>
       <nb-card-footer>
         <button nbButton [status]="'info'" (click)="openRoleDetailModal(role._id)">

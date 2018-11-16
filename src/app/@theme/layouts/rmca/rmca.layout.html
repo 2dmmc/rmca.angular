@@ -11,8 +11,11 @@
       </button>
     </nb-sidebar-header>
     <ng-content select="nb-menu"></ng-content>
-    <ngx-skin-viewer [skinUrl]="'/api/fun/random/skin'"
-                     [options]="{width: 150, height: 150, WalkingAnimation: true, RotatingAnimation: true}"></ngx-skin-viewer>
+    <ngx-skin-viewer [skin]="skinViewerInitOptions.skin"
+                     [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
+                     [animationOptions]="skinViewerInitOptions.animationOptions"
+                     [controlOptions]="skinViewerInitOptions.controlOptions"
+    ></ngx-skin-viewer>
   </nb-sidebar>
 
   <nb-layout-column class="main-content">

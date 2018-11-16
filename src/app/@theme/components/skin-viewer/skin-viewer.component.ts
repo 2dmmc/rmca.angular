@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnDestroy, SimpleChanges} from '@angular/core';
 import {
   CompositeAnimation,
   createOrbitControls,
@@ -8,7 +8,26 @@ import {
   WalkingAnimation,
 } from 'skinview3d';
 
-import {ISkinViewerOptions} from '../../../@model/components/skin-viewer/options';
+export interface ISkin {
+  skinSrc?: string;
+  capeSrc?: string;
+}
+
+export interface ISkinViewerOptions {
+  width: number;
+  height: number;
+}
+
+export interface IAnimationOptions {
+  rotating?: boolean;
+  walking?: boolean;
+  running?: boolean;
+}
+
+export interface IOrbitControlsOptions {
+  rotate?: boolean;
+  zoom?: boolean;
+}
 
 @Component({
   selector: 'ngx-skin-viewer',
@@ -16,84 +35,123 @@ import {ISkinViewerOptions} from '../../../@model/components/skin-viewer/options
   templateUrl: './skin-viewer.component.html',
 })
 
-export class SkinViewerComponent implements AfterViewInit, OnChanges {
-  @Input() skinUrl: string;
-  @Input() capeUrl: string;
-  @Input() options?: ISkinViewerOptions;
+export class SkinViewerComponent implements AfterViewInit, OnChanges, OnDestroy {
+  @Input() skin: ISkin;
+  @Input() skinViewerOptions: ISkinViewerOptions;
+  @Input() animationOptions: IAnimationOptions;
+  @Input() controlOptions: IOrbitControlsOptions;
+
   public randomId: string;
-  public skinView: SkinViewer;
+  public SkinViewer: SkinViewer;
   public loading: boolean;
+  public readonly png: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6E' +
+    'AAAAUElEQVRoQ+3VAREAMAwCseLfdIV85qAcGbv4W/z+E4AGxBNAIF4AnyACCMQTQCBeACuAAALxBBCIF8AKIIBAPAEE4g' +
+    'WwAgggEE8AgXgBrMADMk4AIe75ViAAAAAASUVORK5CYII=';
 
   constructor() {
     this.randomId = Math.random().toString(36).substr(2);
     this.loading = true;
   }
 
+  public ngOnDestroy() {
+    this.SkinViewer.renderer.forceContextLoss();
+    this.SkinViewer.renderer.context = null;
+    this.SkinViewer.dispose();
+  }
+
   public async ngOnChanges(changes: SimpleChanges) {
-    if (this.skinView === undefined) {
+    if (!this.SkinViewer) {
       return;
     }
 
-    if ('skinUrl' in changes) {
-      await this.loadImageToMemory(changes.skinUrl.currentValue);
-      this.skinView.skinUrl = changes.skinUrl.currentValue;
-    }
-
-    if ('capeUrl' in changes) {
-      await this.loadImageToMemory(changes.capeUrl.currentValue);
-      this.skinView.capeUrl = changes.capeUrl.currentValue;
-    }
+    await this.rerender(this.SkinViewer);
 
     this.loading = false;
   }
 
   public async ngAfterViewInit(): Promise<void> {
-    const animation = new CompositeAnimation();
+    this.SkinViewer = await this.createSkinView(
+      this.skin,
+      this.skinViewerOptions,
+      this.animationOptions,
+      this.controlOptions,
+    );
 
-    if (this.options.RotatingAnimation) {
-      animation.add(RotatingAnimation);
-    }
-    if (this.options.WalkingAnimation) {
-      animation.add(WalkingAnimation);
-    }
-    if (this.options.RunningAnimation) {
-      animation.add(RunningAnimation);
-    }
-
-    await this.loadImageToMemory(this.skinUrl);
-    await this.loadImageToMemory(this.capeUrl);
-
-    const skinViewer = new SkinViewer({
-      domElement: document.getElementById(this.randomId),
-      skinUrl: this.skinUrl || '',
-      capeUrl: this.capeUrl || '',
-      animation: animation,
-    });
-
-    this.skinView = skinViewer;
-
-    const control = createOrbitControls(skinViewer);
-    control.enableRotate = this.options.enableRotate || true;
-    control.enableZoom = this.options.enableZoom || true;
-
-    skinViewer.setSize(this.options.width || 275, this.options.height || 275);
     this.loading = false;
   }
 
-  public async loadImageToMemory(imageSrc: string) {
-    this.loading = true;
-    return new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = imageSrc;
-      img.onload = event => {
-        document.body.removeChild(img);
-        resolve();
-      };
-      img.onerror = () => {
-        document.body.removeChild(img);
-        resolve();
-      };
-      document.body.appendChild(img);
+  public async createSkinView(skin: ISkin,
+                              skinViewerOptions: ISkinViewerOptions,
+                              animationOptions: IAnimationOptions,
+                              controlsOptions: IOrbitControlsOptions): Promise<SkinViewer> {
+    const skinViewer = new SkinViewer({
+      domElement: document.getElementById(this.randomId),
     });
+
+    skinViewer.skinUrl = skin.skinSrc;
+    skinViewer.capeUrl = skin.capeSrc;
+    skinViewer.animation = SkinViewerComponent.createAnimation(animationOptions);
+    skinViewer.detectModel = true;
+    SkinViewerComponent.createOrbitControls(skinViewer, controlsOptions);
+    skinViewer.setSize(skinViewerOptions.width, skinViewerOptions.height);
+
+    return skinViewer;
   }
+
+  public async rerender(skinViewer: SkinViewer) {
+    skinViewer.dispose();
+    this.SkinViewer = await this.createSkinView(
+      this.skin,
+      this.skinViewerOptions,
+      this.animationOptions,
+      this.controlOptions,
+    );
+  }
+
+  private static createAnimation(options: IAnimationOptions): CompositeAnimation {
+    const compositeAnimation = new CompositeAnimation();
+
+    if (options.rotating) {
+      compositeAnimation.add(RotatingAnimation);
+    }
+    if (options.walking) {
+      compositeAnimation.add(WalkingAnimation);
+    }
+    if (options.running) {
+      compositeAnimation.add(RunningAnimation);
+    }
+
+    return compositeAnimation;
+  }
+
+  private static createOrbitControls(skinViewer: SkinViewer, options: IOrbitControlsOptions): void {
+    const control = createOrbitControls(skinViewer);
+
+    if (options.rotate) {
+      control.enableRotate = options.rotate;
+    }
+
+    if (options.zoom) {
+      control.enableZoom = options.zoom;
+    }
+  }
+
+
+  // private async loadImageToMemory(imageSrc: string) {
+  //   this.loading = true;
+  //   return new Promise((resolve, reject) => {
+  //     const img = new Image();
+  //     img.src = imageSrc;
+  //     img.onload = event => {
+  //       document.body.removeChild(img);
+  //       resolve(imageSrc);
+  //     };
+  //     img.onerror = () => {
+  //       document.body.removeChild(img);
+  //       resolve('');
+  //     };
+  //     document.body.appendChild(img);
+  //   });
+  // }
+
 }

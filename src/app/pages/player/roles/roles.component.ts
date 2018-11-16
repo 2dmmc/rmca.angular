@@ -8,6 +8,7 @@ import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
 import {IRole} from '../../../@model/common/player/role/role.interface';
+import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../@theme/components';
 
 @Component({
   styleUrls: ['./roles.component.scss'],
@@ -16,11 +17,31 @@ import {IRole} from '../../../@model/common/player/role/role.interface';
 
 export class RolesComponent implements OnInit {
   public roles: IRole[];
+  public skinViewerInitOptions: {
+    skin?: ISkin,
+    skinViewerOptions: ISkinViewerOptions,
+    animationOptions: IAnimationOptions,
+    controlOptions: IOrbitControlsOptions,
+  };
 
   constructor(private noticeService: NoticeService,
               private playerService: PlayerService,
               private modalService: NgbModal) {
     this.roles = [];
+    this.skinViewerInitOptions = {
+      animationOptions: {
+        rotating: true,
+        running: true,
+      },
+      controlOptions: {
+        rotate: true,
+        zoom: true,
+      },
+      skinViewerOptions: {
+        height: 275,
+        width: 275,
+      },
+    };
   }
 
   public ngOnInit(): void {

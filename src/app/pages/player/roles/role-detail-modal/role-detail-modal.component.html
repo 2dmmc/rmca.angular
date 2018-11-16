@@ -24,15 +24,19 @@
     <div class="skin-view-group">
       <div class="skin-viewer">
         <h5>当前角色预览</h5>
-        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
-                         [options]="{RotatingAnimation: true, RunningAnimation: true,
-                         width: 200, height: 200}"></ngx-skin-viewer>
+        <ngx-skin-viewer [skin]="{skinSrc: role.skin, capeSrc: role.cape}"
+                         [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
+                         [animationOptions]="skinViewerInitOptions.animationOptions"
+                         [controlOptions]="skinViewerInitOptions.controlOptions">
+        </ngx-skin-viewer>
       </div>
       <div class="skin-viewer">
         <h5>更新角色后预览</h5>
-        <ngx-skin-viewer [skinUrl]="role.skin" [capeUrl]="role.cape"
-                         [options]="{RotatingAnimation: true, RunningAnimation: true,
-                         width: 200, height: 200}"></ngx-skin-viewer>
+        <ngx-skin-viewer [skin]="previewSkin"
+                         [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
+                         [animationOptions]="skinViewerInitOptions.animationOptions"
+                         [controlOptions]="skinViewerInitOptions.controlOptions">
+        </ngx-skin-viewer>
       </div>
     </div>
   </div>
