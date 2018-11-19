@@ -9,6 +9,7 @@ import {PlayerService} from '../../player.service';
 import {IRole} from '../../../../@model/common/player/role/role.interface';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../../@theme/components';
+import {isSlimSkin} from 'skinview3d';
 
 interface ISkinFile {
   skin: File;
@@ -139,7 +140,10 @@ export class RoleDetailModalComponent implements OnInit {
 
     try {
       if (this.skinFile.skin) {
-        await this.playerService.updateRoleSkin(this.role._id, this.role.userModel, this.skinFile.skin);
+        await this.playerService.updateRoleSkin(
+          this.role._id,
+          await this.getImageModel(this.skinFile.skin),
+          this.skinFile.skin);
       }
       if (this.skinFile.cape) {
         await this.playerService.updateRoleCape(this.role._id, this.skinFile.cape);
@@ -199,6 +203,24 @@ export class RoleDetailModalComponent implements OnInit {
       reader.onerror = (error => {
         reject(error);
       });
+    });
+  }
+
+  private async getImageModel(file: File): Promise<string> {
+    return new Promise<string>(async (resolve, reject) => {
+      const image = new Image();
+      image.src = await this.file2base64(file);
+      image.onload = (ev => {
+        if (isSlimSkin(image)) {
+          resolve('alex');
+        } else {
+          resolve('steve');
+        }
+      });
+      image.onerror = ev => {
+        console.warn('check image model fail, use default model');
+        resolve('steve');
+      };
     });
   }
 }
