@@ -99,6 +99,7 @@ export class SkinViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   public async rerender(skinViewer: SkinViewer) {
+    skinViewer.renderer.context = null;
     skinViewer.dispose();
     this.SkinViewer = await this.createSkinView(
       this.skin,
