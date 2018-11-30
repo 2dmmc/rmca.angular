@@ -8,6 +8,8 @@ import {RmcaService} from '../rmca.service';
 import {IAdminRmcaUsersUser} from '../../../../@model/common/admin/rmca/users/user.interface';
 import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
 import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {IUser, UserState} from '../../../../@model/common/user/user.interface';
 
 @Component({
   styleUrls: ['./users.component.scss'],
@@ -16,6 +18,8 @@ import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.compo
 
 export class UsersComponent implements OnInit {
   public users: IAdminRmcaUsersUser[];
+  public UserStateEnum = UserState;
+
   public page: number;
   public limit: number;
   public count: number;
@@ -26,7 +30,8 @@ export class UsersComponent implements OnInit {
   constructor(private noticeService: NoticeService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
-              private router: Router) {
+              private router: Router,
+              private authUtilService: AuthUtilService) {
     this.users = [];
     this.page = 1;
     this.limit = 10;
@@ -42,9 +47,14 @@ export class UsersComponent implements OnInit {
     this.loading = true;
 
     try {
-      const users = await this.rmcaService.getUsers(page, limit);
-      this.users = users['data'];
-      this.count = users['count'];
+      const usersResponse = await this.rmcaService.getUsers(page, limit);
+      const users = usersResponse['data'];
+      this.count = usersResponse['count'];
+      const usersExtend = [];
+      users.forEach((user: IUser) => {
+        usersExtend.push(this.authUtilService.extendUserModel(user));
+      });
+      this.users = usersExtend;
     } catch (error) {
       this.noticeService.error('获取用户列表失败', '获取用户列表失败, 请刷新页面重试');
     }
@@ -74,7 +84,6 @@ export class UsersComponent implements OnInit {
   //     this.filter.type === this.filter.types.onlyAdmin,
   //     this.filter.type === this.filter.types.onlyBan);
   // }
-
 
 
   public openBanUserModal(user: IAdminRmcaUsersUser): void {

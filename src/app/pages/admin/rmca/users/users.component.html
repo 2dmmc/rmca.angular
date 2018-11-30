@@ -4,7 +4,7 @@
   </nb-card-header>
   <nb-card-body>
     <!--<div class="row">-->
-     <!--<div class="col-md-2">-->
+    <!--<div class="col-md-2">-->
     <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
     <!--class="btn-group btn-group-toggle btn-group-full-width">-->
     <!--<label ngbButtonLabel class="btn btn-outline-success">-->
@@ -72,14 +72,15 @@
           <!--TODO 修正不安全的URL-->
         </td>
         <td width="20%">
-          <div class="account-state font-main text-center">
-            <span class="tag tag-success" *ngIf="!user.ban">
+          <div class="account-state font-main text-center" [ngSwitch]="user.state">
+            <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL">
               正常
             </span>
-            <span class="tag tag-warning">
+            <span class="tag tag-warning" *ngSwitchCase="UserStateEnum.NEED_EMAIL_VALIDATION">
               未验证
             </span>
-            <span class="tag tag-danger" *ngIf="user.ban" nbPopover="封禁原因为: {{user.ban}}" [nbPopoverMode]="'hover'">
+            <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
+                  nbPopover="封禁原因为: {{user.ban}}" [nbPopoverMode]="'hover'">
               账户状态: 被封禁
               <i class="far fa-question-circle"></i>
             </span>

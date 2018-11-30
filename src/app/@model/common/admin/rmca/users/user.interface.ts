@@ -1,5 +1,5 @@
-import {IUser} from '../../../user/user.interface';
+import {IUser, IUserExtend} from '../../../user/user.interface';
 
-export interface IAdminRmcaUsersUser extends IUser {
+export interface IAdminRmcaUsersUser extends IUserExtend {
   defaultRolename?: string;
 }

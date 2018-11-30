@@ -19,12 +19,12 @@ export class AuthUtilService {
   }
 
   public set user(user: IUserExtend) {
-    this._user = AuthUtilService.extendUserModel(user);
+    this._user = this.extendUserModel(user);
   }
 
   public async updateUser(): Promise<IUserExtend> {
     const user = await this.userService.getUserProfile();
-    this._user = AuthUtilService.extendUserModel(user);
+    this._user = this.extendUserModel(user);
     return this._user;
   }
 
@@ -40,7 +40,7 @@ export class AuthUtilService {
     return this._user.username === 'sdjnmxd' || this._user.username === 'bangbang93';
   }
 
-  private static extendUserModel(user: IUser): IUserExtend {
+  public extendUserModel(user: IUser): IUserExtend {
     const extendUser = user as IUserExtend;
 
     if (extendUser.ban) {
