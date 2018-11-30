@@ -27,7 +27,7 @@ export class RoleAddModalComponent implements OnInit {
       rolename: new FormControl(
         '', [
           Validators.required,
-          Validators.pattern('^[a-zA-Z0-9]{1,16}$'),
+          Validators.pattern('^[a-zA-Z0-9_-]{1,16}$'),
         ],
       ),
     });

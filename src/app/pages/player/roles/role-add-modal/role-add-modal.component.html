@@ -32,7 +32,7 @@
                *ngIf="
                roleForm.get('rolename').invalid && roleForm.get('rolename').touched &&
                roleForm.get('rolename').hasError('pattern')">
-          角色名格式不正确, 只允许 <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, 最大<code>16</code>个字符
+          角色名格式不正确, 只允许 <code>a-z</code>, <code>A-Z</code>, <code>0-9</code>, <code>-_</code>. 最大<code>16</code>个字符
         </small>
       </div>
     </div>
