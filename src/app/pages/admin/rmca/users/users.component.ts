@@ -50,11 +50,7 @@ export class UsersComponent implements OnInit {
       const usersResponse = await this.rmcaService.getUsers(page, limit);
       const users = usersResponse['data'];
       this.count = usersResponse['count'];
-      const usersExtend = [];
-      users.forEach((user: IUser) => {
-        usersExtend.push(this.authUtilService.extendUserModel(user));
-      });
-      this.users = usersExtend;
+      this.users = users.map((user: IUser) => this.authUtilService.extendUserModel(user));
     } catch (error) {
       this.noticeService.error('获取用户列表失败', '获取用户列表失败, 请刷新页面重试');
     }
