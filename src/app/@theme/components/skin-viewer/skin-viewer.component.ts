@@ -44,9 +44,6 @@ export class SkinViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
   public randomId: string;
   public SkinViewer: SkinViewer;
   public loading: boolean;
-  public readonly png: string = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAgCAYAAACinX6E' +
-    'AAAAUElEQVRoQ+3VAREAMAwCseLfdIV85qAcGbv4W/z+E4AGxBNAIF4AnyACCMQTQCBeACuAAALxBBCIF8AKIIBAPAEE4g' +
-    'WwAgggEE8AgXgBrMADMk4AIe75ViAAAAAASUVORK5CYII=';
 
   constructor() {
     this.randomId = Math.random().toString(36).substr(2);
@@ -87,6 +84,9 @@ export class SkinViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
     const skinViewer = new SkinViewer({
       domElement: document.getElementById(this.randomId),
     });
+
+    await this.loadImageToMemory(skin.skinSrc);
+    await this.loadImageToMemory(skin.capeSrc);
 
     skinViewer.skinUrl = skin.skinSrc;
     skinViewer.capeUrl = skin.capeSrc;
@@ -138,21 +138,21 @@ export class SkinViewerComponent implements AfterViewInit, OnChanges, OnDestroy 
   }
 
 
-  // private async loadImageToMemory(imageSrc: string) {
-  //   this.loading = true;
-  //   return new Promise((resolve, reject) => {
-  //     const img = new Image();
-  //     img.src = imageSrc;
-  //     img.onload = event => {
-  //       document.body.removeChild(img);
-  //       resolve(imageSrc);
-  //     };
-  //     img.onerror = () => {
-  //       document.body.removeChild(img);
-  //       resolve('');
-  //     };
-  //     document.body.appendChild(img);
-  //   });
-  // }
+  private async loadImageToMemory(imageSrc: string) {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.src = imageSrc;
+      img.onload = event => {
+        document.body.removeChild(img);
+        resolve(imageSrc);
+      };
+      img.onerror = () => {
+        document.body.removeChild(img);
+        resolve('');
+      };
+      document.body.appendChild(img);
+    });
+  }
 
 }
