@@ -7,22 +7,16 @@
     <ngx-auth-notice></ngx-auth-notice>
 
     <div class="form-group">
-      <label for="input-username" class="sr-only">用户名</label>
-      <input class="form-control" id="input-username" placeholder="用户名" autofocus
-             formControlName="username"
-             [class.form-control-success]="loginForm.get('username').valid && loginForm.get('username').touched"
-             [class.form-control-danger]="loginForm.get('username').invalid && loginForm.get('username').touched">
+      <label for="input-account" class="sr-only">用户名/邮箱</label>
+      <input class="form-control" id="input-account" placeholder="用户名/邮箱" autofocus
+             formControlName="account"
+             [class.form-control-success]="loginForm.get('account').valid && loginForm.get('account').touched"
+             [class.form-control-danger]="loginForm.get('account').invalid && loginForm.get('account').touched">
       <small class="form-text error"
              *ngIf="
-             loginForm.get('username').invalid && loginForm.get('username').touched &&
-             loginForm.get('username').hasError('required')">
-        请填写用户名
-      </small>
-      <small class="form-text error"
-             *ngIf="
-             loginForm.get('username').invalid && loginForm.get('username').touched &&
-             loginForm.get('username').hasError('pattern')">
-        用户名格式不正确
+             loginForm.get('account').invalid && loginForm.get('account').touched &&
+             loginForm.get('account').hasError('required')">
+        请填写用户名或邮箱
       </small>
     </div>
 

@@ -21,7 +21,7 @@ export class AuthService {
    */
   public login(username: string, password: string, isKeepLogin: boolean): Promise<IUser> {
     const params = new HttpParams()
-      .set('username', username)
+      .set('account', username)
       .set('password', password)
       .set('isKeepLogin', isKeepLogin.toString());
 

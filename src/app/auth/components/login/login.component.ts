@@ -29,10 +29,9 @@ export class LoginComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     this.loginForm = new FormGroup({
-      username: new FormControl(
+      account: new FormControl(
         '', [
           Validators.required,
-          Validators.pattern(/^[_a-zA-Z0-9]{6,16}$/),
         ],
       ),
       password: new FormControl(
@@ -57,7 +56,7 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
 
     try {
-      const user = await this.authService.login(loginForm.username, loginForm.password, loginForm.isKeepLogin);
+      const user = await this.authService.login(loginForm.account, loginForm.password, loginForm.isKeepLogin);
 
       this.notice.show(
         'success',
