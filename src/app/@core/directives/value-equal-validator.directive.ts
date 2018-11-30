@@ -7,7 +7,7 @@ export function valueEqualValidator(value: string): ValidatorFn {
       return null;
     } else {
       return {
-        isEqual: false,
+        isUnEqual: true,
       };
     }
   };

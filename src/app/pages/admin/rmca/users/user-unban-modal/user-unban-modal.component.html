@@ -3,12 +3,13 @@
       <i class="fa fa-check"></i>
       用户管理 - 解封用户
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
-  <form (ngSubmit)="unbanUser()" #unbanForm="ngForm" name="unbanForm">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'解封中 ...'">
+  <form autocomplete="off" role="form"
+        [formGroup]="unbanForm" (ngSubmit)="unbanUser(unbanForm.value)">
     <div class="alert alert-warning" role="alert">
       你正在试图解除<code>{{user.username}}</code>用户的封禁. <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
     </div>

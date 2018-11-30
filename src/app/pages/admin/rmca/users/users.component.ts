@@ -38,6 +38,21 @@ export class UsersComponent implements OnInit {
     this.getUsers(this.page, this.limit);
   }
 
+  public async getUsers(page: number, limit: number): Promise<void> {
+    this.loading = true;
+
+    try {
+      const users = await this.rmcaService.getUsers(page, limit);
+      this.users = users['data'];
+      this.count = users['count'];
+    } catch (error) {
+      this.noticeService.error('获取用户列表失败', '获取用户列表失败, 请刷新页面重试');
+    }
+
+    this.loading = false;
+  }
+
+
   // public filterAll(): void {
   //   this.page = 1;
   //   this.getUsers(this.page, this.limit);
@@ -60,19 +75,7 @@ export class UsersComponent implements OnInit {
   //     this.filter.type === this.filter.types.onlyBan);
   // }
 
-  public async getUsers(page: number, limit: number): Promise<void> {
-    this.loading = true;
 
-    try {
-      const users = await this.rmcaService.getUsers(page, limit);
-      this.users = users['data'];
-      this.count = users['count'];
-    } catch (error) {
-      this.noticeService.error('获取用户列表失败', '获取用户列表失败, 请刷新页面重试');
-    }
-
-    this.loading = false;
-  }
 
   public openBanUserModal(user: IAdminRmcaUsersUser): void {
     const activeModal = this.modalService.open(UserBanModalComponent, {

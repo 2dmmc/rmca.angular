@@ -1,39 +1,54 @@
 <div class="modal-header">
   <span>
-      <i class="fa fa-snapchat-ghost"></i>
+      <i class="fas fa-ghost"></i>
       用户管理 - 替身登录
   </span>
-  <button class="close" aria-label="Close" (click)="closeModal()">
-    <i class="fas fa-times" aria-hidden="true"></i>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body">
-  <form (ngSubmit)="enterImpersonate()" #enterImpersonateForm="ngForm" name="enterImpersonateForm">
-    <div class="alert alert-warning" role="alert">
-      <p>
-        你即将以替身的身份登录<code>{{user.username}}</code>用户的账户
-      </p>
-      <p>
-        进入替身模式后你将以该用户身份登录, 且可以完成该用户的所有功能操作
-      </p>
-      <p>
-        <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
-      </p>
-    </div>
-    <div class="input-group">
-      <input name='username' id="input-username" class="form-control" placeholder="请输入用户名称"
-             autofocus autocomplete=off
-             [(ngModel)]="username" #usernameInput="ngModel"
-             [class.form-control-danger]="usernameInput.invalid && usernameInput.touched || username != user.username"
-             [required]="true">
-      <div class="input-group-btn">
-        <button class="btn btn-success"
-                [class.btn-pulse]="submitted"
-                [disabled]="submitted || enterImpersonateForm.invalid || username != user.username">
-          <i class="fa fa-check"></i>
-          翻滚吧小牛牛!
-        </button>
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'替身中 ...'">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
+    <p>
+      你即将以替身的身份登录<code>{{user.username}}</code>用户的账户
+    </p>
+    <p>
+      进入替身模式后你将以该用户身份登录, 且可以完成该用户的所有功能操作
+    </p>
+    <p>
+      <strong>这是一个敏感操作!</strong> 请输入该用户名称来确认操作
+    </p>
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="impersonateForm" (ngSubmit)="enterImpersonate()">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" id="input-username" placeholder="请输入用户名称"
+               formControlName="username"
+               [class.form-control-success]="impersonateForm.get('username').valid && impersonateForm.get('username').touched"
+               [class.form-control-danger]="impersonateForm.get('username').invalid && impersonateForm.get('username').touched">
+        <div class="input-group-btn">
+          <button class="btn" nbButton [status]="'success'" type="submit"
+                  [disabled]="submitted || impersonateForm.invalid"
+                  [class.btn-pulse]="submitted">
+            <i class="fa fa-ghost"></i>
+            翻滚吧小牛牛!
+          </button>
+        </div>
       </div>
+      <small class="form-text error"
+             *ngIf="
+               impersonateForm.get('username').invalid && impersonateForm.get('username').touched &&
+               impersonateForm.get('username').hasError('required')">
+        请填写用户名称
+      </small>
+      <small class="form-text error"
+             *ngIf="
+               impersonateForm.get('username').invalid && impersonateForm.get('username').touched &&
+               impersonateForm.get('username').hasError('isUnEqual')">
+        用户名称不匹配
+      </small>
     </div>
   </form>
 </div>
