@@ -80,7 +80,7 @@
               未验证
             </span>
             <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
-                  nbPopover="封禁原因为: {{user.ban}}" [nbPopoverMode]="'hover'">
+                  nbPopover="{{user.ban}}" [nbPopoverMode]="'hover'">
               账户状态: 被封禁
               <i class="far fa-question-circle"></i>
             </span>
