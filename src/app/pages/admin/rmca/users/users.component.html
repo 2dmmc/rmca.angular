@@ -1,43 +1,40 @@
+<!--<div class="row">-->
+  <!--<div class="col-md-2">-->
+    <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
+         <!--class="btn-group btn-group-toggle btn-group-full-width">-->
+      <!--<label ngbButtonLabel class="btn btn-outline-success">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.all" (click)="filterAll()"> 全部-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="filterAdmin()"> 管理员-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyBan" (click)="filterBanned()"> 被封禁-->
+      <!--</label>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-md-2">-->
+
+  <!--</div>-->
+  <!--<div class="col-md-5">-->
+
+  <!--</div>-->
+  <!--<div class="col-md-3">-->
+    <!--<div class="input-group">-->
+      <!--<input class="form-control" placeholder="搜索用户名或电子邮箱">-->
+      <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-success" [class.btn-pulse]="loading" [disabled]="loading">-->
+        <!--Google-->
+        <!--</button>-->
+      <!--</span>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
 <nb-card [size]="'xlarge'" [nbSpinner]="loading" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'加载中...'">
   <nb-card-header>
     <span><i class="fas fa-users"></i> 用户管理</span>
   </nb-card-header>
   <nb-card-body>
-    <!--<div class="row">-->
-    <!--<div class="col-md-2">-->
-    <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
-    <!--class="btn-group btn-group-toggle btn-group-full-width">-->
-    <!--<label ngbButtonLabel class="btn btn-outline-success">-->
-    <!--<input ngbButton type="radio" name="type" [value]="filter.types.all" (click)="filterAll()"> 全部-->
-    <!--</label>-->
-    <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
-    <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="filterAdmin()"> 管理员-->
-    <!--</label>-->
-    <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
-    <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyBan" (click)="filterBanned()"> 被封禁-->
-    <!--</label>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="col-md-2">-->
-
-    <!--</div>-->
-    <!--<div class="col-md-5">-->
-
-    <!--</div>-->
-    <!--<div class="col-md-3">-->
-    <!--<div class="input-group">-->
-    <!--<input class="form-control" placeholder="搜索用户名或电子邮箱" [(ngModel)]="search.keyWord"-->
-    <!--(keydown)="searchKeyDown($event)">-->
-    <!--<span class="input-group-btn">-->
-    <!--<button class="btn btn-success"-->
-    <!--(click)="searchClick()" [class.btn-pulse]="search.submitted" [disabled]="search.submitted">-->
-    <!--Google-->
-    <!--</button>-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<hr>-->
     <table class="table text-nowrap">
       <thead>
       <tr>
