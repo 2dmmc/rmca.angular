@@ -11,7 +11,7 @@
       </button>
     </nb-sidebar-header>
     <ng-content select="nb-menu"></ng-content>
-    <ngx-skin-viewer [skin]="skinViewerInitOptions.skin"
+     <ngx-skin-viewer style="z-index: -1" [skin]="skinViewerInitOptions.skin"
                      [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
                      [animationOptions]="skinViewerInitOptions.animationOptions"
                      [controlOptions]="skinViewerInitOptions.controlOptions"
