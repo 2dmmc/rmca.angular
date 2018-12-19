@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 
-import {ThemeModule} from '../../../../@theme/theme.module';
+import {ThemeModule} from '../../../../../@theme/theme.module';
 
 import {AdminGrantModalComponent} from './admin-grant-modal/admin-grant-modal.component';
 import {AdminRevokeModalComponent} from './admin-revoke-modal/admin-revoke-modal.component';

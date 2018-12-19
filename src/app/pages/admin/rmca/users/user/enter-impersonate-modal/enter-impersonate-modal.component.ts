@@ -2,12 +2,12 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../../@core/services/notice.service';
-import {RmcaService} from '../../rmca.service';
+import {NoticeService} from '../../../../../../@core/services/notice.service';
+import {RmcaService} from '../../../rmca.service';
 
-import {IUserExtend} from '../../../../../@model/common/user/user.interface';
+import {IUserExtend} from '../../../../../../@model/common/user/user.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {valueEqualValidator} from '../../../../../@core/directives';
+import {valueEqualValidator} from '../../../../../../@core/directives/index';
 
 @Component({
   styleUrls: ['./enter-impersonate-modal.component.scss'],

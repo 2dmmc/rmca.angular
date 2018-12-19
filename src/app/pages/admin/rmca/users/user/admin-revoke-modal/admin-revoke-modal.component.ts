@@ -1,23 +1,23 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../../@core/services/notice.service';
-import {RmcaService} from '../../rmca.service';
+import {NoticeService} from '../../../../../../@core/services/notice.service';
+import {RmcaService} from '../../../rmca.service';
 
-import {IUserExtend} from '../../../../../@model/common/user/user.interface';
-import {valueEqualValidator} from '../../../../../@core/directives';
+import {IUser} from '../../../../../../@model/common/user/user.interface';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {valueEqualValidator} from '../../../../../../@core/directives/index';
 
 @Component({
-  styleUrls: ['./admin-grant-modal.component.scss'],
-  templateUrl: './admin-grant-modal.component.html',
+  styleUrls: ['./admin-revoke-modal.component.scss'],
+  templateUrl: './admin-revoke-modal.component.html',
 })
 
-export class AdminGrantModalComponent implements OnInit {
-  @Input() user: IUserExtend;
+export class AdminRevokeModalComponent implements OnInit {
+  @Input() user: IUser;
   @Output() event = new EventEmitter();
   public submitted: boolean;
-  public adminGrantForm: FormGroup;
+  public adminRevokeForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
               public activeModal: NgbActiveModal,
@@ -26,7 +26,7 @@ export class AdminGrantModalComponent implements OnInit {
   }
 
   public async ngOnInit() {
-    this.adminGrantForm = new FormGroup({
+    this.adminRevokeForm = new FormGroup({
       username: new FormControl(
         '', [
           Validators.required,
@@ -36,14 +36,14 @@ export class AdminGrantModalComponent implements OnInit {
     });
   }
 
-  public async grantAdmin(): Promise<void> {
+  public async revokeAdmin(): Promise<void> {
     this.submitted = true;
 
     try {
-      await this.rmcaService.grantAdmin(this.user._id);
+      await this.rmcaService.revokeAdmin(this.user._id);
       this.noticeService.success(
-        '授予管理员成功',
-        `授予 ${this.user.username} 管理员成功`,
+        '撤销管理员成功',
+        `撤销 ${this.user.username} 管理员成功`,
       );
       this.event.emit();
       this.activeModal.close();
