@@ -25,10 +25,10 @@
     <div class="form-group row">
       <label for="input-date" class="col-sm-2 col-form-label">类型</label>
       <div class="col-sm-10">
-        <span class="tag tag-success" *ngIf="financeHistoryForm.get('type').value === FinanceType.INCOME">
+        <span class="tag tag-success" *ngIf="financeHistoryForm.get('type').value === FinanceType.expend">
           收入
         </span>
-        <span class="tag tag-danger" *ngIf="financeHistoryForm.get('type').value === FinanceType.EXPEND">
+        <span class="tag tag-danger" *ngIf="financeHistoryForm.get('type').value === FinanceType.income">
           支出
         </span>
       </div>
