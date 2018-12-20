@@ -53,15 +53,13 @@ export class EnterImpersonateModalComponent implements OnInit {
             window.location.reload();
           });
       }, 3e3);
-    } catch (e) {
+    } catch (error) {
       const errorMessageMap = {
         409: '你当前已经处于替身模式下',
       };
-      const errorMessage = errorMessageMap[e.status] || `[${e.status}] ${e.message}`;
-      this.noticeService.error(
-        '替身登录失败',
-        errorMessage,
-      );
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('替身登录失败', errorMessage);
+      console.error(error);
     }
   }
 }

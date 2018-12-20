@@ -47,15 +47,13 @@ export class AdminGrantModalComponent implements OnInit {
       );
       this.event.emit();
       this.activeModal.close();
-    } catch (e) {
+    } catch (error) {
       const errorMessageMap = {
         404: '找不到这个用户',
       };
-      const errorMessage = errorMessageMap[e.status] || `[${e.status}] ${e.message}`;
-      this.noticeService.error(
-        '授予管理员失败',
-        errorMessage,
-      );
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('授予管理员失败', errorMessage);
+      console.error(error);
     }
 
     this.submitted = false;

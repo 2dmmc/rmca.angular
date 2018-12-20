@@ -61,7 +61,9 @@ export class ServerDetailModalComponent implements OnInit {
         dynmap: server.dynmap,
       });
     } catch (error) {
-      this.noticeService.error('获取服务器详情失败', '获取服务器详情失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取服务器详情失败', errorMessage);
       console.error(error);
     }
 
@@ -83,8 +85,7 @@ export class ServerDetailModalComponent implements OnInit {
       const errorMessageMap = {
         404: '服务器不存在',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('更新服务器详情失败', errorMessage);
       console.error(error);
     }

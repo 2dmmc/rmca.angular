@@ -62,8 +62,7 @@ export class ServerAddModalComponent implements OnInit {
       const errorMessageMap = {
         409: '服务器名已存在',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('新增服务器失败', errorMessage);
       console.error(error);
     }

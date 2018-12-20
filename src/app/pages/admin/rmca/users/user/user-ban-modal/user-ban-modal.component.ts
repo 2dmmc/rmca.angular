@@ -45,12 +45,13 @@ export class UserBanModalComponent implements OnInit {
       );
       this.event.emit(adminForm.reason);
       this.activeModal.close();
-    } catch (e) {
+    } catch (error) {
       const errorMessageMap = {
         404: '找不到这个用户',
       };
-      const errorMessage = errorMessageMap[e.status] || `[${e.status}] ${e.message}`;
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.message}`;
       this.noticeService.error('封禁用户失败', errorMessage);
+      console.error(error);
     }
 
     this.submitted = false;

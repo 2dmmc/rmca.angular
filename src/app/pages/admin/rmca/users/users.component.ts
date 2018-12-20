@@ -52,7 +52,10 @@ export class UsersComponent implements OnInit {
       this.count = usersResponse['count'];
       this.users = users.map((user: IUser) => this.authUtilService.extendUserModel(user));
     } catch (error) {
-      this.noticeService.error('获取用户列表失败', '获取用户列表失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取用户列表失败', errorMessage);
+      console.error(error);
     }
 
     this.loading = false;
@@ -122,10 +125,10 @@ export class UsersComponent implements OnInit {
   //     })
   //     .catch(error => {
   //       this.search.submitted = false;
-  //       this.noticeService.error(
-  //         '获取搜索结果失败',
-  //         `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-  //       );
+  //       const errorMessageMap = {};
+  //       const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+  //       this.noticeService.error('获取搜索结果失败', errorMessage);
+  //       console.error(error);
   //     });
   // }
 }

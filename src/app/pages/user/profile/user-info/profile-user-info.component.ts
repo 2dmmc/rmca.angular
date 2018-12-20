@@ -66,8 +66,7 @@ export class ProfileUserInfoComponent implements OnInit {
       const errorMessageMap = {
         412: '该邮箱已经验证',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系管理员';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('发送验证邮件失败', errorMessage);
       console.error(error);
     }
@@ -89,8 +88,7 @@ export class ProfileUserInfoComponent implements OnInit {
         403: '验证码和邮箱不匹配',
         404: '验证码无效或已被使用, 请重新验证邮箱',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系管理员';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('验证邮箱失败', errorMessage);
       console.error(error);
     }
@@ -108,7 +106,9 @@ export class ProfileUserInfoComponent implements OnInit {
         `更新个人资料成功, 你的邮箱已更换为${profileForm.email}`,
       );
     } catch (error) {
-      this.noticeService.error('更新个人资料失败', '更新个人资料失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('更新个人资料失败', errorMessage);
       console.error(error);
     }
 

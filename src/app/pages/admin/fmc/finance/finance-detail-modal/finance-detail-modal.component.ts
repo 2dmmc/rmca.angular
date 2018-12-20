@@ -78,7 +78,9 @@ export class FinanceDetailModalComponent implements OnInit {
         });
       }
     } catch (error) {
-      this.noticeService.error('获取财务历史失败', '获取财务历史失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取财务历史失败', errorMessage);
       console.error(error);
     }
 
@@ -94,7 +96,9 @@ export class FinanceDetailModalComponent implements OnInit {
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      this.noticeService.error('更新财务历史记录失败', '更新财务历史记录失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('更新财务历史记录失败', errorMessage);
       console.error(error);
     }
 

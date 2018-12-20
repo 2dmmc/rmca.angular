@@ -42,7 +42,10 @@ export class FinanceHistoryComponent implements OnInit {
       this.financeHistories = financeHistories['data'];
       this.count = financeHistories['count'];
     } catch (error) {
-      this.noticeService.error('获取捐助记录失败', '获取捐助记录失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取捐助记录失败', errorMessage);
+      console.error(error);
     }
 
     this.loading = false;

@@ -35,8 +35,9 @@ export class SocialGravatarStateComponent {
       const errorMessageMap = {
         406: '你还未绑定该社交账户',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('更换头像失败', errorMessage);
+      console.error(error);
     }
 
     this.updating = false;

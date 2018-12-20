@@ -49,12 +49,11 @@ export class RoleAddModalComponent implements OnInit {
         409: '角色名已存在',
         450: '当前角色数量超过用户账号限制',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('新增角色失败', errorMessage);
       console.error(error);
-
-      this.submitted = false;
     }
+
+    this.submitted = false;
   }
 }

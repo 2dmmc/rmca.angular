@@ -98,16 +98,14 @@ export class UserComponent implements OnInit {
     activeModal.componentInstance.user = user;
   }
 
-  private getUser(userId): void {
-    this.rmcaService.getUser(userId)
-      .then(user => {
-        this.user = user as IUser;
-      })
-      .catch(error => {
-        this.noticeService.error(
-          '获取用户详情失败, 请刷新页面重试',
-          `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-        );
-      });
+  private async getUser(userId): Promise<void> {
+    try {
+      this.user = await this.rmcaService.getUser(userId) as IUser;
+    } catch (error) {
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取用户详情失败', errorMessage);
+      console.error(error);
+    }
   }
 }

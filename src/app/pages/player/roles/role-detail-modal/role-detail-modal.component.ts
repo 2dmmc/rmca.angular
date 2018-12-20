@@ -156,13 +156,12 @@ export class RoleDetailModalComponent implements OnInit {
       const errorMessageMap = {
         415: '图片格式不符, 请上传png',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('更新角色详情失败', errorMessage);
       console.error(error);
-
-      this.submitted = false;
     }
+
+    this.submitted = false;
   }
 
   public async updateYggdrasilSkin(roleId): Promise<void> {
@@ -180,13 +179,12 @@ export class RoleDetailModalComponent implements OnInit {
         550: '服务器找不见这个uuid，理论上应该不会有这个情况',
         551: '你的正版账号还没设置皮肤',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('同步正版皮肤失败', errorMessage);
       console.error(error);
-
-      this.submitted = false;
     }
+
+    this.submitted = false;
   }
 
   private async file2base64(file: File): Promise<string> {

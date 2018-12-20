@@ -59,10 +59,10 @@ export class RolesComponent implements OnInit {
 
       this.roles = roles;
     } catch (error) {
-      this.noticeService.error(
-        '获取角色列表失败, 请刷新页面重试',
-        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-      );
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取角色列表失败', errorMessage);
+      console.error(error);
     }
   }
 
@@ -74,10 +74,10 @@ export class RolesComponent implements OnInit {
 
       return role;
     } catch (error) {
-      this.noticeService.error(
-        '获取角色详情失败, 请刷新页面重试',
-        `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`,
-      );
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取角色详情失败', errorMessage);
+      console.error(error);
     }
   }
 
@@ -88,23 +88,13 @@ export class RolesComponent implements OnInit {
         this.getRoles();
       })
       .catch(error => {
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 403: {
-            errorMessage = '角色属组不存在?';
-            break;
-          }
-          case 404: {
-            errorMessage = '角色不存在';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
+        const errorMessageMap = {
+          403: '角色属组不存在',
+          404: '角色不存在',
+        };
+        const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
         this.noticeService.error('更新默认角色失败', errorMessage);
+        console.error(error);
       });
   }
 

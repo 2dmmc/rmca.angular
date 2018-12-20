@@ -36,7 +36,7 @@ export class FinanceAddModalComponent implements OnInit {
         ],
       ),
       type: new FormControl(
-        FinanceType.INCOME, [
+        FinanceType.income, [
           Validators.required,
         ],
       ),
@@ -64,7 +64,9 @@ export class FinanceAddModalComponent implements OnInit {
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      this.noticeService.error('新增财务历史记录失败', '新增财务历史记录失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('新增财务历史记录失败', errorMessage);
       console.error(error);
     }
 

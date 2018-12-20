@@ -44,12 +44,13 @@ export class UserUnbanModalComponent implements OnInit {
       this.noticeService.success('解封用户成功', `解封 ${this.user.username} 用户成功`);
       this.event.emit();
       this.activeModal.close();
-    } catch (e) {
+    } catch (error) {
       const errorMessageMap = {
         404: '找不到这个用户',
       };
-      const errorMessage = errorMessageMap[e.status] || `[${e.status}] ${e.message}`;
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('解封用户失败', errorMessage);
+      console.error(error);
     }
   }
 }

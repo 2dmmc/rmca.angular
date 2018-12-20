@@ -33,7 +33,10 @@ export class ServersComponent implements OnInit {
     try {
       this.servers = await this.fmcService.getServers();
     } catch (error) {
-      this.noticeService.error('获取服务器列表失败', '获取服务器列表失败, 请刷新页面重试');
+      const errorMessageMap = {};
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('获取服务器列表失败', errorMessage);
+      console.error(error);
     }
   }
 

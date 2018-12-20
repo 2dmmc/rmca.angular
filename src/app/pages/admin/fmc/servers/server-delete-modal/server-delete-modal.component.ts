@@ -52,8 +52,7 @@ export class ServerDeleteModalComponent implements OnInit {
       const errorMessageMap = {
         404: '服务器不存在',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
       this.noticeService.error('删除服务器失败', errorMessage);
       console.error(error);
     }

@@ -59,12 +59,8 @@ export class ProfileUpdatePasswordComponent implements OnInit {
       const errorMessageMap = {
         403: '当前密码错误',
       };
-      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
-
-      this.noticeService.error(
-        '更新密码失败',
-        errorMessage,
-      );
+      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
+      this.noticeService.error('更新密码失败', errorMessage);
       console.error(error);
     }
 
