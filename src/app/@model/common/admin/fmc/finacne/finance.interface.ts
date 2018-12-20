@@ -18,8 +18,8 @@ export interface IFinanceRequest {
 }
 
 export enum FinanceType {
-  INCOME = 'income',
-  EXPEND = 'expend',
+  'income',
+  'expend',
 }
 
 export interface IUserFinance {

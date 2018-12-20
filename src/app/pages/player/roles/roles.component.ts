@@ -69,8 +69,8 @@ export class RolesComponent implements OnInit {
   public async getRole(roleId: string): Promise<IRole> {
     try {
       const role = await this.playerService.getRole(roleId) as IRole;
-      role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
-      role['cape'] = `/api/role/cape/${role._id}?${Math.random()}`;
+      role.skin = `/api/role/skin/${role._id}?${Math.random()}`;
+      role.cape = `/api/role/cape/${role._id}?${Math.random()}`;
 
       return role;
     } catch (error) {
