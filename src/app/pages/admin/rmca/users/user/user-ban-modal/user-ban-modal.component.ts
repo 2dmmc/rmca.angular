@@ -1,10 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../../@core/services/notice.service';
-import {RmcaService} from '../../rmca.service';
+import {NoticeService} from '../../../../../../@core/services/notice.service';
+import {RmcaService} from '../../../rmca.service';
 
-import {IUser} from '../../../../../@model/common/user/user.interface';
+import {IUser} from '../../../../../../@model/common/user/user.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({

@@ -7,8 +7,8 @@ import {RmcaService} from '../../rmca.service';
 
 import {IUser} from '../../../../../@model/common/user/user.interface';
 
-import {UserBanModalComponent} from '../user-ban-modal/user-ban-modal.component';
-import {UserUnbanModalComponent} from '../user-unban-modal/user-unban-modal.component';
+import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
+import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
 import {AdminGrantModalComponent} from './admin-grant-modal/admin-grant-modal.component';
 import {AdminRevokeModalComponent} from './admin-revoke-modal/admin-revoke-modal.component';
 import {EnterImpersonateModalComponent} from './enter-impersonate-modal/enter-impersonate-modal.component';

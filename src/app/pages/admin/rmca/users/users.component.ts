@@ -6,8 +6,8 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
 import {IAdminRmcaUsersUser} from '../../../../@model/common/admin/rmca/users/user.interface';
-import {UserBanModalComponent} from './user-ban-modal/user-ban-modal.component';
-import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.component';
+import {UserBanModalComponent} from './user/user-ban-modal/user-ban-modal.component';
+import {UserUnbanModalComponent} from './user/user-unban-modal/user-unban-modal.component';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {IUser, UserState} from '../../../../@model/common/user/user.interface';
 
