@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {PlayerService} from '../player.service';
+import {PlayerService} from '../../../@core/data/player.service';
 import {NoticeService} from '../../../@core/services/notice.service';
 
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';

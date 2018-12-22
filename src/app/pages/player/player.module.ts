@@ -9,7 +9,7 @@ import {RolesComponent} from './roles/roles.component';
 import {RoleAddModalComponent} from './roles/role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './roles/role-detail-modal/role-detail-modal.component';
 
-import {PlayerService} from './player.service';
+import {PlayerService} from '../../@core/data/player.service';
 
 const components = [
   PlayerComponent,

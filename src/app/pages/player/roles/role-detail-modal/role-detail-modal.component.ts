@@ -4,7 +4,7 @@ import {FormGroup} from '@angular/forms';
 
 import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {PlayerService} from '../../player.service';
+import {PlayerService} from '../../../../@core/data/player.service';
 
 import {IRole} from '../../../../@model/common/player/role/role.interface';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
