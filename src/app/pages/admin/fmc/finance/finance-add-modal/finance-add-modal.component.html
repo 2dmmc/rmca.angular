@@ -6,7 +6,7 @@
     <i class="fas fa-times"></i>
   </button>
 </div>
-<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'新增中...'">
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'success'" [nbSpinnerMessage]="'新增中...'">
   <form autocomplete="off" role="form"
         [formGroup]="financeHistoryForm" (ngSubmit)="addFinanceHistory(financeHistoryForm.value)">
 
