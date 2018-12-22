@@ -1,11 +1,11 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {NoticeService} from '../../../../../@core/services/notice.service';
 import {FmcService} from '../../../../../@core/data/fmc.service';
 
-import {IFinanceRequest, FinanceType} from '../../../../../@model/common/admin/fmc/finacne/finance.interface';
+import {FinanceType, IFinanceRequest} from '../../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 import * as moment from 'moment';
 import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
@@ -15,7 +15,7 @@ import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service'
   templateUrl: './finance-add-modal.component.html',
 })
 
-export class FinanceAddModalComponent implements OnInit {
+export class FinanceAddModalComponent implements OnInit, OnDestroy {
   @Output() event = new EventEmitter();
 
   public financeHistoryForm: FormGroup;
@@ -64,11 +64,14 @@ export class FinanceAddModalComponent implements OnInit {
       await this.fmcService.addFinanceHistory(financeForm);
       this.noticeService.success('新增成功', '新增财务历史记录成功');
       this.event.emit();
-      this.activeModal.close();
     } catch (error) {
       this.noticeUtilService.errorNotice(error, '新增财务历史记录失败');
     }
 
     this.submitted = false;
+  }
+
+  public ngOnDestroy() {
+    this.activeModal.close();
   }
 }
