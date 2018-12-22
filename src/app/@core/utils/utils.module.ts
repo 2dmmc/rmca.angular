@@ -3,10 +3,12 @@ import {CommonModule} from '@angular/common';
 
 import {AuthUtilService} from './auth-util.service';
 import {CommonUtilService} from './common-util.service';
+import {NoticeUtilService} from './notice-util.service';
 
 const SERVICES = [
   AuthUtilService,
   CommonUtilService,
+  NoticeUtilService,
 ];
 
 @NgModule({

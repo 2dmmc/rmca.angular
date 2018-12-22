@@ -8,6 +8,7 @@ import {FmcService} from '../../../../../@core/data/fmc.service';
 import {IFinanceRequest, FinanceType} from '../../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 import * as moment from 'moment';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./finance-add-modal.component.scss'],
@@ -23,6 +24,7 @@ export class FinanceAddModalComponent implements OnInit {
   public FinanceType = FinanceType;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private fmcService: FmcService) {
     this.submitted = false;
@@ -64,10 +66,7 @@ export class FinanceAddModalComponent implements OnInit {
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('新增财务历史记录失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '新增财务历史记录失败');
     }
 
     this.submitted = false;

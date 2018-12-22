@@ -10,6 +10,7 @@ import {IRole} from '../../../../@model/common/player/role/role.interface';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../../@theme/components';
 import {isSlimSkin} from 'skinview3d';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 interface ISkinFile {
   skin: File;
@@ -47,6 +48,7 @@ export class RoleDetailModalComponent implements OnInit {
 
   constructor(private playerService: PlayerService,
               private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public authUtilService: AuthUtilService,
               public activeModal: NgbActiveModal) {
     this.submitted = false;
@@ -156,9 +158,7 @@ export class RoleDetailModalComponent implements OnInit {
       const errorMessageMap = {
         415: '图片格式不符, 请上传png',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新角色详情失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新角色详情失败', errorMessageMap);
     }
 
     this.submitted = false;
@@ -179,9 +179,7 @@ export class RoleDetailModalComponent implements OnInit {
         550: '服务器找不见这个uuid，理论上应该不会有这个情况',
         551: '你的正版账号还没设置皮肤',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('同步正版皮肤失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '同步正版皮肤失败', errorMessageMap);
     }
 
     this.submitted = false;

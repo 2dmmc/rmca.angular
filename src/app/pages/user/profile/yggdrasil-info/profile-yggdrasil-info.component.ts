@@ -6,6 +6,7 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {IUser} from '../../../../@model/common/user/user.interface';
 import {ProfileComponent} from '../profile.component';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-profile-yggdrasil-info',
@@ -24,6 +25,7 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
 
   constructor(private userService: UserService,
               private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
     this.updating = false;
     this.submitted = false;
@@ -64,9 +66,7 @@ export class ProfileYggdrasilInfoComponent implements OnInit {
         403: '用户名或密码错误',
         406: 'no selectedProfile 一般不会出现，需要去mojang页面手工选择一下profile',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新正版验证状态失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新正版验证状态失败', errorMessageMap);
     }
 
     this.submitted = false;

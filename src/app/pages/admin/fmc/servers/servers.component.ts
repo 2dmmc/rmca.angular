@@ -9,6 +9,7 @@ import {ServerDetailModalComponent} from './server-detail-modal/server-detail-mo
 import {ServerDeleteModalComponent} from './server-delete-modal/server-delete-modal.component';
 
 import {IServer} from '../../../../@model/common/admin/fmc/server/server.interface';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-servers',
@@ -20,6 +21,7 @@ export class ServersComponent implements OnInit {
   servers: IServer[];
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private fmcService: FmcService) {
     this.servers = [];
@@ -33,10 +35,7 @@ export class ServersComponent implements OnInit {
     try {
       this.servers = await this.fmcService.getServers();
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取服务器列表失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取服务器列表失败');
     }
   }
 

@@ -4,6 +4,7 @@ import {DashboardService} from '../dashboard.service';
 import {NoticeService} from '../../../@core/services/notice.service';
 
 import {FinanceType, IFinanceResponse} from '../../../@model/common/admin/fmc/finacne/finance.interface';
+import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-finance-history',
@@ -22,6 +23,7 @@ export class FinanceHistoryComponent implements OnInit {
   public loading: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.pages = 1;
@@ -42,10 +44,7 @@ export class FinanceHistoryComponent implements OnInit {
       this.financeHistories = financeHistories['data'];
       this.count = financeHistories['count'];
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取捐助记录失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取捐助记录失败');
     }
 
     this.loading = false;

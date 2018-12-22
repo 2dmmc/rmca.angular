@@ -7,6 +7,7 @@ import {FmcService} from '../../../../../@core/data/fmc.service';
 import {IServer} from '../../../../../@model/common/admin/fmc/server/server.interface';
 
 import {valueEqualValidator} from '../../../../../@core/directives';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./server-delete-modal.component.scss'],
@@ -21,6 +22,7 @@ export class ServerDeleteModalComponent implements OnInit {
   public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private fmcService: FmcService) {
     this.submitted = false;
@@ -52,9 +54,7 @@ export class ServerDeleteModalComponent implements OnInit {
       const errorMessageMap = {
         404: '服务器不存在',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('删除服务器失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '删除服务器失败', errorMessageMap);
     }
 
     this.submitted = false;

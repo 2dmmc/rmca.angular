@@ -8,6 +8,7 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {UserService} from '../../../../@core/data/user.service';
 import {RouteService} from '../../../../@core/services/route.service';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-profile-user-info',
@@ -26,6 +27,7 @@ export class ProfileUserInfoComponent implements OnInit {
   public profileForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private userService: UserService,
               private routeService: RouteService,
               public authUtilService: AuthUtilService,
@@ -66,9 +68,7 @@ export class ProfileUserInfoComponent implements OnInit {
       const errorMessageMap = {
         412: '该邮箱已经验证',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('发送验证邮件失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '发送验证邮件失败', errorMessageMap);
     }
 
     this.updating = false;
@@ -88,9 +88,7 @@ export class ProfileUserInfoComponent implements OnInit {
         403: '验证码和邮箱不匹配',
         404: '验证码无效或已被使用, 请重新验证邮箱',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('验证邮箱失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '验证邮箱失败', errorMessageMap);
     }
 
     await this.updateUserProfile();
@@ -106,10 +104,7 @@ export class ProfileUserInfoComponent implements OnInit {
         `更新个人资料成功, 你的邮箱已更换为${profileForm.email}`,
       );
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新个人资料失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新个人资料失败');
     }
 
     this.submitted = false;

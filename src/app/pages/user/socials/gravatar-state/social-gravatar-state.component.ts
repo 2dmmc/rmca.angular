@@ -5,6 +5,7 @@ import {NoticeService} from '../../../../@core/services/notice.service';
 import {IUser} from '../../../../@model/common/user/user.interface';
 import {UserService} from '../../../../@core/data/user.service';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-social-gravatar-state',
@@ -17,6 +18,7 @@ export class SocialGravatarStateComponent {
 
   constructor(private userService: UserService,
               private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private authUtilService: AuthUtilService) {
     this.updating = false;
   }
@@ -35,9 +37,7 @@ export class SocialGravatarStateComponent {
       const errorMessageMap = {
         406: '你还未绑定该社交账户',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更换头像失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更换头像失败', errorMessageMap);
     }
 
     this.updating = false;

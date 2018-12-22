@@ -4,6 +4,7 @@ import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 
 import {PlayerService} from '../../player.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./role-add-modal.component.scss'],
@@ -16,8 +17,9 @@ export class RoleAddModalComponent implements OnInit {
   public roleForm: FormGroup;
   public submitted: boolean;
 
-  constructor(private playerService: PlayerService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private noticeService: NoticeService,
+              private playerService: PlayerService,
               public activeModal: NgbActiveModal) {
     this.submitted = false;
   }
@@ -49,9 +51,7 @@ export class RoleAddModalComponent implements OnInit {
         409: '角色名已存在',
         450: '当前角色数量超过用户账号限制',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('新增角色失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '新增角色失败', errorMessageMap);
     }
 
     this.submitted = false;

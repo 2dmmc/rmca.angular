@@ -4,6 +4,7 @@ import {NoticeService} from '../../../@core/services/notice.service';
 
 import {IUserExtend, UserState} from '../../../@model/common/user/user.interface';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
+import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
 
 export interface IUserExtendProfile extends IUserExtend {
   stateColor: StateColor;
@@ -24,6 +25,7 @@ export class ProfileComponent implements OnInit {
   user: IUserExtendProfile;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private authUtilService: AuthUtilService) {
   }
 
@@ -35,10 +37,7 @@ export class ProfileComponent implements OnInit {
     try {
       this.user = ProfileComponent.extendUser(await this.authUtilService.updateUser());
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取用户信息失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取用户信息失败');
     }
   }
 

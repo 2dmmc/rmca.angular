@@ -6,6 +6,7 @@ import {UserService} from '../../../../@core/data/user.service';
 import {NoticeService} from '../../../../@core/services/notice.service';
 
 import {passwordEqualValidator} from '../../../../@core/directives';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-profile-update-password',
@@ -19,6 +20,7 @@ export class ProfileUpdatePasswordComponent implements OnInit {
 
   constructor(private router: Router,
               private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private userService: UserService) {
     this.submitted = false;
   }
@@ -59,9 +61,7 @@ export class ProfileUpdatePasswordComponent implements OnInit {
       const errorMessageMap = {
         403: '当前密码错误',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新密码失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新密码失败', errorMessageMap);
     }
 
     this.submitted = false;

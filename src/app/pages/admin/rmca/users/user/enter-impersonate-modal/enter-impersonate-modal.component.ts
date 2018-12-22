@@ -8,6 +8,7 @@ import {RmcaService} from '../../../rmca.service';
 import {IUserExtend} from '../../../../../../@model/common/user/user.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {valueEqualValidator} from '../../../../../../@core/directives/index';
+import {NoticeUtilService} from '../../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./enter-impersonate-modal.component.scss'],
@@ -21,6 +22,7 @@ export class EnterImpersonateModalComponent implements OnInit {
   public impersonateForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private rmcaService: RmcaService,
               private router: Router) {
@@ -57,9 +59,9 @@ export class EnterImpersonateModalComponent implements OnInit {
       const errorMessageMap = {
         409: '你当前已经处于替身模式下',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('替身登录失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '替身登录失败', errorMessageMap);
     }
+
+    this.submitted = false;
   }
 }

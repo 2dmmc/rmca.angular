@@ -6,6 +6,7 @@ import {NoticeService} from '../../../../../@core/services/notice.service';
 import {FmcService} from '../../../../../@core/data/fmc.service';
 
 import {IServer} from '../../../../../@model/common/admin/fmc/server/server.interface';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./server-detail-modal.component.scss'],
@@ -20,6 +21,7 @@ export class ServerDetailModalComponent implements OnInit {
   public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private fmcService: FmcService) {
     this.submitted = false;
@@ -61,10 +63,7 @@ export class ServerDetailModalComponent implements OnInit {
         dynmap: server.dynmap,
       });
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取服务器详情失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取服务器详情失败');
     }
 
     this.submitted = false;
@@ -85,9 +84,7 @@ export class ServerDetailModalComponent implements OnInit {
       const errorMessageMap = {
         404: '服务器不存在',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新服务器详情失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新服务器详情失败', errorMessageMap);
     }
 
     this.submitted = false;

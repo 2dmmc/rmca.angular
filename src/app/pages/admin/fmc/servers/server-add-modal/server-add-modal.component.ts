@@ -6,6 +6,7 @@ import {NoticeService} from '../../../../../@core/services/notice.service';
 import {FmcService} from '../../../../../@core/data/fmc.service';
 
 import {IServer} from '../../../../../@model/common/admin/fmc/server/server.interface';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./server-add-modal.component.scss'],
@@ -19,6 +20,7 @@ export class ServerAddModalComponent implements OnInit {
   public submitted: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private fmcService: FmcService) {
     this.submitted = false;
@@ -62,9 +64,7 @@ export class ServerAddModalComponent implements OnInit {
       const errorMessageMap = {
         409: '服务器名已存在',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('新增服务器失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '新增服务器失败', errorMessageMap);
     }
 
     this.submitted = false;

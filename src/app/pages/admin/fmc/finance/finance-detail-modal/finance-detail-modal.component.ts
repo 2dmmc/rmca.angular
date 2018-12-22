@@ -13,6 +13,7 @@ import {
 } from '../../../../../@model/common/admin/fmc/finacne/finance.interface';
 
 import * as moment from 'moment';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./finance-detail-modal.component.scss'],
@@ -29,6 +30,7 @@ export class FinanceDetailModalComponent implements OnInit {
   public FinanceType = FinanceType;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private fmcService: FmcService,
               private dashboardService: DashboardService) {
@@ -78,10 +80,7 @@ export class FinanceDetailModalComponent implements OnInit {
         });
       }
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取财务历史失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取财务历史失败');
     }
 
     this.submitted = false;
@@ -96,10 +95,7 @@ export class FinanceDetailModalComponent implements OnInit {
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('更新财务历史记录失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '更新财务历史记录失败');
     }
 
     this.submitted = false;

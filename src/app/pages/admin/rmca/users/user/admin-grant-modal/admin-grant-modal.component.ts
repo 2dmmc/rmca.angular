@@ -7,6 +7,7 @@ import {RmcaService} from '../../../rmca.service';
 
 import {IUserExtend} from '../../../../../../@model/common/user/user.interface';
 import {valueEqualValidator} from '../../../../../../@core/directives/index';
+import {NoticeUtilService} from '../../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./admin-grant-modal.component.scss'],
@@ -20,6 +21,7 @@ export class AdminGrantModalComponent implements OnInit {
   public adminGrantForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private rmcaService: RmcaService) {
     this.submitted = false;
@@ -51,9 +53,7 @@ export class AdminGrantModalComponent implements OnInit {
       const errorMessageMap = {
         404: '找不到这个用户',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('授予管理员失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '授予管理员失败', errorMessageMap);
     }
 
     this.submitted = false;

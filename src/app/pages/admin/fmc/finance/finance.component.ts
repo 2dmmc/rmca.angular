@@ -8,6 +8,7 @@ import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.co
 import {FinanceDetailModalComponent} from './finance-detail-modal/finance-detail-modal.component';
 
 import {FinanceType, IFinanceResponse} from '../../../../@model/common/admin/fmc/finacne/finance.interface';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./finance.component.scss'],
@@ -25,6 +26,7 @@ export class FinanceComponent implements OnInit {
   public loading: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
@@ -47,10 +49,7 @@ export class FinanceComponent implements OnInit {
       this.financeHistories = financeHistories['data'];
       this.count = financeHistories['count'];
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取捐助记录失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取捐助记录失败');
     }
 
     this.loading = false;

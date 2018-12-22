@@ -6,6 +6,7 @@ import {RmcaService} from '../../../rmca.service';
 
 import {IUser} from '../../../../../../@model/common/user/user.interface';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {NoticeUtilService} from '../../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./user-ban-modal.component.scss'],
@@ -19,6 +20,7 @@ export class UserBanModalComponent implements OnInit {
   public banForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               public activeModal: NgbActiveModal,
               private rmcaService: RmcaService) {
     this.submitted = false;
@@ -49,9 +51,7 @@ export class UserBanModalComponent implements OnInit {
       const errorMessageMap = {
         404: '找不到这个用户',
       };
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.message}`;
-      this.noticeService.error('封禁用户失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '封禁用户失败', errorMessageMap);
     }
 
     this.submitted = false;

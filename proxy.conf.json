@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://172.16.0.1:4002",
+    "target": "https://rmca.bangbang93.com",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"

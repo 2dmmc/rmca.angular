@@ -10,6 +10,7 @@ import {UserBanModalComponent} from './user/user-ban-modal/user-ban-modal.compon
 import {UserUnbanModalComponent} from './user/user-unban-modal/user-unban-modal.component';
 import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
 import {IUser, UserState} from '../../../../@model/common/user/user.interface';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./users.component.scss'],
@@ -28,6 +29,7 @@ export class UsersComponent implements OnInit {
   public loading: boolean;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
               private router: Router,
@@ -52,10 +54,7 @@ export class UsersComponent implements OnInit {
       this.count = usersResponse['count'];
       this.users = users.map((user: IUser) => this.authUtilService.extendUserModel(user));
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取用户列表失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取用户列表失败');
     }
 
     this.loading = false;

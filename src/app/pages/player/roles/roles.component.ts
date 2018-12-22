@@ -9,6 +9,7 @@ import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.co
 
 import {IRole} from '../../../@model/common/player/role/role.interface';
 import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../@theme/components';
+import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./roles.component.scss'],
@@ -25,6 +26,7 @@ export class RolesComponent implements OnInit {
   };
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private playerService: PlayerService,
               private modalService: NgbModal) {
     this.roles = [];
@@ -59,10 +61,7 @@ export class RolesComponent implements OnInit {
 
       this.roles = roles;
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取角色列表失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取角色列表失败');
     }
   }
 
@@ -74,10 +73,7 @@ export class RolesComponent implements OnInit {
 
       return role;
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取角色详情失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取角色详情失败');
     }
   }
 
@@ -92,9 +88,7 @@ export class RolesComponent implements OnInit {
           403: '角色属组不存在',
           404: '角色不存在',
         };
-        const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-        this.noticeService.error('更新默认角色失败', errorMessage);
-        console.error(error);
+        this.noticeUtilService.errorNotice(error, '更新默认角色失败', errorMessageMap);
       });
   }
 

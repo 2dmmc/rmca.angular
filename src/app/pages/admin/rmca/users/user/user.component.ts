@@ -12,6 +12,7 @@ import {UserUnbanModalComponent} from './user-unban-modal/user-unban-modal.compo
 import {AdminGrantModalComponent} from './admin-grant-modal/admin-grant-modal.component';
 import {AdminRevokeModalComponent} from './admin-revoke-modal/admin-revoke-modal.component';
 import {EnterImpersonateModalComponent} from './enter-impersonate-modal/enter-impersonate-modal.component';
+import {NoticeUtilService} from '../../../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./user.component.scss'],
@@ -23,6 +24,7 @@ export class UserComponent implements OnInit {
   user: IUser;
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
               private activatedRoute: ActivatedRoute) {
@@ -102,10 +104,7 @@ export class UserComponent implements OnInit {
     try {
       this.user = await this.rmcaService.getUser(userId) as IUser;
     } catch (error) {
-      const errorMessageMap = {};
-      const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
-      this.noticeService.error('获取用户详情失败', errorMessage);
-      console.error(error);
+      this.noticeUtilService.errorNotice(error, '获取用户详情失败');
     }
   }
 }
