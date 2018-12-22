@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-
-import {NoticeService} from '../../../../../@core/services/notice.service';
 import {RmcaService} from '../../rmca.service';
 
 import {IUser} from '../../../../../@model/common/user/user.interface';
@@ -23,8 +21,7 @@ export class UserComponent implements OnInit {
   userId: string;
   user: IUser;
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
               private activatedRoute: ActivatedRoute) {

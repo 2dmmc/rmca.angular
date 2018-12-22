@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@core/services/notice.service';
 import {RmcaService} from '../rmca.service';
 
 import {IAdminRmcaUsersUser} from '../../../../@model/common/admin/rmca/users/user.interface';
@@ -28,8 +27,7 @@ export class UsersComponent implements OnInit {
 
   public loading: boolean;
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private rmcaService: RmcaService,
               private router: Router,

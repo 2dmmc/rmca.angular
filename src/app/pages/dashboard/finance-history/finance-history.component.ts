@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DashboardService} from '../dashboard.service';
-import {NoticeService} from '../../../@core/services/notice.service';
 
 import {FinanceType, IFinanceResponse} from '../../../@model/common/admin/fmc/finacne/finance.interface';
 import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
@@ -22,8 +21,7 @@ export class FinanceHistoryComponent implements OnInit {
 
   public loading: boolean;
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
     this.pages = 1;

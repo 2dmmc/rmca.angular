@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 
-import {NoticeService} from '../../../@core/services/notice.service';
-
 import {IUserExtend, UserState} from '../../../@model/common/user/user.interface';
 import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
@@ -24,8 +22,7 @@ export enum StateColor {
 export class ProfileComponent implements OnInit {
   user: IUserExtendProfile;
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private authUtilService: AuthUtilService) {
   }
 

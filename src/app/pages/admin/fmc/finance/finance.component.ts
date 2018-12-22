@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@core/services/notice.service';
 import {DashboardService} from '../../../dashboard/dashboard.service';
 
 import {FinanceAddModalComponent} from './finance-add-modal/finance-add-modal.component';
@@ -25,8 +24,7 @@ export class FinanceComponent implements OnInit {
 
   public loading: boolean;
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private dashboardService: DashboardService) {
     this.financeHistories = [];

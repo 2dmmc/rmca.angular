@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {NoticeService} from '../../../../@core/services/notice.service';
 import {FmcService} from '../../../../@core/data/fmc.service';
 
 import {ServerAddModalComponent} from './server-add-modal/server-add-modal.component';
@@ -20,8 +19,7 @@ import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 export class ServersComponent implements OnInit {
   servers: IServer[];
 
-  constructor(private noticeService: NoticeService,
-              private noticeUtilService: NoticeUtilService,
+  constructor(private noticeUtilService: NoticeUtilService,
               private modalService: NgbModal,
               private fmcService: FmcService) {
     this.servers = [];
