@@ -8,6 +8,9 @@ export class NoticeUtilService {
   }
 
   public errorNotice(error: any, action: string, errorMessageMap?: Object) {
+    if (!errorMessageMap) {
+      errorMessageMap = {};
+    }
     const errorMessage = errorMessageMap[error.status] || `[${error.status}] ${error.error.message}`;
     this.noticeService.error(action, errorMessage);
     console.error(error);
