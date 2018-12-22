@@ -5,7 +5,7 @@ export interface IFinanceResponse {
   accrual: number;
   balance: number;
   comment?: string;
-  user?: IUserFinance;
+  user?: IFinanceUser;
 }
 
 export interface IFinanceRequest {
@@ -22,7 +22,7 @@ export enum FinanceType {
   'expend' = 'expend',
 }
 
-export interface IUserFinance {
+export interface IFinanceUser {
   _id?: string;
   username: string;
 }
