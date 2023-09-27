@@ -36,8 +36,8 @@ jobs:
           IMAGE_NAME: bangbang93-docker.pkg.coding.net/mirrors/2dmmc/rmca.angular
         with:
           push: true
-          cache-from: type=registry,ref=${{ env.IMAGE_NAME }}:buildcache
-          cache-to: type=registry,ref=${{ env.IMAGE_NAME }},mode=max
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
