@@ -14,3 +14,4 @@ RUN npm run build:prod:aot
 FROM nginx AS release
 
 COPY --from=build /app/dist /usr/share/nginx/html
+COPY ./docker/nginx/default.conf /etc/nginx/conf.d/default.conf
