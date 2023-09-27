@@ -9,7 +9,7 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 COPY . .
-RUN npm run build:prod:aot
+RUN npm run build:prod
 
 FROM nginx AS release
 
