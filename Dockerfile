@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install build-essential python -y
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm i
+RUN npm ci
 
 COPY . .
 RUN npm run build:prod:aot
