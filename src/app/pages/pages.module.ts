@@ -4,10 +4,7 @@ import {PagesComponent} from './pages.component';
 import {DashboardModule} from './dashboard/dashboard.module';
 import {PagesRoutingModule} from './pages-routing.module';
 import {ThemeModule} from '../@theme/theme.module';
-
-import {UserService} from './user/user.service';
-import {AuthService} from '../auth/services/auth.service';
-import {AuthUtilService} from '../auth/services/auth-util.service';
+import {MiscellaneousModule} from './miscellaneous/miscellaneous.module';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -18,16 +15,11 @@ const PAGES_COMPONENTS = [
     PagesRoutingModule,
     ThemeModule,
     DashboardModule,
+    MiscellaneousModule,
   ],
   declarations: [
     ...PAGES_COMPONENTS,
   ],
-  providers: [
-    UserService,
-    AuthService,
-    AuthUtilService,
-  ],
 })
-
 export class PagesModule {
 }

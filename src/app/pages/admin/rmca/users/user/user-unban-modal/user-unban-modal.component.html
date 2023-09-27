@@ -1,0 +1,46 @@
+<div class="modal-header">
+  <span>
+      <i class="fa fa-check"></i>
+      用户管理 - 解封用户
+  </span>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'解封中 ...'">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
+    你正在试图解除<code>{{user.username}}</code>用户的封禁. <i>这是一个敏感操作!</i> 请输入该用户名称来确认操作
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="unbanForm" (ngSubmit)="unbanUser()">
+    <div class="form-group">
+      <div class="input-group">
+        <input class="form-control" id="input-username" placeholder="请输入用户名称"
+               formControlName="username"
+               [class.form-control-success]="unbanForm.get('username').valid && unbanForm.get('username').touched"
+               [class.form-control-danger]="unbanForm.get('username').invalid && unbanForm.get('username').touched">
+        <div class="input-group-btn">
+          <button class="btn" nbButton [status]="'success'" type="submit"
+                  [disabled]="submitted || unbanForm.invalid"
+                  [class.btn-pulse]="submitted">
+            <i class="fas fa-check"></i>
+            解封
+          </button>
+        </div>
+      </div>
+      <small class="form-text error"
+             *ngIf="
+               unbanForm.get('username').invalid && unbanForm.get('username').touched &&
+               unbanForm.get('username').hasError('required')">
+        请填写用户名称
+      </small>
+      <small class="form-text error"
+             *ngIf="
+               unbanForm.get('username').invalid && unbanForm.get('username').touched &&
+               unbanForm.get('username').hasError('isUnEqual')">
+        用户名称不匹配
+      </small>
+    </div>
+  </form>
+</div>

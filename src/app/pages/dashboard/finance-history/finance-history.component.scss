@@ -1,12 +1,4 @@
 @import '../../../@theme/styles/themes';
 @import '../../../@theme/styles/styles';
 
-@import '../../../@system/styles/table';
-@import '../../../@system/styles/extend/nb-card-header';
-
-.page-switcher {
-  input {
-    width: 7rem;
-    text-align: center;
-  }
-}
+@import '../../../@theme/styles/extend/nb-card';

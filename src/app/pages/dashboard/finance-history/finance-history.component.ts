@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 
 import {DashboardService} from '../dashboard.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+
+import {FinanceType, IFinanceResponse} from '../../../@model/common/admin/fmc/finacne/finance.interface';
+import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-finance-history',
@@ -10,50 +12,39 @@ import {NoticeService} from '../../../@system/notice/notice.service';
 })
 
 export class FinanceHistoryComponent implements OnInit {
-  financeHistories: any;
-  page: number;
-  limit: number;
+  public financeHistories: IFinanceResponse[];
+  public pages: number;
+  public limit: number;
+  public count: number;
 
-  constructor(private noticeService: NoticeService,
+  public FinanceType = FinanceType;
+
+  public loading: boolean;
+
+  constructor(private noticeUtilService: NoticeUtilService,
               private dashboardService: DashboardService) {
     this.financeHistories = [];
-    this.page = 1;
-    this.limit = 12;
+    this.pages = 1;
+    this.limit = 10;
+    this.count = 1;
+    this.loading = false;
   }
 
   public ngOnInit(): void {
-    this.getFinanceHistories(this.page, this.limit);
+    this.getFinanceHistories(this.pages, this.limit);
   }
 
-  public getFinanceHistories(page, limit): void {
-    this.dashboardService.getFinanceHistories(page, limit)
-      .then(financeHistory => {
-        this.financeHistories = financeHistory;
-      })
-      .catch(error => {
-        this.noticeService.error('获取捐助记录失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
-  }
+  public async getFinanceHistories(page: number, limit: number): Promise<void> {
+    this.loading = true;
 
-  public pageAdd(): void {
-    this.page++;
-    this.pageChange(this.page);
-  }
-
-  public pageKeyDown(event): void {
-    if (event.keyCode == 13) {
-      this.pageChange(this.page);
+    try {
+      const financeHistories = await this.dashboardService.getFinanceHistories(page, limit);
+      this.financeHistories = financeHistories['data'];
+      this.count = financeHistories['count'];
+    } catch (error) {
+      this.noticeUtilService.errorNotice(error, '获取捐助记录失败');
     }
-  }
 
-  public pageMinus(): void {
-    if (this.page > 1) {
-      this.page--;
-      this.pageChange(this.page);
-    }
-  }
-
-  private pageChange(page): void {
-    this.getFinanceHistories(page, this.limit);
+    this.loading = false;
   }
 }

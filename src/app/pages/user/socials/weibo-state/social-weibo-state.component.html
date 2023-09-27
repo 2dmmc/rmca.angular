@@ -1,31 +1,37 @@
-<nb-card>
+<nb-card [nbSpinner]="updating" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中 ...'"
+         [accent]="user.accounts.weibo ? 'success' : 'warning'" [size]="'small'">
   <nb-card-header>
-    <span><i class="fa fa-weibo"></i> 新浪微博账户</span>
-    <span class="tag tag-success" *ngIf="user.accounts.weibo">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user.accounts.weibo">未授权</span>
+    <span><i class="fab fa-weibo"></i> 新浪微博账户</span>
   </nb-card-header>
   <nb-card-body>
-    <div class="alert alert-warning" role="alert" *ngIf="!user.accounts.weibo">
-      你还未授权新浪微博账户, 授权后你将可以:
+    <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="!user.accounts.weibo">
+      你还未授权新浪微博账户,
+      <a href="javascript:void(0)" class="alert-link" (click)="oAuth()">授权新浪微博账户</a>
+      后可使用以下功能:
       <ul>
         <li>使用新浪微博账户作为RMCA系统头像</li>
         <li>通过新浪微博账户登录RMCA系统</li>
         <li>在新浪相关App内打开RMCA系统可通过微博账户一键登录</li>
       </ul>
-      <a href="javascript:void(0)" (click)="oAuth()">去新浪微博授权</a>
-    </div>
-    <div *ngIf="user.accounts.weibo" class="user-container">
-      <div class="user-picture">
-        <div class="background image" style.background-image="url({{user.accounts.weibo.avatar}})"></div>
-      </div>
-      <div class="user-name">
-        {{user.accounts.weibo.name}}
+    </ngb-alert>
+
+    <div class="user-info-container" *ngIf="user.accounts.weibo">
+      <div class="user-container">
+        <div class="user-picture">
+          <div class="background image" style.background-image="url({{user.accounts.weibo.avatar}})"></div>
+        </div>
+        <div class="user-name">
+          <span>
+            {{user.accounts.weibo.name}}
+          </span>
+        </div>
       </div>
     </div>
   </nb-card-body>
   <nb-card-footer *ngIf="user.accounts.weibo">
-    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
-      <i class="fa fa-image"></i>
+    <button nbButton [status]="'success'" [fullWidth]="true"
+            (click)="updateUserAvatar()">
+      <i class="fas fa-image"></i>
       使用该头像作为RMCA头像
     </button>
   </nb-card-footer>

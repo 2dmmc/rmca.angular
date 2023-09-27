@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
   `,
 })
 
-export class NbAuthBlockComponent {
+export class AuthBlockComponent {
   constructor() {
   }
 }

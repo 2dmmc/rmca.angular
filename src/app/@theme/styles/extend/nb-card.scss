@@ -1,0 +1,19 @@
+nb-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  i {
+    margin-right: 0.5rem;
+  }
+}
+
+nb-card-footer {
+  button[nbButton] {
+    margin-right: 0.75rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

@@ -1,0 +1,84 @@
+<div class="modal-header">
+  <span>
+    <i class="far fa-edit"></i>
+    财务历史管理 - 财务详情
+  </span>
+  <button class="close" (click)="activeModal.close()">
+    <i class="fas fa-times" aria-hidden="true"></i>
+  </button>
+</div>
+<div class="modal-body" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中...'">
+  <ngb-alert [dismissible]="false" [type]="'warning'">
+    日期, 财务类型, 金额, 仅提供展示, 无法修改
+  </ngb-alert>
+
+  <form autocomplete="off" role="form"
+        [formGroup]="financeHistoryForm" (ngSubmit)="updateFinanceHistory(financeHistoryForm.value)">
+    <div class="form-group row">
+      <label for="input-date" class="col-sm-2 col-form-label">日期</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="input-date" placeholder="日期" type="date" readonly
+               [value]="financeHistoryForm.get('date').value">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input-date" class="col-sm-2 col-form-label">类型</label>
+      <div class="col-sm-10">
+        <span class="tag tag-success" *ngIf="financeHistoryForm.get('type').value === FinanceType.income">
+          收入
+        </span>
+        <span class="tag tag-danger" *ngIf="financeHistoryForm.get('type').value === FinanceType.expend">
+          支出
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input-accrual" class="col-sm-2 col-form-label">金额</label>
+      <div class="col-sm-10">
+        <div class="input-group">
+          <input class="form-control" id="input-accrual" placeholder="金额" type="number" readonly
+                 [value]="financeHistoryForm.get('accrual').value">
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <div class="form-group row">
+      <label for="input-comment" class="col-sm-2 col-form-label">备注</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="input-comment" placeholder="备注"
+               formControlName="comment"
+               [class.form-control-success]="financeHistoryForm.get('comment').valid && financeHistoryForm.get('comment').touched"
+               [class.form-control-danger]="financeHistoryForm.get('comment').invalid && financeHistoryForm.get('comment').touched">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="input-user-id" class="col-sm-2 col-form-label">关联用户</label>
+      <div class="col-sm-10">
+        <input class="form-control" id="input-user-id" placeholder="与之关联的用户"
+               formControlName="userId"
+               [class.form-control-success]="financeHistoryForm.get('userId').valid && financeHistoryForm.get('userId').touched"
+               [class.form-control-danger]="financeHistoryForm.get('userId').invalid && financeHistoryForm.get('userId').touched">
+      </div>
+    </div>
+
+    <div class="form-group submit-group row">
+      <div class="offset-sm-2 col-sm-10">
+        <button nbButton [status]="'success'" type="submit"
+                [disabled]="submitted || financeHistoryForm.invalid"
+                [class.btn-pulse]="submitted">
+          <i class="far fa-edit"></i>
+          更新财务历史记录
+        </button>
+        <button nbButton [status]="'danger'" type="button"
+                (click)="activeModal.close()">
+          <i class="fas fa-times"></i>
+          取消
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

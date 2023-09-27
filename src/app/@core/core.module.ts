@@ -1,25 +1,30 @@
 import {ModuleWithProviders, NgModule, Optional, SkipSelf} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NbAuthModule, NbDummyAuthProvider} from '@nebular/auth';
 
 import {throwIfAlreadyLoaded} from './module-import-guard';
+import {ServicesModule} from './services/services.module';
 import {DataModule} from './data/data.module';
+import {UtilsModule} from './utils/utils.module';
+import {GuardsModules} from './guards/guards.modules';
 
-const NB_CORE_PROVIDERS = [
+import {RmbPipe} from './pipes';
+
+import {PasswordEqualValidatorDirective, ValueEqualValidatorDirective} from './directives';
+
+export const RMCA_CORE_PROVIDERS = [
+  ...ServicesModule.forRoot().providers,
   ...DataModule.forRoot().providers,
-  ...NbAuthModule.forRoot({
-    providers: {
-      email: {
-        service: NbDummyAuthProvider,
-        config: {
-          delay: 3000,
-          login: {
-            rememberMe: true,
-          },
-        },
-      },
-    },
-  }).providers,
+  ...UtilsModule.forRoot().providers,
+  ...GuardsModules.forRoot().providers,
+];
+
+const PIPES = [
+  RmbPipe,
+];
+
+const DIRECTIVES = [
+  PasswordEqualValidatorDirective,
+  ValueEqualValidatorDirective,
 ];
 
 @NgModule({
@@ -27,9 +32,12 @@ const NB_CORE_PROVIDERS = [
     CommonModule,
   ],
   exports: [
-    NbAuthModule,
+    ...PIPES,
   ],
-  declarations: [],
+  declarations: [
+    ...PIPES,
+    ...DIRECTIVES,
+  ],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
@@ -40,7 +48,7 @@ export class CoreModule {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
       providers: [
-        ...NB_CORE_PROVIDERS,
+        ...RMCA_CORE_PROVIDERS,
       ],
     };
   }

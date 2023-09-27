@@ -1,30 +1,13 @@
 @import '../../../../@theme/styles/themes';
 @import '../../../../@theme/styles/styles';
-@import '../../../../@system/styles/extend/nb-card-header';
-@import '../../../../@system/styles/table';
-@import '../../../../@system/styles/tag';
+
+@import '../../../../@theme/styles/extend/nb-card';
+@import '../../../../@theme/styles/extend/tag';
 
 .tag {
   margin-right: 0.5rem;
 
   &:last-child {
     margin-right: 0;
-  }
-}
-
-table {
-  button {
-    margin-right: 0.5rem;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-
-.page-switcher {
-  input {
-    width: 7rem;
-    text-align: center;
   }
 }

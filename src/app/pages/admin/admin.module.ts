@@ -4,7 +4,6 @@ import {ThemeModule} from '../../@theme/theme.module';
 
 import {AdminRoutingModule} from './admin-routing.module';
 import {AdminComponent} from './admin.component';
-import {ServerService} from './server/server.service';
 
 const components = [
   AdminComponent,
@@ -17,9 +16,6 @@ const components = [
   ],
   declarations: [
     ...components,
-  ],
-  providers: [
-    ServerService,
   ],
 })
 export class AdminModule {

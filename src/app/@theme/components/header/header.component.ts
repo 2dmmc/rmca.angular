@@ -1,28 +1,16 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {NbMenuService, NbSidebarService} from '@nebular/theme';
-import {UserService} from '../../../pages/user/user.service';
-
-import {NoticeService} from '../../../@system/notice/notice.service';
-
-import {User} from '../../../@model/user/user.interface';
-import {DefaultUser} from '../../../@model/user/user.const';
-import {UserCacheService} from '../../../@system/cache/service/user-cache.service';
+import {IUserExtend} from '../../../@model/common/user/user.interface';
+import {AuthUtilService} from '../../../@core/utils/auth-util.service';
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
-  providers: [
-    UserService,
-    NoticeService,
-  ],
 })
 export class HeaderComponent implements OnInit {
-
-  @Input() position = 'normal';
-
-  user: User;
+  user: IUserExtend;
 
   userMenu = [{
     title: '个人中心',
@@ -34,21 +22,15 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userCacheService: UserCacheService) {
-    this.user = DefaultUser;
+              private authUtilService: AuthUtilService) {
   }
 
   ngOnInit() {
-    this.user = this.userCacheService.getCache();
+    this.user = this.authUtilService.user;
   }
 
   toggleSidebar(): boolean {
     this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
-  }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
     return false;
   }
 

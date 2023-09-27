@@ -1,30 +1,36 @@
-<nb-card>
+<nb-card [nbSpinner]="updating" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中 ...'"
+         [accent]="user.email ? 'success' : 'warning'" [size]="'small'">
   <nb-card-header>
-    <span><i class="fa fa-chain"></i> Gravatar账户</span>
-    <span class="tag tag-success" *ngIf="user.email">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user.email">未授权</span>
+    <span><i class="fas fa-link"></i> Gravatar账户</span>
   </nb-card-header>
   <nb-card-body>
-    <div class="alert alert-warning" role="alert" *ngIf="!user.email">
-      你还未填写邮箱, 填写后即可自动获得授权, 授权后你将可以:
+    <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="!user.email">
+      你还未填写邮箱,
+      <a routerLink="../profile" class="alert-link">填写邮箱</a>
+      后即可自动获得授权, 权后后可使用以下功能:
       <ul>
         <li>使用Gravatar账户作为RMCA系统头像</li>
-        <li>关于Gravatar的具体信息, 请查看<a target="_blank" href="https://cn.gravatar.com/">Gravator</a></li>
+        <li>关于Gravatar的具体信息, 请查看<a class="alert-link" target="_blank" href="https://cn.gravatar.com/">Gravator</a></li>
       </ul>
-      <a routerLink="../profile">去个人中心</a>
-    </div>
-    <div *ngIf="user.email" class="user-container">
-      <div class="user-picture">
-        <div class="background image" style.background-image="url({{user.accounts.gravatar.avatar}})"></div>
-      </div>
-      <div class="user-name">
-        {{user.email}}
+    </ngb-alert>
+
+    <div class="user-info-container" *ngIf="user.email">
+      <div class="user-container">
+        <div class="user-picture">
+          <div class="background image" style.background-image="url({{user.accounts.gravatar.avatar}})"></div>
+        </div>
+        <div class="user-name">
+          <span>
+            {{user.email}}
+          </span>
+        </div>
       </div>
     </div>
   </nb-card-body>
   <nb-card-footer *ngIf="user.email">
-    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
-      <i class="fa fa-image"></i>
+    <button nbButton [status]="'success'" [fullWidth]="true"
+            (click)="updateUserAvatar()">
+      <i class="fas fa-image"></i>
       使用该头像作为RMCA头像
     </button>
   </nb-card-footer>

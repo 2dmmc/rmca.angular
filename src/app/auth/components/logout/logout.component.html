@@ -1,11 +1,4 @@
 <ngx-auth-block>
   <h2 class="title">RMCA - 登出</h2>
-  <div class="alert alert-info" role="alert"
-       [class.alert-info]="notice.type == 'info'"
-       [class.alert-success]="notice.type == 'success'"
-       [class.alert-danger]="notice.type == 'danger'"
-       *ngIf="notice">
-    <div><strong>{{notice.title}}</strong></div>
-    <div>{{notice.message}}</div>
-  </div>
+  <ngx-auth-notice></ngx-auth-notice>
 </ngx-auth-block>

@@ -1,43 +1,40 @@
-<nb-card>
+<!--<div class="row">-->
+  <!--<div class="col-md-2">-->
+    <!--<div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup-->
+         <!--class="btn-group btn-group-toggle btn-group-full-width">-->
+      <!--<label ngbButtonLabel class="btn btn-outline-success">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.all" (click)="filterAll()"> 全部-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="filterAdmin()"> 管理员-->
+      <!--</label>-->
+      <!--<label ngbButtonLabel class="btn btn-outline-danger">-->
+        <!--<input ngbButton type="radio" name="type" [value]="filter.types.onlyBan" (click)="filterBanned()"> 被封禁-->
+      <!--</label>-->
+    <!--</div>-->
+  <!--</div>-->
+  <!--<div class="col-md-2">-->
+
+  <!--</div>-->
+  <!--<div class="col-md-5">-->
+
+  <!--</div>-->
+  <!--<div class="col-md-3">-->
+    <!--<div class="input-group">-->
+      <!--<input class="form-control" placeholder="搜索用户名或电子邮箱">-->
+      <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-success" [class.btn-pulse]="loading" [disabled]="loading">-->
+        <!--Google-->
+        <!--</button>-->
+      <!--</span>-->
+    <!--</div>-->
+  <!--</div>-->
+<!--</div>-->
+<nb-card [size]="'xlarge'" [nbSpinner]="loading" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'加载中...'">
   <nb-card-header>
-    <span><i class="fa fa-users"></i> 用户管理</span>
+    <span><i class="fas fa-users"></i> 用户管理</span>
   </nb-card-header>
   <nb-card-body>
-    <div class="row">
-      <div class="col-md-2">
-        <div [(ngModel)]="filter.type" [ngModelOptions]="{standalone: true}" ngbRadioGroup
-             class="btn-group btn-toggle-group btn-outline-toggle-group btn-group-full-width btn-toggle-radio-group">
-          <label ngbButtonLabel class="btn btn-outline-success">
-            <input ngbButton type="radio" name="type" [value]="filter.types.all" (click)="filterAll()"> 全部
-          </label>
-          <label ngbButtonLabel class="btn btn-outline-danger">
-            <input ngbButton type="radio" name="type" [value]="filter.types.onlyAdmin" (click)="filterAdmin()"> 管理员
-          </label>
-          <label ngbButtonLabel class="btn btn-outline-danger">
-            <input ngbButton type="radio" name="type" [value]="filter.types.onlyBan" (click)="filterBanned()"> 被封禁
-          </label>
-        </div>
-      </div>
-      <div class="col-md-2">
-
-      </div>
-      <div class="col-md-5">
-
-      </div>
-      <div class="col-md-3">
-        <div class="input-group">
-          <input class="form-control" placeholder="搜索用户名或电子邮箱" [(ngModel)]="search.keyWord"
-                 (keydown)="searchKeyDown($event)">
-          <span class="input-group-btn">
-            <button class="btn btn-success"
-                    (click)="searchClick()" [class.btn-pulse]="search.submitted" [disabled]="search.submitted">
-              Google
-            </button>
-          </span>
-        </div>
-      </div>
-    </div>
-    <hr>
     <table class="table text-nowrap">
       <thead>
       <tr>
@@ -45,66 +42,62 @@
         <th>用户名</th>
         <th>默认角色名</th>
         <th>电子邮箱</th>
-        <th>状态</th>
-        <th>操作</th>
+        <th class="text-center">状态</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of users">
-        <td width="15%">
+      <tr *ngFor="let user of users" (dblclick)="goToUserDetail(user._id)">
+        <td width="20%">
           <span class="font-secondary">
               {{user._id}}
           </span>
         </td>
-        <td width="10%">
-          {{user.username}}
-        </td>
-        <td width="10%">
-          {{user.defaultRolename}}
+        <td width="20%">
+          <span class="font-secondary">
+            {{user.username}}
+          </span>
         </td>
         <td width="20%">
+          <span class="font-secondary">
+            {{user.defaultRolename}}
+          </span>
+        </td>
+        <td width="20%">
+          <span class="font-secondary">
+            <a href="mail://{{user.email}}">{{user.email}}</a>
+          </span>
           <!--TODO 修正不安全的URL-->
-          <a href="mail://{{user.email}}">{{user.email}}</a>
         </td>
         <td width="20%">
-          <div class="account-state">
-            <span class="tag tag-success" *ngIf="!user.ban">未封禁</span>
-            <span class="tag tag-danger" *ngIf="user.ban">已封禁: {{user.ban}}</span>
-            <span class="tag tag-danger" *ngIf="user.admin">管理员</span>
-          </div>
-        </td>
-        <td width="20%" class="text-center">
-          <div class="action">
-            <button class="btn btn-hero-info btn-tn" (click)="goToUserDetail(user._id)">
-              <i class="fa fa-pencil"></i>
-              编辑
-            </button>
-            <button class="btn btn-hero-danger btn-tn" *ngIf="!user.ban" (click)="banUser(user)">
-              <i class="fa fa-ban"></i>
-              封禁用户
-            </button>
-            <button class="btn btn-hero-success btn-tn" *ngIf="user.ban" (click)="unBanUser(user)">
-              <i class="fa fa-check"></i>
-              解封用户
-            </button>
+          <div class="account-state font-main text-center" [ngSwitch]="user.state">
+            <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL">
+              正常
+            </span>
+            <span class="tag tag-warning" *ngSwitchCase="UserStateEnum.NEED_EMAIL_VALIDATION">
+              未验证
+            </span>
+            <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
+                  nbPopover="{{user.ban}}" [nbPopoverMode]="'hover'">
+              账户状态: 被封禁
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-info" *ngIf="user.admin">
+              管理员
+            </span>
           </div>
         </td>
       </tr>
       <tr *ngIf="users.length <= 0">
-        <td colspan="6">无更多数据</td>
+        <td colspan="5">无更多数据</td>
       </tr>
       </tbody>
     </table>
   </nb-card-body>
   <nb-card-footer class="text-center">
-    <div class="page-switcher btn-group">
-      <button type="button" class="btn btn-success" (click)="pageMinus()">
-        上一页
-      </button>
-      <input class="form-control" [(ngModel)]="page" (keydown)="pageKeyDown($event)">
-      <button type="button" class="btn btn-success" (click)="pageAdd()">
-        下一页
-      </button>
-    </div>
+    <ngb-pagination class="d-flex justify-content-center" [ellipses]="true" [maxSize]="5" [rotate]="true"
+                    [directionLinks]="false"
+                    [(collectionSize)]="count" [(page)]="page" [(pageSize)]="limit"
+                    (pageChange)="getUsers(page, limit)">
+    </ngb-pagination>
   </nb-card-footer>
 </nb-card>

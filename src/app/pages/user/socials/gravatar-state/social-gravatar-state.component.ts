@@ -1,9 +1,11 @@
 import {Component, Input} from '@angular/core';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {User} from '../../../../@model/user/user.interface';
-import {UserService} from '../../user.service';
+import {IUser} from '../../../../@model/common/user/user.interface';
+import {UserService} from '../../../../@core/data/user.service';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-social-gravatar-state',
@@ -11,30 +13,33 @@ import {UserService} from '../../user.service';
   templateUrl: './social-gravatar-state.component.html',
 })
 export class SocialGravatarStateComponent {
-  @Input() user: User;
+  @Input() user: IUser;
+  public updating: boolean;
 
   constructor(private userService: UserService,
-              private noticeService: NoticeService) {
+              private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
+              private authUtilService: AuthUtilService) {
+    this.updating = false;
   }
 
   public async updateUserAvatar() {
+    this.updating = true;
+
     try {
       await this.userService.updateUserAvatar('gravatar');
-      this.noticeService.success('更换头像成功', 'RMCA头像已经更换为 Gravatar 头像');
+      this.noticeService.success(
+        '更换头像成功',
+        'RMCA头像已经更换为 Gravatar 头像',
+      );
+      this.authUtilService.updateUser();
     } catch (error) {
-      let errorMessage = '';
-
-      switch (error.status) {
-        case 406: {
-          errorMessage = '你还未绑定该社交账户';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
-
-      this.noticeService.error('更换头像失败', errorMessage);
+      const errorMessageMap = {
+        406: '你还未绑定该社交账户',
+      };
+      this.noticeUtilService.errorNotice(error, '更换头像失败', errorMessageMap);
     }
+
+    this.updating = false;
   }
 }

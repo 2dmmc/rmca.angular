@@ -1,10 +1,14 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Component, forwardRef, Inject, Input, OnInit} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
-import {UserService} from '../../user.service';
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {IUserExtendProfile, ProfileComponent} from '../profile.component';
+import {UserState} from '../../../../@model/common/user/user.interface';
 
-import {User} from '../../../../@model/user/user.interface';
+import {NoticeService} from '../../../../@core/services/notice.service';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {UserService} from '../../../../@core/data/user.service';
+import {RouteService} from '../../../../@core/services/route.service';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
 @Component({
   selector: 'ngx-profile-user-info',
@@ -13,79 +17,108 @@ import {User} from '../../../../@model/user/user.interface';
 })
 
 export class ProfileUserInfoComponent implements OnInit {
-  @Input() user: User;
-  @Output() needGetUserProfile = new EventEmitter();
-  submitted: boolean;
+  @Input() user: IUserExtendProfile;
+  public UserStateEnum = UserState;
+
+  public updating: boolean;
+  public submitted: boolean;
+  public flaped: boolean;
+
+  public profileForm: FormGroup;
 
   constructor(private noticeService: NoticeService,
-              private activatedRoute: ActivatedRoute,
-              private userService: UserService) {
+              private noticeUtilService: NoticeUtilService,
+              private userService: UserService,
+              private routeService: RouteService,
+              public authUtilService: AuthUtilService,
+              @Inject(forwardRef(() => ProfileComponent)) private _parent: ProfileComponent) {
+    this.updating = false;
     this.submitted = false;
+    this.flaped = false;
   }
 
-  public ngOnInit(): void {
-    this.activatedRoute.queryParams.subscribe(queryParams => {
-      if (queryParams.hash) {
-        // TODO 验证失败与否移除掉URL中的params
-        this.verifyEmail(queryParams.hash);
-      }
+  public async ngOnInit(): Promise<void> {
+    const hash = await this.routeService.getQuery('hash');
+    if (hash) {
+      await this.verifyEmail(hash);
+      await this.routeService.removeQuery('hash');
+    }
+
+    this.profileForm = new FormGroup({
+      email: new FormControl(
+        this.user.email, [
+          Validators.required,
+          Validators.email,
+        ],
+      ),
     });
   }
 
-  public async updateProfile() {
-    this.submitted = true;
-
-    try {
-      await this.userService.updateUserProfile(this.user.email);
-      this.noticeService.success('更新个人资料成功', `更新个人资料成功, 你的邮箱已更换为${this.user.email}`);
-      this.needGetUserProfile.emit();
-      this.submitted = false;
-    } catch (error) {
-      this.noticeService.error('更新个人资料失败', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      this.submitted = false;
-    }
+  public flipCard(): void {
+    this.flaped = !this.flaped;
   }
 
-  public async verifyEmail(hash) {
-    try {
-      await this.userService.verifyEmail(hash);
-      this.needGetUserProfile.emit();
-      this.noticeService.success('验证邮箱成功', '验证邮箱成功');
-    } catch (error) {
-      let errorMessage = '';
+  public async resendVerifyEmail(): Promise<void> {
+    this.updating = true;
 
-      switch (error.status) {
-        case 404: {
-          errorMessage = '验证码无效或已被使用, 请重新验证邮箱';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
-
-      this.noticeService.error('验证邮箱失败', errorMessage);
-    }
-  }
-
-  public async resendVerifyEmail() {
     try {
       await this.userService.resendVerifyEmail();
       this.noticeService.success('发送验证邮件成功', '重新发送验证邮件成功, 请到邮箱去查看. 如没有收到,请尝试重新发送验证邮件或稍后重试');
     } catch (error) {
-      let errorMessage = '';
-
-      switch (error.status) {
-        case 412: {
-          errorMessage = '该邮箱已经验证';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
-
-      this.noticeService.error('发送验证邮件失败', errorMessage);
+      const errorMessageMap = {
+        412: '该邮箱已经验证',
+      };
+      this.noticeUtilService.errorNotice(error, '发送验证邮件失败', errorMessageMap);
     }
+
+    this.updating = false;
+  }
+
+  private async verifyEmail(hash): Promise<void> {
+    this.updating = true;
+
+    try {
+      await this.userService.verifyEmail(hash);
+      this.noticeService.success(
+        '验证邮箱成功',
+        '验证邮箱成功',
+      );
+    } catch (error) {
+      const errorMessageMap = {
+        403: '验证码和邮箱不匹配',
+        404: '验证码无效或已被使用, 请重新验证邮箱',
+      };
+      this.noticeUtilService.errorNotice(error, '验证邮箱失败', errorMessageMap);
+    }
+
+    await this.updateUserProfile();
+  }
+
+  public async updateProfile(profileForm: any): Promise<void> {
+    this.submitted = true;
+
+    try {
+      await this.userService.updateUserProfile(profileForm.email);
+      this.noticeService.success(
+        '更新个人资料成功',
+        `更新个人资料成功, 你的邮箱已更换为${profileForm.email}`,
+      );
+    } catch (error) {
+      this.noticeUtilService.errorNotice(error, '更新个人资料失败');
+    }
+
+    this.submitted = false;
+    this.flipCard();
+
+    await this.updateUserProfile();
+  }
+
+  // FIXME 整体逻辑需优化, 太冗余
+  public async updateUserProfile() {
+    this.updating = true;
+
+    await this._parent.updateUserProfile();
+
+    this.updating = false;
   }
 }

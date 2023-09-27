@@ -1,7 +1,12 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../@core/data/auth.service';
+import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
+import {CommonUtilService} from '../../../@core/utils/common-util.service';
+
+import {passwordEqualValidator} from '../../../@core/directives';
 
 @Component({
   selector: 'ngx-register',
@@ -9,57 +14,78 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './register.component.html',
 })
 
-export class NbRegisterComponent {
-  user: any;
-  notice: {
-    type: 'info' | 'success' | 'danger',
-    title: string,
-    message: string,
-  };
-  submitted: boolean;
+export class RegisterComponent implements OnInit {
+  public registryForm: FormGroup;
+  public submitted: boolean;
+  @ViewChild(AuthNoticeComponent) notice: AuthNoticeComponent;
 
   constructor(private router: Router,
-              private authService: AuthService) {
-    this.user = {};
+              private authService: AuthService,
+              private commonUtilService: CommonUtilService) {
     this.submitted = false;
   }
 
-  public register(): void {
-    this.submitted = true;
-
-    this.authService.register(this.user.username, this.user.password, this.user.email)
-      .then(
-        registerResult => {
-          this.sendNotice('success', '注册成功', '欢迎加入炉心, 即将跳转到登录页');
-
-          setTimeout(() => {
-            this.router.navigate(['/auth/login']);
-          }, 3e3);
-        },
-      )
-      .catch(error => {
-        let errorTitle;
-        this.submitted = false;
-
-        switch (error.status) {
-          case 409 : {
-            errorTitle = '用户已存在';
-            break;
-          }
-          default: {
-            errorTitle = '未知错误, 请联系鹳狸猿';
-          }
-        }
-
-        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+  ngOnInit(): void {
+    this.registryForm = new FormGroup({
+      username: new FormControl(
+        '', [
+          Validators.required,
+          Validators.pattern(/^[_a-zA-Z0-9]{6,16}$/),
+        ],
+      ),
+      email: new FormControl(
+        '', [
+          Validators.required,
+          Validators.email,
+        ],
+      ),
+      password: new FormControl(
+        '', [
+          Validators.required,
+          Validators.minLength(6),
+          Validators.maxLength(32),
+        ],
+      ),
+      repeatPassword: new FormControl(
+        '', [
+          Validators.required,
+          passwordEqualValidator,
+        ],
+      ),
+      terms: new FormControl(
+        false, [
+          Validators.requiredTrue,
+        ],
+      ),
+    });
   }
 
-  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
-    this.notice = {
-      type: type,
-      title: title,
-      message: message,
-    };
+  public async register(registryForm: any): Promise<void> {
+    this.submitted = true;
+
+    try {
+      await this.authService.register(registryForm.username, registryForm.email, registryForm.password);
+      this.notice.show(
+        'success',
+        '注册成功',
+        '欢迎加入炉心工艺, 即将跳转到登录页',
+      );
+      await this.commonUtilService.sleep(3e3);
+      this.router.navigate(['/auth/login']);
+    } catch (error) {
+      const errorMessageMap = {
+        409: '用户已存在',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+
+      this.notice.show(
+        'danger',
+        '' + errorMessage,
+        `message: ${error.error.message} | code: ${error.status}`,
+      );
+      console.error(error);
+    }
+
+    this.submitted = false;
   }
 }

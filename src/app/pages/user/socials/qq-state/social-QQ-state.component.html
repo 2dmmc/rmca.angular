@@ -1,31 +1,37 @@
-<nb-card>
+<nb-card [nbSpinner]="updating" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'更新中 ...'"
+         [accent]="user.accounts.qq ? 'success' : 'warning'" [size]="'small'">
   <nb-card-header>
-    <span><i class="fa fa-qq"></i> 腾讯QQ账户</span>
-    <span class="tag tag-success" *ngIf="user.accounts.qq">已授权</span>
-    <span class="tag tag-warning" *ngIf="!user.accounts.qq">未授权</span>
+    <span><i class="fab fa-qq"></i> 腾讯QQ账户</span>
   </nb-card-header>
   <nb-card-body>
-    <div class="alert alert-warning" role="alert" *ngIf="!user.accounts.qq">
-      你还未授权腾讯QQ账户, 授权后你将可以:
+    <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="!user.accounts.qq">
+      你还未授权腾讯QQ账户,
+      <a href="javascript:void(0)" class="alert-link" (click)="oAuth()">授权腾讯QQ账户</a>
+      后可使用以下功能:
       <ul>
         <li>使用腾讯QQ账户作为RMCA系统头像</li>
         <li>通过腾讯QQ账户登录RMCA系统</li>
         <li>在腾讯相关App内打开RMCA系统可通过QQ账户一键登录</li>
       </ul>
-      <a href="javascript:void(0)" (click)="oAuth()">去腾讯QQ授权</a>
-    </div>
-    <div *ngIf="user.accounts.qq" class="user-container">
-      <div class="user-picture">
-        <div class="background image" style.background-image="url({{user.accounts.qq.avatar}})"></div>
-      </div>
-      <div class="user-name">
-        {{user.accounts.qq.name}}
+    </ngb-alert>
+
+    <div class="user-info-container" *ngIf="user.accounts.qq">
+      <div class="user-container">
+        <div class="user-picture">
+          <div class="background image" style.background-image="url({{user.accounts.qq.avatar}})"></div>
+        </div>
+        <div class="user-name">
+          <span>
+            {{user.accounts.qq.name}}
+          </span>
+        </div>
       </div>
     </div>
   </nb-card-body>
   <nb-card-footer *ngIf="user.accounts.qq">
-    <button class="btn btn-hero-success" (click)="updateUserAvatar()">
-      <i class="fa fa-image"></i>
+    <button nbButton [status]="'success'" [fullWidth]="true"
+            (click)="updateUserAvatar()">
+      <i class="fas fa-image"></i>
       使用该头像作为RMCA头像
     </button>
   </nb-card-footer>

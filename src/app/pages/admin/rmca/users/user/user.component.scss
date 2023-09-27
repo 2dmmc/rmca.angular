@@ -1,0 +1,16 @@
+@import '../../../../../@theme/styles/themes';
+@import '../../../../../@theme/styles/styles';
+@import '../../../../../@theme/styles/extend/nb-card';
+@import '../../../../../@theme/styles/extend/tag';
+
+section {
+  margin-bottom: 1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.tag {
+  line-height: 2.5rem;
+}

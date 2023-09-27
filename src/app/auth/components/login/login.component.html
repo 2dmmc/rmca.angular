@@ -1,67 +1,66 @@
 <ngx-auth-block>
-  <h2 class="title">RMCA - 登陆</h2>
-  <small class="form-text sub-title">请输入你的用户名和密码来登陆</small>
+  <h2 class="title">RMCA - 登录</h2>
+  <small class="form-text sub-title">请输入你的用户名和密码来登录</small>
 
-  <form (ngSubmit)="login()" #form="ngForm" autocomplete=off>
-    <div class="alert alert-info" role="alert"
-         [class.alert-info]="notice.type == 'info'"
-         [class.alert-success]="notice.type == 'success'"
-         [class.alert-danger]="notice.type == 'danger'"
-         *ngIf="notice">
-      <div><strong>{{notice.title}}</strong></div>
-      <div>{{notice.message}}</div>
-    </div>
+  <form autocomplete="off" role="form"
+        [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+    <ngx-auth-notice></ngx-auth-notice>
 
     <div class="form-group">
-      <label for="input-username" class="sr-only">Username</label>
-      <input name="username" id="input-username" class="form-control" placeholder="用户名" autofocus
-             [(ngModel)]="user.username" #username="ngModel"
-             [class.form-control-danger]="username.invalid && username.touched"
-             [required]="true" pattern="^[_a-zA-Z0-9]{6,16}$">
+      <label for="input-account" class="sr-only">用户名/邮箱</label>
+      <input class="form-control" id="input-account" placeholder="用户名/邮箱" autofocus
+             formControlName="account"
+             [class.form-control-success]="loginForm.get('account').valid && loginForm.get('account').touched"
+             [class.form-control-danger]="loginForm.get('account').invalid && loginForm.get('account').touched">
       <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors?.required">
-        请填写用户名
-      </small>
-      <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors?.pattern">
-        用户名格式不正确
+             *ngIf="
+             loginForm.get('account').invalid && loginForm.get('account').touched &&
+             loginForm.get('account').hasError('required')">
+        请填写用户名或邮箱
       </small>
     </div>
 
     <div class="form-group">
       <label for="input-password" class="sr-only">Password</label>
-      <input name="password" type="password" id="input-password" class="form-control" placeholder="密码"
-             [(ngModel)]="user.password" #password="ngModel"
-             [class.form-control-danger]="password.invalid && password.touched"
-             [required]="true" [minlength]='6' [maxlength]='32'>
+      <input type="password" class="form-control" id="input-password" placeholder="密码"
+             formControlName="password"
+             [class.form-control-success]="loginForm.get('password').valid && loginForm.get('password').touched"
+             [class.form-control-danger]="loginForm.get('password').invalid && loginForm.get('password').touched">
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && password.errors?.required">
+             *ngIf="
+             loginForm.get('password').invalid && loginForm.get('password').touched &&
+             loginForm.get('password').hasError('required')">
         请填写密码
       </small>
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+             *ngIf="
+             loginForm.get('password').invalid && loginForm.get('password').touched &&
+             (loginForm.get('password').hasError('minlength') || loginForm.get('password').hasError('maxlength'))">
         密码应该在 6 - 32 位之间
       </small>
     </div>
 
     <div class="form-group accept-group col-sm-12">
-      <nb-checkbox name="rememberMe" [(ngModel)]="user.isKeepLogin">保持登陆状态(公共电脑不要勾选)</nb-checkbox>
-      <a class="forgot-password" routerLink="../request-password">忘记密码</a>
+      <nb-checkbox
+        formControlName="isKeepLogin">
+        保持登录状态(公共电脑不要勾选)
+      </nb-checkbox>
+      <a class="forgot-password" routerLink="../request-password" tabindex="9999">忘记密码</a>
     </div>
 
-    <button class="btn btn-block btn-hero-success"
-            [disabled]="submitted || !form.form.valid"
+    <button nbButton [status]="'success'" [fullWidth]="true"
+            [disabled]="submitted || loginForm.invalid"
             [class.btn-pulse]="submitted">
-      登陆
+      登录
     </button>
   </form>
 
   <div class="links">
-    <small class="form-text">使用第三方账号登陆:</small>
+    <small class="form-text">使用第三方账号登录:</small>
 
     <div class="socials">
-      <a href="javascript:void(0)" (click)="qqLogin()" class="fa fa-qq"></a>
-      <a href="javascript:void(0)" (click)="weiboLogin()" class="fa fa-weibo"></a>
+      <a href="javascript:void(0)" (click)="qqLogin()" class="fab fa-qq"></a>
+      <a href="javascript:void(0)" (click)="weiboLogin()" class="fab fa-weibo"></a>
     </div>
 
     <small class="form-text">

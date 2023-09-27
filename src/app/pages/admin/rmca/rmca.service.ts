@@ -34,7 +34,8 @@ export class RmcaService {
       .toPromise();
   }
 
-  public searchUsers(keyword: string, page: number, limit: number, isAdmin?: boolean, isBanned?: boolean): Promise<object> {
+  public searchUsers(keyword: string, page: number, limit: number,
+                     isAdmin?: boolean, isBanned?: boolean): Promise<object> {
     const params = new HttpParams()
       .set('keyword', keyword)
       .set('page', page.toString())

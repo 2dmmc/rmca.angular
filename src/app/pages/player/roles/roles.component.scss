@@ -1,18 +1,7 @@
-@import '../../../@system/styles/extend/nb-card-header';
-@import '../../../@system/styles/tag';
-
-nb-card-header {
-  button {
-    line-height: 0.8rem;
-    padding: 0.25rem 0.8rem;
-  }
-}
+@import '../../../@theme/styles/extend/nb-card';
+@import '../../../@theme/styles/extend/tag';
+@import '../../../@theme/styles/extend/button';
 
 nb-card-body {
-  .skin-viewer {
-    img {
-      height: 5rem;
-      width: 10rem;
-    }
-  }
+  overflow: hidden;
 }

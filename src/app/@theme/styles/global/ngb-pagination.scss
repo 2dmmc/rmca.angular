@@ -1,0 +1,30 @@
+@import '../themes';
+
+ngb-pagination {
+  .pagination {
+
+    li.page-item {
+      width: 3rem;
+
+      .page-link {
+        &:first-child {
+          margin-left: -1px;
+        }
+
+        &:last-child {
+          margin-right: -1px;
+        }
+      }
+
+      .page-link {
+        background-color: transparent;
+        color: white;
+        border-color: nb-theme(btn-info-bg);
+      }
+    }
+
+    .active {
+      background-color: nb-theme(btn-info-bg);
+    }
+  }
+}

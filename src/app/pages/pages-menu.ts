@@ -3,7 +3,7 @@ import {NbMenuItem} from '@nebular/theme';
 export const USER_MENU_ITEMS: NbMenuItem[] = [
   {
     title: '控制台',
-    icon: 'fa fa-tachometer fa-fw',
+    icon: 'fas fa-tachometer-alt',
     link: '/pages/dashboard',
     home: true,
   },
@@ -13,15 +13,11 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '账户管理',
-    icon: 'fa fa-user fa-fw',
+    icon: 'fas fa-user',
     children: [
       {
         title: '个人中心',
         link: '/pages/user/profile',
-      },
-      {
-        title: '正版验证',
-        link: '/pages/user/yggdrasil',
       },
       {
         title: '社交账户授权',
@@ -31,7 +27,7 @@ export const USER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '角色管理',
-    icon: 'fa fa-gamepad fa-fw',
+    icon: 'fas fa-gamepad',
     children: [
       {
         title: '角色列表',
@@ -49,25 +45,25 @@ export const ADMIN_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: '服务器管理',
-    icon: 'fa fa-sitemap fa-fw',
+    icon: 'fas fa-server',
     children: [
       {
         title: '服务器列表',
-        link: '/pages/admin/server/servers',
+        link: '/pages/admin/fmc/servers',
       },
       {
         title: '服务器历史管理',
-        link: '/pages/admin/server/history',
+        link: '/pages/admin/fmc/history',
       },
       {
         title: '财务历史管理',
-        link: '/pages/admin/server/finance',
+        link: '/pages/admin/fmc/finance',
       },
     ],
   },
   {
     title: 'RMCA管理',
-    icon: 'fa fa-gears fa-fw',
+    icon: 'fas fa-cogs',
     children: [
       {
         title: '用户管理',
@@ -84,10 +80,10 @@ export const DEVELOPER_MENU_ITEMS: NbMenuItem[] = [
   },
   {
     title: 'Auth',
-    icon: 'fa fa-lock fa-fw',
+    icon: 'fas fa-lock',
     children: [
       {
-        title: '登陆',
+        title: '登录',
         link: '/auth/login',
       },
       {

@@ -1,31 +1,28 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
-import {NbMenuService} from '@nebular/theme';
 
 import {ADMIN_MENU_ITEMS, DEVELOPER_MENU_ITEMS, USER_MENU_ITEMS} from './pages-menu';
 
-import {AuthUtilService} from '../auth/services/auth-util.service';
+import {AuthUtilService} from '../@core/utils/auth-util.service';
+import {IUserExtend} from '../@model/common/user/user.interface';
 
 @Component({
-  selector: 'ngx-rmca-pages',
+  selector: 'ngx-pages',
   template: `
-    <ngx-sample-layout>
+    <ngx-rmca-layout>
       <nb-menu [items]="menu"></nb-menu>
       <router-outlet></router-outlet>
-    </ngx-sample-layout>
+    </ngx-rmca-layout>
   `,
 })
-
 export class PagesComponent implements OnInit {
-  menu: any;
+  public user: IUserExtend;
+  public menu: any;
 
-  constructor(private router: Router,
-              private authUtilService: AuthUtilService,
-              private menuService: NbMenuService) {
+  constructor(private authUtilService: AuthUtilService) {
   }
 
   ngOnInit() {
-    let menu = [];
+    const menu = [];
 
     menu.push.apply(menu, USER_MENU_ITEMS);
 
@@ -39,4 +36,5 @@ export class PagesComponent implements OnInit {
 
     this.menu = menu;
   }
+
 }

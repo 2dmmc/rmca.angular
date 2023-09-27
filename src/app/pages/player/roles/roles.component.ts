@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
-import {PlayerService} from '../player.service';
-import {NoticeService} from '../../../@system/notice/notice.service';
+import {PlayerService} from '../../../@core/data/player.service';
+import {NoticeService} from '../../../@core/services/notice.service';
 
 import {RoleAddModalComponent} from './role-add-modal/role-add-modal.component';
 import {RoleDetailModalComponent} from './role-detail-modal/role-detail-modal.component';
 
-import {Role} from '../../../@model/player/role/role.interface';
+import {IRole} from '../../../@model/common/player/role/role.interface';
+import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../@theme/components';
+import {NoticeUtilService} from '../../../@core/utils/notice-util.service';
 
 @Component({
   styleUrls: ['./roles.component.scss'],
@@ -15,12 +17,33 @@ import {Role} from '../../../@model/player/role/role.interface';
 })
 
 export class RolesComponent implements OnInit {
-  roles: Role[];
+  public roles: IRole[];
+  public skinViewerInitOptions: {
+    skin?: ISkin,
+    skinViewerOptions: ISkinViewerOptions,
+    animationOptions: IAnimationOptions,
+    controlOptions: IOrbitControlsOptions,
+  };
 
   constructor(private noticeService: NoticeService,
+              private noticeUtilService: NoticeUtilService,
               private playerService: PlayerService,
               private modalService: NgbModal) {
     this.roles = [];
+    this.skinViewerInitOptions = {
+      animationOptions: {
+        rotating: true,
+        running: true,
+      },
+      controlOptions: {
+        rotate: true,
+        zoom: true,
+      },
+      skinViewerOptions: {
+        height: 275,
+        width: 275,
+      },
+    };
   }
 
   public ngOnInit(): void {
@@ -29,7 +52,7 @@ export class RolesComponent implements OnInit {
 
   public async getRoles(): Promise<void> {
     try {
-      const roles = await this.playerService.getRoles() as Role[];
+      const roles = await this.playerService.getRoles() as IRole[];
 
       roles.forEach(role => {
         role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
@@ -38,48 +61,34 @@ export class RolesComponent implements OnInit {
 
       this.roles = roles;
     } catch (error) {
-      this.noticeService.error('获取角色列表失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      console.trace(error);
+      this.noticeUtilService.errorNotice(error, '获取角色列表失败');
     }
   }
 
-  public async getRole(roleId: string): Promise<Role> {
+  public async getRole(roleId: string): Promise<IRole> {
     try {
-      const role = await this.playerService.getRole(roleId) as Role;
-      role['skin'] = `/api/role/skin/${role._id}?${Math.random()}`;
-      role['cape'] = `/api/role/cape/${role._id}?${Math.random()}`;
+      const role = await this.playerService.getRole(roleId) as IRole;
+      role.skin = `/api/role/skin/${role._id}?${Math.random()}`;
+      role.cape = `/api/role/cape/${role._id}?${Math.random()}`;
 
       return role;
     } catch (error) {
-      this.noticeService.error('获取角色详情失败, 请刷新页面重试', `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      console.trace(error);
+      this.noticeUtilService.errorNotice(error, '获取角色详情失败');
     }
   }
 
-  public updateDefaultRole(role: Role): void {
+  public updateDefaultRole(role: IRole): void {
     this.playerService.updateDefaultRole(role._id)
       .then(updateState => {
         this.noticeService.success('更新成功', `更新默认角色成功, 默认角色已更换为 ${role.rolename}`);
         this.getRoles();
       })
       .catch(error => {
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 403: {
-            errorMessage = '角色属组不存在?';
-            break;
-          }
-          case 404: {
-            errorMessage = '角色不存在';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('更新默认角色失败', errorMessage);
+        const errorMessageMap = {
+          403: '角色属组不存在',
+          404: '角色不存在',
+        };
+        this.noticeUtilService.errorNotice(error, '更新默认角色失败', errorMessageMap);
       });
   }
 

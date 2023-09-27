@@ -3,6 +3,7 @@
  * Copyright Akveo. All Rights Reserved.
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
+@import '../../../@theme/styles/themes';
 
 :host /deep/ {
   // TODO rewrite when develop responsive
@@ -15,6 +16,12 @@
 
   form {
     width: 100%;
+  }
+
+  small {
+    &.error {
+      font-size: 100%;
+    }
   }
 
   .alert {

@@ -1,6 +1,9 @@
-import {Component} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 
-import {AuthService} from '../../services/auth.service';
+import {AuthService} from '../../../@core/data/auth.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthNoticeComponent} from '../auth-notice/auth-notice.component';
+import {CommonUtilService} from '../../../@core/utils/common-util.service';
 
 @Component({
   selector: 'ngx-request-password-page',
@@ -8,57 +11,52 @@ import {AuthService} from '../../services/auth.service';
   templateUrl: './request-password.component.html',
 })
 
-export class NbRequestPasswordComponent {
-  user: any;
-  notice: {
-    type: 'info' | 'success' | 'danger',
-    title: string,
-    message: string,
-  };
-  submitted: boolean;
+export class RequestPasswordComponent implements OnInit {
+  public requestPasswordForm: FormGroup;
+  public submitted: boolean;
+  @ViewChild(AuthNoticeComponent) notice: AuthNoticeComponent;
 
-  constructor(private authService: AuthService) {
-    this.user = {};
+  constructor(private authService: AuthService,
+              private commonUtilService: CommonUtilService) {
     this.submitted = false;
   }
 
-  public requestPassword(): void {
-    this.submitted = true;
-
-    this.authService.requestResetPassword(this.user.email)
-      .then(
-        requestResult => {
-          this.sendNotice('success', '发送成功', `我们已经发送了一封邮件到你的邮箱里 (${this.user.email}), 请根据邮件内容找回你的密码. 如没有收到,请尝试重新发送邮件或稍后重试`);
-
-          // FIXME 非常简单的倒计时
-          setTimeout(() => {
-            this.submitted = false;
-          }, 60e3);
-        },
-      )
-      .catch(error => {
-        let errorTitle;
-        this.submitted = false;
-
-        switch (error.status) {
-          case 404 : {
-            errorTitle = '邮箱不存在';
-            break;
-          }
-          default: {
-            errorTitle = '未知错误, 请联系鹳狸猿';
-          }
-        }
-
-        this.sendNotice('danger', errorTitle, `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`);
-      });
+  ngOnInit(): void {
+    this.requestPasswordForm = new FormGroup({
+      email: new FormControl(
+        '', [
+          Validators.required,
+          Validators.email,
+        ],
+      ),
+    });
   }
 
-  private sendNotice(type: 'info' | 'success' | 'danger', title: string, message: string): void {
-    this.notice = {
-      type: type,
-      title: title,
-      message: message,
-    };
+  public async requestPassword(requestPasswordForm: any): Promise<void> {
+    this.submitted = true;
+
+    try {
+      await this.authService.requestResetPassword(requestPasswordForm.email);
+      this.notice.show(
+        'success',
+        '发送成功',
+        `我们已经发送了一封邮件到你的邮箱里 (${requestPasswordForm.email}), 请根据邮件内容找回你的密码. 如没有收到,请查看垃圾箱或尝试重新发送邮件`,
+      );
+      await this.commonUtilService.sleep(60e3);
+    } catch (error) {
+      const errorMessageMap = {
+        404: '邮箱不存在',
+      };
+      const errorMessage = errorMessageMap[error.status] || '未知错误, 请联系鹳狸猿';
+
+      this.notice.show(
+        'danger',
+        '' + errorMessage,
+        `message: ${error.error.message} | code: ${error.status}`,
+      );
+      console.error(error);
+    }
+
+    this.submitted = false;
   }
 }

@@ -3,18 +3,18 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {AdminComponent} from './admin.component';
 
-import {NeedAdminGuard} from '../../auth/guards/needAdmin.guard';
+// import {NeedAdminGuard} from '../../auth/guards/needAdmin.guard';
 
 const routes: Routes = [{
   path: '',
   component: AdminComponent,
-  canActivate: [NeedAdminGuard],
+  // canActivate: [NeedAdminGuard],
   children: [{
     path: 'rmca',
     loadChildren: './rmca/rmca.module#RmcaModule',
   }, {
-    path: 'server',
-    loadChildren: './server/server.module#ServerModule',
+    path: 'fmc',
+    loadChildren: './fmc/fmc.module#FmcModule',
   }],
 }];
 

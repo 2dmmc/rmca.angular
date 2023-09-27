@@ -2,89 +2,99 @@
   <h2 class="title">RMCA - 注册</h2>
   <small class="form-text sub-title">Do u like RGB ?</small>
 
-  <form (ngSubmit)="register()" #form="ngForm" autocomplete=off>
-    <div class="alert alert-info" role="alert"
-         [class.alert-info]="notice.type == 'info'"
-         [class.alert-success]="notice.type == 'success'"
-         [class.alert-danger]="notice.type == 'danger'"
-         *ngIf="notice">
-      <div><strong>{{notice.title}}</strong></div>
-      <div>{{notice.message}}</div>
-    </div>
+  <form autocomplete="off" role="form"
+        [formGroup]="registryForm" (ngSubmit)="register(registryForm.value)">
+    <ngx-auth-notice></ngx-auth-notice>
 
     <div class="form-group">
       <label for="input-username" class="sr-only">用户名</label>
-      <input name="username" id="input-username" class="form-control" placeholder="用户名" autofocus
-             [(ngModel)]="user.username" #username="ngModel"
-             [class.form-control-danger]="username.invalid && username.touched"
-             [required]="true" pattern="^[_a-zA-Z0-9]{6,16}$">
+      <input class="form-control" id="input-username" placeholder="用户名" autofocus
+             formControlName="username"
+             [class.form-control-success]="registryForm.get('username').valid && registryForm.get('username').touched"
+             [class.form-control-danger]="registryForm.get('username').invalid && registryForm.get('username').touched">
       <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors?.required">
+             *ngIf="
+             registryForm.get('username').invalid && registryForm.get('username').touched &&
+             registryForm.get('username').hasError('required')">
         请填写用户名
       </small>
       <small class="form-text error"
-             *ngIf="username.invalid && username.touched && username.errors?.pattern">
+             *ngIf="
+             registryForm.get('username').invalid && registryForm.get('username').touched &&
+             registryForm.get('username').hasError('pattern')">
         用户名格式不正确
       </small>
     </div>
 
     <div class="form-group">
       <label for="input-email" class="sr-only">邮箱</label>
-      <input name="email" id="input-email" class="form-control" placeholder="邮箱"
-             [(ngModel)]="user.email" #email="ngModel"
-             [class.form-control-danger]="email.invalid && email.touched"
-             [required]="true" pattern=".+@.+..+">
+      <input class="form-control" id="input-email" placeholder="邮箱"
+             formControlName="email"
+             [class.form-control-success]="registryForm.get('email').valid && registryForm.get('email').touched"
+             [class.form-control-danger]="registryForm.get('email').invalid && registryForm.get('email').touched">
       <small class="form-text error"
-             *ngIf="email.invalid && email.touched && email.errors?.required">
+             *ngIf="
+             registryForm.get('email').invalid && registryForm.get('email').touched &&
+             registryForm.get('email').hasError('required')">
         请填写邮箱
       </small>
       <small class="form-text error"
-             *ngIf="email.invalid && email.touched && email.errors?.pattern">
+             *ngIf="
+             registryForm.get('email').invalid && registryForm.get('email').touched &&
+             registryForm.get('email').hasError('email')">
         邮箱格式不正确
       </small>
     </div>
 
     <div class="form-group">
       <label for="input-password" class="sr-only">密码</label>
-      <input name="password" type="password" id="input-password" class="form-control" placeholder="密码"
-             [(ngModel)]="user.password" #password="ngModel"
-             [class.form-control-danger]="password.invalid && password.touched"
-             [required]="true" [minlength]='6' [maxlength]='32'>
+      <input class="form-control" id="input-password" type="password" placeholder="密码"
+             formControlName="password"
+             [class.form-control-success]="registryForm.get('password').valid && registryForm.get('password').touched"
+             [class.form-control-danger]="registryForm.get('password').invalid && registryForm.get('password').touched">
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && password.errors?.required">
+             *ngIf="
+             registryForm.get('password').invalid && registryForm.get('password').touched &&
+             registryForm.get('password').hasError('required')">
         请填写密码
       </small>
       <small class="form-text error"
-             *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
+             *ngIf="
+             registryForm.get('password').invalid && registryForm.get('password').touched &&
+             (registryForm.get('password').hasError('minlength') || registryForm.get('password').hasError('maxlength'))">
         密码应该在 6 - 32 位之间
       </small>
     </div>
 
     <div class="form-group">
-      <label for="input-re-password" class="sr-only">重复密码</label>
-      <input
-        name="rePass" [(ngModel)]="user.confirmPassword" type="password" id="input-re-password"
-        class="form-control" placeholder="重复密码" #rePass="ngModel"
-        [class.form-control-danger]="(rePass.invalid || password.value != rePass.value) && rePass.touched"
-        [required]="true">
+      <label for="input-repeat-password" class="sr-only">重复密码</label>
+      <input class="form-control" id="input-repeat-password" type="password" placeholder="重复密码"
+             formControlName="repeatPassword"
+             [class.form-control-success]="registryForm.get('repeatPassword').valid && registryForm.get('repeatPassword').touched"
+             [class.form-control-danger]="registryForm.get('repeatPassword').invalid && registryForm.get('repeatPassword').touched">
       <small class="form-text error"
-             *ngIf="rePass.invalid && rePass.touched && rePass.errors?.required">
+             *ngIf="
+             registryForm.get('repeatPassword').invalid && registryForm.get('repeatPassword').touched &&
+             registryForm.get('repeatPassword').hasError('required')">
         请输入重复密码
       </small>
       <small class="form-text error"
-             *ngIf="rePass.touched && password.value != rePass.value && !rePass.errors?.required">
-        两次密码不匹配
+             *ngIf="
+             registryForm.get('repeatPassword').invalid && registryForm.get('repeatPassword').touched &&
+             registryForm.get('repeatPassword').hasError('repeatPassword')">
+        两次密码不一致
       </small>
     </div>
 
     <div class="form-group accept-group col-sm-12">
-      <nb-checkbox name="terms" [(ngModel)]="user.terms">
+      <nb-checkbox name="terms"
+                   formControlName="terms">
         阅读并接受 <a href="javascript:(alert('你是我见过的真正读协议的人|･ω･｀)'));" target="_blank"><strong>用户协议</strong></a>
       </nb-checkbox>
     </div>
 
-    <button class="btn btn-block btn-hero-success"
-            [disabled]="submitted || !form.form.valid || password.value != rePass.value || user.terms != true"
+    <button nbButton [status]="'success'" [fullWidth]="true"
+            [disabled]="submitted || registryForm.invalid"
             [class.btn-pulse]="submitted">
       注册
     </button>
@@ -92,7 +102,7 @@
 
   <div class="links">
     <small class="form-text">
-      已经有账户了? <a routerLink="../login"><strong>登陆</strong></a>
+      已经有账户了? <a routerLink="../login"><strong>登录</strong></a>
     </small>
   </div>
 </ngx-auth-block>

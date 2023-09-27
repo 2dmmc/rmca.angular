@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-4" *ngFor="let server of servers">
+    <nb-card size="medium">
+      <nb-card-header>
+        <span>
+          <i class="fas fa-server"></i>
+          {{server.name}} - {{server.endpoint}}
+        </span>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="row form-group">
+          <label for="input-dynmap" class="col-sm-3 col-form-label">
+            大地图地址
+          </label>
+          <div class="col-sm-9">
+            <input class="form-control" id="input-dynmap" readonly
+                   [ngModel]="server.dynmap">
+          </div>
+        </div>
+        <div class="row form-group">
+          <label for="textarea-announce" class="col-sm-3 col-form-label">
+            服务器公告
+          </label>
+          <div class="col-sm-9">
+          <textarea class="form-control" id="textarea-announce" cols="5" rows="5" readonly
+                    [ngModel]="server.announce"></textarea>
+          </div>
+        </div>
+      </nb-card-body>
+      <nb-card-footer>
+        <button nbButton [status]="'info'" (click)="openServerDetailModal(server)">
+          <i class="far fa-edit"></i>
+          编辑
+        </button>
+        <button nbButton [status]="'danger'" (click)="openServerDeleteModal(server)">
+          <i class="fas fa-trash"></i>
+          删除
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </div>
+  <div class="col-lg-4">
+    <nb-card size="medium">
+      <nb-card-body>
+        <button class="btn-add" (click)="openServerAddModal()">
+          <i class="fas fa-plus"></i>
+          新增服务器
+        </button>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

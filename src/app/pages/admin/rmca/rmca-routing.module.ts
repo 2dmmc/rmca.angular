@@ -3,7 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {RmcaComponent} from './rmca.component';
 import {UsersComponent} from './users/users.component';
-import {UserComponent} from './user/user.component';
+import {UserComponent} from './users/user/user.component';
 
 const routes: Routes = [{
   path: '',

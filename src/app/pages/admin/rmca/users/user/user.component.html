@@ -1,0 +1,131 @@
+<div class="row">
+  <div class="col-lg-8">
+    <nb-card>
+      <nb-card-header>
+        <span>
+          <i class="fas fa-info"></i>
+          用户详情
+        </span>
+      </nb-card-header>
+      <nb-card-body>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">头像</label>
+          <div class="col-sm-10">
+            <img [src]="user?.avatar" alt="">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="input-user-id" class="col-sm-2 col-form-label">ID</label>
+          <div class="col-sm-10">
+            <input name="userId" id="input-user-id" class="form-control" readonly
+                   [(ngModel)]="user._id">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="input-user-username" class="col-sm-2 col-form-label">用户名</label>
+          <div class="col-sm-10">
+            <input name="userUsername" id="input-user-username" class="form-control" readonly
+                   [(ngModel)]="user.username">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="input-user-email" class="col-sm-2 col-form-label">电子邮箱</label>
+          <div class="col-sm-10">
+            <input name="userEmail" id="input-user-email" class="form-control" readonly
+                   [(ngModel)]="user.email">
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">电子邮箱验证状态</label>
+          <div class="col-sm-10">
+            <span class="tag tag-success" *ngIf="user?.isEmailVerify">已验证</span>
+            <span class="tag tag-danger" *ngIf="!user?.isEmailVerify">未验证</span>
+          </div>
+        </div>
+        <hr>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">封禁状态</label>
+          <div class="col-sm-10">
+            <span class="tag tag-success" *ngIf="!user?.ban">未封禁</span>
+            <span class="tag tag-danger" *ngIf="user?.ban">已封禁: {{user.ban}}</span>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">管理员</label>
+          <div class="col-sm-10">
+            <span class="tag tag-success" *ngIf="user?.admin">权限狗!</span>
+            <span class="tag tag-danger" *ngIf="!user?.admin">平民玩家!</span>
+          </div>
+        </div>
+        <hr>
+        <!-- yggdrasil -->
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">正版验证状态</label>
+          <div class="col-sm-10">
+            <span class="tag tag-success" *ngIf="user?.yggdrasil">已验证</span>
+            <span class="tag tag-danger" *ngIf="!user?.yggdrasil">未验证</span>
+          </div>
+        </div>
+        <section *ngIf="user?.yggdrasil">
+          <div class="form-group row">
+            <label for="input-yggdrasil-uuid" class="col-sm-2 col-form-label">UUID</label>
+            <div class="col-sm-10">
+              <input name="userYggdrasilUUID" id="input-yggdrasil-uuid" class="form-control" readonly
+                     [(ngModel)]="user?.yggdrasil.uuid">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="input-yggdrasil-username" class="col-sm-2 col-form-label">用户名</label>
+            <div class="col-sm-10">
+              <input name="userYggdrasilUUID" id="input-yggdrasil-username" class="form-control" readonly
+                     [(ngModel)]="user?.yggdrasil.username">
+            </div>
+          </div>
+        </section>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-lg-4">
+    <nb-card>
+      <nb-card-header>
+        <span>
+          <i class="fas fa-ban"></i>
+          功能管理
+        </span>
+      </nb-card-header>
+      <nb-card-body>
+        <section>
+          <button class="btn btn-success" *ngIf="user.ban" (click)="unBanUser(user)">
+            <i class="fas fa-check"></i>
+            解除封禁
+          </button>
+          <button class="btn btn-danger" *ngIf="!user.ban" (click)="banUser(user)">
+            <i class="fas fa-ban"></i>
+            封禁用户
+          </button>
+        </section>
+        <section>
+          <button class="btn btn-danger" *ngIf="user.admin" (click)="revokeAdmin(user)">
+            <i class="fas fa-bug"></i>
+            解除管理员
+          </button>
+          <button class="btn btn-info" *ngIf="!user.admin" (click)="grantAdmin(user)">
+            <i class="fas fa-bug"></i>
+            授予管理员
+          </button>
+        </section>
+        <section>
+          <button class="btn btn-warning" (click)="enterImpersonate(user)">
+            <i class="fas fa-ghost"></i>
+            替身登录
+          </button>
+        </section>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <!--<ngx-password></ngx-password>-->
+  </div>
+</div>

@@ -1,54 +1,106 @@
-<nb-card>
-  <nb-card-header>
+<nb-flip-card [flipped]="flaped" [showToggleButton]="false">
+  <nb-card-front>
+    <nb-card [accent]="user.stateColor" [size]="'small'"
+             [nbSpinner]="updating" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'状态更新中 ...'">
+      <nb-card-header>
+        <span>
+          <i class="fas fa-info"></i>
+          我的账户
+        </span>
+      </nb-card-header>
+      <nb-card-body>
+        <ngb-alert [dismissible]="false" [type]="'warning'" *ngIf="user.state === UserStateEnum.NEED_EMAIL_VALIDATION">
+          你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
+          <a href="javascript:void(0)" class="alert-link" (click)="resendVerifyEmail()">重新发送验证邮件</a>
+          或稍后重试
+        </ngb-alert>
+
+        <div class="user-info-container">
+          <div class="user-container">
+            <a routerLink="../socials">
+              <div class="user-picture">
+                <div class="background image" style.background-image="url({{user.avatar}})"></div>
+              </div>
+            </a>
+            <div class="user-name">
+              <span>
+                {{user.username}} ({{user.email}})
+                <a href="javascript:void(0)" (click)="flipCard()"><i class="far fa-edit"></i>修改</a>
+              </span>
+            </div>
+          </div>
+          <div class="tag-container" [ngSwitch]="user.state">
+            <span class="tag tag-success" *ngSwitchCase="UserStateEnum.NORMAL"
+                  nbPopover="你的账户状态正常, 可使用RMCA账号登陆游戏" [nbPopoverMode]="'hover'">
+              账户状态: 正常
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-warning" *ngSwitchCase="UserStateEnum.NEED_EMAIL_VALIDATION"
+                  nbPopover="你的账户还没有通过电子邮箱验证, 你将不能: 使用RMCA账号登录游戏" [nbPopoverMode]="'hover'">
+              账户状态: 未验证
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-danger" *ngSwitchCase="UserStateEnum.BANNED"
+                  nbPopover="你的账户已经被封禁, 封禁原因为: {{user.ban}}" [nbPopoverMode]="'hover'">
+              账户状态: 被封禁
+              <i class="far fa-question-circle"></i>
+            </span>
+            <span class="tag tag-info" *ngIf="authUtilService.isAdmin()">
+              管理员
+            </span>
+            <span class="tag tag-info" *ngIf="authUtilService.isDeveloper()">
+              Developer
+            </span>
+          </div>
+        </div>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-front>
+  <nb-card-back>
+    <nb-card [size]="'small'" [nbSpinner]="submitted" [nbSpinnerStatus]="'info'" [nbSpinnerMessage]="'个人资料更新中 ...'">
+      <nb-card-header>
     <span>
-      <i class="fa fa-id-card"></i>个人资料
+      <i class="fas fa-id-card"></i>个人资料
     </span>
-    <section>
-      <span class="tag tag-success" *ngIf="user.isEmailVerify">
-        已验证
-      </span>
-      <span class="tag tag-warning" *ngIf="!user.isEmailVerify">
-        未验证
-      </span>
-    </section>
-  </nb-card-header>
-  <nb-card-body>
-    <form (ngSubmit)="updateProfile()" #profileForm="ngForm" name="profileForm">
-      <div class="alert alert-info" role="alert" *ngIf="user.isEmailVerify">
-        你可通过<a class="alert-link" routerLink="../socials">社交账户授权</a>使用已绑定社交账户的头像作为RMCA的头像
-      </div>
-      <div class="alert alert-warning" role="alert" *ngIf="!user.isEmailVerify">
-        你的电子邮箱还没有验证, 请根据邮件内容验证你的账户. 如没有收到邮件,请尝试
-        <a href="javascript:void(0)" (click)="resendVerifyEmail()">重新发送验证邮件</a>
-        或稍后重试
-      </div>
-      <div class="form-group row">
-        <label for="input-email" class="col-sm-2 col-form-label">电子邮箱</label>
-        <div class="col-sm-10">
-          <input name="email" id="input-email" class="form-control" placeholder="邮箱"
-                 [(ngModel)]="user.email" #email="ngModel"
-                 [class.form-control-danger]="email.invalid && email.touched"
-                 [required]="true" pattern=".+@.+..+">
-          <small class="form-text error"
-                 *ngIf="email.invalid && email.touched && email.errors?.required">
-            请填写邮箱
-          </small>
-          <small class="form-text error"
-                 *ngIf="email.invalid && email.touched && email.errors?.pattern">
-            邮箱格式不正确
-          </small>
-        </div>
-      </div>
-      <div class="form-group row">
-        <div class="offset-sm-2 col-sm-10">
-          <button class="btn btn-hero-success"
-                  [disabled]="submitted || !profileForm.form.valid"
-                  [class.btn-pulse]="submitted">
-            <i class="fa fa-pencil-square-o"></i>
-            更新个人资料
-          </button>
-        </div>
-      </div>
-    </form>
-  </nb-card-body>
-</nb-card>
+      </nb-card-header>
+      <nb-card-body>
+        <form autocomplete="off" role="form"
+              [formGroup]="profileForm" (ngSubmit)="updateProfile(profileForm.value)">
+
+          <div class="form-group row">
+            <label for="input-email" class="col-sm-2 col-form-label">电子邮箱</label>
+            <div class="col-sm-10">
+              <input class="form-control" id="input-email" placeholder="邮箱"
+                     formControlName="email"
+                     [class.form-control-success]="profileForm.get('email').valid && profileForm.get('email').touched"
+                     [class.form-control-danger]="profileForm.get('email').invalid && profileForm.get('email').touched">
+              <small class="form-text error"
+                     *ngIf="
+                     profileForm.get('email').invalid && profileForm.get('email').touched &&
+                     profileForm.get('email').hasError('required')">
+                请填写邮箱
+              </small>
+              <small class="form-text error"
+                     *ngIf="
+                     profileForm.get('email').invalid && profileForm.get('email').touched &&
+                     profileForm.get('email').hasError('email')">
+                邮箱格式不正确
+              </small>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="offset-sm-2 col-sm-10">
+              <button nbButton [status]="'success'"
+                      [disabled]="submitted || profileForm.invalid"
+                      [class.btn-pulse]="submitted">
+                <i class="far fa-edit"></i>
+                更新个人资料
+              </button>
+            </div>
+          </div>
+        </form>
+      </nb-card-body>
+    </nb-card>
+  </nb-card-back>
+</nb-flip-card>

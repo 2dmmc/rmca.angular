@@ -1,2 +1,55 @@
-@import '../../../../@system/styles/extend/nb-card-header';
-@import '../../../../@system/styles/tag';
+@import '../../../../@theme/styles/extend/nb-card';
+@import '../../../../@theme/styles/extend/ngb-alert';
+@import '../../../../@theme/styles/extend/tag';
+
+.user-info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+
+  .user-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    font-family: nb-theme(card-header-font-family);
+    font-size: nb-theme(card-header-font-size);
+    font-weight: nb-theme(card-header-font-weight);
+
+    margin-bottom: 0.75rem;
+
+    .user-picture {
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: #a1a1e5;
+      border: solid 2px #00f9a6;
+
+      margin-bottom: 0.5rem;
+
+      .background {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .image {
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 5rem;
+        width: 5rem;
+        border-radius: 100%;
+      }
+    }
+  }
+
+  .tag-container {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.tag {
+  display: block;
+ }

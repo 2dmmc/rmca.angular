@@ -1,10 +1,16 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
-import {StateService} from './state.service';
+import {AuthService} from './auth.service';
+import {CallbackService} from './callback.service';
+import {UserService} from './user.service';
+import {FmcService} from './fmc.service';
 
 const SERVICES = [
-  StateService,
+  AuthService,
+  CallbackService,
+  UserService,
+  FmcService,
 ];
 
 @NgModule({

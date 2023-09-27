@@ -3,6 +3,8 @@
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/all';
+// global app font size
+@import './font-size';
 // loading progress bar theme
 @import './pace.theme';
 
@@ -15,20 +17,37 @@
 
   // loading progress bar
   @include ngx-pace-theme();
-}
 
-html {
-  font-size: 16px;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio: 2) {
-  html {
-    font-size: 12px;
+  // fixed in rc.9 and can be removed after upgrade
+  .custom-control .custom-control-indicator {
+    border-radius: 50%; // TODO: quickfix for https://github.com/akveo/nebular/issues/275
   }
 }
 
-@media screen and (-moz-device-pixel-ratio: 2) {
-  html {
-    font-size: 12px;
-  }
+// 修正导航菜单图标大小, 这玩意无法从layout里覆盖, 样式优先权太高, FML
+.nb-theme-cosmic nb-menu .menu-item .menu-icon {
+  font-size: 2.2rem;
+  width: 3rem;
 }
+
+// 干掉全局nbButton的outline
+button[nbButton] {
+  outline: 0;
+}
+
+// 给code一个样式, FML, 默认样式竟然没了
+code {
+  padding: 0.2rem 0.4rem;
+  font-size: 90%;
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+  margin: 0 0.2rem;
+}
+
+// 修正这玩意在模态里导致按钮和它不平齐的问题
+.input-group-btn {
+  display: flex;
+}
+
+// make some style to global
+@import './global/global';

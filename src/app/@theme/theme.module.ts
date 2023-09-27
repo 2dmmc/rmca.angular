@@ -5,38 +5,35 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {
   NbActionsModule,
+  NbButtonModule,
+  NbBadgeModule,
   NbCardModule,
   NbCheckboxModule,
+  NbContextMenuModule,
   NbLayoutModule,
   NbMenuModule,
+  NbPopoverModule,
+  NbProgressBarModule,
   NbRouteTabsetModule,
   NbSearchModule,
   NbSidebarModule,
+  NbSpinnerModule,
   NbTabsetModule,
   NbThemeModule,
   NbUserModule,
+  NbAlertModule,
 } from '@nebular/theme';
 
-import {
-  FooterComponent,
-  HeaderComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
-  ThemeSwitcherComponent,
-  TinyMCEComponent,
-} from './components';
-
-import {CapitalizePipe, PluralPipe, RmbPipe, RoundPipe, TimingPipe} from './pipes';
-
-import {DonationModalComponent, SampleLayoutComponent} from './layouts';
-
-import {DEFAULT_THEME} from './styles/theme.default';
+import {FooterComponent, HeaderComponent, TinyMCEComponent, SkinViewerComponent} from './components';
+import {CapitalizePipe, NumberWithCommasPipe, PluralPipe, RoundPipe, TimingPipe} from './pipes';
+import {RmcaLayoutComponent} from './layouts';
+import {DonationModalComponent} from './layouts/rmca/donation-modal/donation-modal.component';
 import {COSMIC_THEME} from './styles/theme.cosmic';
-import {RouterModule} from '@angular/router';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const NB_MODULES = [
+  NbButtonModule,
   NbCardModule,
   NbLayoutModule,
   NbTabsetModule,
@@ -47,17 +44,21 @@ const NB_MODULES = [
   NbSearchModule,
   NbSidebarModule,
   NbCheckboxModule,
+  NbPopoverModule,
+  NbContextMenuModule,
   NgbModule,
+  NbProgressBarModule,
+  NbBadgeModule,
+  NbSpinnerModule,
+  NbAlertModule,
 ];
 
 const COMPONENTS = [
-  ThemeSwitcherComponent,
   HeaderComponent,
   FooterComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
   TinyMCEComponent,
-  SampleLayoutComponent,
+  SkinViewerComponent,
+  RmcaLayoutComponent,
   DonationModalComponent,
 ];
 
@@ -66,7 +67,7 @@ const PIPES = [
   PluralPipe,
   RoundPipe,
   TimingPipe,
-  RmbPipe,
+  NumberWithCommasPipe,
 ];
 
 const NB_THEME_PROVIDERS = [
@@ -74,14 +75,14 @@ const NB_THEME_PROVIDERS = [
     {
       name: 'cosmic',
     },
-    [DEFAULT_THEME, COSMIC_THEME],
+    [COSMIC_THEME],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
 ];
 
 @NgModule({
-  imports: [...BASE_MODULES, ...NB_MODULES, RouterModule],
+  imports: [...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [

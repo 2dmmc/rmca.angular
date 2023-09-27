@@ -3,6 +3,9 @@ import {NgModule} from '@angular/core';
 
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {NotFoundComponent} from './miscellaneous/not-found/not-found.component';
+
+import {NeedAdminGuard} from '../@core/guards/need-admin.guard';
 
 const routes: Routes = [{
   path: '',
@@ -19,10 +22,14 @@ const routes: Routes = [{
   }, {
     path: 'admin',
     loadChildren: './admin/admin.module#AdminModule',
+    canActivate: [NeedAdminGuard],
   }, {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
+  }, {
+    path: '**',
+    component: NotFoundComponent,
   }],
 }];
 
@@ -30,6 +37,5 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-
 export class PagesRoutingModule {
 }

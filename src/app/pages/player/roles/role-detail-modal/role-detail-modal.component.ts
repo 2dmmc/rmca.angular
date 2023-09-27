@@ -1,16 +1,26 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {FormGroup} from '@angular/forms';
 
-import {NoticeService} from '../../../../@system/notice/notice.service';
+import {NoticeService} from '../../../../@core/services/notice.service';
 
-import {PlayerService} from '../../player.service';
+import {PlayerService} from '../../../../@core/data/player.service';
 
-import {User} from '../../../../@model/user/user.interface';
-import {DefaultUser} from '../../../../@model/user/user.const';
+import {IRole} from '../../../../@model/common/player/role/role.interface';
+import {AuthUtilService} from '../../../../@core/utils/auth-util.service';
+import {IAnimationOptions, IOrbitControlsOptions, ISkin, ISkinViewerOptions} from '../../../../@theme/components';
+import {isSlimSkin} from 'skinview3d';
+import {NoticeUtilService} from '../../../../@core/utils/notice-util.service';
 
-import {Role} from '../../../../@model/player/role/role.interface';
+interface ISkinFile {
+  skin: File;
+  cape: File;
+}
 
-import {UserCacheService} from '../../../../@system/cache/service/user-cache.service';
+enum SkinType {
+  upload,
+  async,
+}
 
 @Component({
   styleUrls: ['./role-detail-modal.component.scss'],
@@ -18,38 +28,105 @@ import {UserCacheService} from '../../../../@system/cache/service/user-cache.ser
 })
 
 export class RoleDetailModalComponent implements OnInit {
-  @Input() role: Role;
+  @Input() role: IRole;
   @Output() event = new EventEmitter();
-  user: User;
 
-  submitted: boolean;
-  skinType: any;
+  public skinViewerInitOptions: {
+    skin: ISkin,
+    skinViewerOptions: ISkinViewerOptions,
+    animationOptions: IAnimationOptions,
+    controlOptions: IOrbitControlsOptions,
+  };
+
+  public roleForm: FormGroup;
+  public submitted: boolean;
+
+  public SkinType = SkinType;
+  public skinType: SkinType;
+  public skinFile: ISkinFile;
+  public previewSkin: ISkin;
 
   constructor(private playerService: PlayerService,
-              private userCacheService: UserCacheService,
               private noticeService: NoticeService,
-              private activeModal: NgbActiveModal) {
-    this.user = DefaultUser;
+              private noticeUtilService: NoticeUtilService,
+              public authUtilService: AuthUtilService,
+              public activeModal: NgbActiveModal) {
     this.submitted = false;
-    this.skinType = 'upload';
+    this.skinType = SkinType.upload;
+    this.previewSkin = {
+      skinSrc: '',
+      capeSrc: '',
+    };
+    this.skinFile = {
+      skin: null,
+      cape: null,
+    };
+    this.skinViewerInitOptions = {
+      skin: {
+        skinSrc: '',
+        capeSrc: '',
+      },
+      animationOptions: {
+        rotating: true,
+        running: true,
+      },
+      controlOptions: {
+        rotate: true,
+        zoom: true,
+      },
+      skinViewerOptions: {
+        height: 275,
+        width: 275,
+      },
+    };
   }
+
 
   public ngOnInit(): void {
-    this.user = this.userCacheService.getCache();
+    this.roleForm = new FormGroup({});
+    this.previewSkin = {
+      skinSrc: this.role.skin,
+      capeSrc: this.role.cape,
+    };
   }
 
-  public getFiles(event, type): void {
+  public async skinTypeEventHandler(skinType: SkinType) {
+    switch (skinType) {
+      case SkinType.upload:
+        this.previewSkin = {
+          skinSrc: await this.file2base64(this.skinFile.skin) || this.role.skin,
+          capeSrc: await this.file2base64(this.skinFile.cape) || this.role.cape,
+        };
+        break;
+      case SkinType.async:
+        this.previewSkin = {
+          skinSrc: '/api/yggdrasil/skin',
+          capeSrc: '/api/yggdrasil/cape',
+        };
+        break;
+    }
+  }
+
+  public async getFiles(event, type): Promise<void> {
     if (event.srcElement) {
       const files = event.srcElement.files;
 
       if (files.length > 0) {
         switch (type) {
           case 'skin': {
-            this.role['skinFile'] = files[0];
+            this.skinFile.skin = files[0];
+            this.previewSkin = {
+              skinSrc: await this.file2base64(files[0]) || this.previewSkin.skinSrc,
+              capeSrc: this.previewSkin.capeSrc,
+            };
             break;
           }
           case 'cape': {
-            this.role['capeFile'] = files[0];
+            this.skinFile.cape = files[0];
+            this.previewSkin = {
+              skinSrc: this.previewSkin.skinSrc,
+              capeSrc: await this.file2base64(files[0]) || this.previewSkin.capeSrc,
+            };
             break;
           }
           default: {
@@ -60,86 +137,86 @@ export class RoleDetailModalComponent implements OnInit {
     }
   }
 
-  // FIXME 图片预览被砍掉了, 有空的时候加上
-  // private _handleReaderLoaded(readerEvt): void {
-  //   const binaryString = readerEvt.target.result;
-  //   this.role.file = btoa(binaryString);
-  // }
-
-  public async updateRole() {
+  public async updateRole(): Promise<void> {
     this.submitted = true;
 
     try {
-      if (this.role['skinFile']) {
-        await this.playerService.updateRoleSkin(this.role._id, this.role.userModel, this.role['skinFile']);
+      if (this.skinFile.skin) {
+        await this.playerService.updateRoleSkin(
+          this.role._id,
+          await this.getImageModel(this.skinFile.skin),
+          this.skinFile.skin);
       }
-      if (this.role['capeFile']) {
-        await this.playerService.updateRoleCape(this.role._id, this.role['capeFile']);
+      if (this.skinFile.cape) {
+        await this.playerService.updateRoleCape(this.role._id, this.skinFile.cape);
       }
 
       this.noticeService.success('更新成功', '更新角色详情成功');
       this.event.emit();
       this.activeModal.close();
     } catch (error) {
-      this.submitted = false;
-
-      let errorMessage = '';
-
-      switch (error.status) {
-        case 415: {
-          errorMessage = '图片格式不符, 请上传png';
-          break;
-        }
-        default: {
-          errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-        }
-      }
-
-      this.noticeService.error('更新角色详情失败', errorMessage);
+      const errorMessageMap = {
+        415: '图片格式不符, 请上传png',
+      };
+      this.noticeUtilService.errorNotice(error, '更新角色详情失败', errorMessageMap);
     }
+
+    this.submitted = false;
   }
 
-  public updateYggdrasilSkin(roleId): void {
+  public async updateYggdrasilSkin(roleId): Promise<void> {
     this.submitted = true;
 
-    this.playerService.updateYggdrasilSkin(roleId)
-      .then(updateState => {
-        this.noticeService.success('同步成功', '同步正版皮肤成功');
-        this.event.emit();
-        this.activeModal.close();
-      })
-      .catch(error => {
-        this.submitted = false;
+    try {
+      await this.playerService.updateYggdrasilSkin(roleId);
+      this.noticeService.success('同步成功', '同步正版皮肤成功');
+      this.event.emit();
+      this.activeModal.close();
+    } catch (error) {
+      const errorMessageMap = {
+        404: '角色不存在',
+        406: '你还没有进行正版验证',
+        550: '服务器找不见这个uuid，理论上应该不会有这个情况',
+        551: '你的正版账号还没设置皮肤',
+      };
+      this.noticeUtilService.errorNotice(error, '同步正版皮肤失败', errorMessageMap);
+    }
 
-        let errorMessage = '';
-
-        switch (error.status) {
-          case 404: {
-            errorMessage = '角色不存在';
-            break;
-          }
-          case 406: {
-            errorMessage = '你还没有进行正版验证';
-            break;
-          }
-          case 550: {
-            errorMessage = '服务器找不见这个uuid，理论上应该不会有这个情况';
-            break;
-          }
-          case 551: {
-            errorMessage = '你的正版账号还没设置皮肤';
-            break;
-          }
-          default: {
-            errorMessage = `message: ${error.error.message || '未知'} | code: ${error.status || '未知'}`;
-          }
-        }
-
-        this.noticeService.error('同步正版皮肤失败', errorMessage);
-      });
+    this.submitted = false;
   }
 
-  public closeModal(): void {
-    this.activeModal.close();
+  private async file2base64(file: File): Promise<string> {
+    if (!file) {
+      return;
+    }
+
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = (event => {
+        resolve(reader.result);
+      });
+      reader.onerror = (error => {
+        reject(error);
+      });
+    });
+  }
+
+  private async getImageModel(file: File): Promise<string> {
+    return new Promise<string>(async (resolve, reject) => {
+      const image = new Image();
+      image.src = await this.file2base64(file);
+      image.onload = (ev => {
+        if (isSlimSkin(image)) {
+          resolve('alex');
+        } else {
+          resolve('steve');
+        }
+      });
+      image.onerror = ev => {
+        console.warn('check image model fail, use default model');
+        resolve('steve');
+      };
+    });
   }
 }

@@ -1,13 +1,13 @@
 <div class="row">
-  <div class="col-lg-8">
-    <ngx-profile-user-info [user]="user" (needGetUserProfile)="getUserProfile()"></ngx-profile-user-info>
+  <div class="col-lg-6">
+    <ngx-profile-user-info [user]="user"></ngx-profile-user-info>
   </div>
-  <div class="col-lg-4">
-    <ngx-profile-user-state [user]="user"></ngx-profile-user-state>
+  <div class="col-lg-6">
+    <ngx-profile-yggdrasil-info [user]="user"></ngx-profile-yggdrasil-info>
   </div>
 </div>
 <div class="row">
   <div class="col-lg-12">
-    <ngx-profile-user-password></ngx-profile-user-password>
+    <ngx-profile-update-password></ngx-profile-update-password>
   </div>
 </div>

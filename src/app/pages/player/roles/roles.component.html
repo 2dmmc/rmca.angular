@@ -1,32 +1,39 @@
 <div class="row">
+  <ngb-alert [dismissible]="false" [type]="'warning'" class="animate-show animate-hide">
+    <del>角色模型渲染默认采用3D渲染, 浏览器需支持<code>WebGL</code>功能, 如果3D渲染无法正常显示, 你可以降级为
+      <a href="javascript:void(0)" class="alert-link">2D展示</a></del>
+    (待实现)
+  </ngb-alert>
+</div>
+<div class="row">
   <div class="col-lg-4" *ngFor="let role of roles">
-    <nb-card>
+    <nb-card [accent]="role.isDefault ? 'success' : 'default'" size="medium">
       <nb-card-header>
-        <span>{{role.rolename}}</span>
-        <span class="tag tag-success" *ngIf="role.isDefault">默认角色</span>
-        <button class="btn btn-info" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
+        <span>
+          <span>{{role.rolename}}</span>
+        </span>
       </nb-card-header>
       <nb-card-body>
-        <rmca-skin-viewer [role]="role"></rmca-skin-viewer>
+        <ngx-skin-viewer [skin]="{skinSrc: role.skin, capeSrc: role.cape}"
+                         [skinViewerOptions]="skinViewerInitOptions.skinViewerOptions"
+                         [animationOptions]="skinViewerInitOptions.animationOptions"
+                         [controlOptions]="skinViewerInitOptions.controlOptions"
+        ></ngx-skin-viewer>
       </nb-card-body>
       <nb-card-footer>
-        <button class="btn btn-hero-success"
-                (click)="openRoleDetailModal(role._id)">
-          <i class="fa fa-pencil-square-o"></i>
+        <button nbButton [status]="'info'" (click)="openRoleDetailModal(role._id)">
+          <i class="far fa-edit"></i>
           编辑
         </button>
+        <button nbButton [status]="'success'" (click)="updateDefaultRole(role)" *ngIf="!role.isDefault">设为默认角色</button>
       </nb-card-footer>
     </nb-card>
   </div>
   <div class="col-lg-4">
-    <nb-card>
-      <nb-card-header>
-        <span>新增角色</span>
-      </nb-card-header>
+    <nb-card size="medium">
       <nb-card-body>
-        <button class="btn btn-hero-success"
-                (click)="openRoleAddModal()">
-          <i class="fa fa-plus"></i>
+        <button class="btn-add" (click)="openRoleAddModal()">
+          <i class="fas fa-plus"></i>
           新增角色
         </button>
       </nb-card-body>

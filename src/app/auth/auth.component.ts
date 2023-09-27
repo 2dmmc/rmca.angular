@@ -18,5 +18,5 @@ import {Component} from '@angular/core';
   `,
 })
 
-export class NbAuthComponent {
+export class AuthComponent {
 }
