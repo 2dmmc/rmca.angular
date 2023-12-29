@@ -84,12 +84,12 @@ export class LoginComponent implements OnInit {
 
   public qqLogin(): void {
     window.location.href =
-      `https://auth.bangbang93.com/qq/oauth?callbackUrl=${window.location.origin}/callback/login/qq`;
+      `https://auth.bangbang93.com/api/qq/oauth?callbackUrl=${window.location.origin}/callback/login/qq`;
   }
 
   public weiboLogin(): void {
     window.location.href =
-      `https://auth.bangbang93.com/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
+      `https://auth.bangbang93.com/api/weibo/oauth?callbackUrl=${window.location.origin}/callback/login/weibo`;
   }
 
   private async doLogin(): Promise<void> {
