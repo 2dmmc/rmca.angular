@@ -8,7 +8,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY . .
+COPY src  ./src
+COPY *.json *.js ./
 RUN npm run build:prod
 
 FROM nginx AS release
